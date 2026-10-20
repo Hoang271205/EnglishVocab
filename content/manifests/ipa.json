@@ -1,0 +1,20 @@
+{
+  "id": "us-ipa-text-reference-v1",
+  "mode": "text-only",
+  "rows": 40,
+  "groups": {
+    "consonant": 24,
+    "vowel": 11,
+    "diphthong": 5
+  },
+  "phonemeAudioEnabled": false,
+  "wordSentenceAudio": "en-US speechSynthesis retained",
+  "source": {
+    "author": "Philip Neal Whitman",
+    "organization": "The Ohio State University, Intercultural English Language Programs",
+    "url": "https://ielp.ehe.osu.edu/files/2025/09/IPA_English.pdf",
+    "landingUrl": "https://ielp.ehe.osu.edu/sep/resources/interactive-ipa-charts/",
+    "license": "Creative Commons Attribution-NonCommercial; version unspecified in the PDF",
+    "attribution": "Reference inventory: Philip Neal Whitman, The Ohio State University. EnglishVocab adapted a text-only teaching table; no source audio or graphics included."
+  }
+}

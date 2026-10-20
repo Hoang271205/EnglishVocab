@@ -1,0 +1,1602 @@
+[
+  {
+    "id": "ielts-001",
+    "collectionId": "ielts",
+    "nameEn": "School Education",
+    "nameVi": "Giáo dục phổ thông",
+    "order": 1,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-002",
+    "collectionId": "ielts",
+    "nameEn": "Higher Education",
+    "nameVi": "Giáo dục đại học",
+    "order": 2,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-003",
+    "collectionId": "ielts",
+    "nameEn": "Online Learning",
+    "nameVi": "Học trực tuyến",
+    "order": 3,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-004",
+    "collectionId": "ielts",
+    "nameEn": "Lifelong Learning",
+    "nameVi": "Học tập suốt đời",
+    "order": 4,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-005",
+    "collectionId": "ielts",
+    "nameEn": "Exams and Assessment",
+    "nameVi": "Thi cử và đánh giá",
+    "order": 5,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-006",
+    "collectionId": "ielts",
+    "nameEn": "Vocational Training",
+    "nameVi": "Đào tạo nghề",
+    "order": 6,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-007",
+    "collectionId": "ielts",
+    "nameEn": "Teaching Methods",
+    "nameVi": "Phương pháp giảng dạy",
+    "order": 7,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-008",
+    "collectionId": "ielts",
+    "nameEn": "Equal Access to Education",
+    "nameVi": "Bình đẳng trong tiếp cận giáo dục",
+    "order": 8,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-009",
+    "collectionId": "ielts",
+    "nameEn": "Curriculum and School Subjects",
+    "nameVi": "Chương trình và môn học",
+    "order": 9,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-010",
+    "collectionId": "ielts",
+    "nameEn": "Student Wellbeing",
+    "nameVi": "Sức khỏe tinh thần và đời sống học sinh, sinh viên",
+    "order": 10,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-011",
+    "collectionId": "ielts",
+    "nameEn": "Career Choices",
+    "nameVi": "Lựa chọn nghề nghiệp",
+    "order": 11,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-012",
+    "collectionId": "ielts",
+    "nameEn": "Workplace Culture",
+    "nameVi": "Văn hóa công sở",
+    "order": 12,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-013",
+    "collectionId": "ielts",
+    "nameEn": "Remote and Hybrid Work",
+    "nameVi": "Làm việc từ xa và kết hợp",
+    "order": 13,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-014",
+    "collectionId": "ielts",
+    "nameEn": "Work–Life Balance",
+    "nameVi": "Cân bằng công việc và cuộc sống",
+    "order": 14,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-015",
+    "collectionId": "ielts",
+    "nameEn": "Unemployment and Job Security",
+    "nameVi": "Thất nghiệp và sự ổn định việc làm",
+    "order": 15,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-016",
+    "collectionId": "ielts",
+    "nameEn": "Automation and the Workforce",
+    "nameVi": "Tự động hóa và lực lượng lao động",
+    "order": 16,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-017",
+    "collectionId": "ielts",
+    "nameEn": "Entrepreneurship",
+    "nameVi": "Khởi nghiệp và kinh doanh",
+    "order": 17,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-018",
+    "collectionId": "ielts",
+    "nameEn": "Leadership and Teamwork",
+    "nameVi": "Lãnh đạo và làm việc nhóm",
+    "order": 18,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-019",
+    "collectionId": "ielts",
+    "nameEn": "Professional Ethics",
+    "nameVi": "Đạo đức nghề nghiệp",
+    "order": 19,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-020",
+    "collectionId": "ielts",
+    "nameEn": "Workplace Equality",
+    "nameVi": "Bình đẳng tại nơi làm việc",
+    "order": 20,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-021",
+    "collectionId": "ielts",
+    "nameEn": "Climate Change",
+    "nameVi": "Biến đổi khí hậu",
+    "order": 21,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-022",
+    "collectionId": "ielts",
+    "nameEn": "Air Pollution",
+    "nameVi": "Ô nhiễm không khí",
+    "order": 22,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-023",
+    "collectionId": "ielts",
+    "nameEn": "Water Resources",
+    "nameVi": "Tài nguyên nước",
+    "order": 23,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-024",
+    "collectionId": "ielts",
+    "nameEn": "Waste Management",
+    "nameVi": "Quản lý rác thải",
+    "order": 24,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-025",
+    "collectionId": "ielts",
+    "nameEn": "Plastic Pollution",
+    "nameVi": "Ô nhiễm nhựa",
+    "order": 25,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-026",
+    "collectionId": "ielts",
+    "nameEn": "Biodiversity and Conservation",
+    "nameVi": "Đa dạng sinh học và bảo tồn",
+    "order": 26,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-027",
+    "collectionId": "ielts",
+    "nameEn": "Deforestation",
+    "nameVi": "Phá rừng",
+    "order": 27,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-028",
+    "collectionId": "ielts",
+    "nameEn": "Renewable Energy",
+    "nameVi": "Năng lượng tái tạo",
+    "order": 28,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-029",
+    "collectionId": "ielts",
+    "nameEn": "Energy Efficiency",
+    "nameVi": "Hiệu quả sử dụng năng lượng",
+    "order": 29,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-030",
+    "collectionId": "ielts",
+    "nameEn": "Sustainable Agriculture",
+    "nameVi": "Nông nghiệp bền vững",
+    "order": 30,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-031",
+    "collectionId": "ielts",
+    "nameEn": "Artificial Intelligence",
+    "nameVi": "Trí tuệ nhân tạo",
+    "order": 31,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-032",
+    "collectionId": "ielts",
+    "nameEn": "Digital Privacy",
+    "nameVi": "Quyền riêng tư trên môi trường số",
+    "order": 32,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-033",
+    "collectionId": "ielts",
+    "nameEn": "Cybersecurity",
+    "nameVi": "An ninh mạng",
+    "order": 33,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-034",
+    "collectionId": "ielts",
+    "nameEn": "Social Media",
+    "nameVi": "Mạng xã hội",
+    "order": 34,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-035",
+    "collectionId": "ielts",
+    "nameEn": "The Digital Divide",
+    "nameVi": "Khoảng cách số",
+    "order": 35,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-036",
+    "collectionId": "ielts",
+    "nameEn": "Space Exploration",
+    "nameVi": "Khám phá không gian",
+    "order": 36,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-037",
+    "collectionId": "ielts",
+    "nameEn": "Scientific Research",
+    "nameVi": "Nghiên cứu khoa học",
+    "order": 37,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-038",
+    "collectionId": "ielts",
+    "nameEn": "Biotechnology",
+    "nameVi": "Công nghệ sinh học",
+    "order": 38,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-039",
+    "collectionId": "ielts",
+    "nameEn": "Technology and Ethics",
+    "nameVi": "Công nghệ và đạo đức",
+    "order": 39,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-040",
+    "collectionId": "ielts",
+    "nameEn": "Digital Public Services",
+    "nameVi": "Dịch vụ công trực tuyến",
+    "order": 40,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-041",
+    "collectionId": "ielts",
+    "nameEn": "Access to Healthcare",
+    "nameVi": "Tiếp cận dịch vụ y tế",
+    "order": 41,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-042",
+    "collectionId": "ielts",
+    "nameEn": "Preventive Healthcare",
+    "nameVi": "Chăm sóc sức khỏe dự phòng",
+    "order": 42,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-043",
+    "collectionId": "ielts",
+    "nameEn": "Diet and Nutrition",
+    "nameVi": "Chế độ ăn và dinh dưỡng",
+    "order": 43,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-044",
+    "collectionId": "ielts",
+    "nameEn": "Obesity and Sedentary Lifestyles",
+    "nameVi": "Béo phì và lối sống ít vận động",
+    "order": 44,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-045",
+    "collectionId": "ielts",
+    "nameEn": "Mental Health",
+    "nameVi": "Sức khỏe tinh thần",
+    "order": 45,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-046",
+    "collectionId": "ielts",
+    "nameEn": "Public Health and Epidemics",
+    "nameVi": "Y tế công cộng và dịch bệnh",
+    "order": 46,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-047",
+    "collectionId": "ielts",
+    "nameEn": "Ageing and Elderly Care",
+    "nameVi": "Già hóa và chăm sóc người cao tuổi",
+    "order": 47,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-048",
+    "collectionId": "ielts",
+    "nameEn": "Disability and Accessibility",
+    "nameVi": "Khuyết tật và khả năng tiếp cận",
+    "order": 48,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-049",
+    "collectionId": "ielts",
+    "nameEn": "Medical Technology",
+    "nameVi": "Công nghệ y tế",
+    "order": 49,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-050",
+    "collectionId": "ielts",
+    "nameEn": "Sports and Physical Activity",
+    "nameVi": "Thể thao và vận động thể chất",
+    "order": 50,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-051",
+    "collectionId": "ielts",
+    "nameEn": "Urbanisation",
+    "nameVi": "Đô thị hóa",
+    "order": 51,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-052",
+    "collectionId": "ielts",
+    "nameEn": "Affordable Housing",
+    "nameVi": "Nhà ở vừa túi tiền",
+    "order": 52,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-053",
+    "collectionId": "ielts",
+    "nameEn": "Urban Planning",
+    "nameVi": "Quy hoạch đô thị",
+    "order": 53,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-054",
+    "collectionId": "ielts",
+    "nameEn": "Public Transport",
+    "nameVi": "Giao thông công cộng",
+    "order": 54,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-055",
+    "collectionId": "ielts",
+    "nameEn": "Traffic Congestion",
+    "nameVi": "Ùn tắc giao thông",
+    "order": 55,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-056",
+    "collectionId": "ielts",
+    "nameEn": "Road Safety",
+    "nameVi": "An toàn giao thông",
+    "order": 56,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-057",
+    "collectionId": "ielts",
+    "nameEn": "Walking and Cycling Infrastructure",
+    "nameVi": "Hạ tầng đi bộ và xe đạp",
+    "order": 57,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-058",
+    "collectionId": "ielts",
+    "nameEn": "Rural Development",
+    "nameVi": "Phát triển nông thôn",
+    "order": 58,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-059",
+    "collectionId": "ielts",
+    "nameEn": "Public Spaces",
+    "nameVi": "Không gian công cộng",
+    "order": 59,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-060",
+    "collectionId": "ielts",
+    "nameEn": "Architecture and the Built Environment",
+    "nameVi": "Kiến trúc và môi trường xây dựng",
+    "order": 60,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-061",
+    "collectionId": "ielts",
+    "nameEn": "Family Structures",
+    "nameVi": "Cấu trúc gia đình",
+    "order": 61,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-062",
+    "collectionId": "ielts",
+    "nameEn": "Population and Demographic Change",
+    "nameVi": "Dân số và biến đổi nhân khẩu học",
+    "order": 62,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-063",
+    "collectionId": "ielts",
+    "nameEn": "Migration and Integration",
+    "nameVi": "Di cư và hội nhập",
+    "order": 63,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-064",
+    "collectionId": "ielts",
+    "nameEn": "Globalisation",
+    "nameVi": "Toàn cầu hóa",
+    "order": 64,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-065",
+    "collectionId": "ielts",
+    "nameEn": "Cultural Heritage",
+    "nameVi": "Di sản văn hóa",
+    "order": 65,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-066",
+    "collectionId": "ielts",
+    "nameEn": "Language and Linguistic Diversity",
+    "nameVi": "Ngôn ngữ và đa dạng ngôn ngữ",
+    "order": 66,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-067",
+    "collectionId": "ielts",
+    "nameEn": "News and Journalism",
+    "nameVi": "Tin tức và báo chí",
+    "order": 67,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-068",
+    "collectionId": "ielts",
+    "nameEn": "Advertising and Persuasion",
+    "nameVi": "Quảng cáo và sự thuyết phục",
+    "order": 68,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-069",
+    "collectionId": "ielts",
+    "nameEn": "Consumerism",
+    "nameVi": "Chủ nghĩa tiêu dùng",
+    "order": 69,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-070",
+    "collectionId": "ielts",
+    "nameEn": "Social Inequality",
+    "nameVi": "Bất bình đẳng xã hội",
+    "order": 70,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-071",
+    "collectionId": "ielts",
+    "nameEn": "Government Spending",
+    "nameVi": "Chi tiêu chính phủ",
+    "order": 71,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-072",
+    "collectionId": "ielts",
+    "nameEn": "Taxation",
+    "nameVi": "Thuế và chính sách thuế",
+    "order": 72,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-073",
+    "collectionId": "ielts",
+    "nameEn": "Social Welfare",
+    "nameVi": "Phúc lợi xã hội",
+    "order": 73,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-074",
+    "collectionId": "ielts",
+    "nameEn": "Crime and Its Causes",
+    "nameVi": "Tội phạm và nguyên nhân",
+    "order": 74,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-075",
+    "collectionId": "ielts",
+    "nameEn": "Criminal Justice",
+    "nameVi": "Tư pháp hình sự",
+    "order": 75,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-076",
+    "collectionId": "ielts",
+    "nameEn": "Rehabilitation and Reintegration",
+    "nameVi": "Cải tạo và tái hòa nhập",
+    "order": 76,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-077",
+    "collectionId": "ielts",
+    "nameEn": "Public Safety and Disaster Preparedness",
+    "nameVi": "An toàn cộng đồng và ứng phó thiên tai",
+    "order": 77,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-078",
+    "collectionId": "ielts",
+    "nameEn": "Civic Participation",
+    "nameVi": "Sự tham gia của công dân",
+    "order": 78,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-079",
+    "collectionId": "ielts",
+    "nameEn": "Regulation and Accountability",
+    "nameVi": "Quản lý bằng pháp luật và trách nhiệm giải trình",
+    "order": 79,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-080",
+    "collectionId": "ielts",
+    "nameEn": "International Cooperation",
+    "nameVi": "Hợp tác quốc tế",
+    "order": 80,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-081",
+    "collectionId": "ielts",
+    "nameEn": "Economic Growth",
+    "nameVi": "Tăng trưởng kinh tế",
+    "order": 81,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-082",
+    "collectionId": "ielts",
+    "nameEn": "Inflation and the Cost of Living",
+    "nameVi": "Lạm phát và chi phí sinh hoạt",
+    "order": 82,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-083",
+    "collectionId": "ielts",
+    "nameEn": "International Trade",
+    "nameVi": "Thương mại quốc tế",
+    "order": 83,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-084",
+    "collectionId": "ielts",
+    "nameEn": "Tourism and Local Economies",
+    "nameVi": "Du lịch và kinh tế địa phương",
+    "order": 84,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-085",
+    "collectionId": "ielts",
+    "nameEn": "Sustainable Tourism",
+    "nameVi": "Du lịch bền vững",
+    "order": 85,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-086",
+    "collectionId": "ielts",
+    "nameEn": "Global Supply Chains",
+    "nameVi": "Chuỗi cung ứng toàn cầu",
+    "order": 86,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-087",
+    "collectionId": "ielts",
+    "nameEn": "Financial Literacy",
+    "nameVi": "Hiểu biết tài chính",
+    "order": 87,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-088",
+    "collectionId": "ielts",
+    "nameEn": "The Circular Economy",
+    "nameVi": "Kinh tế tuần hoàn",
+    "order": 88,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-089",
+    "collectionId": "ielts",
+    "nameEn": "Corporate Social Responsibility",
+    "nameVi": "Trách nhiệm xã hội của doanh nghiệp",
+    "order": 89,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-090",
+    "collectionId": "ielts",
+    "nameEn": "Economic Development and Poverty Reduction",
+    "nameVi": "Phát triển kinh tế và giảm nghèo",
+    "order": 90,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-091",
+    "collectionId": "ielts",
+    "nameEn": "The Arts and Public Funding",
+    "nameVi": "Nghệ thuật và tài trợ công",
+    "order": 91,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-092",
+    "collectionId": "ielts",
+    "nameEn": "Literature and Reading Culture",
+    "nameVi": "Văn học và văn hóa đọc",
+    "order": 92,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-093",
+    "collectionId": "ielts",
+    "nameEn": "Music and Cultural Identity",
+    "nameVi": "Âm nhạc và bản sắc văn hóa",
+    "order": 93,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-094",
+    "collectionId": "ielts",
+    "nameEn": "Museums and Historical Preservation",
+    "nameVi": "Bảo tàng và bảo tồn lịch sử",
+    "order": 94,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-095",
+    "collectionId": "ielts",
+    "nameEn": "Freedom of Expression",
+    "nameVi": "Tự do biểu đạt",
+    "order": 95,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-096",
+    "collectionId": "ielts",
+    "nameEn": "Ethical Consumption",
+    "nameVi": "Tiêu dùng có đạo đức",
+    "order": 96,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-097",
+    "collectionId": "ielts",
+    "nameEn": "Animal Welfare",
+    "nameVi": "Phúc lợi động vật",
+    "order": 97,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-098",
+    "collectionId": "ielts",
+    "nameEn": "Individual and Social Responsibility",
+    "nameVi": "Trách nhiệm cá nhân và xã hội",
+    "order": 98,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-099",
+    "collectionId": "ielts",
+    "nameEn": "Tradition and Social Change",
+    "nameVi": "Truyền thống và thay đổi xã hội",
+    "order": 99,
+    "entryIds": []
+  },
+  {
+    "id": "ielts-100",
+    "collectionId": "ielts",
+    "nameEn": "Critical Thinking and Evidence",
+    "nameVi": "Tư duy phản biện và bằng chứng",
+    "order": 100,
+    "entryIds": []
+  },
+  {
+    "id": "daily-001",
+    "collectionId": "daily",
+    "nameEn": "Introducing Yourself",
+    "nameVi": "Giới thiệu bản thân",
+    "order": 1,
+    "entryIds": []
+  },
+  {
+    "id": "daily-002",
+    "collectionId": "daily",
+    "nameEn": "Personal Information",
+    "nameVi": "Thông tin cá nhân",
+    "order": 2,
+    "entryIds": []
+  },
+  {
+    "id": "daily-003",
+    "collectionId": "daily",
+    "nameEn": "Family Members",
+    "nameVi": "Thành viên gia đình",
+    "order": 3,
+    "entryIds": []
+  },
+  {
+    "id": "daily-004",
+    "collectionId": "daily",
+    "nameEn": "Friends and Friendship",
+    "nameVi": "Bạn bè và tình bạn",
+    "order": 4,
+    "entryIds": []
+  },
+  {
+    "id": "daily-005",
+    "collectionId": "daily",
+    "nameEn": "Physical Appearance",
+    "nameVi": "Ngoại hình",
+    "order": 5,
+    "entryIds": []
+  },
+  {
+    "id": "daily-006",
+    "collectionId": "daily",
+    "nameEn": "Personality",
+    "nameVi": "Tính cách",
+    "order": 6,
+    "entryIds": []
+  },
+  {
+    "id": "daily-007",
+    "collectionId": "daily",
+    "nameEn": "Feelings and Emotions",
+    "nameVi": "Cảm xúc",
+    "order": 7,
+    "entryIds": []
+  },
+  {
+    "id": "daily-008",
+    "collectionId": "daily",
+    "nameEn": "Hobbies and Interests",
+    "nameVi": "Sở thích",
+    "order": 8,
+    "entryIds": []
+  },
+  {
+    "id": "daily-009",
+    "collectionId": "daily",
+    "nameEn": "Daily Routines",
+    "nameVi": "Thói quen hằng ngày",
+    "order": 9,
+    "entryIds": []
+  },
+  {
+    "id": "daily-010",
+    "collectionId": "daily",
+    "nameEn": "Dates and Time",
+    "nameVi": "Ngày tháng và giờ giấc",
+    "order": 10,
+    "entryIds": []
+  },
+  {
+    "id": "daily-011",
+    "collectionId": "daily",
+    "nameEn": "Rooms in a Home",
+    "nameVi": "Các phòng trong nhà",
+    "order": 11,
+    "entryIds": []
+  },
+  {
+    "id": "daily-012",
+    "collectionId": "daily",
+    "nameEn": "Furniture and Household Items",
+    "nameVi": "Nội thất và đồ dùng trong nhà",
+    "order": 12,
+    "entryIds": []
+  },
+  {
+    "id": "daily-013",
+    "collectionId": "daily",
+    "nameEn": "Household Chores",
+    "nameVi": "Công việc nhà",
+    "order": 13,
+    "entryIds": []
+  },
+  {
+    "id": "daily-014",
+    "collectionId": "daily",
+    "nameEn": "Cooking at Home",
+    "nameVi": "Nấu ăn tại nhà",
+    "order": 14,
+    "entryIds": []
+  },
+  {
+    "id": "daily-015",
+    "collectionId": "daily",
+    "nameEn": "Grocery Shopping",
+    "nameVi": "Mua thực phẩm và nhu yếu phẩm",
+    "order": 15,
+    "entryIds": []
+  },
+  {
+    "id": "daily-016",
+    "collectionId": "daily",
+    "nameEn": "Kitchen Appliances",
+    "nameVi": "Thiết bị nhà bếp",
+    "order": 16,
+    "entryIds": []
+  },
+  {
+    "id": "daily-017",
+    "collectionId": "daily",
+    "nameEn": "Home Repairs",
+    "nameVi": "Sửa chữa trong nhà",
+    "order": 17,
+    "entryIds": []
+  },
+  {
+    "id": "daily-018",
+    "collectionId": "daily",
+    "nameEn": "Laundry and Clothing Care",
+    "nameVi": "Giặt giũ và chăm sóc quần áo",
+    "order": 18,
+    "entryIds": []
+  },
+  {
+    "id": "daily-019",
+    "collectionId": "daily",
+    "nameEn": "Neighbours and the Neighbourhood",
+    "nameVi": "Hàng xóm và khu dân cư",
+    "order": 19,
+    "entryIds": []
+  },
+  {
+    "id": "daily-020",
+    "collectionId": "daily",
+    "nameEn": "Renting a Home",
+    "nameVi": "Thuê nhà",
+    "order": 20,
+    "entryIds": []
+  },
+  {
+    "id": "daily-021",
+    "collectionId": "daily",
+    "nameEn": "Ordering at a Café",
+    "nameVi": "Gọi đồ ở quán cà phê",
+    "order": 21,
+    "entryIds": []
+  },
+  {
+    "id": "daily-022",
+    "collectionId": "daily",
+    "nameEn": "Eating at a Restaurant",
+    "nameVi": "Ăn tại nhà hàng",
+    "order": 22,
+    "entryIds": []
+  },
+  {
+    "id": "daily-023",
+    "collectionId": "daily",
+    "nameEn": "Food Preferences",
+    "nameVi": "Sở thích ăn uống",
+    "order": 23,
+    "entryIds": []
+  },
+  {
+    "id": "daily-024",
+    "collectionId": "daily",
+    "nameEn": "Food Allergies and Dietary Needs",
+    "nameVi": "Dị ứng thực phẩm và nhu cầu ăn uống",
+    "order": 24,
+    "entryIds": []
+  },
+  {
+    "id": "daily-025",
+    "collectionId": "daily",
+    "nameEn": "Paying the Bill",
+    "nameVi": "Thanh toán hóa đơn",
+    "order": 25,
+    "entryIds": []
+  },
+  {
+    "id": "daily-026",
+    "collectionId": "daily",
+    "nameEn": "Shopping for Clothes",
+    "nameVi": "Mua quần áo",
+    "order": 26,
+    "entryIds": []
+  },
+  {
+    "id": "daily-027",
+    "collectionId": "daily",
+    "nameEn": "Sizes and Fit",
+    "nameVi": "Kích cỡ và độ vừa vặn",
+    "order": 27,
+    "entryIds": []
+  },
+  {
+    "id": "daily-028",
+    "collectionId": "daily",
+    "nameEn": "Online Shopping",
+    "nameVi": "Mua sắm trực tuyến",
+    "order": 28,
+    "entryIds": []
+  },
+  {
+    "id": "daily-029",
+    "collectionId": "daily",
+    "nameEn": "Returns and Refunds",
+    "nameVi": "Đổi trả hàng và hoàn tiền",
+    "order": 29,
+    "entryIds": []
+  },
+  {
+    "id": "daily-030",
+    "collectionId": "daily",
+    "nameEn": "Prices and Bargaining",
+    "nameVi": "Giá cả và mặc cả",
+    "order": 30,
+    "entryIds": []
+  },
+  {
+    "id": "daily-031",
+    "collectionId": "daily",
+    "nameEn": "Asking for Directions",
+    "nameVi": "Hỏi đường",
+    "order": 31,
+    "entryIds": []
+  },
+  {
+    "id": "daily-032",
+    "collectionId": "daily",
+    "nameEn": "Buses and the Metro",
+    "nameVi": "Xe buýt và tàu điện",
+    "order": 32,
+    "entryIds": []
+  },
+  {
+    "id": "daily-033",
+    "collectionId": "daily",
+    "nameEn": "Train Travel",
+    "nameVi": "Đi tàu hỏa",
+    "order": 33,
+    "entryIds": []
+  },
+  {
+    "id": "daily-034",
+    "collectionId": "daily",
+    "nameEn": "Taking a Taxi",
+    "nameVi": "Đi taxi",
+    "order": 34,
+    "entryIds": []
+  },
+  {
+    "id": "daily-035",
+    "collectionId": "daily",
+    "nameEn": "At the Airport",
+    "nameVi": "Tại sân bay",
+    "order": 35,
+    "entryIds": []
+  },
+  {
+    "id": "daily-036",
+    "collectionId": "daily",
+    "nameEn": "On a Flight",
+    "nameVi": "Trên chuyến bay",
+    "order": 36,
+    "entryIds": []
+  },
+  {
+    "id": "daily-037",
+    "collectionId": "daily",
+    "nameEn": "Staying at a Hotel",
+    "nameVi": "Lưu trú tại khách sạn",
+    "order": 37,
+    "entryIds": []
+  },
+  {
+    "id": "daily-038",
+    "collectionId": "daily",
+    "nameEn": "Sightseeing",
+    "nameVi": "Tham quan",
+    "order": 38,
+    "entryIds": []
+  },
+  {
+    "id": "daily-039",
+    "collectionId": "daily",
+    "nameEn": "Lost Luggage and Travel Problems",
+    "nameVi": "Thất lạc hành lý và sự cố khi đi du lịch",
+    "order": 39,
+    "entryIds": []
+  },
+  {
+    "id": "daily-040",
+    "collectionId": "daily",
+    "nameEn": "Talking About the Weather",
+    "nameVi": "Nói về thời tiết",
+    "order": 40,
+    "entryIds": []
+  },
+  {
+    "id": "daily-041",
+    "collectionId": "daily",
+    "nameEn": "Parts of the Body",
+    "nameVi": "Bộ phận cơ thể",
+    "order": 41,
+    "entryIds": []
+  },
+  {
+    "id": "daily-042",
+    "collectionId": "daily",
+    "nameEn": "Common Symptoms",
+    "nameVi": "Triệu chứng thường gặp",
+    "order": 42,
+    "entryIds": []
+  },
+  {
+    "id": "daily-043",
+    "collectionId": "daily",
+    "nameEn": "Visiting a Doctor",
+    "nameVi": "Đi khám bác sĩ",
+    "order": 43,
+    "entryIds": []
+  },
+  {
+    "id": "daily-044",
+    "collectionId": "daily",
+    "nameEn": "At the Pharmacy",
+    "nameVi": "Tại nhà thuốc",
+    "order": 44,
+    "entryIds": []
+  },
+  {
+    "id": "daily-045",
+    "collectionId": "daily",
+    "nameEn": "Asking for Emergency Help",
+    "nameVi": "Nhờ trợ giúp khẩn cấp",
+    "order": 45,
+    "entryIds": []
+  },
+  {
+    "id": "daily-046",
+    "collectionId": "daily",
+    "nameEn": "Exercise and Fitness",
+    "nameVi": "Tập luyện và thể lực",
+    "order": 46,
+    "entryIds": []
+  },
+  {
+    "id": "daily-047",
+    "collectionId": "daily",
+    "nameEn": "Sleep and Rest",
+    "nameVi": "Giấc ngủ và nghỉ ngơi",
+    "order": 47,
+    "entryIds": []
+  },
+  {
+    "id": "daily-048",
+    "collectionId": "daily",
+    "nameEn": "At the Dentist",
+    "nameVi": "Tại phòng khám nha khoa",
+    "order": 48,
+    "entryIds": []
+  },
+  {
+    "id": "daily-049",
+    "collectionId": "daily",
+    "nameEn": "Healthy Eating Habits",
+    "nameVi": "Thói quen ăn uống lành mạnh",
+    "order": 49,
+    "entryIds": []
+  },
+  {
+    "id": "daily-050",
+    "collectionId": "daily",
+    "nameEn": "Talking About Stress",
+    "nameVi": "Nói về căng thẳng",
+    "order": 50,
+    "entryIds": []
+  },
+  {
+    "id": "daily-051",
+    "collectionId": "daily",
+    "nameEn": "Your First Day at Work",
+    "nameVi": "Ngày đầu đi làm",
+    "order": 51,
+    "entryIds": []
+  },
+  {
+    "id": "daily-052",
+    "collectionId": "daily",
+    "nameEn": "Schedules and Availability",
+    "nameVi": "Lịch trình và thời gian rảnh",
+    "order": 52,
+    "entryIds": []
+  },
+  {
+    "id": "daily-053",
+    "collectionId": "daily",
+    "nameEn": "Taking Part in Meetings",
+    "nameVi": "Tham gia cuộc họp",
+    "order": 53,
+    "entryIds": []
+  },
+  {
+    "id": "daily-054",
+    "collectionId": "daily",
+    "nameEn": "Everyday Work Emails",
+    "nameVi": "Email công việc thường ngày",
+    "order": 54,
+    "entryIds": []
+  },
+  {
+    "id": "daily-055",
+    "collectionId": "daily",
+    "nameEn": "Work Phone Calls",
+    "nameVi": "Cuộc gọi công việc",
+    "order": 55,
+    "entryIds": []
+  },
+  {
+    "id": "daily-056",
+    "collectionId": "daily",
+    "nameEn": "Tasks and Progress Updates",
+    "nameVi": "Công việc và cập nhật tiến độ",
+    "order": 56,
+    "entryIds": []
+  },
+  {
+    "id": "daily-057",
+    "collectionId": "daily",
+    "nameEn": "Asking for Help and Clarification",
+    "nameVi": "Nhờ giúp đỡ và hỏi lại cho rõ",
+    "order": 57,
+    "entryIds": []
+  },
+  {
+    "id": "daily-058",
+    "collectionId": "daily",
+    "nameEn": "Giving and Receiving Feedback",
+    "nameVi": "Góp ý và tiếp nhận góp ý",
+    "order": 58,
+    "entryIds": []
+  },
+  {
+    "id": "daily-059",
+    "collectionId": "daily",
+    "nameEn": "In the Classroom",
+    "nameVi": "Trong lớp học",
+    "order": 59,
+    "entryIds": []
+  },
+  {
+    "id": "daily-060",
+    "collectionId": "daily",
+    "nameEn": "Studying and Preparing for Exams",
+    "nameVi": "Học bài và chuẩn bị thi",
+    "order": 60,
+    "entryIds": []
+  },
+  {
+    "id": "daily-061",
+    "collectionId": "daily",
+    "nameEn": "Inviting Someone",
+    "nameVi": "Mời ai đó",
+    "order": 61,
+    "entryIds": []
+  },
+  {
+    "id": "daily-062",
+    "collectionId": "daily",
+    "nameEn": "Making Plans Together",
+    "nameVi": "Cùng lên kế hoạch",
+    "order": 62,
+    "entryIds": []
+  },
+  {
+    "id": "daily-063",
+    "collectionId": "daily",
+    "nameEn": "Accepting Invitations",
+    "nameVi": "Nhận lời mời",
+    "order": 63,
+    "entryIds": []
+  },
+  {
+    "id": "daily-064",
+    "collectionId": "daily",
+    "nameEn": "Politely Declining",
+    "nameVi": "Từ chối lịch sự",
+    "order": 64,
+    "entryIds": []
+  },
+  {
+    "id": "daily-065",
+    "collectionId": "daily",
+    "nameEn": "Apologising",
+    "nameVi": "Xin lỗi",
+    "order": 65,
+    "entryIds": []
+  },
+  {
+    "id": "daily-066",
+    "collectionId": "daily",
+    "nameEn": "Thanking Someone",
+    "nameVi": "Cảm ơn",
+    "order": 66,
+    "entryIds": []
+  },
+  {
+    "id": "daily-067",
+    "collectionId": "daily",
+    "nameEn": "Giving Compliments",
+    "nameVi": "Khen ngợi",
+    "order": 67,
+    "entryIds": []
+  },
+  {
+    "id": "daily-068",
+    "collectionId": "daily",
+    "nameEn": "Expressing Opinions",
+    "nameVi": "Bày tỏ ý kiến",
+    "order": 68,
+    "entryIds": []
+  },
+  {
+    "id": "daily-069",
+    "collectionId": "daily",
+    "nameEn": "Agreeing and Disagreeing",
+    "nameVi": "Đồng ý và không đồng ý",
+    "order": 69,
+    "entryIds": []
+  },
+  {
+    "id": "daily-070",
+    "collectionId": "daily",
+    "nameEn": "Making Small Talk",
+    "nameVi": "Trò chuyện xã giao",
+    "order": 70,
+    "entryIds": []
+  },
+  {
+    "id": "daily-071",
+    "collectionId": "daily",
+    "nameEn": "At the Bank",
+    "nameVi": "Tại ngân hàng",
+    "order": 71,
+    "entryIds": []
+  },
+  {
+    "id": "daily-072",
+    "collectionId": "daily",
+    "nameEn": "Using an ATM",
+    "nameVi": "Sử dụng máy ATM",
+    "order": 72,
+    "entryIds": []
+  },
+  {
+    "id": "daily-073",
+    "collectionId": "daily",
+    "nameEn": "Mobile Phone Plans",
+    "nameVi": "Gói cước điện thoại",
+    "order": 73,
+    "entryIds": []
+  },
+  {
+    "id": "daily-074",
+    "collectionId": "daily",
+    "nameEn": "Internet Connection Problems",
+    "nameVi": "Sự cố kết nối Internet",
+    "order": 74,
+    "entryIds": []
+  },
+  {
+    "id": "daily-075",
+    "collectionId": "daily",
+    "nameEn": "At the Post Office",
+    "nameVi": "Tại bưu điện",
+    "order": 75,
+    "entryIds": []
+  },
+  {
+    "id": "daily-076",
+    "collectionId": "daily",
+    "nameEn": "Receiving Deliveries",
+    "nameVi": "Nhận hàng giao đến",
+    "order": 76,
+    "entryIds": []
+  },
+  {
+    "id": "daily-077",
+    "collectionId": "daily",
+    "nameEn": "At the Hair Salon",
+    "nameVi": "Tại tiệm làm tóc",
+    "order": 77,
+    "entryIds": []
+  },
+  {
+    "id": "daily-078",
+    "collectionId": "daily",
+    "nameEn": "Utility Bills",
+    "nameVi": "Hóa đơn điện, nước và dịch vụ",
+    "order": 78,
+    "entryIds": []
+  },
+  {
+    "id": "daily-079",
+    "collectionId": "daily",
+    "nameEn": "Booking and Rescheduling Appointments",
+    "nameVi": "Đặt và đổi lịch hẹn",
+    "order": 79,
+    "entryIds": []
+  },
+  {
+    "id": "daily-080",
+    "collectionId": "daily",
+    "nameEn": "Contacting Customer Support",
+    "nameVi": "Liên hệ chăm sóc khách hàng",
+    "order": 80,
+    "entryIds": []
+  },
+  {
+    "id": "daily-081",
+    "collectionId": "daily",
+    "nameEn": "Texting and Messaging",
+    "nameVi": "Nhắn tin",
+    "order": 81,
+    "entryIds": []
+  },
+  {
+    "id": "daily-082",
+    "collectionId": "daily",
+    "nameEn": "Video Calls",
+    "nameVi": "Gọi video",
+    "order": 82,
+    "entryIds": []
+  },
+  {
+    "id": "daily-083",
+    "collectionId": "daily",
+    "nameEn": "Accounts and Passwords",
+    "nameVi": "Tài khoản và mật khẩu",
+    "order": 83,
+    "entryIds": []
+  },
+  {
+    "id": "daily-084",
+    "collectionId": "daily",
+    "nameEn": "Everyday Device Problems",
+    "nameVi": "Sự cố thiết bị thường gặp",
+    "order": 84,
+    "entryIds": []
+  },
+  {
+    "id": "daily-085",
+    "collectionId": "daily",
+    "nameEn": "Taking and Sharing Photos",
+    "nameVi": "Chụp và chia sẻ ảnh",
+    "order": 85,
+    "entryIds": []
+  },
+  {
+    "id": "daily-086",
+    "collectionId": "daily",
+    "nameEn": "Using Maps and Navigation Apps",
+    "nameVi": "Dùng bản đồ và ứng dụng chỉ đường",
+    "order": 86,
+    "entryIds": []
+  },
+  {
+    "id": "daily-087",
+    "collectionId": "daily",
+    "nameEn": "Booking Through Apps",
+    "nameVi": "Đặt dịch vụ qua ứng dụng",
+    "order": 87,
+    "entryIds": []
+  },
+  {
+    "id": "daily-088",
+    "collectionId": "daily",
+    "nameEn": "Talking About the News",
+    "nameVi": "Trò chuyện về tin tức",
+    "order": 88,
+    "entryIds": []
+  },
+  {
+    "id": "daily-089",
+    "collectionId": "daily",
+    "nameEn": "Films, TV and Streaming",
+    "nameVi": "Phim, truyền hình và xem trực tuyến",
+    "order": 89,
+    "entryIds": []
+  },
+  {
+    "id": "daily-090",
+    "collectionId": "daily",
+    "nameEn": "Staying Safe Online",
+    "nameVi": "Giữ an toàn trên mạng",
+    "order": 90,
+    "entryIds": []
+  },
+  {
+    "id": "daily-091",
+    "collectionId": "daily",
+    "nameEn": "Dating and Relationships",
+    "nameVi": "Hẹn hò và các mối quan hệ",
+    "order": 91,
+    "entryIds": []
+  },
+  {
+    "id": "daily-092",
+    "collectionId": "daily",
+    "nameEn": "Birthdays and Celebrations",
+    "nameVi": "Sinh nhật và tiệc mừng",
+    "order": 92,
+    "entryIds": []
+  },
+  {
+    "id": "daily-093",
+    "collectionId": "daily",
+    "nameEn": "Holidays and Festivals",
+    "nameVi": "Ngày lễ và lễ hội",
+    "order": 93,
+    "entryIds": []
+  },
+  {
+    "id": "daily-094",
+    "collectionId": "daily",
+    "nameEn": "Future Plans and Intentions",
+    "nameVi": "Dự định và kế hoạch tương lai",
+    "order": 94,
+    "entryIds": []
+  },
+  {
+    "id": "daily-095",
+    "collectionId": "daily",
+    "nameEn": "Making Everyday Decisions",
+    "nameVi": "Đưa ra quyết định thường ngày",
+    "order": 95,
+    "entryIds": []
+  },
+  {
+    "id": "daily-096",
+    "collectionId": "daily",
+    "nameEn": "Sharing Responsibilities",
+    "nameVi": "Chia sẻ trách nhiệm",
+    "order": 96,
+    "entryIds": []
+  },
+  {
+    "id": "daily-097",
+    "collectionId": "daily",
+    "nameEn": "Solving Everyday Problems",
+    "nameVi": "Giải quyết vấn đề thường gặp",
+    "order": 97,
+    "entryIds": []
+  },
+  {
+    "id": "daily-098",
+    "collectionId": "daily",
+    "nameEn": "Talking About Past Experiences",
+    "nameVi": "Kể về trải nghiệm đã qua",
+    "order": 98,
+    "entryIds": []
+  },
+  {
+    "id": "daily-099",
+    "collectionId": "daily",
+    "nameEn": "Setting Personal Boundaries",
+    "nameVi": "Đặt giới hạn cá nhân",
+    "order": 99,
+    "entryIds": []
+  },
+  {
+    "id": "daily-100",
+    "collectionId": "daily",
+    "nameEn": "Giving Recommendations",
+    "nameVi": "Đưa ra lời gợi ý",
+    "order": 100,
+    "entryIds": []
+  }
+]

@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "crawl-ielts-056-6a290afc4e6a",
+  "entries": [
+    {
+      "id": "crawl-sense-dd25f944c36c5f7442b82e0e",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "speed limit",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-dd25f944c36c5f7442b82e0e",
+      "meaningVi": "giới hạn tốc độ",
+      "acceptedLearnAnswers": [
+        "speed limit"
+      ],
+      "cefr": {
+        "level": "B1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-16f1557b95fa4ad070d0993c",
+          "prefix": "John is a careful driver. He never exceeds the ",
+          "targetSurface": "speed limit",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "speed limit"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/speed limit",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/speed limit",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/speed limit",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-vi-sense-b28d8cf93d2bcd40133a949d",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "speeding",
+      "partOfSpeech": "n.",
+      "senseKey": "vi-sense-b28d8cf93d2bcd40133a949d",
+      "meaningVi": "Sự lái xe quá tốc độ quy định.",
+      "acceptedLearnAnswers": [
+        "speeding"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. Explicit cross-source sense alignment reviewed for identical headword/POS. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-457aef3ae67a3ea5a8abc1fb",
+          "prefix": "He was fined $100 for ",
+          "targetSurface": "speeding",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "speeding"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://vi.wiktionary.org/wiki/speeding",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/speeding",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-vi-sense-fd56a9e2216d7f1e5d9f04e9",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "pedestrian",
+      "partOfSpeech": "n.",
+      "senseKey": "vi-sense-fd56a9e2216d7f1e5d9f04e9",
+      "meaningVi": "Người đi bộ, khách bộ hành.",
+      "acceptedLearnAnswers": [
+        "pedestrian"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-bf8fc941ceb41284e25906dd",
+          "prefix": "The ambulance went out of control and came close to running over a ",
+          "targetSurface": "pedestrian",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "pedestrian"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://vi.wiktionary.org/wiki/pedestrian",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #34942 (CK) & #580814 (autuno); https://www.manythings.org/anki/; translated sentence https://tatoeba.org/en/sentences/show/580814; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY 2.0 FR (https://creativecommons.org/licenses/by/2.0/fr/)",
+          "url": "https://tatoeba.org/en/sentences/show/34942",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    }
+  ],
+  "topics": [
+    {
+      "id": "ielts-056",
+      "collectionId": "ielts",
+      "nameEn": "Road Safety",
+      "nameVi": "An toàn giao thông",
+      "order": 56,
+      "entryIds": [
+        "crawl-sense-dd25f944c36c5f7442b82e0e",
+        "crawl-vi-sense-b28d8cf93d2bcd40133a949d",
+        "crawl-vi-sense-fd56a9e2216d7f1e5d9f04e9"
+      ]
+    }
+  ]
+}

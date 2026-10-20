@@ -1,0 +1,18 @@
+node_modules/
+dist/
+.browser-check/
+*.tsbuildinfo
+.DS_Store
+dist-extension/
+
+.dictionary-cache/
+
+.crawl-cache/
+
+# Durable local crawl archive; include separately in personal backups.
+.crawl-archive/
+
+# Reproducible crawl staging (kept on disk and in crawl archive, not in Git).
+content/crawl/*-candidates.json
+content/crawl/*-example-pool.json
+content/crawl/proposals.json

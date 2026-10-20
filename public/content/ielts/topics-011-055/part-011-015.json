@@ -1,0 +1,3101 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "data-02-part-011-015-v1-usipa1",
+  "entries": [
+    {
+      "id": "word-2ef6d4609c49ff3f6659",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "career path",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-2ef6d4609c49ff3f6659",
+      "meaningVi": "hướng phát triển nghề nghiệp",
+      "acceptedLearnAnswers": [
+        "career path"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-2ef6d4609c49ff3f6659-example",
+          "prefix": "Mentoring helped her choose a ",
+          "targetSurface": "career path",
+          "suffix": " that suited her interests.",
+          "acceptedAnswers": [
+            "career path"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-4e0f0184beb4e41e8e18",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "job satisfaction",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-4e0f0184beb4e41e8e18",
+      "meaningVi": "mức độ hài lòng với công việc",
+      "acceptedLearnAnswers": [
+        "job satisfaction"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-4e0f0184beb4e41e8e18-example",
+          "prefix": "Flexible hours can improve ",
+          "targetSurface": "job satisfaction",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "job satisfaction"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-79b07a31a8b82e7f25c6",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "career prospects",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-79b07a31a8b82e7f25c6",
+      "meaningVi": "triển vọng phát triển nghề nghiệp",
+      "acceptedLearnAnswers": [
+        "career prospects"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-79b07a31a8b82e7f25c6-example",
+          "prefix": "Learning another language may improve your ",
+          "targetSurface": "career prospects",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "career prospects"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-3a285fd1b6967d8d5f24",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "aptitude",
+      "partOfSpeech": "n.",
+      "senseKey": "word-3a285fd1b6967d8d5f24",
+      "meaningVi": "năng khiếu hoặc khả năng tự nhiên đối với một việc",
+      "acceptedLearnAnswers": [
+        "aptitude"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-3a285fd1b6967d8d5f24-example",
+          "prefix": "She showed an ",
+          "targetSurface": "aptitude",
+          "suffix": " for solving technical problems.",
+          "acceptedAnswers": [
+            "aptitude"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-a42f695a51febff7cd29",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "aspiration",
+      "partOfSpeech": "n.",
+      "senseKey": "word-a42f695a51febff7cd29",
+      "meaningVi": "khát vọng, mục tiêu mong muốn đạt được",
+      "acceptedLearnAnswers": [
+        "aspiration"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-a42f695a51febff7cd29-example",
+          "prefix": "His main ",
+          "targetSurface": "aspiration",
+          "suffix": " is to become a civil engineer.",
+          "acceptedAnswers": [
+            "aspiration"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-60ebe4539db311766454",
+      "revision": 2,
+      "collectionId": "ielts",
+      "headword": "job market",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-60ebe4539db311766454",
+      "meaningVi": "thị trường việc làm",
+      "acceptedLearnAnswers": [
+        "job market"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": "/ˈd͡ʒɑb ˌmɑɹkɪt/",
+        "accent": "en-US"
+      },
+      "examples": [
+        {
+          "id": "word-60ebe4539db311766454-example",
+          "prefix": "Graduates face a competitive ",
+          "targetSurface": "job market",
+          "suffix": " this year.",
+          "acceptedAnswers": [
+            "job market"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "ipa",
+          "attribution": "FreeDictionaryAPI.com / Wiktionary — IPA tagged General American/US; copied automatically, not manually listened",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/job market",
+          "status": "unverified",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-82c1a929fb2009bad1bb",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "specialization",
+      "partOfSpeech": "n.",
+      "senseKey": "word-82c1a929fb2009bad1bb",
+      "meaningVi": "việc tập trung chuyên sâu vào một lĩnh vực",
+      "acceptedLearnAnswers": [
+        "specialization"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-82c1a929fb2009bad1bb-example",
+          "prefix": "Early ",
+          "targetSurface": "specialization",
+          "suffix": " can limit students' career options.",
+          "acceptedAnswers": [
+            "specialization"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-6b38736de350e82e01cb",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "career guidance",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-6b38736de350e82e01cb",
+      "meaningVi": "việc tư vấn và định hướng nghề nghiệp",
+      "acceptedLearnAnswers": [
+        "career guidance"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-6b38736de350e82e01cb-example",
+          "prefix": "Schools should provide ",
+          "targetSurface": "career guidance",
+          "suffix": " before students choose a major.",
+          "acceptedAnswers": [
+            "career guidance"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-a0a9cb7c05590f1db0be",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "career transition",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-a0a9cb7c05590f1db0be",
+      "meaningVi": "việc chuyển đổi nghề nghiệp hoặc lĩnh vực làm việc",
+      "acceptedLearnAnswers": [
+        "career transition"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-a0a9cb7c05590f1db0be-example",
+          "prefix": "Additional training can make a ",
+          "targetSurface": "career transition",
+          "suffix": " less stressful.",
+          "acceptedAnswers": [
+            "career transition"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-8caa891fdae106e9fe77",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "professional ambition",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-8caa891fdae106e9fe77",
+      "meaningVi": "hoài bão trong sự nghiệp",
+      "acceptedLearnAnswers": [
+        "professional ambition"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-8caa891fdae106e9fe77-example",
+          "prefix": "Her ",
+          "targetSurface": "professional ambition",
+          "suffix": " motivated her to apply for the management role.",
+          "acceptedAnswers": [
+            "professional ambition"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-cde7631c2098f852c483",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "organizational culture",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-cde7631c2098f852c483",
+      "meaningVi": "các giá trị và cách ứng xử chung trong một tổ chức",
+      "acceptedLearnAnswers": [
+        "organizational culture"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-cde7631c2098f852c483-example",
+          "prefix": "An open ",
+          "targetSurface": "organizational culture",
+          "suffix": " encourages employees to share ideas.",
+          "acceptedAnswers": [
+            "organizational culture"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-beab6b2220828443b78e",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "collaboration",
+      "partOfSpeech": "n.",
+      "senseKey": "word-beab6b2220828443b78e",
+      "meaningVi": "sự hợp tác để cùng thực hiện công việc",
+      "acceptedLearnAnswers": [
+        "collaboration"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-beab6b2220828443b78e-example",
+          "prefix": "Effective ",
+          "targetSurface": "collaboration",
+          "suffix": " requires clear communication.",
+          "acceptedAnswers": [
+            "collaboration"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-00f44583028f81b474e0",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "workplace morale",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-00f44583028f81b474e0",
+      "meaningVi": "tinh thần và mức độ tích cực của nhân viên tại nơi làm việc",
+      "acceptedLearnAnswers": [
+        "workplace morale"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-00f44583028f81b474e0-example",
+          "prefix": "Regular recognition can improve ",
+          "targetSurface": "workplace morale",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "workplace morale"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-367ee0643f6486a7f1d4",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "hierarchy",
+      "partOfSpeech": "n.",
+      "senseKey": "word-367ee0643f6486a7f1d4",
+      "meaningVi": "hệ thống cấp bậc trong tổ chức",
+      "acceptedLearnAnswers": [
+        "hierarchy"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-367ee0643f6486a7f1d4-example",
+          "prefix": "A rigid ",
+          "targetSurface": "hierarchy",
+          "suffix": " can slow down decision-making.",
+          "acceptedAnswers": [
+            "hierarchy"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-a66781ed083ee339b17e",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "accountability",
+      "partOfSpeech": "n.",
+      "senseKey": "word-a66781ed083ee339b17e",
+      "meaningVi": "trách nhiệm giải trình về hành động và kết quả",
+      "acceptedLearnAnswers": [
+        "accountability"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-a66781ed083ee339b17e-example",
+          "prefix": "Clear roles promote ",
+          "targetSurface": "accountability",
+          "suffix": " within a team.",
+          "acceptedAnswers": [
+            "accountability"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-281624f27db6e12618d9",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "recognition",
+      "partOfSpeech": "n.",
+      "senseKey": "word-281624f27db6e12618d9",
+      "meaningVi": "sự ghi nhận công sức hoặc thành tích",
+      "acceptedLearnAnswers": [
+        "recognition"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-281624f27db6e12618d9-example",
+          "prefix": "Employees deserve ",
+          "targetSurface": "recognition",
+          "suffix": " for their contributions.",
+          "acceptedAnswers": [
+            "recognition"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-2518ccc81d182246a3b3",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "initiative",
+      "partOfSpeech": "n.",
+      "senseKey": "word-2518ccc81d182246a3b3",
+      "meaningVi": "sự chủ động bắt tay làm việc cần thiết",
+      "acceptedLearnAnswers": [
+        "initiative"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-2518ccc81d182246a3b3-example",
+          "prefix": "The manager praised her ",
+          "targetSurface": "initiative",
+          "suffix": " in improving the process.",
+          "acceptedAnswers": [
+            "initiative"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-dbc4df8e8612c17c2036",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "transparency",
+      "partOfSpeech": "n.",
+      "senseKey": "word-dbc4df8e8612c17c2036",
+      "meaningVi": "sự minh bạch trong thông tin và quyết định",
+      "acceptedLearnAnswers": [
+        "transparency"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-dbc4df8e8612c17c2036-example",
+          "prefix": "Greater ",
+          "targetSurface": "transparency",
+          "suffix": " can build trust between staff and management.",
+          "acceptedAnswers": [
+            "transparency"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-1a925b858ffba6a68f45",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "professional conduct",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-1a925b858ffba6a68f45",
+      "meaningVi": "cách ứng xử đáp ứng chuẩn mực nghề nghiệp",
+      "acceptedLearnAnswers": [
+        "professional conduct"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-1a925b858ffba6a68f45-example",
+          "prefix": "The handbook sets out expectations for ",
+          "targetSurface": "professional conduct",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "professional conduct"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-dd5e714b0e648149f737",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "constructive criticism",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-dd5e714b0e648149f737",
+      "meaningVi": "nhận xét có mục đích giúp cải thiện",
+      "acceptedLearnAnswers": [
+        "constructive criticism"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-dd5e714b0e648149f737-example",
+          "prefix": "Learning to accept ",
+          "targetSurface": "constructive criticism",
+          "suffix": " is part of professional growth.",
+          "acceptedAnswers": [
+            "constructive criticism"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-0bfa757763ee9d10957c",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "remote work",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-0bfa757763ee9d10957c",
+      "meaningVi": "việc làm từ xa thay vì tại văn phòng",
+      "acceptedLearnAnswers": [
+        "remote work"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-0bfa757763ee9d10957c-example",
+          "prefix": "Reliable internet access is essential for ",
+          "targetSurface": "remote work",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "remote work"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-91a3172aed479fc6633b",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "hybrid work",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-91a3172aed479fc6633b",
+      "meaningVi": "hình thức kết hợp làm tại văn phòng và làm từ xa",
+      "acceptedLearnAnswers": [
+        "hybrid work"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-91a3172aed479fc6633b-example",
+          "prefix": "The company introduced ",
+          "targetSurface": "hybrid work",
+          "suffix": " to give staff more flexibility.",
+          "acceptedAnswers": [
+            "hybrid work"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-3eb94942a181e13f7ff2",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "flexible schedule",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-3eb94942a181e13f7ff2",
+      "meaningVi": "lịch làm việc có thể điều chỉnh",
+      "acceptedLearnAnswers": [
+        "flexible schedule"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-3eb94942a181e13f7ff2-example",
+          "prefix": "A ",
+          "targetSurface": "flexible schedule",
+          "suffix": " helps employees manage family responsibilities.",
+          "acceptedAnswers": [
+            "flexible schedule"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-1307443f9f7e31fa5e52",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "asynchronous communication",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-1307443f9f7e31fa5e52",
+      "meaningVi": "việc trao đổi không yêu cầu các bên phản hồi cùng lúc",
+      "acceptedLearnAnswers": [
+        "asynchronous communication"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-1307443f9f7e31fa5e52-example",
+          "prefix": "Written updates support ",
+          "targetSurface": "asynchronous communication",
+          "suffix": " across time zones.",
+          "acceptedAnswers": [
+            "asynchronous communication"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-eb812477e3d7da2619c5",
+      "revision": 2,
+      "collectionId": "ielts",
+      "headword": "virtual meeting",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-eb812477e3d7da2619c5",
+      "meaningVi": "cuộc họp diễn ra trực tuyến",
+      "acceptedLearnAnswers": [
+        "virtual meeting"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": "/ˈvɜɹ.t͡ʃu.əl ˈmi.tɪŋ/",
+        "accent": "en-US"
+      },
+      "examples": [
+        {
+          "id": "word-eb812477e3d7da2619c5-example",
+          "prefix": "The team holds a ",
+          "targetSurface": "virtual meeting",
+          "suffix": " every Monday.",
+          "acceptedAnswers": [
+            "virtual meeting"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "ipa",
+          "attribution": "FreeDictionaryAPI.com / Wiktionary — IPA tagged General American/US; copied automatically, not manually listened",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/virtual meeting",
+          "status": "unverified",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-eb6bd598a711685ae725",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "productivity",
+      "partOfSpeech": "n.",
+      "senseKey": "word-eb6bd598a711685ae725",
+      "meaningVi": "năng suất, lượng kết quả tạo ra trong một khoảng thời gian",
+      "acceptedLearnAnswers": [
+        "productivity"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-eb6bd598a711685ae725-example",
+          "prefix": "Frequent interruptions can reduce ",
+          "targetSurface": "productivity",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "productivity"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-525dc83abdb601dc2b6d",
+      "revision": 2,
+      "collectionId": "ielts",
+      "headword": "isolation",
+      "partOfSpeech": "n.",
+      "senseKey": "word-525dc83abdb601dc2b6d",
+      "meaningVi": "trạng thái thiếu liên hệ với người khác",
+      "acceptedLearnAnswers": [
+        "isolation"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": "/ˌaɪsəˈleɪʃən/",
+        "accent": "en-US"
+      },
+      "examples": [
+        {
+          "id": "word-525dc83abdb601dc2b6d-example",
+          "prefix": "Some remote workers experience social ",
+          "targetSurface": "isolation",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "isolation"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "ipa",
+          "attribution": "FreeDictionaryAPI.com / Wiktionary — IPA tagged General American/US; copied automatically, not manually listened",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/isolation",
+          "status": "unverified",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-7dfc66fb14b0d2b88613",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "collaborative tool",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-7dfc66fb14b0d2b88613",
+      "meaningVi": "công cụ giúp nhiều người làm việc cùng nhau",
+      "acceptedLearnAnswers": [
+        "collaborative tool"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-7dfc66fb14b0d2b88613-example",
+          "prefix": "The team uses a ",
+          "targetSurface": "collaborative tool",
+          "suffix": " to edit documents together.",
+          "acceptedAnswers": [
+            "collaborative tool"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-b52105af1aae8af2387a",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "time zone",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-b52105af1aae8af2387a",
+      "meaningVi": "múi giờ",
+      "acceptedLearnAnswers": [
+        "time zone"
+      ],
+      "cefr": {
+        "level": "B1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-b52105af1aae8af2387a-example",
+          "prefix": "Check the client's ",
+          "targetSurface": "time zone",
+          "suffix": " before scheduling the call.",
+          "acceptedAnswers": [
+            "time zone"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-4afbe79f8fc082009035",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "digital nomad",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-4afbe79f8fc082009035",
+      "meaningVi": "người làm việc trực tuyến trong khi di chuyển giữa nhiều nơi",
+      "acceptedLearnAnswers": [
+        "digital nomad"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-4afbe79f8fc082009035-example",
+          "prefix": "A ",
+          "targetSurface": "digital nomad",
+          "suffix": " needs to plan for reliable internet access.",
+          "acceptedAnswers": [
+            "digital nomad"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-fff3cfa43f84d154c22c",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "workload",
+      "partOfSpeech": "n.",
+      "senseKey": "word-fff3cfa43f84d154c22c",
+      "meaningVi": "khối lượng công việc cần thực hiện",
+      "acceptedLearnAnswers": [
+        "workload"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-fff3cfa43f84d154c22c-example",
+          "prefix": "An excessive ",
+          "targetSurface": "workload",
+          "suffix": " can leave employees exhausted.",
+          "acceptedAnswers": [
+            "workload"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-8ea8c64354c4fee4455d",
+      "revision": 2,
+      "collectionId": "ielts",
+      "headword": "overtime",
+      "partOfSpeech": "n.",
+      "senseKey": "word-8ea8c64354c4fee4455d",
+      "meaningVi": "thời gian làm việc ngoài giờ thông thường",
+      "acceptedLearnAnswers": [
+        "overtime"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": "/ˈoʊ.vɚˌtaɪm/",
+        "accent": "en-US"
+      },
+      "examples": [
+        {
+          "id": "word-8ea8c64354c4fee4455d-example",
+          "prefix": "Too much ",
+          "targetSurface": "overtime",
+          "suffix": " can affect family life.",
+          "acceptedAnswers": [
+            "overtime"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "ipa",
+          "attribution": "FreeDictionaryAPI.com / Wiktionary — IPA tagged General American/US; copied automatically, not manually listened",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/overtime",
+          "status": "unverified",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-ee7df4211c2356ef2555",
+      "revision": 2,
+      "collectionId": "ielts",
+      "headword": "flexibility",
+      "partOfSpeech": "n.",
+      "senseKey": "word-ee7df4211c2356ef2555",
+      "meaningVi": "khả năng linh hoạt điều chỉnh theo hoàn cảnh",
+      "acceptedLearnAnswers": [
+        "flexibility"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": "/ˌflɛksɪˈbɪlɪti/",
+        "accent": "en-US"
+      },
+      "examples": [
+        {
+          "id": "word-ee7df4211c2356ef2555-example",
+          "prefix": "Parents often value ",
+          "targetSurface": "flexibility",
+          "suffix": " in their working hours.",
+          "acceptedAnswers": [
+            "flexibility"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "ipa",
+          "attribution": "FreeDictionaryAPI.com / Wiktionary — IPA tagged General American/US; copied automatically, not manually listened",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/flexibility",
+          "status": "unverified",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-02b54d9f1537cb74b1d9",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "boundary",
+      "partOfSpeech": "n.",
+      "senseKey": "word-02b54d9f1537cb74b1d9",
+      "meaningVi": "giới hạn xác định điều gì chấp nhận được trong quan hệ hoặc hoạt động",
+      "acceptedLearnAnswers": [
+        "boundary"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-02b54d9f1537cb74b1d9-example",
+          "prefix": "Not checking work emails at night helps establish a healthy ",
+          "targetSurface": "boundary",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "boundary"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-ce88ce1453437fa9526b",
+      "revision": 2,
+      "collectionId": "ielts",
+      "headword": "downtime",
+      "partOfSpeech": "n.",
+      "senseKey": "word-ce88ce1453437fa9526b",
+      "meaningVi": "khoảng thời gian nghỉ ngơi không phải làm việc",
+      "acceptedLearnAnswers": [
+        "downtime"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": "/ˈdaʊnˌtaɪm/",
+        "accent": "en-US"
+      },
+      "examples": [
+        {
+          "id": "word-ce88ce1453437fa9526b-example",
+          "prefix": "Everyone needs some ",
+          "targetSurface": "downtime",
+          "suffix": " after a demanding week.",
+          "acceptedAnswers": [
+            "downtime"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "ipa",
+          "attribution": "FreeDictionaryAPI.com / Wiktionary — IPA tagged General American/US; copied automatically, not manually listened",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/downtime",
+          "status": "unverified",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-7c64d48c7588ef538711",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "parental leave",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-7c64d48c7588ef538711",
+      "meaningVi": "thời gian nghỉ việc để chăm sóc con mới sinh hoặc mới nhận nuôi",
+      "acceptedLearnAnswers": [
+        "parental leave"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-7c64d48c7588ef538711-example",
+          "prefix": "Paid ",
+          "targetSurface": "parental leave",
+          "suffix": " allows new parents to care for their child.",
+          "acceptedAnswers": [
+            "parental leave"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-04e81a3cd19b3e3ac191",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "prioritize",
+      "partOfSpeech": "v.",
+      "senseKey": "word-04e81a3cd19b3e3ac191",
+      "meaningVi": "xếp thứ tự ưu tiên để làm việc quan trọng trước",
+      "acceptedLearnAnswers": [
+        "prioritize"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-04e81a3cd19b3e3ac191-example",
+          "prefix": "Workers need to ",
+          "targetSurface": "prioritize",
+          "suffix": " urgent tasks when time is limited.",
+          "acceptedAnswers": [
+            "prioritize"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-969490a662841549d07d",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "delegate",
+      "partOfSpeech": "v.",
+      "senseKey": "word-969490a662841549d07d",
+      "meaningVi": "giao nhiệm vụ hoặc quyền thực hiện cho người khác",
+      "acceptedLearnAnswers": [
+        "delegate"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-969490a662841549d07d-example",
+          "prefix": "Managers should ",
+          "targetSurface": "delegate",
+          "suffix": " tasks when their teams have the right skills.",
+          "acceptedAnswers": [
+            "delegate"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-fd7c8050075841b7cc71",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "leisure time",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-fd7c8050075841b7cc71",
+      "meaningVi": "thời gian dành cho nghỉ ngơi và hoạt động yêu thích",
+      "acceptedLearnAnswers": [
+        "leisure time"
+      ],
+      "cefr": {
+        "level": "B1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-fd7c8050075841b7cc71-example",
+          "prefix": "Shorter commutes can give people more ",
+          "targetSurface": "leisure time",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "leisure time"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-902dc9bfc29075cd9fa0",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "work-related stress",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-902dc9bfc29075cd9fa0",
+      "meaningVi": "căng thẳng phát sinh từ công việc",
+      "acceptedLearnAnswers": [
+        "work-related stress"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-902dc9bfc29075cd9fa0-example",
+          "prefix": "Unclear expectations can increase ",
+          "targetSurface": "work-related stress",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "work-related stress"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-8c6ba5fd18c91d8a37fc",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "unemployment",
+      "partOfSpeech": "n.",
+      "senseKey": "word-8c6ba5fd18c91d8a37fc",
+      "meaningVi": "tình trạng không có việc làm dù muốn và có khả năng làm việc",
+      "acceptedLearnAnswers": [
+        "unemployment"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-8c6ba5fd18c91d8a37fc-example",
+          "prefix": "The report shows a rise in youth ",
+          "targetSurface": "unemployment",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "unemployment"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-ee8d6f0cd293208f62bc",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "job security",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-ee8d6f0cd293208f62bc",
+      "meaningVi": "mức độ ổn định và khả năng tiếp tục giữ được việc làm",
+      "acceptedLearnAnswers": [
+        "job security"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-ee8d6f0cd293208f62bc-example",
+          "prefix": "Permanent contracts can give workers greater ",
+          "targetSurface": "job security",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "job security"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-ffb1cbd4aa26b8682a01",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "redundancy",
+      "partOfSpeech": "n.",
+      "senseKey": "word-ffb1cbd4aa26b8682a01",
+      "meaningVi": "việc mất việc vì vị trí không còn cần thiết",
+      "acceptedLearnAnswers": [
+        "redundancy"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-ffb1cbd4aa26b8682a01-example",
+          "prefix": "The factory closure led to the ",
+          "targetSurface": "redundancy",
+          "suffix": " of many skilled workers.",
+          "acceptedAnswers": [
+            "redundancy"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-1a0f26d860c1172eb482",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "layoff",
+      "partOfSpeech": "n.",
+      "senseKey": "word-1a0f26d860c1172eb482",
+      "meaningVi": "việc cho nhân viên nghỉ việc do doanh nghiệp cắt giảm nhu cầu lao động",
+      "acceptedLearnAnswers": [
+        "layoff"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-1a0f26d860c1172eb482-example",
+          "prefix": "The company announced a temporary ",
+          "targetSurface": "layoff",
+          "suffix": " because demand had fallen.",
+          "acceptedAnswers": [
+            "layoff"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-5130fffed290afab1c73",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "underemployment",
+      "partOfSpeech": "n.",
+      "senseKey": "word-5130fffed290afab1c73",
+      "meaningVi": "tình trạng làm ít giờ hơn mong muốn hoặc làm việc dưới trình độ",
+      "acceptedLearnAnswers": [
+        "underemployment"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-5130fffed290afab1c73-example",
+          "prefix": "A graduate working only a few hours a week may face ",
+          "targetSurface": "underemployment",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "underemployment"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-82ebfb23adce55d7ce34",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "job seeker",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-82ebfb23adce55d7ce34",
+      "meaningVi": "người đang tìm việc",
+      "acceptedLearnAnswers": [
+        "job seeker"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-82ebfb23adce55d7ce34-example",
+          "prefix": "Each ",
+          "targetSurface": "job seeker",
+          "suffix": " can register for free employment advice.",
+          "acceptedAnswers": [
+            "job seeker"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-7111cc8b3a051de4f56d",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "unemployment benefit",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-7111cc8b3a051de4f56d",
+      "meaningVi": "khoản trợ cấp cho người đủ điều kiện đang thất nghiệp",
+      "acceptedLearnAnswers": [
+        "unemployment benefit"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-7111cc8b3a051de4f56d-example",
+          "prefix": "She applied for ",
+          "targetSurface": "unemployment benefit",
+          "suffix": " while looking for another job.",
+          "acceptedAnswers": [
+            "unemployment benefit"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-372650d07af4bf0d3082",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "severance pay",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-372650d07af4bf0d3082",
+      "meaningVi": "khoản tiền được trả khi người lao động phải thôi việc",
+      "acceptedLearnAnswers": [
+        "severance pay"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-372650d07af4bf0d3082-example",
+          "prefix": "His contract included ",
+          "targetSurface": "severance pay",
+          "suffix": " if the position was eliminated.",
+          "acceptedAnswers": [
+            "severance pay"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-af84daeab0dd40b3c640",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "recession",
+      "partOfSpeech": "n.",
+      "senseKey": "word-af84daeab0dd40b3c640",
+      "meaningVi": "giai đoạn suy giảm hoạt động kinh tế",
+      "acceptedLearnAnswers": [
+        "recession"
+      ],
+      "cefr": {
+        "level": "B2",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-af84daeab0dd40b3c640-example",
+          "prefix": "Businesses often reduce hiring during a ",
+          "targetSurface": "recession",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "recession"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "word-7d154608292aa80caaa2",
+      "revision": 1,
+      "collectionId": "ielts",
+      "headword": "job retention",
+      "partOfSpeech": "n. phrase",
+      "senseKey": "word-7d154608292aa80caaa2",
+      "meaningVi": "việc giúp người lao động tiếp tục giữ được việc làm",
+      "acceptedLearnAnswers": [
+        "job retention"
+      ],
+      "cefr": {
+        "level": "C1",
+        "status": "estimated",
+        "note": "Ước lượng theo cách dùng trong mục từ; chưa đối chiếu nguồn CEFR theo nghĩa."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "word-7d154608292aa80caaa2-example",
+          "prefix": "Training programs can support ",
+          "targetSurface": "job retention",
+          "suffix": " during economic change.",
+          "acceptedAnswers": [
+            "job retention"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab – nội dung tự biên soạn cho học cá nhân; chưa đối chiếu từ điển",
+          "license": "Original content for personal use",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    }
+  ],
+  "topics": [
+    {
+      "id": "ielts-011",
+      "collectionId": "ielts",
+      "nameEn": "Career Choices",
+      "nameVi": "Lựa chọn nghề nghiệp",
+      "order": 11,
+      "entryIds": [
+        "word-2ef6d4609c49ff3f6659",
+        "word-4e0f0184beb4e41e8e18",
+        "word-79b07a31a8b82e7f25c6",
+        "word-3a285fd1b6967d8d5f24",
+        "word-a42f695a51febff7cd29",
+        "word-60ebe4539db311766454",
+        "word-82c1a929fb2009bad1bb",
+        "word-6b38736de350e82e01cb",
+        "word-a0a9cb7c05590f1db0be",
+        "word-8caa891fdae106e9fe77"
+      ]
+    },
+    {
+      "id": "ielts-012",
+      "collectionId": "ielts",
+      "nameEn": "Workplace Culture",
+      "nameVi": "Văn hóa công sở",
+      "order": 12,
+      "entryIds": [
+        "word-cde7631c2098f852c483",
+        "word-beab6b2220828443b78e",
+        "word-00f44583028f81b474e0",
+        "word-367ee0643f6486a7f1d4",
+        "word-a66781ed083ee339b17e",
+        "word-281624f27db6e12618d9",
+        "word-2518ccc81d182246a3b3",
+        "word-dbc4df8e8612c17c2036",
+        "word-1a925b858ffba6a68f45",
+        "word-dd5e714b0e648149f737"
+      ]
+    },
+    {
+      "id": "ielts-013",
+      "collectionId": "ielts",
+      "nameEn": "Remote and Hybrid Work",
+      "nameVi": "Làm việc từ xa và kết hợp",
+      "order": 13,
+      "entryIds": [
+        "word-0bfa757763ee9d10957c",
+        "word-91a3172aed479fc6633b",
+        "word-3eb94942a181e13f7ff2",
+        "word-1307443f9f7e31fa5e52",
+        "word-eb812477e3d7da2619c5",
+        "word-eb6bd598a711685ae725",
+        "word-525dc83abdb601dc2b6d",
+        "word-7dfc66fb14b0d2b88613",
+        "word-b52105af1aae8af2387a",
+        "word-4afbe79f8fc082009035"
+      ]
+    },
+    {
+      "id": "ielts-014",
+      "collectionId": "ielts",
+      "nameEn": "Work–Life Balance",
+      "nameVi": "Cân bằng công việc và cuộc sống",
+      "order": 14,
+      "entryIds": [
+        "word-fff3cfa43f84d154c22c",
+        "word-8ea8c64354c4fee4455d",
+        "word-ee7df4211c2356ef2555",
+        "word-02b54d9f1537cb74b1d9",
+        "word-ce88ce1453437fa9526b",
+        "word-7c64d48c7588ef538711",
+        "word-04e81a3cd19b3e3ac191",
+        "word-969490a662841549d07d",
+        "word-fd7c8050075841b7cc71",
+        "word-902dc9bfc29075cd9fa0"
+      ]
+    },
+    {
+      "id": "ielts-015",
+      "collectionId": "ielts",
+      "nameEn": "Unemployment and Job Security",
+      "nameVi": "Thất nghiệp và sự ổn định việc làm",
+      "order": 15,
+      "entryIds": [
+        "word-8c6ba5fd18c91d8a37fc",
+        "word-ee8d6f0cd293208f62bc",
+        "word-ffb1cbd4aa26b8682a01",
+        "word-1a0f26d860c1172eb482",
+        "word-5130fffed290afab1c73",
+        "word-82ebfb23adce55d7ce34",
+        "word-7111cc8b3a051de4f56d",
+        "word-372650d07af4bf0d3082",
+        "word-af84daeab0dd40b3c640",
+        "word-7d154608292aa80caaa2"
+      ]
+    }
+  ]
+}

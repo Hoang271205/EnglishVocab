@@ -1,0 +1,1179 @@
+{
+  "schemaVersion": 1,
+  "candidates": [
+    {
+      "id": "sense-dd25f944c36c5f7442b82e0e",
+      "headword": "speed limit",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "tốc độ tối đa",
+        "giới hạn tốc độ"
+      ],
+      "definitionEn": "The maximum speed permitted by law for vehicles.",
+      "examples": [
+        {
+          "id": "example-16f1557b95fa4ad070d0993c",
+          "text": "John is a careful driver. He never exceeds the speed limit.",
+          "prefix": "John is a careful driver. He never exceeds the ",
+          "targetSurface": "speed limit",
+          "suffix": "."
+        }
+      ],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/speed limit",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507362159,
+        "sourceHash": "f40270359e2800b92735e1905cd7b4e1f011e82ba423a90152a9bc1b3d5d5a01"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-0a85e2735f47ff6c8565816c",
+      "headword": "speeding",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [],
+      "definitionEn": "(uncountable) Driving faster than the legal speed limit.",
+      "examples": [
+        {
+          "id": "example-457aef3ae67a3ea5a8abc1fb",
+          "text": "He was fined $100 for speeding.",
+          "prefix": "He was fined $100 for ",
+          "targetSurface": "speeding",
+          "suffix": "."
+        }
+      ],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/speeding",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507363206,
+        "sourceHash": "dc5327fac906cd393e4da172b7571fb5b693d2b2a0ea8f5e1a5c7233bbed9ee2"
+      },
+      "issues": [
+        "missing-vietnamese",
+        "missing-or-ambiguous-us-ipa",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-93baaaf1421cdefe438c4419",
+      "headword": "bedroom",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [],
+      "definitionEn": "A room in a house, apartment, hotel, or other dwelling where a bed is kept for sleeping.",
+      "examples": [
+        {
+          "id": "example-841ac420363dcae77d20ebd0",
+          "text": "Please don't enter my bedroom without knocking.",
+          "prefix": "Please don't enter my ",
+          "targetSurface": "bedroom",
+          "suffix": " without knocking."
+        }
+      ],
+      "ipaUSOptions": [
+        "/ˈbɛdˌɹum/",
+        "/ˈbɛdɹʊm/"
+      ],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/bedroom",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507345029,
+        "sourceHash": "080353473c5d242bb6ada51e1e257d4a15f0bc83b393f783fe675c809867a5c7"
+      },
+      "issues": [
+        "missing-vietnamese",
+        "missing-or-ambiguous-us-ipa",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-7e7ceda3e06b96b92115cc88",
+      "headword": "kitchen",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "nhà bếp",
+        "bếp"
+      ],
+      "definitionEn": "A room or area for preparing food.",
+      "examples": [
+        {
+          "id": "example-6da1f99a5d6efc653c6219ad",
+          "text": "We cook in the kitchen.",
+          "prefix": "We cook in the ",
+          "targetSurface": "kitchen",
+          "suffix": "."
+        }
+      ],
+      "ipaUSOptions": [
+        "/ˈkɪt͡ʃ(ə)n/"
+      ],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/kitchen",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507345773,
+        "sourceHash": "a788230e35b6017a2cbcceaa0b28371ac08beddec04cea19e7e5fe6efae17675"
+      },
+      "issues": [
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-eff5184074b66a7521b3927a",
+      "headword": "attic",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [],
+      "definitionEn": "The space, often unfinished and with sloped walls, directly below the roof in the uppermost part of a house or other building, generally used for storage or habitation.",
+      "examples": [
+        {
+          "id": "example-01b561b4224032e5c0622f92",
+          "text": "We went up to the attic to look for the boxes containing our childhood keepsakes.",
+          "prefix": "We went up to the ",
+          "targetSurface": "attic",
+          "suffix": " to look for the boxes containing our childhood keepsakes."
+        }
+      ],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/attic",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507346227,
+        "sourceHash": "bf504c2c3500d277665621dcfe5402e9fe0d7fb81cbbe6fa721c8b7757389ff2"
+      },
+      "issues": [
+        "missing-vietnamese",
+        "missing-or-ambiguous-us-ipa",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-54a3d0a7160ccf10abc12ec9",
+      "headword": "living room",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "phòng khách"
+      ],
+      "definitionEn": "(countable) A room in a private house used for general social and leisure activities.",
+      "examples": [
+        {
+          "id": "example-2421600b6e81f4cd68cf760f",
+          "text": "We relax in the living room.",
+          "prefix": "We relax in the ",
+          "targetSurface": "living room",
+          "suffix": ".",
+          "source": {
+            "provider": "Tatoeba English detailed export",
+            "url": "https://tatoeba.org/en/sentences/show/11787839",
+            "license": "CC BY 2.0 FR",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/fr/",
+            "attribution": "Tatoeba sentence #11787839 by terrynoti; last modified 2023-05-23 23:04:22"
+          }
+        }
+      ],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/living room",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507347683,
+        "sourceHash": "991ede58c1d06ac07eefae7a6dfb849e2e80bd60af44b75e7a64e9685356a377"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-027a9b56439b94a2513d5019",
+      "headword": "chair",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "ghế"
+      ],
+      "definitionEn": "An item of furniture used to sit on or in, comprising a seat, legs or wheels, back, and sometimes arm rests, for use by one person.",
+      "examples": [
+        {
+          "id": "example-951564dc9d31a3e56a670454",
+          "text": "I sat on my chair to have dinner.",
+          "prefix": "I sat on my ",
+          "targetSurface": "chair",
+          "suffix": " to have dinner."
+        }
+      ],
+      "ipaUSOptions": [
+        "/t͡ʃɛɚ/"
+      ],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/chair",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507348957,
+        "sourceHash": "fb7c9ae3ce56a15d12f7f95afeacae2781bf20caae7a32a62384ee234bf0ca43"
+      },
+      "issues": [
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-1c994a578f3522385bd26b46",
+      "headword": "table",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "bàn"
+      ],
+      "definitionEn": "An item of furniture with a flat top surface raised above the ground, usually on one or more legs.",
+      "examples": [
+        {
+          "id": "example-d9b36b17ac6998c0073b218d",
+          "text": "This table is heavy.",
+          "prefix": "This ",
+          "targetSurface": "table",
+          "suffix": " is heavy.",
+          "translationVi": "Cái bàn này nặng quá.",
+          "source": {
+            "provider": "Tatoeba / ManyThings",
+            "url": "https://tatoeba.org/en/sentences/show/464216",
+            "license": "CC BY 2.0 FR",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/fr/",
+            "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #464216 (lukaszpp) & #4605234 (khoaharp); https://www.manythings.org/anki/; translated sentence https://tatoeba.org/en/sentences/show/4605234"
+          }
+        }
+      ],
+      "ipaUSOptions": [
+        "[ˈtʰeɪb(ə)ɫ]"
+      ],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/table",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507349463,
+        "sourceHash": "1f12ccf67c1348c2e14e51f1db95fb1307521dda9f94065b384a2fe938f564ce"
+      },
+      "issues": [
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-95ec9645277feafb148a2719",
+      "headword": "sofa",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "xô-pha",
+        "ghế xô-pha",
+        "đi văng"
+      ],
+      "definitionEn": "(furniture) An upholstered seat with a raised back and one or two raised ends, long enough to comfortably accommodate two or more people.",
+      "examples": [
+        {
+          "id": "example-cd65990ac21db06dc72fd3f3",
+          "text": "He bought a big sofa two days before his relatives arrived.",
+          "prefix": "He bought a big ",
+          "targetSurface": "sofa",
+          "suffix": " two days before his relatives arrived."
+        }
+      ],
+      "ipaUSOptions": [
+        "/ˈsoʊ̯fə/",
+        "/ˈsɔʊ̯fə/"
+      ],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/sofa",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507349918,
+        "sourceHash": "f6e994adea23c18f36ef95ab604b9cff087fb118f00c9269371178dcbf1c9f22"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-12a3aa2a60ab323bc22b8077",
+      "headword": "shelf",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "giá sách",
+        "giá"
+      ],
+      "definitionEn": "A flat, rigid structure, fixed at right angles to a wall or forming a part of a cabinet, desk, etc., and used to display, store, or support objects.",
+      "examples": [
+        {
+          "id": "example-88ac671592fa5e769bc1dc4f",
+          "text": "He put the book on the shelf.",
+          "prefix": "He put the book on the ",
+          "targetSurface": "shelf",
+          "suffix": ".",
+          "source": {
+            "provider": "Tatoeba English detailed export",
+            "url": "https://tatoeba.org/en/sentences/show/1396455",
+            "license": "CC BY 2.0 FR",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/fr/",
+            "attribution": "Tatoeba sentence #1396455 by CK; last modified 2012-01-27 03:24:55"
+          }
+        }
+      ],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/shelf",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507350622,
+        "sourceHash": "a3055d0f742568f86b84565b96f744693ddc2d4101e877e35c6c1c09a99b7812"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-eb3b11086df43b7e29cb2dd3",
+      "headword": "bed",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "giường"
+      ],
+      "definitionEn": "(countable) A piece of furniture, usually flat and soft, on which to rest or sleep.",
+      "examples": [
+        {
+          "id": "example-2202fee8bf724c778e00e675",
+          "text": "My cat often sleeps on my bed.",
+          "prefix": "My cat often sleeps on my ",
+          "targetSurface": "bed",
+          "suffix": "."
+        }
+      ],
+      "ipaUSOptions": [
+        "/ˈbɛd/"
+      ],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/bed",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507351448,
+        "sourceHash": "a20d90a8342fe524cc370cead0a6f92e4268c129d41e240e916ee3b3c31ed52f"
+      },
+      "issues": [
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-998b59c45e8c99a1cc6ea596",
+      "headword": "blanket",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "mền",
+        "chăn"
+      ],
+      "definitionEn": "A heavy, loosely woven fabric, usually large and woollen, used for warmth while sleeping or resting.",
+      "examples": [
+        {
+          "id": "example-6cf0b3e11591eeebb057e751",
+          "text": "The baby was cold, so his mother put a blanket over him.",
+          "prefix": "The baby was cold, so his mother put a ",
+          "targetSurface": "blanket",
+          "suffix": " over him."
+        }
+      ],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/blanket",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507352290,
+        "sourceHash": "b989d4c06769d47aab3967bd1d6a891ec8d1f6cf58d6330899eb1e8146fcbc20"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-c19c52b973c1b14f360a9e44",
+      "headword": "slice",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "lát mỏng",
+        "miếng mỏng"
+      ],
+      "definitionEn": "A thin, broad piece cut off.",
+      "examples": [
+        {
+          "id": "example-48b96f43357161d5eac86435",
+          "text": "Jim was munching on a slice of toast.",
+          "prefix": "Jim was munching on a ",
+          "targetSurface": "slice",
+          "suffix": " of toast."
+        }
+      ],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/slice",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507354183,
+        "sourceHash": "ce5f533b2a6a370fa611120767a05c593e0f87d204659240aa3c79edf6ce4d43"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-e449340c878550ae9670d2eb",
+      "headword": "boil",
+      "partOfSpeech": "v.",
+      "meaningViOptions": [
+        "luộc"
+      ],
+      "definitionEn": "(ambitransitive) To cook in boiling water.",
+      "examples": [
+        {
+          "id": "example-750d5567286a235a664d43ea",
+          "text": "Boil the eggs for three minutes.",
+          "prefix": "",
+          "targetSurface": "Boil",
+          "suffix": " the eggs for three minutes."
+        }
+      ],
+      "ipaUSOptions": [
+        "/bɔɪ(ə)l/"
+      ],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/boil",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507354898,
+        "sourceHash": "cef6485eb01aad45417c172f099a825f13b73bcabc90686478daeb8f25f02c2d"
+      },
+      "issues": [
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-8f4a38d1d804378fdd0c670c",
+      "headword": "stir",
+      "partOfSpeech": "v.",
+      "meaningViOptions": [],
+      "definitionEn": "(transitive) To disturb the content of (a container) by passing an object through it.",
+      "examples": [
+        {
+          "id": "example-6f36cc1b727c39a1a49fc3aa",
+          "text": "Would you please stir this pot so that the chocolate doesn't burn?",
+          "prefix": "Would you please ",
+          "targetSurface": "stir",
+          "suffix": " this pot so that the chocolate doesn't burn?"
+        }
+      ],
+      "ipaUSOptions": [
+        "/stɝ/"
+      ],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/stir",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507356076,
+        "sourceHash": "cec7b3ad04dc5d7c8f2d893371d48a2331b7c8c8e3ff3a419260100b3d982b1f"
+      },
+      "issues": [
+        "missing-vietnamese",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-405b2e30f5afd3cd1624ad10",
+      "headword": "simmer",
+      "partOfSpeech": "v.",
+      "meaningViOptions": [],
+      "definitionEn": "(transitive) To cause to cook or to cause to undergo heating slowly at or below the boiling point.",
+      "examples": [
+        {
+          "id": "example-1ba54f8072c623c1cc6e8908",
+          "text": "Simmer the soup for five minutes, then serve.",
+          "prefix": "",
+          "targetSurface": "Simmer",
+          "suffix": " the soup for five minutes, then serve."
+        }
+      ],
+      "ipaUSOptions": [
+        "/ˈsɪmɚ/"
+      ],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/simmer",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507356390,
+        "sourceHash": "3c41c7d77546a9763ace68cb8f8dec9c17374687ee6020235645184a33c9990b"
+      },
+      "issues": [
+        "missing-vietnamese",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-c118ff7006c790999c6a916f",
+      "headword": "trousers",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [],
+      "definitionEn": "An article of clothing that covers the part of the body between the waist and the ankles or knees, and is divided into a separate part for each leg.",
+      "examples": [
+        {
+          "id": "example-a9cacc6253a4eaa81df89c6f",
+          "text": "The trousers need to be shortened.",
+          "prefix": "The ",
+          "targetSurface": "trousers",
+          "suffix": " need to be shortened."
+        }
+      ],
+      "ipaUSOptions": [
+        "/ˈtɹaʊzɚz/"
+      ],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/trousers",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507357745,
+        "sourceHash": "3c2c8478e177f8ef49fb1ff388cffbeef5cf4123348d955126467aa9f85d9ee3"
+      },
+      "issues": [
+        "missing-vietnamese",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-6d0fca1e615f18f1e8259d05",
+      "headword": "shirt",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "áo sơ mi",
+        "sơ mi"
+      ],
+      "definitionEn": "(clothing) An article of clothing that is worn on the upper part of the body, and often has sleeves, either long or short, that cover the arms.",
+      "examples": [
+        {
+          "id": "example-a466d99e9ff5c4ab4b71208c",
+          "text": "It can take a while to learn how to iron a shirt properly.",
+          "prefix": "It can take a while to learn how to iron a ",
+          "targetSurface": "shirt",
+          "suffix": " properly."
+        }
+      ],
+      "ipaUSOptions": [
+        "/ʃɜɹt/"
+      ],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/shirt",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507357513,
+        "sourceHash": "3c4f9cf629243452aebb9f0e0e25babfbb10c464274b139ac3082d1afe9691dd"
+      },
+      "issues": [
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-0d883886f9adaf8f73a0851f",
+      "headword": "coat",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "áo bành tô",
+        "áo khoác"
+      ],
+      "definitionEn": "(countable, clothing) An outer garment covering the upper torso and arms.",
+      "examples": [
+        {
+          "id": "example-ac27fb12dc058991be5a5f1d",
+          "text": "Tom was wearing a blue coat.",
+          "prefix": "Tom was wearing a blue ",
+          "targetSurface": "coat",
+          "suffix": ".",
+          "translationVi": "Tom đã mặc một chiếc áo khoác màu xanh .",
+          "source": {
+            "provider": "Tatoeba / ManyThings",
+            "url": "https://tatoeba.org/en/sentences/show/8351440",
+            "license": "CC BY 2.0 FR",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/fr/",
+            "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #8351440 (CK) & #10273156 (Alex_do); https://www.manythings.org/anki/; translated sentence https://tatoeba.org/en/sentences/show/10273156"
+          }
+        }
+      ],
+      "ipaUSOptions": [
+        "/ˈkoʊ̯t/",
+        "[ˈkʰoʊ̯t]"
+      ],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/coat",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507358578,
+        "sourceHash": "bcd14b4e3c3ebc5e81b4891f212512f039f3902e964cfdec7053770a7aadcfdd"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-4a6dbc2395386046dbaa07a1",
+      "headword": "shoe",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "giày"
+      ],
+      "definitionEn": "(footwear) A protective covering for the foot, with a bottom part composed of thick leather or plastic sole and often a thicker heel, and a softer upper part made of leather or synthetic material. Shoes generally do not extend above the ankle, as opposed to boots, which do.",
+      "examples": [
+        {
+          "id": "example-ea6cdbf150df7ec76d077f19",
+          "text": "She manages a shoe store.",
+          "prefix": "She manages a ",
+          "targetSurface": "shoe",
+          "suffix": " store.",
+          "source": {
+            "provider": "Tatoeba English detailed export",
+            "url": "https://tatoeba.org/en/sentences/show/313352",
+            "license": "CC BY 2.0 FR",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/fr/",
+            "attribution": "Tatoeba sentence #313352 by CK; last modified 2010-10-22 19:59:05"
+          }
+        }
+      ],
+      "ipaUSOptions": [
+        "/ˈʃu/"
+      ],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/shoe",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507360729,
+        "sourceHash": "c351f05612bcdb1e76913a27d1695c0deaaaeffd350dcc74cdfb2df3f0ed85b4"
+      },
+      "issues": [
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-3d6e6aad048a96b6fc0aaca5",
+      "headword": "jeans",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "jeans",
+        "quần jeans",
+        "quần bò"
+      ],
+      "definitionEn": "plural of jean",
+      "examples": [
+        {
+          "id": "example-5d8bfba59990596378620898",
+          "text": "I like these blue jeans.",
+          "prefix": "I like these blue ",
+          "targetSurface": "jeans",
+          "suffix": ".",
+          "translationVi": "Tôi thích chiếc quần jeans màu xanh da trời này.",
+          "source": {
+            "provider": "Tatoeba / ManyThings",
+            "url": "https://tatoeba.org/en/sentences/show/11277796",
+            "license": "CC BY 2.0 FR",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/fr/",
+            "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #11277796 (chaule3) & #11277797 (chaule3); https://www.manythings.org/anki/; translated sentence https://tatoeba.org/en/sentences/show/11277797"
+          }
+        }
+      ],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/jeans",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507361479,
+        "sourceHash": "9861b5cf9e9d576e51de75e8048050b71ba3fcb947d001dc66ddc80ead7e824b"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "sense-e50775c4bfbc8d890b81027b",
+      "headword": "sweater",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "áo len"
+      ],
+      "definitionEn": "(chiefly US) A similar garment worn for warmth.",
+      "examples": [
+        {
+          "id": "example-f0c10d1d7300f6acdc36202e",
+          "text": "Try on this sweater.",
+          "prefix": "Try on this ",
+          "targetSurface": "sweater",
+          "suffix": ".",
+          "source": {
+            "provider": "Tatoeba English detailed export",
+            "url": "https://tatoeba.org/en/sentences/show/60937",
+            "license": "CC BY 2.0 FR",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/fr/",
+            "attribution": "Tatoeba sentence #60937 by CK; last modified 2010-10-16 14:43:48"
+          }
+        }
+      ],
+      "ipaUSOptions": [
+        "/ˈswɛtɚ/",
+        "/-ɾɚ/"
+      ],
+      "source": {
+        "provider": "FreeDictionaryAPI.com / English Wiktionary",
+        "url": "https://en.wiktionary.org/wiki/sweater",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507361228,
+        "sourceHash": "0d8f34fa0e9669298bf62151a8ff783f92f962d838b5a36dc2d0b5139a1e799e"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "vi-sense-a522c131c4814bc090484b86",
+      "headword": "desk",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "Một cái bàn, cái khung, hoặc cái hộp, thường có mặt trên cùng phẳng và hơi nghiêng, dùng vào mục đích ban đầu là để đọc sách và viết. Chúng thường có ngăn kéo ở dưới."
+      ],
+      "definitionEn": null,
+      "examples": [
+        {
+          "id": "example-293165b81bd7d11302bc8088",
+          "text": "This is a desk.",
+          "prefix": "This is a ",
+          "targetSurface": "desk",
+          "suffix": ".",
+          "source": {
+            "provider": "Tatoeba English detailed export",
+            "url": "https://tatoeba.org/en/sentences/show/55769",
+            "license": "CC BY 2.0 FR",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/fr/",
+            "attribution": "Tatoeba sentence #55769 by CK; last modified 2010-10-16 14:09:32"
+          }
+        }
+      ],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract",
+        "url": "https://vi.wiktionary.org/wiki/desk",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507406492,
+        "sourceHash": "8df2c2659c6017aa2aa304ccbcbc30d390cf5a04c52cb0cc8db4ff7a10894974"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "vi-sense-09b3e18875c25d3c70bb37d5",
+      "headword": "basement",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "Tầng hầm."
+      ],
+      "definitionEn": null,
+      "examples": [
+        {
+          "id": "example-7c1de3b16b800e1758841c33",
+          "text": "My basement is flooded.",
+          "prefix": "My ",
+          "targetSurface": "basement",
+          "suffix": " is flooded.",
+          "source": {
+            "provider": "Tatoeba English detailed export",
+            "url": "https://tatoeba.org/en/sentences/show/10296201",
+            "license": "CC BY 2.0 FR",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/fr/",
+            "attribution": "Tatoeba sentence #10296201 by Smoky; last modified 2021-09-14 21:51:48"
+          }
+        }
+      ],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract",
+        "url": "https://vi.wiktionary.org/wiki/basement",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507406492,
+        "sourceHash": "9fbb39c0937c6edfee94cd04985cdfc39bd9ecc01c4b74ee56470f018112c7fb"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "vi-sense-fd56a9e2216d7f1e5d9f04e9",
+      "headword": "pedestrian",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "Người đi bộ, khách bộ hành."
+      ],
+      "definitionEn": null,
+      "examples": [
+        {
+          "id": "example-bf8fc941ceb41284e25906dd",
+          "text": "The ambulance went out of control and came close to running over a pedestrian.",
+          "prefix": "The ambulance went out of control and came close to running over a ",
+          "targetSurface": "pedestrian",
+          "suffix": ".",
+          "source": {
+            "provider": "Tatoeba English detailed export",
+            "url": "https://tatoeba.org/en/sentences/show/34942",
+            "license": "CC BY 2.0 FR",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/fr/",
+            "attribution": "Tatoeba sentence #34942 by CK; last modified 2011-01-03 13:50:45"
+          }
+        }
+      ],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract",
+        "url": "https://vi.wiktionary.org/wiki/pedestrian",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507406492,
+        "sourceHash": "c41c4f28684d8cca2cb3ceb1c431048d9cf38828dccb6506b15949e22675fedb"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "vi-sense-6d066ccf62a0204c03df1155",
+      "headword": "simmer",
+      "partOfSpeech": "v.",
+      "meaningViOptions": [
+        "Làm cho sủi; ninh nhỏ lửa."
+      ],
+      "definitionEn": null,
+      "examples": [],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract",
+        "url": "https://vi.wiktionary.org/wiki/simmer",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507406492,
+        "sourceHash": "ab091b87cb3e07d796120b70e4fcc7f99d562f80f382baa65aab6f36953762d0"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "vi-sense-9c333363f96f65021d14cccd",
+      "headword": "bedroom",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "Buồng ngủ."
+      ],
+      "definitionEn": null,
+      "examples": [],
+      "ipaUSOptions": [
+        "/ˈbed.rʊm/"
+      ],
+      "source": {
+        "provider": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract",
+        "url": "https://vi.wiktionary.org/wiki/bedroom",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507406492,
+        "sourceHash": "35f6f3ac982ad6e0aa16194703c7564fe8417d383a83ff7f1c6c2b40473cd09e"
+      },
+      "issues": [
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "vi-sense-bf197c6ab55dbf694019f264",
+      "headword": "attic",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "Gác mái."
+      ],
+      "definitionEn": null,
+      "examples": [],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract",
+        "url": "https://vi.wiktionary.org/wiki/attic",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507406492,
+        "sourceHash": "a43576d7e143988aff1fc0a1eb0fed46e44a11b76101ab52e9d07384e85747a6"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "vi-sense-4e1299a88eaffe35c7db0e06",
+      "headword": "room",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "Buồng, phòng."
+      ],
+      "definitionEn": null,
+      "examples": [
+        {
+          "id": "example-9d9bee2736e3d7c8f02e450d",
+          "text": "This is my room.",
+          "prefix": "This is my ",
+          "targetSurface": "room",
+          "suffix": ".",
+          "source": {
+            "provider": "Tatoeba English detailed export",
+            "url": "https://tatoeba.org/en/sentences/show/1273375",
+            "license": "CC BY 2.0 FR",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/fr/",
+            "attribution": "Tatoeba sentence #1273375 by CK; last modified 2019-03-15 05:42:56"
+          }
+        }
+      ],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract",
+        "url": "https://vi.wiktionary.org/wiki/room",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507406492,
+        "sourceHash": "ebaa40f1aa3ddbea76343c3137265ba9a646d550185b8ed6d284e489f2288069"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "vi-sense-2fc32a7d671922bc400cd7e3",
+      "headword": "bathroom",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "Buồng tắm, phòng tắm, nhà vệ sinh."
+      ],
+      "definitionEn": null,
+      "examples": [
+        {
+          "id": "example-fe57b20a9e3517a69b5efd13",
+          "text": "Where is the bathroom?",
+          "prefix": "Where is the ",
+          "targetSurface": "bathroom",
+          "suffix": "?",
+          "source": {
+            "provider": "Tatoeba English detailed export",
+            "url": "https://tatoeba.org/en/sentences/show/2136",
+            "license": "CC BY 2.0 FR",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/fr/",
+            "attribution": "Tatoeba sentence #2136 by brauliobezerra; last modified 2010-06-15 12:36:23"
+          }
+        }
+      ],
+      "ipaUSOptions": [
+        "/ˈbæθˌɹum/",
+        "/ˈbæθɹʊm/",
+        "/ˈbæθɹuːm/"
+      ],
+      "source": {
+        "provider": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract",
+        "url": "https://vi.wiktionary.org/wiki/bathroom",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507406492,
+        "sourceHash": "a39eb09342ca420ee526131271553edbf8d590605ab880e2423a17bcfac14b39"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cross-source-alignment-needs-review",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "vi-sense-b28d8cf93d2bcd40133a949d",
+      "headword": "speeding",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "Sự lái xe quá tốc độ quy định."
+      ],
+      "definitionEn": null,
+      "examples": [],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract",
+        "url": "https://vi.wiktionary.org/wiki/speeding",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507406492,
+        "sourceHash": "6e7890be5df1787ed4619e86224bc9541a076b115ddd6e03ce8f8a86c51d85c4"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "vi-sense-4398bdfa4dcee1c8f67087c1",
+      "headword": "stir",
+      "partOfSpeech": "v.",
+      "meaningViOptions": [
+        "Khuấy, quấy."
+      ],
+      "definitionEn": null,
+      "examples": [],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract",
+        "url": "https://vi.wiktionary.org/wiki/stir",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507406492,
+        "sourceHash": "49fdab474c46830476f6a1f4fc383c2517f015bd2933a035475393e1d9b02021"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    },
+    {
+      "id": "vi-sense-467cda5b527e566954995add",
+      "headword": "trousers",
+      "partOfSpeech": "n.",
+      "meaningViOptions": [
+        "Quần Âu."
+      ],
+      "definitionEn": null,
+      "examples": [],
+      "ipaUSOptions": [],
+      "source": {
+        "provider": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract",
+        "url": "https://vi.wiktionary.org/wiki/trousers",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrievedAt": 1792507406492,
+        "sourceHash": "8fdcff84a5b7aac61c5bb448df11562c05c1ffaa13ce698f224607fff4b7ba2b"
+      },
+      "issues": [
+        "missing-or-ambiguous-us-ipa",
+        "cc0-sentence-sense-alignment-needs-review",
+        "detailed-sentence-sense-alignment-needs-review"
+      ],
+      "reviewStatus": "needs-review"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+# daily-001
+hello|interj.|A1|xin chào|I said [hello] to my new neighbor.
+nice to meet you|phrase|A1|rất vui được gặp bạn|Hi, I'm Linh; it's [nice to meet you].
+introduce|v.|A2|giới thiệu|Let me [introduce] myself before we begin.
+first name|n. phrase|A1|tên riêng, tên gọi|My [first name] is Anna.
+last name|n. phrase|A1|họ|Please write your [last name] on this form.
+call me|phrase|A1|hãy gọi tôi là|My name is Alexander, but you can [call me] Alex.
+from|prep.|A1|đến từ|I'm [from] Vietnam.
+live|v.|A1|sinh sống|I [live] near the city center.
+nickname|n.|A2|biệt danh|My [nickname] is Ben.
+pleased to meet you|phrase|A2|hân hạnh được gặp bạn|I'm [pleased to meet you], Mr. Brown.
+# daily-002
+age|n.|A1|tuổi|The form asks for my [age].
+nationality|n.|A1|quốc tịch|Please state your [nationality] here.
+address|n.|A1|địa chỉ|Is this your current [address]?
+phone number|n. phrase|A1|số điện thoại|Could I have your [phone number]?
+email address|n. phrase|A1|địa chỉ thư điện tử|I sent the details to your [email address].
+date of birth|n. phrase|A1|ngày tháng năm sinh|Please enter your [date of birth].
+hometown|n.|A2|quê nhà, quê quán|My [hometown] is a small coastal town.
+occupation|n.|B1|nghề nghiệp|What is your current [occupation]?
+marital status|n. phrase|B1|tình trạng hôn nhân|This section asks about your [marital status].
+contact details|n. phrase|A2|thông tin liên lạc|Please check your [contact details] before submitting the form.
+# daily-003
+mother|n.|A1|mẹ|My [mother] enjoys gardening.
+father|n.|A1|bố, cha|My [father] cooks dinner on Sundays.
+sister|n.|A1|chị hoặc em gái|My [sister] is two years younger than me.
+brother|n.|A1|anh hoặc em trai|My [brother] works in a bookstore.
+grandmother|n.|A1|bà|My [grandmother] lives nearby.
+grandfather|n.|A1|ông|My [grandfather] likes telling stories.
+aunt|n.|A1|cô, dì, bác gái hoặc mợ, thím|My [aunt] is visiting us this weekend.
+uncle|n.|A1|chú, cậu, bác trai hoặc dượng|My [uncle] drives a bus.
+cousin|n.|A1|anh, chị hoặc em họ|My [cousin] studies in the same city.
+sibling|n.|B1|anh, chị hoặc em ruột|I have one [sibling], an older sister.
+# daily-004
+friend|n.|A1|bạn|A good [friend] listens when you need to talk.
+close friend|n. phrase|A2|bạn thân|Mai is a [close friend] of mine.
+classmate|n.|A1|bạn cùng lớp|My [classmate] helped me understand the exercise.
+colleague|n.|A2|đồng nghiệp|I had lunch with a [colleague] from work.
+neighbor|n.|A1|người hàng xóm|Our [neighbor] feeds the cat when we travel.
+hang out|phrasal v.|A2|dành thời gian thư giãn cùng ai đó|We often [hang out] after class.
+keep in touch|phrase|A2|giữ liên lạc|Let's [keep in touch] after you move.
+get along|phrasal v.|B1|hòa thuận, có quan hệ tốt với nhau|My roommates and I [get along] well.
+trust|v.|B1|tin tưởng|I [trust] her to give me honest advice.
+rely on|phrasal v.|B1|tin cậy, dựa vào sự giúp đỡ của ai đó|You can [rely on] me when you need help.
+# daily-005
+tall|adj.|A1|cao|Her brother is very [tall].
+short|adj.|A1|thấp về chiều cao|He is quite [short] compared with his brother.
+slim|adj.|A2|thon gọn, mảnh mai|The runner has a [slim] build.
+curly|adj.|A2|xoăn|She has naturally [curly] hair.
+straight hair|n. phrase|A1|tóc thẳng|He has dark, [straight hair].
+beard|n.|A2|râu ở cằm và má|My uncle has a short [beard].
+glasses|n.|A1|kính đeo mắt|I need my [glasses] to read the menu.
+freckles|n.|B1|những đốm tàn nhang|She has [freckles] across her nose.
+bald|adj.|B1|hói, không có tóc trên đầu|The man in the photo is [bald].
+appearance|n.|A2|ngoại hình, vẻ bề ngoài|Her [appearance] has changed since we last met.
+# daily-006
+friendly|adj.|A1|thân thiện|Our new teacher is very [friendly].
+shy|adj.|A2|nhút nhát, ngại giao tiếp|I feel [shy] when I meet new people.
+patient|adj.|A2|kiên nhẫn|She is [patient] with beginners.
+honest|adj.|A2|trung thực|He gave me an [honest] answer.
+generous|adj.|A2|hào phóng, rộng lượng|My friend is always [generous] with her time.
+reliable|adj.|B1|đáng tin cậy|He is a [reliable] teammate who keeps his promises.
+outgoing|adj.|B1|cởi mở, thích giao tiếp|My sister is [outgoing] and enjoys meeting people.
+thoughtful|adj.|B1|chu đáo, quan tâm đến người khác|It was [thoughtful] of you to bring her a meal.
+stubborn|adj.|B2|bướng bỉnh, khó thay đổi ý kiến|He can be [stubborn] when he thinks he is right.
+easygoing|adj.|B1|thoải mái, dễ tính|Our manager is [easygoing] about small changes to the schedule.
+# daily-007
+happy|adj.|A1|vui vẻ, hạnh phúc|I'm [happy] to see you again.
+sad|adj.|A1|buồn|She felt [sad] when her friend moved away.
+angry|adj.|A1|tức giận|He was [angry] about the broken window.
+worried|adj.|A2|lo lắng|I'm [worried] about tomorrow's test.
+excited|adj.|A1|hào hứng|The children are [excited] about the trip.
+tired|adj.|A1|mệt|I feel [tired] after a long day.
+proud|adj.|A2|tự hào|She is [proud] of her progress.
+embarrassed|adj.|B1|ngượng ngùng, xấu hổ vì tình huống khó xử|I felt [embarrassed] when I forgot his name.
+relieved|adj.|B2|nhẹ nhõm sau khi hết lo lắng|We were [relieved] to hear that everyone was safe.
+frustrated|adj.|B2|bực bội vì khó khăn hoặc không đạt điều mong muốn|She felt [frustrated] when the app stopped working.
+# daily-008
+hobby|n.|A1|sở thích, hoạt động yêu thích lúc rảnh|My favorite [hobby] is reading.
+reading|n.|A1|việc đọc sách hoặc tài liệu|I enjoy [reading] before bed.
+gardening|n.|A2|việc làm vườn|My dad finds [gardening] relaxing.
+hiking|n.|A2|hoạt động đi bộ đường dài ở thiên nhiên|We go [hiking] in the hills on weekends.
+photography|n.|A2|hoạt động hoặc nghệ thuật chụp ảnh|She became interested in [photography] last year.
+painting|n.|A1|hoạt động vẽ tranh bằng màu|I took up [painting] during the summer.
+collect|v.|A2|sưu tầm|Some people [collect] old coins.
+play the guitar|v. phrase|A1|chơi đàn ghi-ta|I like to [play the guitar] after dinner.
+be into|phrase|B1|thích, có hứng thú với|You might [be into] this new board game.
+spare time|n. phrase|A2|thời gian rảnh|What do you do in your [spare time]?
+# daily-009
+wake up|phrasal v.|A1|thức giấc|I usually [wake up] at six.
+get up|phrasal v.|A1|ra khỏi giường|I [get up] as soon as the alarm rings.
+brush my teeth|v. phrase|A1|đánh răng của tôi|I [brush my teeth] after breakfast.
+get dressed|v. phrase|A1|mặc quần áo|I [get dressed] before I make coffee.
+have breakfast|v. phrase|A1|ăn sáng|We [have breakfast] together at seven.
+commute|v.|B1|đi lại thường xuyên giữa nhà và nơi làm việc hoặc học tập|I [commute] to work by train.
+run errands|v. phrase|B1|làm những việc vặt cần đi ra ngoài|I [run errands] on Saturday mornings.
+take a break|v. phrase|A2|nghỉ giải lao|Let's [take a break] after this exercise.
+do the laundry|v. phrase|A2|giặt quần áo|I [do the laundry] on Sundays.
+go to bed|v. phrase|A1|đi ngủ|I try to [go to bed] before eleven.
+# daily-010
+weekday|n.|A2|ngày trong tuần từ thứ Hai đến thứ Sáu|The office is open every [weekday].
+weekend|n.|A1|cuối tuần|What are you doing this [weekend]?
+calendar|n.|A1|lịch|I marked the date on my [calendar].
+appointment|n.|A2|cuộc hẹn đã được sắp xếp|I have a dentist [appointment] tomorrow.
+noon|n.|A2|mười hai giờ trưa|Let's meet at [noon] outside the station.
+midnight|n.|A2|mười hai giờ đêm|The last train leaves at [midnight].
+half past|phrase|A1|rưỡi, cách giờ tròn ba mươi phút|The meeting starts at [half past] three.
+quarter to|phrase|A1|kém mười lăm phút|The shop closes at a [quarter to] six.
+on time|adv. phrase|A2|đúng giờ đã định|The bus arrived [on time] this morning.
+in advance|adv. phrase|B1|trước thời điểm diễn ra|Please book your ticket [in advance].

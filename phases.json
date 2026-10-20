@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "phases": [
+    {
+      "id": "P0",
+      "title": "Hợp đồng và cách bàn giao",
+      "tasks": [
+        "EV-00"
+      ]
+    },
+    {
+      "id": "P1",
+      "title": "Nền tảng, model và luật học–ôn",
+      "tasks": [
+        "BE-01",
+        "BE-02",
+        "BE-03",
+        "BE-04"
+      ]
+    },
+    {
+      "id": "P2",
+      "title": "Lưu trữ và dịch vụ học–ôn",
+      "tasks": [
+        "BE-05",
+        "BE-06",
+        "BE-07",
+        "BE-08",
+        "BE-09",
+        "BE-12",
+        "BE-13"
+      ]
+    },
+    {
+      "id": "P3",
+      "title": "Tra từ, worker và cầu nối",
+      "tasks": [
+        "BE-10",
+        "BE-11",
+        "BE-14",
+        "BE-15"
+      ]
+    },
+    {
+      "id": "P4",
+      "title": "Nội dung nền, pipeline, giọng đọc và vận hành",
+      "tasks": [
+        "DATA-01",
+        "DATA-06",
+        "BE-16",
+        "BE-17",
+        "DATA-CRAWL"
+      ]
+    },
+    {
+      "id": "P5",
+      "title": "Kiểm tra kỹ thuật BE — chờ người dùng nghiệm thu",
+      "tasks": [
+        "GATE-BE"
+      ]
+    },
+    {
+      "id": "P6",
+      "title": "Giao diện chính và học–ôn",
+      "tasks": [
+        "FE-01",
+        "FE-02",
+        "FE-03",
+        "FE-04",
+        "FE-05"
+      ]
+    },
+    {
+      "id": "P7",
+      "title": "Reading, popup và tiện ích",
+      "tasks": [
+        "FE-06",
+        "FE-07",
+        "FE-08",
+        "FE-09"
+      ]
+    },
+    {
+      "id": "P8",
+      "title": "Gate-FE, bản local và nghiệm thu",
+      "tasks": [
+        "GATE-FE",
+        "REL-01",
+        "ACCEPT-01"
+      ]
+    },
+    {
+      "id": "P-DATA",
+      "title": "Nội dung riêng: hoàn thiện bộ 2.000 vị trí",
+      "tasks": [
+        "DATA-02",
+        "DATA-03",
+        "DATA-04",
+        "DATA-05"
+      ]
+    }
+  ]
+}

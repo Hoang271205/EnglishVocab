@@ -1,0 +1,4 @@
+import {readFile} from 'node:fs/promises';
+import {contentSchema} from '../src/content/schema.ts';
+if(!process.argv[2]){console.error('Usage: npm run validate:content -- path/to/pack.json');process.exitCode=1;}
+else {try{const pack=contentSchema.parse(JSON.parse(await readFile(process.argv[2],'utf8')));console.log(JSON.stringify({entries:pack.entries.length,topics:pack.topics.length,slots:pack.topics.reduce((n,t)=>n+t.entryIds.length,0),drafts:pack.entries.filter(e=>e.contentStatus==='draft').length,missingIPA:pack.entries.filter(e=>!e.pronunciation.ipa).length,estimatedCefr:pack.entries.filter(e=>e.cefr.status==='estimated').length,unknownCefr:pack.entries.filter(e=>e.cefr.status==='unknown').length,unverifiedEntries:pack.entries.filter(e=>e.provenance.some(s=>s.status==='unverified')).map(e=>e.id)}));}catch(e){console.error(e.message);process.exitCode=1;}}

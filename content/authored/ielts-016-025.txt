@@ -1,0 +1,110 @@
+# ielts-016
+automation|n.|B2|việc dùng máy móc hoặc phần mềm để thực hiện công việc tự động|Factory [automation] has changed the skills employers need.
+workforce|n.|B2|toàn bộ lực lượng lao động của một tổ chức hoặc nền kinh tế|The company plans to train its [workforce] to use new equipment.
+job displacement|n. phrase|C1|việc người lao động mất vị trí do thay đổi kinh tế hoặc công nghệ|New technology can cause [job displacement] in some industries.
+robotics|n.|C1|lĩnh vực thiết kế và sử dụng robot|Advances in [robotics] have improved warehouse operations.
+manual labor|n. phrase|B2|công việc chủ yếu sử dụng sức lao động thể chất|Machines can reduce the need for dangerous [manual labor].
+repetitive task|n. phrase|B2|công việc phải thực hiện cùng thao tác nhiều lần|Entering the same data every day is a [repetitive task].
+human oversight|n. phrase|C1|sự giám sát của con người đối với một quá trình|Automated hiring systems still require [human oversight].
+skills gap|n. phrase|B2|khoảng cách giữa kỹ năng hiện có và kỹ năng công việc cần|Training can help close the [skills gap] in manufacturing.
+technological change|n. phrase|B2|sự thay đổi do phát triển và ứng dụng công nghệ|Rapid [technological change] can create new occupations.
+labor demand|n. phrase|C1|nhu cầu tuyển dụng lao động trong nền kinh tế|Investment in renewable energy may increase [labor demand].
+# ielts-017
+entrepreneur|n.|B2|người khởi sự và điều hành hoạt động kinh doanh|An [entrepreneur] must understand the needs of potential customers.
+startup|n.|B2|doanh nghiệp mới thành lập đang phát triển mô hình kinh doanh|The [startup] received funding to test its first product.
+business model|n. phrase|B2|cách doanh nghiệp tạo ra giá trị và kiếm doanh thu|The team revised its [business model] after interviewing customers.
+venture capital|n. phrase|C1|vốn đầu tư vào doanh nghiệp mới có tiềm năng tăng trưởng|The founders sought [venture capital] to expand production.
+market research|n. phrase|B2|việc tìm hiểu khách hàng và thị trường|Good [market research] can reveal unmet customer needs.
+cash flow|n. phrase|B2|dòng tiền đi vào và đi ra của doanh nghiệp|A profitable business can still struggle with poor [cash flow].
+profit margin|n. phrase|C1|tỷ lệ lợi nhuận so với doanh thu|Rising material costs reduced the firm's [profit margin].
+scalability|n.|C1|khả năng mở rộng quy mô mà vẫn vận hành hiệu quả|Investors asked about the [scalability] of the service.
+break even|v. phrase|B2|có doanh thu đủ bù chi phí mà chưa có lãi|The cafe expects to [break even] within a year.
+competitive advantage|n. phrase|C1|yếu tố giúp doanh nghiệp vượt trội hơn đối thủ|Reliable customer service can provide a [competitive advantage].
+# ielts-018
+leadership|n.|B2|khả năng định hướng và dẫn dắt người khác|Effective [leadership] helps a team respond to uncertainty.
+team cohesion|n. phrase|C1|mức độ gắn kết giữa các thành viên trong nhóm|Shared goals can strengthen [team cohesion].
+conflict resolution|n. phrase|C1|việc giải quyết bất đồng giữa các bên|Managers need training in [conflict resolution].
+consensus|n.|C1|sự đồng thuận chung của một nhóm|The committee reached a [consensus] after a long discussion.
+shared goal|n. phrase|B2|mục tiêu mà các thành viên cùng hướng tới|A clear [shared goal] can keep a team focused.
+empower|v.|C1|trao quyền và tạo điều kiện để ai đó tự quyết định|Good managers [empower] staff to solve routine problems.
+mentor|n.|B2|người có kinh nghiệm hướng dẫn người ít kinh nghiệm hơn|A [mentor] can help a new employee develop confidence.
+coordination|n.|C1|việc tổ chức để các phần hoặc các bên làm việc ăn khớp|The project requires close [coordination] between departments.
+decision-making|n.|B2|quá trình lựa chọn phương án hành động|Reliable evidence improves [decision-making].
+mutual respect|n. phrase|B2|sự tôn trọng lẫn nhau|A successful partnership depends on [mutual respect].
+# ielts-019
+conflict of interest|n. phrase|C1|tình huống lợi ích riêng có thể ảnh hưởng trách nhiệm nghề nghiệp|The researcher disclosed a [conflict of interest] before the study began.
+confidentiality|n.|C1|việc giữ bí mật thông tin được giao hoặc chia sẻ|Doctors have a duty to protect patient [confidentiality].
+whistleblower|n.|C1|người tố giác hành vi sai trái trong tổ chức|The law offers protection to a [whistleblower] who reports fraud.
+bribery|n.|C1|hành vi đưa hoặc nhận lợi ích để tác động quyết định trái phép|The company introduced strict rules against [bribery].
+code of conduct|n. phrase|B2|bộ quy tắc ứng xử mà thành viên phải tuân theo|Every employee receives a copy of the [code of conduct].
+informed consent|n. phrase|C1|sự đồng ý sau khi đã được cung cấp thông tin cần thiết|Researchers must obtain [informed consent] from participants.
+ethical dilemma|n. phrase|C1|tình huống phải lựa chọn giữa các yêu cầu đạo đức xung đột|The journalist faced an [ethical dilemma] about revealing the source.
+compliance|n.|C1|việc tuân thủ quy định hoặc yêu cầu|Regular audits help ensure [compliance] with safety standards.
+misconduct|n.|C1|hành vi sai trái vi phạm chuẩn mực hoặc quy định|The organization investigated allegations of professional [misconduct].
+due diligence|n. phrase|C1|việc kiểm tra kỹ lưỡng trước khi đưa ra quyết định quan trọng|The buyer carried out [due diligence] before signing the contract.
+# ielts-020
+equal pay|n. phrase|B2|việc trả lương ngang nhau cho công việc có giá trị tương đương|The campaign calls for [equal pay] for work of equal value.
+gender bias|n. phrase|C1|sự thiên lệch dựa trên giới|Anonymous applications may reduce [gender bias] in recruitment.
+discrimination|n.|B2|sự đối xử bất công dựa trên đặc điểm của một nhóm|The policy prohibits [discrimination] against disabled applicants.
+diversity|n.|B2|sự đa dạng về đặc điểm và hoàn cảnh của con người|The organization values [diversity] within its teams.
+pay gap|n. phrase|B2|sự chênh lệch mức thu nhập giữa các nhóm|The report examines the [pay gap] between men and women.
+glass ceiling|n. phrase|C1|rào cản vô hình hạn chế một nhóm thăng tiến|Many women still encounter a [glass ceiling] in senior management.
+inclusive recruitment|n. phrase|C1|cách tuyển dụng tạo cơ hội cho người từ nhiều hoàn cảnh|Accessible interviews are part of [inclusive recruitment].
+reasonable accommodation|n. phrase|C1|điều chỉnh phù hợp giúp người có nhu cầu đặc thù tham gia công việc|A modified workstation may be a [reasonable accommodation].
+representation|n.|B2|sự hiện diện hoặc tham gia của một nhóm trong tổ chức|The board aims to improve the [representation] of minority groups.
+unconscious bias|n. phrase|C1|sự thiên lệch mà bản thân người có nó không nhận thức rõ|Training can help staff recognize [unconscious bias].
+# ielts-021
+greenhouse gas|n. phrase|B2|chất khí giữ nhiệt trong khí quyển|Carbon dioxide is a [greenhouse gas] released by burning fossil fuels.
+carbon footprint|n. phrase|B2|lượng khí nhà kính do một hoạt động hoặc chủ thể gây ra|Using public transport can reduce a person's [carbon footprint].
+global warming|n. phrase|B1|sự gia tăng nhiệt độ trung bình của Trái Đất|Reducing emissions is central to limiting [global warming].
+climate adaptation|n. phrase|C1|việc điều chỉnh để ứng phó với tác động của biến đổi khí hậu|Flood defenses are one form of [climate adaptation].
+emission reduction|n. phrase|B2|việc cắt giảm lượng chất thải phát ra môi trường|Cleaner transport is important for [emission reduction].
+sea-level rise|n. phrase|B2|sự gia tăng mực nước biển trung bình|Coastal communities face increasing risks from [sea-level rise].
+extreme weather|n. phrase|B2|hiện tượng thời tiết có cường độ hoặc mức độ bất thường|Farmers need support after damage caused by [extreme weather].
+climate mitigation|n. phrase|C1|các biện pháp hạn chế nguyên nhân gây biến đổi khí hậu|Protecting forests contributes to [climate mitigation].
+net zero|n. phrase|C1|trạng thái cân bằng lượng phát thải khí nhà kính với lượng được loại bỏ|The country has set a target of reaching [net zero].
+carbon sink|n. phrase|C1|hệ thống tự nhiên hoặc nhân tạo hấp thụ nhiều carbon hơn lượng thải ra|A healthy forest can act as a [carbon sink].
+# ielts-022
+air quality|n. phrase|B1|mức độ sạch hoặc ô nhiễm của không khí|The city monitors [air quality] near busy roads.
+particulate matter|n. phrase|C1|các hạt vật chất rất nhỏ lơ lửng trong không khí|Traffic and construction can increase levels of [particulate matter].
+smog|n.|B2|lớp không khí ô nhiễm giống sương mù|Thick [smog] covered the city during the heatwave.
+vehicle exhaust|n. phrase|B2|khí thải thoát ra từ động cơ phương tiện|Reducing [vehicle exhaust] can improve urban air quality.
+industrial emissions|n. phrase|C1|các chất thải phát ra từ hoạt động công nghiệp|New filters can help control [industrial emissions].
+respiratory illness|n. phrase|C1|bệnh ảnh hưởng hệ hô hấp|Air pollution can increase the risk of [respiratory illness].
+low-emission zone|n. phrase|C1|khu vực hạn chế phương tiện gây nhiều khí thải|The council introduced a [low-emission zone] in the city center.
+clean air|n. phrase|B1|không khí ít chất gây ô nhiễm có hại|Everyone should have access to [clean air].
+pollutant|n.|B2|chất làm ô nhiễm môi trường|Each [pollutant] has a different effect on human health.
+public exposure|n. phrase|C1|mức độ người dân tiếp xúc với một yếu tố có hại|Cleaner buses may reduce [public exposure] to roadside pollution.
+# ielts-023
+water scarcity|n. phrase|C1|tình trạng thiếu nước so với nhu cầu sử dụng|Long droughts can worsen [water scarcity].
+groundwater|n.|C1|nước nằm dưới mặt đất trong đất hoặc đá|Many farms rely on [groundwater] for irrigation.
+irrigation|n.|C1|việc cung cấp nước nhân tạo cho cây trồng|Efficient [irrigation] can reduce water waste.
+desalination|n.|C1|quá trình loại bỏ muối khỏi nước|Coastal cities may use [desalination] to produce drinking water.
+water treatment|n. phrase|B2|quá trình xử lý nước để đạt yêu cầu sử dụng|Safe drinking water depends on effective [water treatment].
+drought|n.|B2|giai đoạn kéo dài có lượng mưa thấp gây thiếu nước|The [drought] damaged crops across the region.
+reservoir|n.|B2|hồ hoặc nơi chứa nước để cung cấp cho sử dụng|The [reservoir] supplies water to several towns.
+watershed|n.|C1|vùng đất mà nước chảy về cùng một hệ thống sông hoặc hồ|Protecting the [watershed] helps maintain water quality downstream.
+freshwater|n.|B2|nước có hàm lượng muối thấp trong sông hồ hoặc nguồn ngầm|Wetlands support many species that depend on [freshwater].
+water conservation|n. phrase|B2|việc sử dụng tiết kiệm và bảo vệ nguồn nước|Fixing leaks is a simple form of [water conservation].
+# ielts-024
+landfill|n.|B2|nơi chôn lấp rác thải|Less household waste should end up in a [landfill].
+recycling|n.|B1|việc xử lý vật liệu đã dùng để tạo sản phẩm mới|Clear labels make [recycling] easier for residents.
+composting|n.|B2|việc biến chất hữu cơ thành phân ủ|Home [composting] can keep food scraps out of the trash.
+hazardous waste|n. phrase|C1|chất thải có thể gây hại cho sức khỏe hoặc môi trường|Hospitals need special systems for handling [hazardous waste].
+waste sorting|n. phrase|B2|việc phân loại rác theo nhóm để xử lý|Separate bins encourage [waste sorting] at school.
+circular economy|n. phrase|C1|mô hình kinh tế giữ vật liệu và sản phẩm được sử dụng lâu hơn|Repair and reuse are important in a [circular economy].
+incineration|n.|C1|việc đốt chất thải trong hệ thống xử lý|Waste [incineration] requires careful control of air pollution.
+biodegradable|adj.|C1|có khả năng phân hủy nhờ quá trình sinh học|The packaging uses [biodegradable] materials.
+municipal waste|n. phrase|C1|rác thải từ hộ gia đình và các hoạt động đô thị tương tự|The city collects [municipal waste] twice a week.
+waste reduction|n. phrase|B2|việc giảm lượng chất thải được tạo ra|Buying products with less packaging supports [waste reduction].
+# ielts-025
+single-use plastic|n. phrase|B2|đồ nhựa được thiết kế để dùng một lần rồi bỏ|The shop is reducing its use of [single-use plastic].
+microplastic|n.|C1|mảnh hoặc hạt nhựa có kích thước rất nhỏ|Scientists found [microplastic] particles in the river sediment.
+plastic debris|n. phrase|C1|các mảnh rác nhựa còn lại trong môi trường|The volunteers removed [plastic debris] from the beach.
+marine litter|n. phrase|C1|rác thải do con người tạo ra trong môi trường biển|Fishing equipment can contribute to [marine litter].
+reusable container|n. phrase|B2|vật chứa có thể sử dụng nhiều lần|Bring a [reusable container] when you buy takeaway food.
+packaging waste|n. phrase|B2|rác thải từ vật liệu dùng để đóng gói|Refill stations can reduce [packaging waste].
+plastic leakage|n. phrase|C1|sự thất thoát nhựa từ hệ thống quản lý ra môi trường|Better collection systems can prevent [plastic leakage] into rivers.
+producer responsibility|n. phrase|C1|trách nhiệm của nhà sản xuất đối với tác động của sản phẩm và chất thải|The policy extends [producer responsibility] to used packaging.
+plastic ban|n. phrase|B2|quy định cấm một số loại sản phẩm nhựa|The city introduced a [plastic ban] covering disposable shopping bags.
+entanglement|n.|C1|tình trạng bị mắc vào vật liệu như dây hoặc lưới|Discarded fishing lines can cause [entanglement] in marine animals.

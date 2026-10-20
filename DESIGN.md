@@ -1,14 +1,14 @@
 # EnglishVocab — thiết kế ứng dụng học cá nhân
 
-Ngày cập nhật: 20/10/2026. Phiên bản thiết kế: 4 — chốt FE 3 tab theo ảnh tham khảo, tra local trước và dùng Free Dictionary API khi cần. Trạng thái: chưa triển khai ứng dụng hoặc nạp bộ 2.000 từ. Quy mô được người dùng chốt: 100 topic IELTS (từ B1–C2) và 100 topic giao tiếp (từ A1–B2); tối đa 10 mục/topic. Lịch duy trì level 5 được chốt là mỗi 5 ngày, sai về level 1.
+Ngày cập nhật: 20/10/2026. Phiên bản thiết kế: 5 — FE 3 tab, tra local/API và kế hoạch build BE hoàn tất trước FE qua Gate-BE. Trạng thái: BE đã đạt kiểm tra kỹ thuật với 677 mục, đang dừng chờ người dùng nghiệm thu; hoàn thiện bộ 2.000 từ là task nội dung riêng, chưa có FE sản phẩm. Tiến độ thực tế ở PHASES.md. Quy mô được người dùng chốt: 100 topic IELTS (từ B1–C2) và 100 topic giao tiếp (từ A1–B2); tối đa 10 mục/topic. Lịch duy trì level 5 được chốt là mỗi 5 ngày, sai về level 1.
 
 ## 1. Quyết định tổng thể
 
 Xây một ứng dụng web chạy trên máy cá nhân, giao diện tiếng Việt, nội dung học tiếng Anh. Một người dùng, một máy và một hồ sơ trình duyệt là phạm vi mặc định. Có thể chuyển sang máy khác bằng file sao lưu.
 
-**Công nghệ đề xuất:** React + TypeScript + Vite; CSS thông thường; IndexedDB qua Dexie để lưu từ và tiến độ; Web Speech API để đọc từ; file JSON để nhập và sao lưu. Phát âm riêng lẻ trên bảng IPA dùng file âm thanh đã kiểm tra.
+**Công nghệ đề xuất:** React + TypeScript + Vite; CSS thông thường; IndexedDB qua Dexie để lưu từ và tiến độ; Web Speech API để đọc từ; file JSON để nhập và sao lưu. Bảng IPA chỉ tra cứu dạng chữ; giọng en-US chỉ dùng đọc từ/câu, gồm cả từ tự thêm.
 
-Bổ sung đã chốt: tra và lưu từ khi đọc, gồm popup trong web và tiện ích Chrome cho các trang bên ngoài. Ưu tiên dữ liệu local; chưa có thì gọi **Free Dictionary API (dictionaryapi.dev)** qua mạng. Người dùng chọn nghĩa, xem ví dụ và lưu vào **Từ của tôi**; chỉ hoàn thành viết lại đúng mới vào level 1. Nghĩa Việt bổ sung/chỉnh thủ công khi thiếu, CEFR chưa xác minh để trống. Không cần API dịch hoặc AI trong bản đầu. Chi tiết ở mục 10.
+Bổ sung đã chốt: tra và lưu từ khi đọc, gồm popup trong web và tiện ích Chrome cho các trang bên ngoài. Ưu tiên dữ liệu local; chưa có thì gọi **FreeDictionaryAPI.com (dữ liệu Wiktionary)** qua mạng. Người dùng chọn nghĩa, xem ví dụ và lưu vào **Từ của tôi**; chỉ hoàn thành viết lại đúng mới vào level 1. Nghĩa Việt bổ sung/chỉnh thủ công khi thiếu, CEFR chưa xác minh để trống. Không cần API dịch hoặc AI trong bản đầu. Chi tiết ở mục 10.
 
 React phù hợp với các trạng thái xem từ, viết lại, trả lời và hiện kết quả. TypeScript giúp giữ đúng cấu trúc dữ liệu. Dexie giảm phần thao tác IndexedDB và hỗ trợ transaction. Đây là lựa chọn thiết kế cho dự án, không phải yêu cầu bắt buộc của trình duyệt. [Tài liệu Dexie](https://dexie.org/docs/Tutorial/React)
 
@@ -104,9 +104,9 @@ Tìm theo từ hoặc nghĩa; lọc bộ, topic, CEFR, level, đến hạn và h
 
 ### Bảng IPA trong Sổ tay/menu
 
-Chia nguyên âm đơn, nguyên âm đôi và phụ âm theo hệ phát âm Anh-Mỹ cho bản đầu. Mỗi âm có ký hiệu, từ ví dụ, nút nghe **âm** và nút nghe **từ ví dụ** riêng.
+Chia nguyên âm đơn, nguyên âm đôi và phụ âm theo hệ tham khảo Anh-Mỹ. Mỗi hàng có ký hiệu và từ ví dụ; giải thích cách ký hiệu thay đổi theo từ điển và biến thể giọng. Không có nút nghe từng ký hiệu, không cần tệp audio IPA.
 
-Không đưa chuỗi ký hiệu `/θ/` cho TTS rồi coi đó là phát âm chuẩn của âm. Nút nghe âm cần bản ghi đã kiểm tra và nguồn/giấy phép cho từng tệp. Nếu thiếu audio, đánh dấu chưa có và vẫn giữ phần tra cứu; bảng IPA có audio đầy đủ là tiêu chí hoàn thành riêng.
+Nghe **từ/câu** là chức năng riêng bằng giọng `en-US`. Mọi từ tự thêm, kể cả bản nháp chưa có IPA hoặc kết quả từ điển, có thể được đọc từ chính headword đã lưu khi thiết bị có giọng Mỹ. Không đưa chuỗi ký hiệu IPA vào TTS. Nếu không có giọng Mỹ thì báo unavailable, không tự chọn en-GB. Chưa tạo frontend cho bảng này trước nghiệm thu BE.
 
 ### Reading và Từ của tôi
 
@@ -149,13 +149,13 @@ Một “mục từ” đại diện cho **từ/cụm từ + loại từ + nghĩ
 - `pronunciation`: IPA và accent; có thể thêm URL/tệp audio nếu có quyền sử dụng. Bản đầu ưu tiên hệ IPA Anh-Mỹ nhất quán; biến thể Anh-Anh có thể lưu thêm nếu dữ liệu theo nghĩa cần thiết.
 - Mỗi `example`: `prefix`, `targetSurface`, `suffix`, đáp án hợp lệ, nguồn. Ví dụ `My favourite ` + `hobby` + ` is reading.`. MVP ưu tiên câu chứa đúng dạng từ gốc; nếu dùng `hobbies` phải khai báo rõ đáp án theo câu.
 - `provenance`: nguồn riêng cho nghĩa, IPA, CEFR, ví dụ và audio; gồm URL hoặc định danh, người đóng góp, giấy phép, URL giấy phép, ghi công, thay đổi đã làm và ngày kiểm tra. Dữ liệu tự biên soạn ghi rõ là tự biên soạn; nguồn chưa xác minh có trạng thái riêng.
-- `phonemes`: ký hiệu, nhóm âm, accent, từ ví dụ và đường dẫn audio/ghi công; có thể là file nội dung tĩnh thay vì bảng IndexedDB riêng.
+- `phonemes`: ký hiệu, nhóm âm, hệ tham khảo Anh-Mỹ, từ ví dụ và nguồn tham khảo; không có trường audio; có thể là file nội dung tĩnh thay vì bảng IndexedDB riêng.
 - `captures`: các lần chủ động lưu từ khi đọc; giữ vùng chọn, câu gốc, nguồn bài, nghĩa được chọn và liên kết đến mục từ. Nhiều capture có thể liên kết cùng một entry; định nghĩa chi tiết ở mục 10.
 - `lookupCache`: dữ liệu tra được từ API theo provider + truy vấn chuẩn hóa, kèm thời gian lấy, định nghĩa, phát âm và nguồn/giấy phép. Cache không tạo entry/progress và không được tính là từ đã lưu. Giới hạn 500 truy vấn gần đây trong mỗi vùng lưu; các mục đã lưu giữ bản nội dung độc lập với cache.
 
 ### Tiến độ cá nhân
 
-- `progress`: khóa chính `entryId`; `level` 1–5; `learnedAt`, `lastReviewedAt` nullable trước lượt ôn đầu, `nextReviewAt` luôn có giá trị, `correctCount`, `wrongCount`, `version`.
+- `progress`: khóa chính `entryId`; `level` 1–5; `learnedAt` có giá trị sau học đúng lần đầu, `lastReviewedAt` nullable trước lượt ôn đầu, `nextReviewAt` luôn có giá trị, `correctCount`, `wrongCount`, `version`.
 - Mọi mục đã học, bao gồm level 5, luôn có hạn ôn tiếp theo. Mục chưa học không có bản ghi progress. Chính sách lịch dùng định danh `fixed-5day-v2` để phân biệt với bản đề xuất cũ chưa được triển khai.
 - `reviewEvents`: `id` duy nhất cho lần chấm, `entryId`, mode, thời gian, đúng/sai, level trước/sau, hạn mới, phiên bản nội dung và chính sách lịch. Không cần lưu toàn bộ bài gõ sai.
 - `activeSession`: một lượt học hoặc ôn đang dở; danh sách ID, vị trí, giai đoạn, ví dụ/mặt nạ, ID lần chấm và câu đang gõ. Khôi phục sau refresh; khôi phục đúng trạng thái đã chấm thì không chấm lại.
@@ -198,7 +198,7 @@ Dùng `speechSynthesis.getVoices()` và cập nhật danh sách qua sự kiện 
 
 Nếu thiết bị có giọng Anh-Mỹ local thì dùng được offline. Giọng Anh-Mỹ remote có thể cần Internet. Giọng Google chỉ là lựa chọn khi trình duyệt/hệ điều hành thật sự cung cấp; không tích hợp Google TTS trả phí hay endpoint không chính thức. [MDN localService](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice/localService)
 
-Với audio IPA hoặc audio đi kèm kết quả tra, chỉ phát tệp được xác định là giọng Anh-Mỹ. Nếu nguồn trả audio Anh-Anh hoặc không cho biết accent, ưu tiên giọng `en-US` qua TTS nếu có; nếu không có thì báo audio Anh-Mỹ chưa sẵn sàng, không phát nhầm giọng. Lưu accent của từng audio theo metadata nguồn.
+Với audio từ/câu đi kèm kết quả tra, chỉ phát tệp được xác định là giọng Anh-Mỹ. Nếu nguồn trả audio Anh-Anh hoặc không cho biết accent, ưu tiên giọng `en-US` qua TTS để đọc từ/câu nếu có; nếu không có thì báo audio Anh-Mỹ chưa sẵn sàng. Riêng nghe từng âm trong bảng IPA bắt buộc dùng tệp âm đã kiểm tra, không đưa ký hiệu IPA cho TTS. Lưu accent của từng audio theo metadata nguồn.
 
 ## 7. Lưu trữ, nhập và sao lưu
 
@@ -239,14 +239,13 @@ src/
     progress.ts        đọc/ghi tiến độ và sự kiện
     backup.ts          kiểm tra, xuất và khôi phục
   content/             kiểu dữ liệu và kiểm tra gói từ
-  audio/               chọn giọng, phát âm, audio IPA
+  audio/               chọn giọng en-US và đọc từ/câu
   dictionary/
     freeDictionary.ts  gọi API và ánh xạ các nghĩa/phát âm
     cache.ts           tra local và cache có giới hạn
     types.ts           dữ liệu tra độc lập với entry đã lưu
 public/
   content/             gói từ có phiên bản
-  audio/ipa/           tệp âm và manifest ghi công
 scripts/
   serve.mjs            phục vụ bản build trên loopback, cổng cố định
 extension/
@@ -258,13 +257,15 @@ extension/
 
 Giữ state giao diện trong React; Dexie là nguồn tiến độ duy nhất. Chưa cần Redux, API REST hoặc ORM máy chủ. Viết hàm lịch ôn độc lập với UI, không hardcode thời gian trong component.
 
-Triển khai theo năm mốc có kết quả kiểm tra rõ:
+**Thứ tự bắt buộc mới theo yêu cầu người dùng: hoàn thành BE trước rồi mới làm FE.** Kế hoạch đầy đủ ở [BUILD_PLAN.md](BUILD_PLAN.md), 38 task ở [TASKS.md](TASKS.md) và [tasks.json](tasks.json).
 
-1. **Nền tảng:** schema, scheduler, chấm và nhập gói nhỏ. Đạt khi chạy đúng toàn bộ chuyển level và lưu/tải lại được.
-2. **Học và ôn:** các màn hình chính, khôi phục lượt dở, hiển thị đáp án, lịch. Đạt khi hoàn thành một chu trình học–ôn với đồng hồ kiểm thử và không ghi trùng.
-3. **Dùng hằng ngày:** sao lưu/khôi phục, TTS, IPA audio, lỗi lưu và giao diện bàn phím. Đạt khi thử đổi phiên trình duyệt bằng sao lưu và học được không mạng với dữ liệu/audio local.
-4. **Reading và lưu từ:** Từ của tôi, popup tra local → API trong web, sau đó tiện ích Chrome và hàng đợi. Đạt khi tra/lưu/chuyển/học mục mới hoàn chỉnh, kể cả lưu lúc server tắt và API không tìm thấy từ. Không cần API dịch hoặc AI.
-5. **Nội dung:** nghiệm thu 200 vị trí thử, sau đó mở rộng đến khoảng 2.000. Nội dung chưa kiểm tra không được báo là hoàn chỉnh.
+1. EV-00 chốt contract và quyền sở hữu file; BE-01…BE-17 triển khai core/lưu trữ/học–ôn/tra từ/worker/cầu nối/audio/launcher, chưa có UI sản phẩm.
+2. Pilot, bảng IPA và pipeline đã hoàn tất; thư viện hiện có 677 mục. Theo lựa chọn người dùng, DATA-02…DATA-05 hoàn thiện 2.000 vị trí trong một track nội dung riêng, không chặn nghiệm thu BE.
+3. Gate-BE kỹ thuật đã Pass sau kiểm tra core/native browser/extension/audio. FE vẫn Blocked đến khi người dùng nghiệm thu BE trực tiếp; không tự ghi đã nghiệm thu.
+4. Sau Gate-BE mới triển khai FE-01…FE-09 đúng 3 tab, phiên học/ôn, Sổ tay, Reading/popup, UI extension và utility theo FRONTEND.md.
+5. Gate-FE kiểm tra tích hợp/hiển thị, rồi REL-01 đóng gói và ACCEPT-01 để người dùng nghiệm thu bản local.
+
+Hiện tại BE đã triển khai và kiểm tra; chờ người dùng nghiệm thu. FE chưa triển khai; nội dung đầy đủ còn trong P-DATA.
 
 ## 9. Tiêu chí nghiệm thu
 
@@ -281,7 +282,7 @@ Các mục dưới đây là điều kiện cần kiểm thử khi triển khai,
 - Cụm từ, dấu nối, biến thể khai báo và câu có dạng biến đổi được chấm đúng quy tắc.
 - Export → khôi phục vào vùng dữ liệu sạch giữ nguyên ID, level, hạn, lịch sử và tham chiếu nội dung; file lỗi không làm thay đổi dữ liệu.
 - Lỗi quota/ghi dữ liệu không báo hoàn thành giả; người dùng giữ được câu đang trả lời để thử lưu lại.
-- Âm IPA thực sự đúng ký hiệu và khác chức năng nghe từ ví dụ; tài sản có ghi công.
+- Bảng IPA dạng chữ có ký hiệu, phân nhóm, từ ví dụ và nguồn; không có âm thanh từng ký hiệu. Giọng đọc từ/câu en-US hoạt động độc lập với việc có IPA hay không.
 - Hai bộ có đúng 100 topic, tối đa 10 mục/topic ở bản nội dung hoàn chỉnh; báo riêng vị trí từ và số mục duy nhất.
 
 Kiểm thử tự động nên tập trung vào scheduler, chấm, kiểm tra gói và transaction; kiểm thử trình duyệt tập trung luồng học–ôn–refresh–sao lưu. Phần phát âm cần nghe kiểm tra trên trình duyệt thực tế, không chỉ xác nhận nút có phản hồi.
@@ -290,11 +291,11 @@ Kiểm thử tự động nên tập trung vào scheduler, chấm, kiểm tra g�
 
 ### Nguồn tra đã chốt
 
-Dùng **Free Dictionary API — dictionaryapi.dev** làm nguồn tra online của bản đầu. API miễn phí, không cần tài khoản hay API key theo tài liệu công bố. Endpoint: `GET https://api.dictionaryapi.dev/api/v2/entries/en/{word}`; chuẩn hóa vùng chọn và mã hóa từ/cụm từ trước khi ghép URL. Không dùng Cambridge trong bản đầu. [Tài liệu](https://dictionaryapi.dev/), [mã nguồn và hướng dẫn](https://github.com/meetDeveloper/freeDictionaryAPI)
+Dùng **FreeDictionaryAPI.com** làm nguồn tra online: `GET https://freedictionaryapi.com/api/v1/entries/en/{word}`. Nguồn miễn phí, không cần API key, đã kiểm tra CORS từ localhost bằng Chrome thật. Giới hạn công bố 1.000 yêu cầu/giờ/IP; nhận 429 thì báo chờ, không tự retry. Nguồn dictionaryapi.dev cũ đang lỗi CORS/HTTP 530 trong kiểm tra thực tế nên không còn là provider mặc định. [Tài liệu nguồn hiện dùng](https://freedictionaryapi.com/).
 
 Dữ liệu tra có thể gồm nhiều mục/nghĩa, loại từ, định nghĩa tiếng Anh, IPA, audio, ví dụ, đồng nghĩa và trái nghĩa. Không mặc định nghĩa đầu tiên đúng ngữ cảnh hoặc mọi từ đều có ví dụ/audio. Cấu trúc công bố không cung cấp sẵn bản dịch tiếng Việt hoặc CEFR; bản đầu không tự thêm dịch vụ dịch/AI để điền hai trường này.
 
-Giữ `sourceUrls`, giấy phép nội dung, và nguồn/giấy phép của từng audio nếu phản hồi có. Giấy phép mã nguồn API không thay thế giấy phép nội dung trả về. Khi lưu vào thẻ, giữ bản dữ liệu cần dùng cùng ghi công; không tự tải toàn bộ âm thanh. [Phản hồi mẫu có nguồn và giấy phép](https://api.dictionaryapi.dev/api/v2/entries/en/hobby)
+Giữ link Wiktionary gốc và giấy phép CC BY-SA 4.0 từ phản hồi cho từng nghĩa/IPA. Hiện ghi công FreeDictionaryAPI.com trong vùng nguồn của popup và thông tin ứng dụng. Chỉ nhãn General American/US rõ ràng được đánh dấu en-US; accent khác hoặc không rõ không chuyển thành US. Nguồn này không cung cấp audio: từ/câu dùng giọng en-US của thiết bị. Không tự suy đoán nghĩa Việt hoặc CEFR.
 
 ### Workflow từ lúc đọc đến lúc ôn
 
@@ -345,7 +346,7 @@ Từ tự lưu không bị giới hạn trong 2.000 vị trí nội dung hoặc 
 
 - **Trong web EnglishVocab:** Reading cho dán văn bản và tùy chọn nhập tiêu đề/URL nguồn; popup xử lý vùng chọn trong trang. Dùng adapter Free Dictionary API qua fetch; cần kiểm tra CORS từ origin local khi triển khai. Chưa thêm tải bài từ URL, OCR hoặc đọc PDF.
 - **Trên trang web khác:** tiện ích Chrome Manifest V3 hiển thị popup bằng content script. Người dùng bật tiện ích trên trang đang đọc hoặc cấp quyền cho website thường dùng; có thêm menu chuột phải “Tra và lưu vào EnglishVocab”. Chỉ bôi đen không tự cấp quyền activeTab.
-- **Tra online trong tiện ích:** content script gửi từ cần tra đến service worker; worker gọi cố định host `https://api.dictionaryapi.dev/` với host permission phù hợp rồi gửi kết quả về. Không đưa URL bất kỳ của trang đọc vào hàm gọi mạng và không cần server local giữ API key.
+- **Tra online trong tiện ích:** content script gửi từ cần tra đến service worker; worker gọi cố định host `https://freedictionaryapi.com/` với host permission phù hợp rồi gửi kết quả về. Không đưa URL bất kỳ của trang đọc vào hàm gọi mạng và không cần server local giữ API key.
 - Chỉ gửi từ/cụm từ cần tra cho nguồn tra; không gửi cả bài, câu gốc hoặc URL bài đọc. Đây là tra từ, chưa có tự động xác định nghĩa theo toàn bộ ngữ cảnh.
 - Bản đầu hỗ trợ văn bản HTML thông thường. Trang nội bộ trình duyệt, PDF, ảnh và một số khung nhúng cần cách xử lý khác; khi không đọc được ngữ cảnh thì vẫn có đường nhập thủ công trong Reading/Từ của tôi.
 

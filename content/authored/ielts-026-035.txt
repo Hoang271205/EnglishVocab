@@ -1,0 +1,110 @@
+# ielts-026
+biodiversity|n.|B2|sự đa dạng của sinh vật trong một khu vực hoặc trên Trái Đất|Protecting wetlands helps preserve [biodiversity].
+habitat|n.|B2|môi trường sống tự nhiên của một loài|Urban expansion can destroy the [habitat] of local wildlife.
+endangered species|n. phrase|B2|loài có nguy cơ bị tuyệt chủng|The reserve provides a safe home for several [endangered species].
+ecosystem|n.|B2|hệ gồm sinh vật và môi trường mà chúng tương tác|Removing one predator can affect an entire [ecosystem].
+conservation|n.|B2|việc bảo vệ thiên nhiên và tài nguyên|Local communities play a key role in wildlife [conservation].
+invasive species|n. phrase|C1|loài được đưa tới nơi mới và gây hại cho hệ sinh thái ở đó|An [invasive species] can compete with native plants for resources.
+extinction|n.|C1|sự biến mất hoàn toàn của một loài|Habitat loss can push a species toward [extinction].
+pollinator|n.|C1|sinh vật giúp chuyển phấn giữa các bông hoa|A bee is an important [pollinator] for many crops.
+protected area|n. phrase|B2|khu vực được quản lý để bảo tồn thiên nhiên|Tourism is restricted inside the [protected area].
+ecological balance|n. phrase|C1|trạng thái tương tác tương đối ổn định giữa các thành phần sinh thái|Overfishing can disturb the [ecological balance] of coastal waters.
+# ielts-027
+deforestation|n.|B2|việc phá bỏ rừng trên diện tích lớn|Demand for farmland can drive [deforestation].
+logging|n.|C1|hoạt động chặt cây rừng để lấy gỗ|Illegal [logging] threatens the national park.
+reforestation|n.|C1|việc trồng lại cây ở khu vực từng có rừng|Community [reforestation] projects can restore damaged land.
+canopy|n.|C1|tầng tán cây ở phía trên của rừng|Birds find food and shelter in the forest [canopy].
+soil erosion|n. phrase|C1|sự cuốn trôi hoặc bào mòn lớp đất bề mặt|Tree roots help prevent [soil erosion] on steep slopes.
+forest fragmentation|n. phrase|C1|việc rừng liên tục bị chia thành các mảng nhỏ tách biệt|New roads can increase [forest fragmentation].
+land clearing|n. phrase|B2|việc dọn bỏ thảm thực vật để sử dụng đất|The authorities restricted [land clearing] near the river.
+old-growth forest|n. phrase|C1|khu rừng phát triển lâu đời với ít tác động lớn từ con người|An [old-growth forest] supports a wide range of species.
+sustainable forestry|n. phrase|C1|việc quản lý và khai thác rừng theo hướng duy trì lâu dài|Certification can encourage [sustainable forestry].
+forest restoration|n. phrase|C1|quá trình phục hồi chức năng và cấu trúc của rừng|Successful [forest restoration] involves more than planting trees.
+# ielts-028
+renewable energy|n. phrase|B2|năng lượng từ nguồn được tái tạo tự nhiên|The region is investing in [renewable energy].
+solar panel|n. phrase|B1|thiết bị chuyển năng lượng ánh sáng mặt trời thành điện|Each [solar panel] produces electricity during daylight hours.
+wind turbine|n. phrase|B2|thiết bị sử dụng sức gió để tạo điện|The new [wind turbine] supplies power to nearby homes.
+hydropower|n.|C1|điện năng được tạo ra từ chuyển động của nước|The country generates much of its electricity from [hydropower].
+geothermal energy|n. phrase|C1|năng lượng khai thác từ nhiệt bên trong Trái Đất|Some communities use [geothermal energy] for heating.
+energy storage|n. phrase|C1|việc lưu năng lượng để sử dụng vào thời điểm khác|Better [energy storage] can support the use of wind power.
+electricity grid|n. phrase|B2|mạng lưới truyền tải và phân phối điện|The [electricity grid] needs upgrades to handle changing demand.
+intermittency|n.|C1|tính chất không diễn ra liên tục hoặc ổn định theo thời gian|Battery systems can help manage the [intermittency] of solar generation.
+clean energy transition|n. phrase|C1|quá trình chuyển sang nguồn năng lượng ít gây ô nhiễm hơn|Worker training is important during the [clean energy transition].
+fossil fuel|n. phrase|B2|nhiên liệu hình thành từ vật chất hữu cơ cổ như than hoặc dầu|Coal is a [fossil fuel] used to generate electricity.
+# ielts-029
+energy efficiency|n. phrase|B2|khả năng cung cấp cùng dịch vụ với ít năng lượng hơn|Better windows can improve a building's [energy efficiency].
+insulation|n.|C1|vật liệu hoặc biện pháp hạn chế sự truyền nhiệt|Roof [insulation] can reduce heating costs.
+energy audit|n. phrase|C1|việc đánh giá mức sử dụng năng lượng và cơ hội tiết kiệm|The factory commissioned an [energy audit].
+heat loss|n. phrase|B2|lượng nhiệt thoát ra khỏi một không gian hoặc hệ thống|Sealing gaps around doors can reduce [heat loss].
+efficient appliance|n. phrase|B2|thiết bị thực hiện chức năng với ít tài nguyên tiêu thụ hơn|An energy-[efficient appliance] may cost less to run.
+retrofitting|n.|C1|việc bổ sung cải tiến cho công trình hoặc thiết bị đã có|Building [retrofitting] can reduce energy demand.
+smart meter|n. phrase|B2|đồng hồ đo tự động ghi nhận và truyền dữ liệu sử dụng năng lượng|A [smart meter] helps households track electricity use.
+standby power|n. phrase|C1|điện mà thiết bị tiêu thụ khi ở chế độ chờ|Switching devices off completely can reduce [standby power].
+demand management|n. phrase|C1|việc điều chỉnh nhu cầu sử dụng để hệ thống hoạt động hiệu quả|Electricity [demand management] can reduce pressure during peak hours.
+energy consumption|n. phrase|B2|lượng năng lượng được sử dụng|The company aims to lower its [energy consumption].
+# ielts-030
+crop rotation|n. phrase|C1|việc luân phiên trồng các loại cây khác nhau trên cùng diện tích|Farmers use [crop rotation] to support soil health.
+soil fertility|n. phrase|C1|khả năng của đất cung cấp điều kiện và dinh dưỡng cho cây|Organic matter can improve [soil fertility].
+organic farming|n. phrase|B2|phương thức canh tác theo tiêu chuẩn hữu cơ|The family switched to [organic farming] several years ago.
+pesticide|n.|B2|chất dùng để kiểm soát sinh vật gây hại|Careless use of a [pesticide] can harm beneficial insects.
+fertilizer|n.|B2|chất được bổ sung để cung cấp dinh dưỡng cho cây|The farmer applied [fertilizer] before the planting season.
+agroforestry|n.|C1|hệ thống kết hợp cây thân gỗ với cây trồng hoặc vật nuôi|Using [agroforestry] can diversify farm production.
+food security|n. phrase|B2|khả năng tiếp cận ổn định với thực phẩm đủ và phù hợp|Reliable harvests are important for [food security].
+crop yield|n. phrase|C1|lượng sản phẩm thu được từ cây trồng trên một diện tích|Better irrigation can increase [crop yield] in dry areas.
+regenerative agriculture|n. phrase|C1|các cách canh tác hướng tới phục hồi đất và hệ sinh thái nông nghiệp|Cover crops are often used in [regenerative agriculture].
+water-efficient farming|n. phrase|C1|canh tác đạt mục tiêu sản xuất với lượng nước sử dụng hiệu quả|Drip irrigation supports [water-efficient farming].
+# ielts-031
+artificial intelligence|n. phrase|B2|công nghệ giúp máy thực hiện nhiệm vụ thường cần năng lực trí tuệ con người|The hospital is testing [artificial intelligence] to assist with image analysis.
+machine learning|n. phrase|C1|phương pháp giúp hệ thống học các quy luật từ dữ liệu|The research team uses [machine learning] to identify patterns.
+algorithm|n.|B2|tập hợp các bước để giải quyết một loại vấn đề|The [algorithm] sorts the records by date.
+training data|n. phrase|C1|dữ liệu được sử dụng để xây dựng khả năng của mô hình|Poor-quality [training data] can reduce model reliability.
+neural network|n. phrase|C1|mô hình tính toán gồm các lớp đơn vị xử lý kết nối với nhau|The team trained a [neural network] to recognize images.
+predictive model|n. phrase|C1|mô hình dùng dữ liệu để ước tính kết quả chưa biết|A [predictive model] can help forecast electricity demand.
+generative AI|n. phrase|C1|hệ thống trí tuệ nhân tạo có thể tạo ra nội dung mới|Students need guidance on responsible use of [generative AI].
+model bias|n. phrase|C1|sự thiên lệch có hệ thống trong kết quả của một mô hình|Researchers examined [model bias] across different user groups.
+explainability|n.|C1|mức độ có thể giải thích được cách hệ thống tạo ra kết quả|Doctors may require [explainability] before trusting an automated recommendation.
+hallucination|n.|C1|thông tin sai hoặc bịa đặt mà mô hình AI trình bày như có thật|A chatbot [hallucination] can introduce false references into an answer.
+# ielts-032
+data protection|n. phrase|B2|việc bảo vệ dữ liệu khỏi sử dụng hoặc truy cập không phù hợp|The organization updated its [data protection] policy.
+personal data|n. phrase|B2|thông tin liên quan đến một cá nhân có thể được nhận diện|The form explains how [personal data] will be used.
+anonymization|n.|C1|quá trình loại bỏ khả năng gắn dữ liệu với cá nhân cụ thể|Effective [anonymization] can be difficult for detailed datasets.
+online tracking|n. phrase|B2|việc theo dõi hoạt động của người dùng trên mạng|Some browsers provide tools to limit [online tracking].
+opt out|phrasal v.|B2|chọn không tham gia hoặc không cho phép một hoạt động|Users can [opt out] of promotional emails.
+biometric data|n. phrase|C1|dữ liệu về đặc điểm sinh học dùng để nhận diện người|Fingerprint scanners collect [biometric data].
+data collection|n. phrase|B2|quá trình thu thập thông tin để sử dụng hoặc phân tích|The study limits [data collection] to information it actually needs.
+privacy settings|n. phrase|B1|các tùy chọn kiểm soát mức độ chia sẻ thông tin cá nhân|Check your [privacy settings] before posting personal photos.
+third party|n. phrase|B2|bên khác ngoài hai bên trực tiếp tham gia giao dịch hoặc quan hệ|The company will not share the records with a [third party] without permission.
+data minimization|n. phrase|C1|nguyên tắc chỉ thu thập và giữ lượng dữ liệu cần thiết|Deleting unnecessary fields supports [data minimization].
+# ielts-033
+cybersecurity|n.|B2|việc bảo vệ hệ thống và dữ liệu trước các mối đe dọa số|Small businesses also need a clear [cybersecurity] strategy.
+phishing|n.|C1|hành vi giả mạo thông tin để lừa người dùng cung cấp dữ liệu nhạy cảm|The staff learned how to recognize a [phishing] email.
+malware|n.|C1|phần mềm được tạo ra để gây hại hoặc truy cập trái phép|The scan found [malware] on the computer.
+encryption|n.|C1|việc biến đổi thông tin để chỉ bên có quyền mới đọc được|The app uses [encryption] to protect messages.
+data breach|n. phrase|B2|sự cố dữ liệu bị lộ hoặc bị truy cập trái phép|The company notified users after a [data breach].
+multi-factor authentication|n. phrase|C1|cách xác thực yêu cầu nhiều loại bằng chứng nhận dạng|Enable [multi-factor authentication] to improve account security.
+security patch|n. phrase|C1|bản cập nhật sửa điểm yếu bảo mật|Install the latest [security patch] before using the system.
+ransomware|n.|C1|phần mềm độc hại ngăn truy cập dữ liệu nhằm đòi tiền chuộc|A [ransomware] attack disrupted the hospital's systems.
+vulnerability|n.|C1|điểm yếu có thể bị khai thác để gây hại cho hệ thống|The developer fixed a [vulnerability] in the login process.
+access control|n. phrase|C1|cơ chế giới hạn ai được sử dụng dữ liệu hoặc tài nguyên|Strong [access control] protects sensitive records.
+# ielts-034
+social network|n. phrase|B1|nền tảng trực tuyến giúp người dùng kết nối và chia sẻ nội dung|The campaign spread quickly through a popular [social network].
+content moderation|n. phrase|C1|việc xem xét và xử lý nội dung theo quy tắc của nền tảng|Large platforms face challenges in [content moderation].
+misinformation|n.|C1|thông tin sai lệch không nhất thiết được chia sẻ với ý định lừa dối|Media literacy can help people recognize [misinformation].
+echo chamber|n. phrase|C1|môi trường chỉ lặp lại những quan điểm giống nhau và ít có phản biện|An online [echo chamber] can reinforce existing beliefs.
+digital footprint|n. phrase|B2|dấu vết dữ liệu để lại từ hoạt động trên môi trường số|Public posts contribute to your [digital footprint].
+online community|n. phrase|B2|nhóm người tương tác với nhau chủ yếu qua Internet|An [online community] can offer support to new parents.
+viral content|n. phrase|B2|nội dung được chia sẻ nhanh với số lượng lớn|Brands cannot reliably predict which posts will become [viral content].
+engagement rate|n. phrase|C1|tỷ lệ người tương tác với nội dung theo cách đo đã xác định|The team compared the [engagement rate] of two campaigns.
+algorithmic recommendation|n. phrase|C1|nội dung hoặc lựa chọn được hệ thống thuật toán gợi ý|An [algorithmic recommendation] may shape what a user sees next.
+online harassment|n. phrase|C1|hành vi quấy rối hoặc đe dọa người khác trên mạng|Platforms need effective ways to report [online harassment].
+# ielts-035
+digital divide|n. phrase|C1|khoảng cách giữa các nhóm về khả năng tiếp cận và sử dụng công nghệ số|Affordable internet can help narrow the [digital divide].
+broadband|n.|B2|kết nối Internet có khả năng truyền dữ liệu tốc độ cao|Some rural homes still lack reliable [broadband].
+affordability|n.|C1|mức độ phù hợp của chi phí với khả năng chi trả|The [affordability] of devices affects access to online learning.
+digital access|n. phrase|B2|khả năng tiếp cận thiết bị và dịch vụ công nghệ số|Public libraries can improve [digital access].
+network coverage|n. phrase|B2|phạm vi khu vực nhận được dịch vụ kết nối mạng|Mountain communities often have limited [network coverage].
+underserved|adj.|C1|chưa được cung cấp đầy đủ dịch vụ hoặc nguồn lực cần thiết|The program provides internet access to [underserved] neighborhoods.
+digital skills|n. phrase|B2|kỹ năng sử dụng thiết bị và dịch vụ công nghệ số|Adults may need support to develop basic [digital skills].
+assistive technology|n. phrase|C1|công nghệ giúp người khuyết tật thực hiện hoạt động dễ dàng hơn|Screen readers are a form of [assistive technology].
+public internet access|n. phrase|B2|dịch vụ cho phép người dân sử dụng Internet tại địa điểm chung|Libraries provide [public internet access] for residents.
+internet penetration|n. phrase|C1|mức độ phổ biến của việc sử dụng Internet trong một dân số|The report compares [internet penetration] across regions.

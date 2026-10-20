@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "packs": [
+    {
+      "url": "/content/daily/topics-011-055/crawled-daily-011.json",
+      "contentVersion": "crawl-daily-011-d499afb58dd4",
+      "entries": 7,
+      "slots": 7,
+      "sha256": "b23f93ab99aaa7f7951d3c49a7cd13f4abae2abac19bd3e5cf0bf7c3d9fab19a"
+    },
+    {
+      "url": "/content/daily/topics-011-055/crawled-daily-012.json",
+      "contentVersion": "crawl-daily-012-a3c644bb8358",
+      "entries": 7,
+      "slots": 7,
+      "sha256": "b1b3951840d369bc1d37437da33c09c48bbefb88369bfd2fa72afe8037f4532a"
+    },
+    {
+      "url": "/content/daily/topics-011-055/crawled-daily-014.json",
+      "contentVersion": "crawl-daily-014-59dc423c0a94",
+      "entries": 4,
+      "slots": 4,
+      "sha256": "6a9d57ac7029c1ea3cb7e84dd66ea74cd6e5418777c0a6c454785c6866008d7d"
+    },
+    {
+      "url": "/content/daily/topics-011-055/crawled-daily-026.json",
+      "contentVersion": "crawl-daily-026-e0264393e063",
+      "entries": 6,
+      "slots": 6,
+      "sha256": "8eb5ca5e8ac31e3aa0f3389232bba18405449d9c3a02f3f29329e2645d1dbb55"
+    },
+    {
+      "url": "/content/ielts/topics-011-055/part-011-015.json",
+      "contentVersion": "data-02-part-011-015-v1-usipa1",
+      "entries": 50,
+      "slots": 50,
+      "sha256": "8aba841b7b57bcb06857156ad081079a9ec339d0703cc18f2d6285363bb5dc38"
+    },
+    {
+      "url": "/content/ielts/topics-011-055/part-016-025.json",
+      "contentVersion": "data-02-part-016-025-v1-usipa1",
+      "entries": 100,
+      "slots": 100,
+      "sha256": "e2615cdd1f264fc984b7b2c109ccd0ca4e507d098ee89d3bafd7609333cc5e31"
+    },
+    {
+      "url": "/content/ielts/topics-011-055/part-026-035.json",
+      "contentVersion": "data-02-part-026-035-v1-usipa1",
+      "entries": 100,
+      "slots": 100,
+      "sha256": "b27087132bda1f6cb0c895003919a1df38e8c58c9d33d682a6ca5e10eb0b29f5"
+    },
+    {
+      "url": "/content/ielts/topics-011-055/part-036-045.json",
+      "contentVersion": "data-02-part-036-045-v1-usipa1",
+      "entries": 100,
+      "slots": 100,
+      "sha256": "79a9551128750539a57b5bdb2cf13105e74c72df2fcf0ff70036db4c58eb4737"
+    },
+    {
+      "url": "/content/ielts/topics-011-055/part-046-055.json",
+      "contentVersion": "data-02-part-046-055-v1-usipa1",
+      "entries": 100,
+      "slots": 100,
+      "sha256": "1feb0155877ab838838be36c9ff0e260120e912c8130539c2e119f96307d572d"
+    },
+    {
+      "url": "/content/ielts/topics-056-100/crawled-ielts-056.json",
+      "contentVersion": "crawl-ielts-056-6a290afc4e6a",
+      "entries": 3,
+      "slots": 3,
+      "sha256": "3b41580f3df66081ffa87895cae0ab90c955b0d02a85a218b69f768afc319f19"
+    },
+    {
+      "url": "/content/pilot/pilot-200.json",
+      "contentVersion": "pilot-200-v1-usipa1",
+      "entries": 200,
+      "slots": 200,
+      "sha256": "79278cde09294476634d620f6896edf63f7b9a76e45bfa8f42bd4f62e90913ed"
+    }
+  ],
+  "stats": {
+    "targetSlots": 2000,
+    "slots": 677,
+    "uniqueEntries": 677,
+    "topicShells": 200,
+    "populatedTopics": 70,
+    "estimatedCefr": 677,
+    "verifiedCefr": 0,
+    "missingIPA": 595
+  }
+}

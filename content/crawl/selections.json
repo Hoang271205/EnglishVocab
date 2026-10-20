@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "selections": [
+    {
+      "candidateId": "sense-7e7ceda3e06b96b92115cc88",
+      "topicId": "daily-011",
+      "meaningVi": "nhà bếp",
+      "exampleId": "example-6da1f99a5d6efc653c6219ad",
+      "cefrEstimate": "A1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "sense-54a3d0a7160ccf10abc12ec9",
+      "topicId": "daily-011",
+      "meaningVi": "phòng khách",
+      "exampleId": "example-2421600b6e81f4cd68cf760f",
+      "cefrEstimate": "A1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "vi-sense-4e1299a88eaffe35c7db0e06",
+      "topicId": "daily-011",
+      "meaningVi": "Buồng, phòng.",
+      "exampleId": "example-9d9bee2736e3d7c8f02e450d",
+      "cefrEstimate": "A1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "vi-sense-2fc32a7d671922bc400cd7e3",
+      "topicId": "daily-011",
+      "meaningVi": "Buồng tắm, phòng tắm, nhà vệ sinh.",
+      "exampleId": "example-fe57b20a9e3517a69b5efd13",
+      "cefrEstimate": "A1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "vi-sense-09b3e18875c25d3c70bb37d5",
+      "topicId": "daily-011",
+      "meaningVi": "Tầng hầm.",
+      "exampleId": "example-7c1de3b16b800e1758841c33",
+      "cefrEstimate": "A2",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "vi-sense-9c333363f96f65021d14cccd",
+      "topicId": "daily-011",
+      "meaningVi": "Buồng ngủ.",
+      "exampleId": "example-841ac420363dcae77d20ebd0",
+      "cefrEstimate": "A1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate. Explicit cross-source sense alignment reviewed for identical headword/POS.",
+      "exampleCandidateId": "sense-93baaaf1421cdefe438c4419"
+    },
+    {
+      "candidateId": "vi-sense-bf197c6ab55dbf694019f264",
+      "topicId": "daily-011",
+      "meaningVi": "Gác mái.",
+      "exampleId": "example-01b561b4224032e5c0622f92",
+      "cefrEstimate": "A2",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate. Explicit cross-source sense alignment reviewed for identical headword/POS.",
+      "exampleCandidateId": "sense-eff5184074b66a7521b3927a"
+    },
+    {
+      "candidateId": "sense-027a9b56439b94a2513d5019",
+      "topicId": "daily-012",
+      "meaningVi": "ghế",
+      "exampleId": "example-951564dc9d31a3e56a670454",
+      "cefrEstimate": "A1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "sense-1c994a578f3522385bd26b46",
+      "topicId": "daily-012",
+      "meaningVi": "bàn",
+      "exampleId": "example-d9b36b17ac6998c0073b218d",
+      "cefrEstimate": "A1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "sense-95ec9645277feafb148a2719",
+      "topicId": "daily-012",
+      "meaningVi": "ghế xô-pha",
+      "exampleId": "example-cd65990ac21db06dc72fd3f3",
+      "cefrEstimate": "A1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "vi-sense-a522c131c4814bc090484b86",
+      "topicId": "daily-012",
+      "meaningVi": "Một cái bàn, cái khung, hoặc cái hộp, thường có mặt trên cùng phẳng và hơi nghiêng, dùng vào mục đích ban đầu là để đọc sách và viết. Chúng thường có ngăn kéo ở dưới.",
+      "exampleId": "example-293165b81bd7d11302bc8088",
+      "cefrEstimate": "A1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "sense-12a3aa2a60ab323bc22b8077",
+      "topicId": "daily-012",
+      "meaningVi": "giá sách",
+      "exampleId": "example-88ac671592fa5e769bc1dc4f",
+      "cefrEstimate": "A2",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "sense-eb3b11086df43b7e29cb2dd3",
+      "topicId": "daily-012",
+      "meaningVi": "giường",
+      "exampleId": "example-2202fee8bf724c778e00e675",
+      "cefrEstimate": "A1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "sense-998b59c45e8c99a1cc6ea596",
+      "topicId": "daily-012",
+      "meaningVi": "chăn",
+      "exampleId": "example-6cf0b3e11591eeebb057e751",
+      "cefrEstimate": "A2",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "sense-c19c52b973c1b14f360a9e44",
+      "topicId": "daily-014",
+      "meaningVi": "lát mỏng",
+      "exampleId": "example-48b96f43357161d5eac86435",
+      "cefrEstimate": "A2",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "sense-e449340c878550ae9670d2eb",
+      "topicId": "daily-014",
+      "meaningVi": "luộc",
+      "exampleId": "example-750d5567286a235a664d43ea",
+      "cefrEstimate": "A2",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "vi-sense-4398bdfa4dcee1c8f67087c1",
+      "topicId": "daily-014",
+      "meaningVi": "Khuấy, quấy.",
+      "exampleId": "example-6f36cc1b727c39a1a49fc3aa",
+      "cefrEstimate": "A2",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate. Explicit cross-source sense alignment reviewed for identical headword/POS.",
+      "exampleCandidateId": "sense-8f4a38d1d804378fdd0c670c"
+    },
+    {
+      "candidateId": "vi-sense-6d066ccf62a0204c03df1155",
+      "topicId": "daily-014",
+      "meaningVi": "Làm cho sủi; ninh nhỏ lửa.",
+      "exampleId": "example-1ba54f8072c623c1cc6e8908",
+      "cefrEstimate": "B1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate. Explicit cross-source sense alignment reviewed for identical headword/POS.",
+      "exampleCandidateId": "sense-405b2e30f5afd3cd1624ad10"
+    },
+    {
+      "candidateId": "sense-6d0fca1e615f18f1e8259d05",
+      "topicId": "daily-026",
+      "meaningVi": "áo sơ mi",
+      "exampleId": "example-a466d99e9ff5c4ab4b71208c",
+      "cefrEstimate": "A1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "sense-0d883886f9adaf8f73a0851f",
+      "topicId": "daily-026",
+      "meaningVi": "áo khoác",
+      "exampleId": "example-ac27fb12dc058991be5a5f1d",
+      "cefrEstimate": "A1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "sense-4a6dbc2395386046dbaa07a1",
+      "topicId": "daily-026",
+      "meaningVi": "giày",
+      "exampleId": "example-ea6cdbf150df7ec76d077f19",
+      "cefrEstimate": "A1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "sense-e50775c4bfbc8d890b81027b",
+      "topicId": "daily-026",
+      "meaningVi": "áo len",
+      "exampleId": "example-f0c10d1d7300f6acdc36202e",
+      "cefrEstimate": "A2",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "sense-3d6e6aad048a96b6fc0aaca5",
+      "topicId": "daily-026",
+      "meaningVi": "quần jeans",
+      "exampleId": "example-5d8bfba59990596378620898",
+      "cefrEstimate": "A1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "vi-sense-467cda5b527e566954995add",
+      "topicId": "daily-026",
+      "meaningVi": "Quần Âu.",
+      "exampleId": "example-a9cacc6253a4eaa81df89c6f",
+      "cefrEstimate": "A2",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate. Explicit cross-source sense alignment reviewed for identical headword/POS.",
+      "exampleCandidateId": "sense-c118ff7006c790999c6a916f"
+    },
+    {
+      "candidateId": "sense-dd25f944c36c5f7442b82e0e",
+      "topicId": "ielts-056",
+      "meaningVi": "giới hạn tốc độ",
+      "exampleId": "example-16f1557b95fa4ad070d0993c",
+      "cefrEstimate": "B1",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "vi-sense-fd56a9e2216d7f1e5d9f04e9",
+      "topicId": "ielts-056",
+      "meaningVi": "Người đi bộ, khách bộ hành.",
+      "exampleId": "example-bf8fc941ceb41284e25906dd",
+      "cefrEstimate": "B2",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate."
+    },
+    {
+      "candidateId": "vi-sense-b28d8cf93d2bcd40133a949d",
+      "topicId": "ielts-056",
+      "meaningVi": "Sự lái xe quá tốc độ quy định.",
+      "exampleId": "example-457aef3ae67a3ea5a8abc1fb",
+      "cefrEstimate": "B2",
+      "note": "Reviewed source meaning and example for this topic; common usage estimate. Explicit cross-source sense alignment reviewed for identical headword/POS.",
+      "exampleCandidateId": "sense-0a85e2735f47ff6c8565816c"
+    }
+  ]
+}

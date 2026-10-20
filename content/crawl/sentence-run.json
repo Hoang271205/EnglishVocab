@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "productionWrite": false,
+  "sourceUrl": "https://www.manythings.org/anki/vie-eng.zip",
+  "sha256": "2fc68ac8dfe3210d78608eee41c0db2db4d930a7fdfbc76f9745906f2683974e",
+  "sentencePairs": 12628,
+  "candidates": 6741,
+  "joinedCandidates": 590,
+  "candidatesWithMeaningAndExample": 637,
+  "wordsWithMeaningAndExample": 376,
+  "reviewStatus": "Matching a literal Vietnamese anchor is a candidate filter, not automatic sense/topic verification."
+}

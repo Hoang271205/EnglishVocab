@@ -1,0 +1,12 @@
+{
+  "version": "pilot-200-v1-usipa1",
+  "slots": 200,
+  "uniqueEntries": 200,
+  "populatedTopics": 20,
+  "topicShells": 200,
+  "estimatedCefr": 200,
+  "verifiedCefr": 0,
+  "missingIPA": 163,
+  "phonemeAudioFiles": 0,
+  "reviewStatus": "Authoring reviewed for selected meaning/context; CEFR estimated. 37 IPA references copied from explicit US labels, not manually listened; 163 missing/ambiguous."
+}

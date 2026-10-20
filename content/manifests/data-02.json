@@ -1,0 +1,23 @@
+{
+  "version": "data-02-ielts-011-055-v1",
+  "status": "complete",
+  "slots": 450,
+  "targetSlots": 450,
+  "uniqueEntries": 450,
+  "populatedTopics": 45,
+  "topicRange": [
+    11,
+    55
+  ],
+  "estimatedCefr": 450,
+  "verifiedCefr": 0,
+  "missingIPA": 413,
+  "packs": [
+    "public/content/ielts/topics-011-055/part-011-015.json",
+    "public/content/ielts/topics-011-055/part-016-025.json",
+    "public/content/ielts/topics-011-055/part-026-035.json",
+    "public/content/ielts/topics-011-055/part-036-045.json",
+    "public/content/ielts/topics-011-055/part-046-055.json"
+  ],
+  "reviewStatus": "Authored meanings/examples reviewed in batches. CEFR estimated; missing/ambiguous IPA reported. Full-library import/reimport and cloze checks passed."
+}

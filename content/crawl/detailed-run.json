@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "sourceSha256": "24f742143d9079308d8c6b9c8cb4f6efb54e908a37d27fd5e40f22ab841b3d0d",
+  "records": 2039120,
+  "matchedWords": 1247,
+  "missingWords": [
+    "pedestrianisation",
+    "homogenisation",
+    "standardisation",
+    "localisation",
+    "marginalisation",
+    "reintegration",
+    "reoffend",
+    "affordability",
+    "liberalisation",
+    "seasonality",
+    "microfinance",
+    "logout",
+    "subtitle"
+  ],
+  "augmentedCandidates": 6729,
+  "reviewStatus": "Exact word matches only; meaning/POS/context must be reviewed before publication."
+}

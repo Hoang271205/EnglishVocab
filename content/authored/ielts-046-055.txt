@@ -1,0 +1,110 @@
+# ielts-046
+public health|n. phrase|B2|lĩnh vực bảo vệ và cải thiện sức khỏe của cộng đồng|The city increased funding for [public health].
+outbreak|n.|B2|sự xuất hiện hoặc gia tăng nhanh của bệnh trong một khu vực|The team investigated an [outbreak] at the school.
+epidemic|n.|C1|sự gia tăng số ca bệnh vượt mức thường thấy trong một cộng đồng|The report describes the social effects of an [epidemic].
+pandemic|n.|B2|dịch bệnh lan rộng qua nhiều quốc gia hoặc châu lục|The [pandemic] disrupted education and travel.
+transmission|n.|C1|sự truyền tác nhân gây bệnh giữa các vật chủ hoặc môi trường|Researchers studied patterns of disease [transmission].
+infection rate|n. phrase|B2|tỷ lệ nhiễm bệnh được đo trong một nhóm và khoảng thời gian|The bulletin reported a change in the [infection rate].
+contact tracing|n. phrase|C1|việc xác định những người từng tiếp xúc có nguy cơ với ca bệnh|The health department expanded its [contact tracing] team.
+quarantine|n.|C1|biện pháp hạn chế tiếp xúc đối với người có khả năng đã phơi nhiễm|The study examined the social impact of [quarantine].
+herd immunity|n. phrase|C1|sự bảo vệ gián tiếp khi đủ nhiều người trong cộng đồng có miễn dịch|The lecture explains the concept of [herd immunity].
+emergency preparedness|n. phrase|C1|mức độ chuẩn bị để ứng phó tình huống khẩn cấp|Hospitals review their [emergency preparedness] plans regularly.
+# ielts-047
+ageing population|n. phrase|B2|dân số có tỷ lệ người cao tuổi tăng lên|An [ageing population] can change demand for public services.
+life expectancy|n. phrase|B2|số năm sống trung bình được ước tính theo các điều kiện thống kê|The chart compares [life expectancy] across countries.
+elderly care|n. phrase|B2|dịch vụ và sự hỗ trợ dành cho người cao tuổi|Families often share responsibility for [elderly care].
+caregiver|n.|B2|người chăm sóc và hỗ trợ người cần giúp đỡ|A [caregiver] may need time away from paid work.
+assisted living|n. phrase|C1|hình thức nhà ở cung cấp hỗ trợ sinh hoạt khi cần|Some older adults choose [assisted living] for greater support.
+social isolation|n. phrase|C1|tình trạng có ít liên hệ và tương tác xã hội|Community activities can help address [social isolation].
+independent living|n. phrase|B2|việc sống với quyền tự chủ và mức hỗ trợ phù hợp|Accessible housing can support [independent living].
+long-term care|n. phrase|C1|sự chăm sóc hoặc hỗ trợ được cung cấp trong thời gian dài|The policy addresses the cost of [long-term care].
+intergenerational support|n. phrase|C1|sự hỗ trợ giữa những người thuộc các thế hệ khác nhau|Shared housing can encourage [intergenerational support].
+age-friendly community|n. phrase|C1|cộng đồng có điều kiện hỗ trợ con người khi tuổi tác tăng lên|Safe sidewalks are part of an [age-friendly community].
+# ielts-048
+disability|n.|B2|tình trạng suy giảm chức năng có thể tương tác với rào cản và hạn chế tham gia|The survey asked about barriers experienced by people with a [disability].
+barrier-free access|n. phrase|C1|khả năng tiếp cận mà không gặp chướng ngại hạn chế sử dụng|The entrance provides [barrier-free access] to the library.
+universal design|n. phrase|C1|cách thiết kế để nhiều người nhất có thể sử dụng mà ít cần điều chỉnh riêng|Wider doorways are one feature of [universal design].
+wheelchair ramp|n. phrase|B2|lối dốc giúp người dùng xe lăn di chuyển qua chênh lệch độ cao|The new entrance includes a [wheelchair ramp].
+screen reader|n. phrase|B2|phần mềm chuyển nội dung màn hình thành giọng đọc hoặc dạng hỗ trợ khác|The website should work with a [screen reader].
+captioning|n.|C1|việc cung cấp văn bản thể hiện lời nói và âm thanh liên quan|Accurate [captioning] makes videos accessible to more viewers.
+sign language|n. phrase|B1|ngôn ngữ dùng chuyển động tay nét mặt và cơ thể|The event provides interpretation in [sign language].
+accessible transport|n. phrase|B2|dịch vụ đi lại được thiết kế để người có nhiều nhu cầu sử dụng được|Reliable [accessible transport] helps people reach work and school.
+reasonable adjustment|n. phrase|C1|thay đổi phù hợp để giảm bất lợi trong việc tham gia|Extra time may be a [reasonable adjustment] for an examination.
+participation barrier|n. phrase|C1|yếu tố cản trở ai đó tham gia hoạt động|An inaccessible registration form can create a [participation barrier].
+# ielts-049
+telemedicine|n.|C1|việc cung cấp dịch vụ y tế từ xa bằng công nghệ liên lạc|The clinic uses [telemedicine] for some follow-up appointments.
+wearable device|n. phrase|B2|thiết bị điện tử có thể đeo trên cơ thể|The study collected activity data from a [wearable device].
+electronic health record|n. phrase|C1|hồ sơ thông tin sức khỏe được lưu và quản lý bằng hệ thống điện tử|The doctor reviewed the patient's [electronic health record].
+medical imaging|n. phrase|C1|các kỹ thuật tạo hình ảnh cấu trúc bên trong cơ thể|Advances in [medical imaging] support clinical research.
+robot-assisted surgery|n. phrase|C1|phẫu thuật trong đó bác sĩ sử dụng hệ thống robot hỗ trợ thao tác|The hospital introduced a training program for [robot-assisted surgery].
+remote monitoring|n. phrase|C1|việc theo dõi tình trạng từ một địa điểm khác bằng công nghệ|Some services offer [remote monitoring] for patients at home.
+diagnostic tool|n. phrase|C1|công cụ hỗ trợ xác định bệnh hoặc tình trạng|The team evaluated a new [diagnostic tool] in a clinical study.
+medical device|n. phrase|B2|thiết bị được thiết kế để phục vụ mục đích y tế|The manufacturer tested the [medical device] before release.
+patient data|n. phrase|B2|thông tin liên quan đến người nhận chăm sóc y tế|Access to [patient data] must be carefully controlled.
+health technology assessment|n. phrase|C1|việc đánh giá có hệ thống giá trị và tác động của một công nghệ y tế|The agency published a [health technology assessment] of the new device.
+# ielts-050
+physical activity|n. phrase|B1|hoạt động vận động cơ thể tiêu hao năng lượng|The survey asked about weekly [physical activity].
+endurance|n.|B2|khả năng duy trì nỗ lực trong thời gian dài|Long-distance runners develop [endurance] through regular training.
+strength training|n. phrase|B2|bài tập sử dụng lực cản để phát triển sức mạnh cơ bắp|The program includes supervised [strength training].
+aerobic exercise|n. phrase|C1|vận động làm tăng hoạt động tim phổi trong thời gian duy trì|The course introduces different forms of [aerobic exercise].
+sports participation|n. phrase|B2|việc tham gia các hoạt động thể thao|Affordable facilities can increase youth [sports participation].
+recreational facility|n. phrase|B2|cơ sở phục vụ hoạt động vui chơi hoặc vận động lúc rảnh|The neighborhood needs a safe [recreational facility].
+team sport|n. phrase|B1|môn thể thao có các đội cùng phối hợp thi đấu|Volleyball is a popular [team sport] at the school.
+athletic performance|n. phrase|C1|mức độ thể hiện khả năng trong hoạt động thể thao|The study examined factors affecting [athletic performance].
+inclusive sport|n. phrase|C1|hoạt động thể thao tạo điều kiện cho người có khả năng và hoàn cảnh khác nhau|The club promotes [inclusive sport] in the community.
+recovery period|n. phrase|B2|khoảng thời gian dành cho phục hồi sau vận động hoặc tổn thương|The training plan includes a [recovery period] between demanding sessions.
+# ielts-051
+urbanisation|n.|C1|quá trình tăng tỷ lệ dân sống ở đô thị và mở rộng đời sống đô thị|Rapid [urbanisation] can put pressure on housing supply.
+rural-to-urban migration|n. phrase|C1|việc người dân chuyển nơi sống từ nông thôn tới đô thị|Employment opportunities often encourage [rural-to-urban migration].
+urban sprawl|n. phrase|C1|sự mở rộng đô thị phân tán ra vùng đất xung quanh|Poor planning can lead to [urban sprawl].
+population density|n. phrase|B2|số người sống trên một đơn vị diện tích|High [population density] can support frequent public transport.
+megacity|n.|C1|thành phố có quy mô dân số đặc biệt lớn|A [megacity] faces complex transport and housing challenges.
+infrastructure demand|n. phrase|C1|nhu cầu đối với hệ thống cơ sở hạ tầng|Population growth increases [infrastructure demand].
+informal settlement|n. phrase|C1|khu dân cư hình thành ngoài một phần quy trình quản lý hoặc quy hoạch chính thức|Residents of an [informal settlement] may lack reliable public services.
+urban growth|n. phrase|B2|sự gia tăng dân số hoặc quy mô không gian đô thị|The report predicts continued [urban growth] over the next decade.
+metropolitan area|n. phrase|C1|vùng gồm đô thị trung tâm và các khu vực có liên hệ chặt chẽ với nó|Millions of people commute across the [metropolitan area].
+urban regeneration|n. phrase|C1|quá trình cải thiện và tái phát triển khu vực đô thị xuống cấp|The city launched an [urban regeneration] project near the old docks.
+# ielts-052
+affordable housing|n. phrase|B2|nhà ở có chi phí phù hợp thu nhập của nhóm người được xét|The council plans to build more [affordable housing].
+housing shortage|n. phrase|B2|tình trạng số nhà ở không đủ đáp ứng nhu cầu|A [housing shortage] has pushed rents higher.
+social housing|n. phrase|C1|nhà ở được cung cấp theo chính sách hỗ trợ xã hội|The development includes units for [social housing].
+rental market|n. phrase|B2|thị trường cho thuê nhà hoặc bất động sản|Students face strong competition in the [rental market].
+housing affordability|n. phrase|C1|mức độ người dân có thể chi trả chi phí nhà ở|The report measures [housing affordability] relative to household income.
+security of tenure|n. phrase|C1|mức bảo đảm quyền tiếp tục ở hoặc sử dụng nhà đất|Longer leases may improve [security of tenure] for renters.
+homelessness|n.|B2|tình trạng không có nơi ở ổn định và phù hợp|The charity provides services for people experiencing [homelessness].
+rent subsidy|n. phrase|C1|khoản hỗ trợ để giảm chi phí thuê nhà|Eligible families can apply for a [rent subsidy].
+first-time buyer|n. phrase|B2|người mua nhà lần đầu|A [first-time buyer] may need years to save for a deposit.
+housing supply|n. phrase|B2|lượng nhà ở hiện có hoặc được đưa ra thị trường|Slow construction can limit [housing supply].
+# ielts-053
+zoning|n.|C1|việc phân chia khu vực và quy định mục đích sử dụng đất|The city revised its [zoning] rules to allow more housing.
+mixed-use development|n. phrase|C1|dự án kết hợp nhiều mục đích sử dụng như ở làm việc và mua sắm|A [mixed-use development] can reduce some daily travel needs.
+green space|n. phrase|B2|khu vực có cây xanh hoặc thảm thực vật trong đô thị|Residents want more public [green space].
+walkability|n.|C1|mức độ một khu vực thuận tiện và an toàn để đi bộ|Shorter crossings can improve neighborhood [walkability].
+land use|n. phrase|B2|cách một diện tích đất được sử dụng|Transport planning should be coordinated with [land use].
+urban density|n. phrase|C1|mức độ tập trung dân cư hoặc công trình trong đô thị|The proposal would increase [urban density] near the station.
+public consultation|n. phrase|C1|quá trình lấy ý kiến người dân về quyết định hoặc kế hoạch|The design changed after [public consultation].
+master plan|n. phrase|B2|kế hoạch tổng thể định hướng sự phát triển của một khu vực|The university published a new [master plan] for its campus.
+transit-oriented development|n. phrase|C1|phát triển đô thị tập trung quanh điểm tiếp cận giao thông công cộng|The strategy encourages [transit-oriented development] near railway stations.
+heritage preservation|n. phrase|C1|việc bảo vệ các giá trị hoặc công trình di sản|The project balances new construction with [heritage preservation].
+# ielts-054
+public transit|n. phrase|B2|hệ thống giao thông chở khách phục vụ công chúng|Better [public transit] can reduce dependence on private cars.
+commuter|n.|B2|người thường xuyên đi giữa nhà và nơi làm việc hoặc học tập|Each [commuter] saves time when trains run reliably.
+fare|n.|B1|số tiền trả cho một chuyến đi bằng phương tiện chở khách|The bus [fare] is lower for students.
+service frequency|n. phrase|C1|số chuyến dịch vụ được cung cấp trong một khoảng thời gian|Higher [service frequency] can make buses more convenient.
+last-mile connection|n. phrase|C1|chặng kết nối cuối giữa điểm giao thông và nơi người đi cần tới|A shuttle provides a [last-mile connection] from the station to the hospital.
+interchange|n.|C1|địa điểm cho phép chuyển giữa các tuyến hoặc phương tiện giao thông|The new [interchange] connects buses with the metro.
+transit reliability|n. phrase|C1|mức độ dịch vụ giao thông công cộng hoạt động ổn định như dự kiến|Passengers value [transit reliability] as well as low fares.
+integrated ticketing|n. phrase|C1|hệ thống vé dùng chung cho nhiều tuyến hoặc loại phương tiện|The city introduced [integrated ticketing] across buses and trains.
+ridership|n.|C1|số lượt hoặc số người sử dụng dịch vụ vận tải công cộng|Weekend [ridership] increased after fares were reduced.
+bus rapid transit|n. phrase|C1|hệ thống xe buýt có các đặc điểm giúp vận hành nhanh và ổn định hơn|Dedicated lanes are a common feature of [bus rapid transit].
+# ielts-055
+traffic congestion|n. phrase|B2|tình trạng lượng xe lớn làm dòng giao thông chậm hoặc ùn lại|The bridge is a major source of [traffic congestion].
+rush hour|n. phrase|B1|khoảng thời gian có lượng người đi lại cao nhất trong ngày|Trains are crowded during [rush hour].
+bottleneck|n.|C1|điểm có năng lực hạn chế làm chậm cả dòng di chuyển hoặc quy trình|The narrow junction creates a traffic [bottleneck].
+congestion charge|n. phrase|C1|khoản phí đánh vào phương tiện đi vào khu vực để hạn chế ùn tắc|The city considered a [congestion charge] for the central district.
+carpooling|n.|B2|việc nhiều người đi chung một xe trong các chuyến tương tự|Office [carpooling] can reduce the number of cars on the road.
+road capacity|n. phrase|C1|lượng giao thông mà một tuyến đường có thể phục vụ trong điều kiện nhất định|The project aims to increase [road capacity] at the junction.
+induced demand|n. phrase|C1|nhu cầu đi lại tăng thêm khi việc đi lại trở nên thuận tiện hơn|Planners considered [induced demand] before approving the road expansion.
+traffic flow|n. phrase|B2|sự chuyển động của phương tiện trong hệ thống đường|Better signal timing can improve [traffic flow].
+parking demand|n. phrase|B2|nhu cầu sử dụng chỗ đỗ xe|New office buildings can increase [parking demand] in nearby streets.
+modal shift|n. phrase|C1|sự chuyển đổi từ loại phương tiện đi lại này sang loại khác|Improved rail services may encourage a [modal shift] away from private cars.

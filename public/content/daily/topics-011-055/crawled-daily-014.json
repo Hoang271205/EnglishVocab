@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "crawl-daily-014-59dc423c0a94",
+  "entries": [
+    {
+      "id": "crawl-sense-c19c52b973c1b14f360a9e44",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "slice",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-c19c52b973c1b14f360a9e44",
+      "meaningVi": "lát mỏng",
+      "acceptedLearnAnswers": [
+        "slice"
+      ],
+      "cefr": {
+        "level": "A2",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-48b96f43357161d5eac86435",
+          "prefix": "Jim was munching on a ",
+          "targetSurface": "slice",
+          "suffix": " of toast.",
+          "acceptedAnswers": [
+            "slice"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/slice",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/slice",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/slice",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-sense-e449340c878550ae9670d2eb",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "boil",
+      "partOfSpeech": "v.",
+      "senseKey": "sense-e449340c878550ae9670d2eb",
+      "meaningVi": "luộc",
+      "acceptedLearnAnswers": [
+        "boil"
+      ],
+      "cefr": {
+        "level": "A2",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": "/bɔɪ(ə)l/",
+        "accent": "en-US"
+      },
+      "examples": [
+        {
+          "id": "example-750d5567286a235a664d43ea",
+          "prefix": "",
+          "targetSurface": "Boil",
+          "suffix": " the eggs for three minutes.",
+          "acceptedAnswers": [
+            "Boil"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/boil",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/boil",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/boil",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "ipa",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; explicitly US-tagged source transcription",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/boil",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-vi-sense-4398bdfa4dcee1c8f67087c1",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "stir",
+      "partOfSpeech": "v.",
+      "senseKey": "vi-sense-4398bdfa4dcee1c8f67087c1",
+      "meaningVi": "Khuấy, quấy.",
+      "acceptedLearnAnswers": [
+        "stir"
+      ],
+      "cefr": {
+        "level": "A2",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. Explicit cross-source sense alignment reviewed for identical headword/POS. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-6f36cc1b727c39a1a49fc3aa",
+          "prefix": "Would you please ",
+          "targetSurface": "stir",
+          "suffix": " this pot so that the chocolate doesn't burn?",
+          "acceptedAnswers": [
+            "stir"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://vi.wiktionary.org/wiki/stir",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/stir",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-vi-sense-6d066ccf62a0204c03df1155",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "simmer",
+      "partOfSpeech": "v.",
+      "senseKey": "vi-sense-6d066ccf62a0204c03df1155",
+      "meaningVi": "Làm cho sủi; ninh nhỏ lửa.",
+      "acceptedLearnAnswers": [
+        "simmer"
+      ],
+      "cefr": {
+        "level": "B1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. Explicit cross-source sense alignment reviewed for identical headword/POS. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-1ba54f8072c623c1cc6e8908",
+          "prefix": "",
+          "targetSurface": "Simmer",
+          "suffix": " the soup for five minutes, then serve.",
+          "acceptedAnswers": [
+            "Simmer"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://vi.wiktionary.org/wiki/simmer",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/simmer",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    }
+  ],
+  "topics": [
+    {
+      "id": "daily-014",
+      "collectionId": "daily",
+      "nameEn": "Cooking at Home",
+      "nameVi": "Nấu ăn tại nhà",
+      "order": 14,
+      "entryIds": [
+        "crawl-sense-c19c52b973c1b14f360a9e44",
+        "crawl-sense-e449340c878550ae9670d2eb",
+        "crawl-vi-sense-4398bdfa4dcee1c8f67087c1",
+        "crawl-vi-sense-6d066ccf62a0204c03df1155"
+      ]
+    }
+  ]
+}

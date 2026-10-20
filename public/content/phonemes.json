@@ -1,0 +1,302 @@
+{
+  "schemaVersion": 1,
+  "id": "us-ipa-text-reference-v1",
+  "source": {
+    "author": "Philip Neal Whitman",
+    "organization": "The Ohio State University, Intercultural English Language Programs",
+    "url": "https://ielp.ehe.osu.edu/files/2025/09/IPA_English.pdf",
+    "landingUrl": "https://ielp.ehe.osu.edu/sep/resources/interactive-ipa-charts/",
+    "license": "Creative Commons Attribution-NonCommercial; version unspecified in the PDF",
+    "attribution": "Reference inventory: Philip Neal Whitman, The Ohio State University. EnglishVocab adapted a text-only teaching table; no source audio or graphics included."
+  },
+  "notes": [
+    "Bảng tra IPA dạng chữ: 24 phụ âm, 11 hàng nguyên âm đơn và 5 nguyên âm đôi; không khẳng định đây là số lượng âm vị duy nhất của mọi giọng Mỹ.",
+    "ɝ là nguyên âm có màu r thường có trọng âm; ɚ là dạng không nhấn, được gộp trong cùng hàng tra cứu.",
+    "Phân biệt ɑ/ɔ thay đổi tùy hiện tượng cot–caught merger. Một số từ điển dùng iː/uː hoặc r thay cho i/u/ɹ.",
+    "Bảng này không có nút nghe từng âm. Nghe từ/câu dùng giọng en-US riêng."
+  ],
+  "phonemes": [
+    {
+      "symbol": "p",
+      "aliases": [],
+      "group": "consonant",
+      "example": "pen",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "b",
+      "aliases": [],
+      "group": "consonant",
+      "example": "book",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "t",
+      "aliases": [],
+      "group": "consonant",
+      "example": "tea",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "d",
+      "aliases": [],
+      "group": "consonant",
+      "example": "day",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "k",
+      "aliases": [],
+      "group": "consonant",
+      "example": "cat",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "g",
+      "aliases": [],
+      "group": "consonant",
+      "example": "go",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "f",
+      "aliases": [],
+      "group": "consonant",
+      "example": "fine",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "v",
+      "aliases": [],
+      "group": "consonant",
+      "example": "very",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "θ",
+      "aliases": [],
+      "group": "consonant",
+      "example": "think",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "ð",
+      "aliases": [],
+      "group": "consonant",
+      "example": "this",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "s",
+      "aliases": [],
+      "group": "consonant",
+      "example": "see",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "z",
+      "aliases": [],
+      "group": "consonant",
+      "example": "zoo",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "ʃ",
+      "aliases": [],
+      "group": "consonant",
+      "example": "ship",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "ʒ",
+      "aliases": [],
+      "group": "consonant",
+      "example": "vision",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "h",
+      "aliases": [],
+      "group": "consonant",
+      "example": "hat",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "tʃ",
+      "aliases": [],
+      "group": "consonant",
+      "example": "chair",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "dʒ",
+      "aliases": [],
+      "group": "consonant",
+      "example": "job",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "m",
+      "aliases": [],
+      "group": "consonant",
+      "example": "man",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "n",
+      "aliases": [],
+      "group": "consonant",
+      "example": "no",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "ŋ",
+      "aliases": [],
+      "group": "consonant",
+      "example": "sing",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "l",
+      "aliases": [],
+      "group": "consonant",
+      "example": "light",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "ɹ",
+      "aliases": [],
+      "group": "consonant",
+      "example": "red",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "j",
+      "aliases": [],
+      "group": "consonant",
+      "example": "yes",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "w",
+      "aliases": [],
+      "group": "consonant",
+      "example": "we",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "i",
+      "aliases": [],
+      "group": "vowel",
+      "example": "see",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "ɪ",
+      "aliases": [],
+      "group": "vowel",
+      "example": "sit",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "ɛ",
+      "aliases": [],
+      "group": "vowel",
+      "example": "bed",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "æ",
+      "aliases": [],
+      "group": "vowel",
+      "example": "cat",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "ɑ",
+      "aliases": [],
+      "group": "vowel",
+      "example": "father",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "ɔ",
+      "aliases": [],
+      "group": "vowel",
+      "example": "thought",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "ʊ",
+      "aliases": [],
+      "group": "vowel",
+      "example": "book",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "u",
+      "aliases": [],
+      "group": "vowel",
+      "example": "food",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "ʌ",
+      "aliases": [],
+      "group": "vowel",
+      "example": "cup",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "ə",
+      "aliases": [],
+      "group": "vowel",
+      "example": "about",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "ɝ",
+      "aliases": [
+        "ɚ"
+      ],
+      "group": "vowel",
+      "example": "bird",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "eɪ",
+      "aliases": [],
+      "group": "diphthong",
+      "example": "day",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "aɪ",
+      "aliases": [],
+      "group": "diphthong",
+      "example": "my",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "ɔɪ",
+      "aliases": [],
+      "group": "diphthong",
+      "example": "boy",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "oʊ",
+      "aliases": [],
+      "group": "diphthong",
+      "example": "go",
+      "targetAccent": "en-US"
+    },
+    {
+      "symbol": "aʊ",
+      "aliases": [],
+      "group": "diphthong",
+      "example": "now",
+      "targetAccent": "en-US"
+    }
+  ]
+}

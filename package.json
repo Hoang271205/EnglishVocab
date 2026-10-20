@@ -1,0 +1,55 @@
+{
+  "name": "englishvocab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.14"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src extension tests scripts --max-warnings=0",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "test:browser": "node scripts/browser-check.mjs",
+    "check": "npm run typecheck && npm run lint && npm test",
+    "check:gate": "node scripts/check-gate.mjs",
+    "progress": "node scripts/progress.mjs",
+    "start": "node scripts/serve.mjs --open",
+    "validate:content": "node --import tsx scripts/validate-content.mjs",
+    "build:extension": "node scripts/build-extension.mjs",
+    "test:extension": "npm run build:extension && node scripts/test-extension.mjs",
+    "test:dictionary:live": "node scripts/browser-check.mjs --live-dictionary",
+    "progress:update": "node scripts/progress.mjs --write",
+    "enrich:ipa": "node --import tsx scripts/enrich-ipa.mjs",
+    "content:build": "node --import tsx scripts/build-authored-pack.mjs",
+    "test:audio:browser": "node scripts/audio-check.mjs",
+    "content:index": "node --import tsx scripts/index-content.mjs",
+    "crawl:api": "node --import tsx scripts/crawl-api.mjs",
+    "crawl:download": "node scripts/fetch-wiktionary.mjs",
+    "crawl:bulk": "node --import tsx scripts/crawl-bulk.mjs",
+    "crawl:sentences": "node --import tsx scripts/crawl-sentences.mjs",
+    "crawl:publish": "node --import tsx scripts/publish-crawl.mjs",
+    "crawl:archive": "node scripts/archive-crawl.mjs",
+    "crawl:archive:verify": "node scripts/archive-crawl.mjs --verify",
+    "crawl:download:sentences": "node scripts/fetch-sentences.mjs",
+    "crawl:download:sentences:full": "node scripts/fetch-sentences.mjs --detailed",
+    "crawl:sentences:cc0": "node --import tsx scripts/crawl-cc0.mjs",
+    "crawl:sentences:full": "node --import tsx scripts/crawl-cc0.mjs --detailed",
+    "crawl:propose": "node scripts/propose-crawl.mjs",
+    "crawl:filter": "node scripts/filter-crawl.mjs"
+  },
+  "dependencies": {
+    "dexie": "4.4.6",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.5",
+    "typescript": "5.9.3",
+    "tsx": "4.23.15",
+    "eslint": "10.13.0",
+    "typescript-eslint": "8.72.0",
+    "fake-indexeddb": "6.2.6",
+    "esbuild": "0.28.2",
+    "playwright": "1.64.1"
+  }
+}

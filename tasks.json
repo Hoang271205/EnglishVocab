@@ -1,0 +1,1060 @@
+{
+  "schemaVersion": 1,
+  "projectRoot": "/Users/ttcenter/englishvocab",
+  "createdAt": "2026-10-20",
+  "baselineCommit": "6c82e0a",
+  "status": "Backend technically complete; stopped for user acceptance. Full 2000-word content is a separate track.",
+  "gates": {
+    "GATE-BE": {
+      "status": "Pass",
+      "verification": "Pass"
+    },
+    "GATE-FE": {
+      "status": "Blocked",
+      "verification": "Not tested"
+    }
+  },
+  "tasks": [
+    {
+      "id": "EV-00",
+      "title": "Chốt hợp đồng giữa core, dữ liệu, tiện ích và FE",
+      "phase": "foundation",
+      "owner": "COORD",
+      "dependencies": [],
+      "branch": "codex/ev-00",
+      "timebox": "Một phiên 2–3 giờ; tách follow-up nếu phát sinh thay đổi sản phẩm.",
+      "files": [
+        "docs/CONTRACTS.md",
+        "docs/FILE_OWNERSHIP.md",
+        "docs/gates/"
+      ],
+      "scope": "Đọc các thiết kế đã có; xác định kiểu dữ liệu, chữ ký service, lỗi trả về, version và thông điệp capture/ACK. Giữ repo Git hiện có; không tạo lại thiết kế hoặc repo.",
+      "acceptanceCriteria": [
+        "Ghi rõ BE chạy trong trình duyệt/extension, server chỉ phục vụ file; FE không tự tính level hoặc ghi DB trực tiếp.",
+        "Chốt Entry/Capture/Progress/Session/LookupResult/Backup và DTO mặt câu hỏi không lộ đáp án; learnedAt luôn có sau học đúng, lastReviewedAt được null trước lần ôn đầu.",
+        "Có quyền sở hữu file, quy tắc đổi contract và mẫu evidence; toàn bộ FE phụ thuộc Gate-BE."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "BE-01",
+      "title": "Dựng công cụ TypeScript và harness kiểm tra core",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "EV-00"
+      ],
+      "branch": "codex/be-01",
+      "timebox": "2–4 giờ",
+      "files": [
+        "package.json",
+        "lockfile",
+        "tsconfig*.json",
+        "tests/",
+        "scripts/check-gate.*"
+      ],
+      "scope": "Thiết lập compiler, lint, unit runner và harness trình duyệt để kiểm tra IndexedDB/extension. Chưa dựng App, navigation, component hoặc CSS sản phẩm.",
+      "acceptanceCriteria": [
+        "Chạy được typecheck/lint và một kiểm tra harness tối thiểu từ checkout sạch.",
+        "Test HTML chỉ là fixture, không phải giao diện người dùng. Công cụ kiểm tra gate từ chối mở FE khi Gate-BE chưa có review hợp lệ.",
+        "Có lockfile; chỉ owner công cụ thay package/lock/config dùng chung."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "BE-02",
+      "title": "Định nghĩa model, validation và catalog 200 topic",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "BE-01"
+      ],
+      "branch": "codex/be-02",
+      "timebox": "3–5 giờ",
+      "files": [
+        "src/content/",
+        "src/domain/types.ts",
+        "content/catalog.json",
+        "tests/content/"
+      ],
+      "scope": "Tạo schema có version, định danh topic ổn định theo TOPICS.md, kiểm tra tham chiếu và trạng thái draft/ready. Tách 2 bộ hệ thống khỏi thư viện cá nhân.",
+      "acceptanceCriteria": [
+        "Có đúng 100 topic IELTS và 100 topic giao tiếp, ID không trùng; tối đa 10 entryId/topic.",
+        "CEFR và level nhớ là hai kiểu riêng; IELTS B1–C2, giao tiếp A1–B2; mục cá nhân có thể chưa có CEFR.",
+        "Ready cá nhân cần từ, loại từ, nghĩa Việt đã xác nhận, đáp án và câu khuyết hợp lệ; chưa có IPA/CEFR/audio vẫn lưu và học được."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "BE-03",
+      "title": "Viết luật chấm và tạo câu khuyết",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "BE-02"
+      ],
+      "branch": "codex/be-03",
+      "timebox": "3–5 giờ",
+      "files": [
+        "src/domain/grading.ts",
+        "src/domain/cloze.ts",
+        "tests/domain/grading*",
+        "tests/domain/cloze*"
+      ],
+      "scope": "Chuẩn hóa NFKC, khoảng trắng, hoa/thường, dấu nháy; xử lý biến thể được khai báo. Tạo mask theo đoạn targetSurface, không replace chuỗi toàn câu.",
+      "acceptanceCriteria": [
+        "Sai chính tả không được chấp nhận bằng fuzzy matching; biến thể khác độ dài không bị ép vào cùng mask.",
+        "Từ ngắn, cụm từ, dấu nối, từ lặp trong câu và dạng biến đổi có đáp án đúng; mask ổn định khi khôi phục session.",
+        "Rỗng hoặc thiếu ô trả validation error, không tính sai; chỉ đủ đáp án hoặc Không nhớ mới chấm."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "BE-04",
+      "title": "Viết scheduler và bộ đồng hồ có thể giả lập",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "BE-02"
+      ],
+      "branch": "codex/be-04",
+      "timebox": "2–3 giờ",
+      "files": [
+        "src/domain/scheduler.ts",
+        "src/domain/clock.ts",
+        "tests/domain/scheduler*"
+      ],
+      "scope": "Hàm thuần nhận thời điểm trả lời: mới học L1 +2h; đúng L1/L2/L3/L4/L5 lần lượt sang L2/L3/L4/L5/L5 với +8h/+24h/+48h/+120h/+120h.",
+      "acceptanceCriteria": [
+        "Chuỗi đúng đúng hạn có mốc +2/+10/+34/+82/+202/+322 giờ; không có điểm tự dừng tại L5.",
+        "Sai ở cả 5 level về L1 +2h; ôn muộn chỉ tăng 1 level và tính hạn từ lúc trả lời.",
+        "Tính due bằng timestamp; tắt server/máy rồi mở lại vẫn thấy từ quá hạn, không cần tác vụ nền."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "BE-05",
+      "title": "Tạo IndexedDB, migration và repository",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "BE-02"
+      ],
+      "branch": "codex/be-05",
+      "timebox": "5–8 giờ",
+      "files": [
+        "src/storage/db.ts",
+        "src/storage/repositories/",
+        "tests/storage/"
+      ],
+      "scope": "Lưu entries/topics/progress/events/session/captures/cache/settings bằng Dexie; index due, level, entry và collection. Tạo nền cho transaction và expectedVersion.",
+      "acceptanceCriteria": [
+        "Native IndexedDB trên trình duyệt chứng minh giữ dữ liệu sau reload/đóng mở context và migration không mất bản ghi.",
+        "Rollback khi một phần ghi lỗi; duplicate key/đối chiếu version và hai tab cập nhật được xử lý.",
+        "Lỗi quota/DB đóng được chuyển thành lỗi có cấu trúc; không báo lưu thành công trước commit."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "BE-06",
+      "title": "Service học từ mới và phiên đang dở",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "BE-03",
+        "BE-04",
+        "BE-05"
+      ],
+      "branch": "codex/be-06",
+      "timebox": "4–6 giờ",
+      "files": [
+        "src/services/learning.ts",
+        "tests/services/learning*"
+      ],
+      "scope": "Tạo lượt 5/10 mục chưa học; quản lý front/recall và tạm dừng/tiếp tục. Học đúng mới ghi progress và cập nhật session.",
+      "acceptanceCriteria": [
+        "Viết sai, xem lại, bỏ dở hoặc chỉ xem từ không tạo L1.",
+        "Một transaction ghi L1 +2h và session; cùng attemptId gửi lại không tạo trùng; từ đã học không bị reset.",
+        "Commit thành công rồi mới trả kết quả cho FE chuyển từ; lỗi ghi giữ câu trả lời để lưu lại."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "BE-07",
+      "title": "Service ôn tập, kết quả lần đầu và chống chấm trùng",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "BE-03",
+        "BE-04",
+        "BE-05"
+      ],
+      "branch": "codex/be-07",
+      "timebox": "5–8 giờ",
+      "files": [
+        "src/services/review.ts",
+        "tests/services/review*"
+      ],
+      "scope": "Tạo hàng đợi due 10/20 từ, hạn cũ trước, bao gồm từ cá nhân và L5. Chấm lần nộp đầu; đồng bộ progress/event/session trong transaction.",
+      "acceptanceCriteria": [
+        "Không đưa từ tương lai vào hàng đợi; từ vừa đến hạn trong lượt vào lượt tiếp theo.",
+        "Không nhớ tính sai; sửa lại sau hiện đáp án không lên level lần hai; cùng attemptId và 2 tab không chấm kép.",
+        "Version lỗi trả conflict; refresh sau commit không chấm lại; DTO câu hỏi không chứa từ đầy đủ, IPA, audio hoặc ví dụ làm lộ đáp án."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "BE-08",
+      "title": "Service truy vấn cho Ôn tập, topic và Sổ tay",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "BE-05",
+        "BE-06",
+        "BE-07"
+      ],
+      "branch": "codex/be-08",
+      "timebox": "2–4 giờ",
+      "files": [
+        "src/services/queries.ts",
+        "tests/services/queries*"
+      ],
+      "scope": "Tính thống kê và lọc/tìm kiếm cho đúng 3 tab; xác định topic đang dở và mốc ôn tiếp theo.",
+      "acceptanceCriteria": [
+        "Phân biệt chưa học gì/chưa đến hạn/có due; tổng học đếm entry duy nhất, tiến độ từng bộ đếm vị trí thực có.",
+        "Đếm Chờ bổ sung/Chưa học/Đang ôn/Thành thạo đúng, L5 vẫn có nextReviewAt.",
+        "Tìm theo từ/nghĩa; lọc bộ/topic/CEFR/level/due không sửa dữ liệu hoặc level."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "BE-09",
+      "title": "Service lưu từ cá nhân và ngữ cảnh",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "BE-02",
+        "BE-05"
+      ],
+      "branch": "codex/be-09",
+      "timebox": "3–5 giờ",
+      "files": [
+        "src/services/personal.ts",
+        "src/domain/capture.ts",
+        "tests/services/personal*"
+      ],
+      "scope": "Lưu draft hoặc ready, chọn nghĩa, sửa nghĩa Việt và liên kết nhiều capture với một entry. Giữ selectedText, câu gốc, đoạn cần khuyết, URL, nguồn và metadata.",
+      "acceptanceCriteria": [
+        "Tra đơn thuần không tạo entry; bấm lưu mới tạo capture; lưu/nhập capture không tạo progress.",
+        "Cùng nghĩa giữ level và bổ sung ngữ cảnh; khác nghĩa tạo ID riêng; không gộp chỉ theo mặt chữ.",
+        "Policies/policy giữ đúng dạng trong câu; thiếu nghĩa Việt/POS/câu hợp lệ ở Chờ bổ sung, thiếu CEFR/IPA không chặn ready."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "BE-10",
+      "title": "Adapter Wiktionary/FreeDictionaryAPI.com và các trường thiếu",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "BE-02"
+      ],
+      "branch": "codex/be-10",
+      "timebox": "3–5 giờ",
+      "files": [
+        "src/dictionary/freeDictionary.ts",
+        "src/dictionary/types.ts",
+        "tests/dictionary/"
+      ],
+      "scope": "Gọi endpoint en được chọn, ánh xạ nhiều entry/nghĩa/POS/IPA/audio/example; timeout, abort, not-found, 429 và lỗi mạng. Kiểm tra CORS thực tế từ localhost:5173.",
+      "acceptanceCriteria": [
+        "Giữ nguồn và giấy phép riêng cho text/audio; không gán CEFR hoặc nghĩa Việt giả, không tự chọn nghĩa đầu.",
+        "Hủy/bỏ kết quả cũ theo queryId; tôn trọng Retry-After, không retry vô hạn; chỉ gửi từ/cụm từ.",
+        "Có fixture cho các lỗi và bản ghi kiểm tra live/CORS. Nếu CORS không chạy, chưa Pass: xử lý qua cầu nối extension đã có quyền hoặc báo blocker rõ, không tự dựng backend mới."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Native Chrome web CORS + actual extension worker live lookup passed; isolated restart/queue/ACK integration passed."
+    },
+    {
+      "id": "BE-11",
+      "title": "Tra local trước, cache và snapshot cho tiện ích",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "BE-05",
+        "BE-10"
+      ],
+      "branch": "codex/be-11",
+      "timebox": "3–5 giờ",
+      "files": [
+        "src/dictionary/lookup.ts",
+        "src/dictionary/cache.ts",
+        "src/services/snapshot.ts",
+        "tests/dictionary/lookup*"
+      ],
+      "scope": "Ưu tiên entry local phù hợp → cache → API; hỗ trợ tra thêm online. Giới hạn 500 truy vấn gần đây mỗi vùng, chia sẻ request đang chạy và xuất snapshot có version.",
+      "acceptanceCriteria": [
+        "Local hit không gọi mạng; offline vẫn dùng dữ liệu có sẵn; snapshot không chứa progress/ghi chú riêng tư không cần thiết.",
+        "Xóa/cache lỗi không xóa mục đã lưu hoặc ngăn xem kết quả; lưu capture vẫn cần commit riêng.",
+        "Kết quả cache không tạo thư viện/level, không ghi đè nghĩa Việt người dùng đã sửa."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "BE-12",
+      "title": "Nhập gói từ, cập nhật nội dung và kiểm tra dữ liệu",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "BE-02",
+        "BE-05"
+      ],
+      "branch": "codex/be-12",
+      "timebox": "3–5 giờ",
+      "files": [
+        "src/content/import.ts",
+        "scripts/validate-content.*",
+        "tests/content/import*"
+      ],
+      "scope": "Inspect trước khi nhập; schema/content version, tham chiếu, max10/topic, trạng thái, CEFR và provenance. Cập nhật theo ID mà giữ tiến độ.",
+      "acceptanceCriteria": [
+        "Gói lỗi bị từ chối trước khi ghi hoặc rollback cả gói; không có nhập dở dang.",
+        "Content revision không reset progress hoặc thay nghĩa đã học thành nghĩa khác; ID đổi phải migration rõ.",
+        "Validator báo được số topic, vị trí và mục duy nhất, thiếu trường, nguồn và các mục chưa được kiểm tra."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "BE-13",
+      "title": "Xuất, kiểm tra và khôi phục sao lưu",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "BE-05",
+        "BE-09",
+        "BE-12"
+      ],
+      "branch": "codex/be-13",
+      "timebox": "4–6 giờ",
+      "files": [
+        "src/storage/backup.ts",
+        "tests/storage/backup*"
+      ],
+      "scope": "Backup toàn bộ nội dung/capture đã nhận/progress/events/session/settings/nguồn; bỏ cache. Inspect bản sao lưu và restore thay thế toàn bộ bằng transaction.",
+      "acceptanceCriteria": [
+        "Export → restore vào DB sạch giữ đúng ID, level, due, session, đoạn khuyết và nguồn.",
+        "Schema mới hơn, file hỏng, tham chiếu lỗi hoặc lỗi ghi không thay dữ liệu hiện tại.",
+        "Queue chưa chuyển không tự được coi đã backup; nhập queue theo captureId không tạo trùng/progress; audio remote lưu URL + nguồn, không hứa offline."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "BE-14",
+      "title": "Nền tiện ích: manifest, worker và hàng đợi bền vững",
+      "phase": "backend",
+      "owner": "EXT",
+      "dependencies": [
+        "BE-09",
+        "BE-10",
+        "BE-11"
+      ],
+      "branch": "codex/be-14",
+      "timebox": "4–7 giờ",
+      "files": [
+        "extension/manifest.json",
+        "extension/service-worker.ts",
+        "extension/storage.ts",
+        "tests/extension/queue*"
+      ],
+      "scope": "Manifest V3, host API và quyền cần thiết; nhận capture từ contract, gọi API từ worker và lưu queue/snapshot/cache riêng. Chưa dựng popup hoặc CSS.",
+      "acceptanceCriteria": [
+        "Server local tắt vẫn tra API khi có mạng và lưu được; mất mạng vẫn lưu draft.",
+        "Worker bị dừng rồi khởi động lại, đóng/mở browser trong profile kiểm tra vẫn giữ queue đã commit.",
+        "Quota/ghi lỗi không báo đã lưu; queue có xuất JSON; worker chỉ nhận query hợp lệ, không fetch URL tùy ý."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Native Chrome web CORS + actual extension worker live lookup passed; isolated restart/queue/ACK integration passed."
+    },
+    {
+      "id": "BE-15",
+      "title": "Cầu nối chuyển capture và ACK sau commit",
+      "phase": "backend",
+      "owner": "EXT",
+      "dependencies": [
+        "BE-09",
+        "BE-11",
+        "BE-13",
+        "BE-14"
+      ],
+      "branch": "codex/be-15",
+      "timebox": "4–7 giờ",
+      "files": [
+        "extension/bridge.ts",
+        "src/services/transfer.ts",
+        "src/shared/messages.ts",
+        "tests/extension/transfer*"
+      ],
+      "scope": "Giao thức có version giữa tiện ích và web trên đúng localhost:5173; chuyển capture, trả receipt và cập nhật snapshot. Kiểm tra bằng harness chưa có UI sản phẩm.",
+      "acceptanceCriteria": [
+        "Web chỉ ACK sau commit, extension chỉ bỏ queue sau ACK; mất ACK/gửi lại nhiều lần không tạo trùng.",
+        "Nguồn/sender/type/size được kiểm tra; website đọc bên ngoài không nhận cả queue và không ghi trực tiếp DB web.",
+        "Queue export/import và chuyển lại sau restart đều giữ nghĩa/câu gốc, không tạo L1; snapshot có version và không mất dữ liệu cá nhân."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "BE-16",
+      "title": "Giọng Anh-Mỹ cho từ/câu, kể cả từ tự thêm",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "BE-02",
+        "BE-05"
+      ],
+      "branch": "codex/be-16",
+      "timebox": "Một phiên dịch vụ giọng đọc và kiểm tra browser.",
+      "files": [
+        "src/audio/",
+        "tests/audio.test.ts",
+        "tests/entry-audio.test.ts",
+        "scripts/audio-check.mjs"
+      ],
+      "scope": "Chọn en-US, cập nhật voiceschanged, lưu lựa chọn, đọc headword/câu ví dụ thường hoặc chậm, kể cả bản nháp chưa có IPA. Bảng IPA không có audio.",
+      "acceptanceCriteria": [
+        "Không chọn en-GB thay en-US; thiếu giọng Mỹ trả unavailable rõ, không chặn chức năng học khác.",
+        "Từ tự thêm hoặc bản nháp chưa có IPA/kết quả từ điển vẫn gọi phát âm headword; không tạo hoặc sửa tiến độ.",
+        "Giọng lưu và danh sách đến muộn được xử lý; kiểm tra native Chrome có cửa sổ đã phát xong một utterance en-US từ bản nháp không IPA (tắt âm lượng trong test)."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Unit tests and native headful Chrome passed: saved personal draft without IPA completed a muted local en-US utterance with Internet blocked. Word/capture/progress not modified by playback."
+    },
+    {
+      "id": "BE-17",
+      "title": "Launcher và server file tĩnh cố định",
+      "phase": "backend",
+      "owner": "CORE",
+      "dependencies": [
+        "BE-01"
+      ],
+      "branch": "codex/be-17",
+      "timebox": "2–3 giờ",
+      "files": [
+        "scripts/serve.mjs",
+        "scripts/start.*",
+        "tests/launcher/"
+      ],
+      "scope": "Một lệnh khởi động, bind loopback tại localhost:5173, lỗi cổng bận không đổi cổng. Trước FE dùng fixture kiểm tra; sau FE phục vụ dist.",
+      "acceptanceCriteria": [
+        "Khởi động/dừng không sửa IndexedDB hoặc đổi origin; kiểm tra đường dẫn tĩnh, MIME, path traversal và cổng bận.",
+        "Thông báo thiếu build rõ ràng, launcher mở đúng địa chỉ; không lắng nghe công khai ngoài máy.",
+        "Có hướng dẫn Node/runtime tối thiểu được xác định khi triển khai, không thêm Docker hoặc DB server."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "Implemented and verified by local code/runtime checks; no separate reviewer per user instruction"
+    },
+    {
+      "id": "DATA-01",
+      "title": "Tuyển bộ thử 200 vị trí nội dung",
+      "phase": "data",
+      "owner": "DATA",
+      "dependencies": [
+        "BE-02",
+        "BE-12"
+      ],
+      "branch": "codex/data-01",
+      "timebox": "Review theo lô 50 mục; tối đa 4 giờ mỗi phiên, chưa ước lượng tổng số phiên.",
+      "files": [
+        "public/content/pilot/",
+        "content/manifests/pilot.json"
+      ],
+      "scope": "10 topic đầu IELTS + 10 topic đầu giao tiếp, mỗi topic 10 từ/cụm từ. Chọn nghĩa hữu ích, nghĩa Việt, IPA US khi có, câu ví dụ và nguồn; không coi 200 tên topic là 200 từ.",
+      "acceptanceCriteria": [
+        "Có 200 vị trí hợp lệ, report ID dùng chung và số mục duy nhất; đúng phạm vi CEFR từng bộ.",
+        "CEFR có nhãn verified/estimated và nguồn/ghi chú trung thực; nghĩa/câu do người biên soạn được review, không ghi Cambridge khi chưa đối chiếu.",
+        "Mỗi mục có câu khuyết dùng được, nghĩa Việt và provenance; thiếu IPA US được báo, không đổi IPA UK thành US bằng nhãn."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "200 authored meanings/examples reviewed; strict data/import checks passed. CEFR all estimated. 37 explicitly US-tagged IPA references copied with source/license; 163 IPA missing/ambiguous, reported as permitted by task criteria; copied references not manually listened.",
+      "limitations": "CEFR đều ước lượng. 37 IPA tham khảo có nhãn Mỹ và giấy phép; chưa nghe kiểm tra. 163 mục thiếu hoặc nhiều cách đọc chưa chọn; không gán IPA UK thành US."
+    },
+    {
+      "id": "DATA-02",
+      "title": "IELTS topic 11–55: 450 vị trí",
+      "phase": "data",
+      "owner": "DATA",
+      "dependencies": [
+        "DATA-01"
+      ],
+      "branch": "codex/data-02",
+      "timebox": "Review theo lô 50–100 mục; tối đa 4 giờ/phiên; không coi một phiên là đủ 450 mục.",
+      "files": [
+        "public/content/ielts/topics-011-055/",
+        "content/manifests/data-02.json"
+      ],
+      "scope": "Tuyển 45 topic từ TOPICS.md, 10 vị trí/topic; cùng chuẩn dữ liệu và review như bộ thử. Không sửa gói thuộc task dữ liệu khác.",
+      "acceptanceCriteria": [
+        "Đủ 450 vị trí, không có topic quá 10; IDs và tham chiếu hợp lệ, không trùng mục trong cùng topic.",
+        "Mỗi nghĩa có nghĩa Việt và câu phù hợp, CEFR trong phạm vi bộ và nhãn độ tin cậy thật; nguồn/giấy phép rõ theo từng trường.",
+        "Tự rà soát nghĩa/cách dùng theo từng lô, giữ bản biên soạn và nhãn nguồn rõ; kiểm tra schema, câu khuyết và nhập lại không mất tiến độ."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "450 authored entries in IELTS topics 11–55; meanings/examples reviewed in batches, schema/masks and full 650-entry import/reimport tests passed. CEFR estimated; missing/ambiguous IPA reported, not invented.",
+      "limitations": "CEFR ước lượng. Có 37 IPA tham khảo nhãn Mỹ, 413 mục thiếu hoặc nhiều cách đọc chưa chọn; phát âm từ/câu độc lập bằng en-US."
+    },
+    {
+      "id": "DATA-CRAWL",
+      "title": "Pipeline crawl, lọc nguồn, tuyển chọn và giữ kho local",
+      "phase": "data",
+      "owner": "DATA",
+      "dependencies": [
+        "BE-02",
+        "BE-12"
+      ],
+      "files": [
+        "scripts/crawl-*.mjs",
+        "scripts/lib/crawl.ts",
+        "scripts/publish-crawl.mjs",
+        "scripts/archive-crawl.mjs",
+        "content/crawl/",
+        "tests/crawl.test.ts"
+      ],
+      "scope": "Tải nguồn một lần, giữ raw và snapshot lâu dài, lọc offline theo seed, dùng cache API và xuất gói theo nghĩa đã chọn. Không tự tạo nội dung hoặc progress.",
+      "acceptanceCriteria": [
+        "Giữ nguồn raw và snapshot có checksum; mở rộng topic có thể lọc lại từ kho local.",
+        "Chỉ xuất nghĩa Việt có trong nguồn và câu được chọn; giữ nguồn/giấy phép theo từng trường, CEFR chỉ là ước lượng.",
+        "Có kiểm tra phân tách nghĩa, IPA đúng nhãn Mỹ, câu khuyết và nhập lại không mất tiến độ."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "27 source-backed entries published across five partial topics; 43 tests pass. Whole offline filter regenerated for 135 topics with zero new API calls; original sources and four snapshots retained and verified (530 file checks). Full-library native reimport preserves learning. Proposals remain needs-review.",
+      "limitations": "Pipeline hoàn tất không đồng nghĩa đủ 2.000 mục. Ghép câu theo từ/nghĩa Việt chỉ tạo ứng viên; vẫn rà soát nghĩa và ngữ cảnh trước publish."
+    },
+    {
+      "id": "DATA-03",
+      "title": "IELTS topic 56–100: 450 vị trí",
+      "phase": "data",
+      "owner": "DATA",
+      "dependencies": [
+        "DATA-01"
+      ],
+      "branch": "codex/data-03",
+      "timebox": "Review theo lô 50–100 mục; tối đa 4 giờ/phiên; không coi một phiên là đủ 450 mục.",
+      "files": [
+        "public/content/ielts/topics-056-100/",
+        "content/manifests/data-03.json"
+      ],
+      "scope": "Tuyển 45 topic từ TOPICS.md, 10 vị trí/topic; cùng chuẩn dữ liệu và review như bộ thử. Không sửa gói thuộc task dữ liệu khác.",
+      "acceptanceCriteria": [
+        "Đủ 450 vị trí, không có topic quá 10; IDs và tham chiếu hợp lệ, không trùng mục trong cùng topic.",
+        "Mỗi nghĩa có nghĩa Việt và câu phù hợp, CEFR trong phạm vi bộ và nhãn độ tin cậy thật; nguồn/giấy phép rõ theo từng trường.",
+        "Dữ liệu được kiểm tra ngôn ngữ theo từng lô, có người review và báo cáo; validator/schema pass đơn thuần không chứng minh chất lượng nghĩa/cách dùng."
+      ],
+      "status": "In progress",
+      "verification": "Not tested",
+      "remaining": "Đã nhập 3/450 mục từ nguồn crawl trong 1 topic chưa đủ 10 từ; còn 447 vị trí. Tái sử dụng kho raw, không tự biên soạn toàn bộ.",
+      "batchVerification": "Pass for published batch: schema/cloze and full-library import/reimport; CEFR estimated. Whole package incomplete."
+    },
+    {
+      "id": "DATA-04",
+      "title": "Giao tiếp topic 11–55: 450 vị trí",
+      "phase": "data",
+      "owner": "DATA",
+      "dependencies": [
+        "DATA-01"
+      ],
+      "branch": "codex/data-04",
+      "timebox": "Review theo lô 50–100 mục; tối đa 4 giờ/phiên; không coi một phiên là đủ 450 mục.",
+      "files": [
+        "public/content/daily/topics-011-055/",
+        "content/manifests/data-04.json"
+      ],
+      "scope": "Tuyển 45 topic từ TOPICS.md, 10 vị trí/topic; cùng chuẩn dữ liệu và review như bộ thử. Không sửa gói thuộc task dữ liệu khác.",
+      "acceptanceCriteria": [
+        "Đủ 450 vị trí, không có topic quá 10; IDs và tham chiếu hợp lệ, không trùng mục trong cùng topic.",
+        "Mỗi nghĩa có nghĩa Việt và câu phù hợp, CEFR trong phạm vi bộ và nhãn độ tin cậy thật; nguồn/giấy phép rõ theo từng trường.",
+        "Dữ liệu được kiểm tra ngôn ngữ theo từng lô, có người review và báo cáo; validator/schema pass đơn thuần không chứng minh chất lượng nghĩa/cách dùng."
+      ],
+      "status": "In progress",
+      "verification": "Not tested",
+      "remaining": "Đã nhập 0/450 mục từ nguồn crawl trong 0 topic chưa đủ 10 từ; còn 450 vị trí. Tái sử dụng kho raw, không tự biên soạn toàn bộ.",
+      "batchVerification": "Pass for published batch: schema/cloze and full-library import/reimport; CEFR estimated. Whole package incomplete."
+    },
+    {
+      "id": "DATA-05",
+      "title": "Giao tiếp topic 56–100: 450 vị trí",
+      "phase": "data",
+      "owner": "DATA",
+      "dependencies": [
+        "DATA-01"
+      ],
+      "branch": "codex/data-05",
+      "timebox": "Review theo lô 50–100 mục; tối đa 4 giờ/phiên; không coi một phiên là đủ 450 mục.",
+      "files": [
+        "public/content/daily/topics-056-100/",
+        "content/manifests/data-05.json"
+      ],
+      "scope": "Tuyển 45 topic từ TOPICS.md, 10 vị trí/topic; cùng chuẩn dữ liệu và review như bộ thử. Không sửa gói thuộc task dữ liệu khác.",
+      "acceptanceCriteria": [
+        "Đủ 450 vị trí, không có topic quá 10; IDs và tham chiếu hợp lệ, không trùng mục trong cùng topic.",
+        "Mỗi nghĩa có nghĩa Việt và câu phù hợp, CEFR trong phạm vi bộ và nhãn độ tin cậy thật; nguồn/giấy phép rõ theo từng trường.",
+        "Dữ liệu được kiểm tra ngôn ngữ theo từng lô, có người review và báo cáo; validator/schema pass đơn thuần không chứng minh chất lượng nghĩa/cách dùng."
+      ],
+      "status": "Ready",
+      "verification": "Not tested"
+    },
+    {
+      "id": "DATA-06",
+      "title": "Bảng IPA Anh-Mỹ dạng chữ và từ ví dụ",
+      "phase": "data",
+      "owner": "DATA",
+      "dependencies": [
+        "BE-02"
+      ],
+      "branch": "codex/data-06",
+      "timebox": "Một phiên dữ liệu; không có thu thập hoặc nghiệm thu audio từng âm.",
+      "files": [
+        "src/content/ipa.ts",
+        "public/content/phonemes.json",
+        "content/manifests/ipa.json"
+      ],
+      "scope": "Bảng IPA dạng chữ theo thay đổi yêu cầu: phụ âm, nguyên âm đơn/đôi, từ ví dụ và ghi chú biến thể; bỏ phát âm từng ký hiệu.",
+      "acceptanceCriteria": [
+        "Danh sách và phân nhóm nhất quán, có ví dụ và giải thích biến thể; không áp một số lượng âm duy nhất cho mọi giọng Mỹ.",
+        "Schema và service chỉ tra bảng/ký hiệu, không có trường audio hoặc phương thức play.",
+        "Không đóng gói file audio IPA. Nghe từ/câu en-US là chức năng riêng."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "completionBasis": "40 text reference rows (24 consonants, 11 vowel rows, 5 diphthongs), aliases and strict no-audio schema tested. IPA audio assets/player/extraction removed at user request."
+    },
+    {
+      "id": "GATE-BE",
+      "title": "Kiểm tra kỹ thuật BE và bàn giao người dùng nghiệm thu",
+      "phase": "gate-be",
+      "owner": "QA",
+      "dependencies": [
+        "EV-00",
+        "BE-01",
+        "BE-02",
+        "BE-03",
+        "BE-04",
+        "BE-05",
+        "BE-06",
+        "BE-07",
+        "BE-08",
+        "BE-09",
+        "BE-10",
+        "BE-11",
+        "BE-12",
+        "BE-13",
+        "BE-14",
+        "BE-15",
+        "BE-16",
+        "BE-17",
+        "DATA-01",
+        "DATA-06",
+        "DATA-CRAWL"
+      ],
+      "branch": "codex/gate-be",
+      "timebox": "1–2 phiên kiểm tra tích hợp; sửa lỗi tại task gốc, không hạ tiêu chí để kịp giờ.",
+      "files": [
+        "docs/gates/gate-be.json"
+      ],
+      "scope": "Kiểm tra core/storage/dictionary/worker/bridge/audio/launcher, pipeline nhập từ và thư viện hiện có 677 mục. Bộ đủ 2.000 vị trí là task dữ liệu riêng theo lựa chọn của người dùng. Chưa làm FE.",
+      "acceptanceCriteria": [
+        "Toàn bộ BE-01..BE-17, pilot, bảng IPA dạng chữ và pipeline dữ liệu đã triển khai; typecheck/lint/unit/integration đạt.",
+        "Native IndexedDB qua hai tab/restart/migration, backup/restore, toàn bộ gói production và facade học–ôn đúng lịch L5 5 ngày đã kiểm tra trên Chrome thật.",
+        "Live API qua browser CORS và worker thật, hàng đợi khi server tắt/restart/lost ACK, giọng en-US cho draft không IPA khi Internet bị chặn đều đạt.",
+        "Technical Pass không tự ghi người dùng đã nghiệm thu. FE chỉ được bắt đầu sau khi userAcceptance.backend là true theo xác nhận trực tiếp của người dùng."
+      ],
+      "status": "Done",
+      "verification": "Pass",
+      "remaining": "Chờ người dùng nghiệm thu BE. Không tự mở FE. Nội dung 677/2.000, còn 1.323 vị trí ở task dữ liệu riêng.",
+      "completionBasis": "43 tests Pass; seven native storage/library checks Pass plus live CORS; five native extension checks Pass; muted headful en-US draft speech completed offline. Full content completion explicitly separated by user."
+    },
+    {
+      "id": "FE-01",
+      "title": "Khung ứng dụng và đúng 3 tab chính",
+      "phase": "frontend",
+      "owner": "FE",
+      "dependencies": [
+        "GATE-BE"
+      ],
+      "branch": "codex/fe-01",
+      "timebox": "3–5 giờ",
+      "files": [
+        "src/app/",
+        "src/components/shared/",
+        "src/styles/",
+        "vite.config.*"
+      ],
+      "scope": "Dựng React/Vite và giao diện sáng theo FRONTEND.md và ba ảnh tham khảo trong assets/: Ôn tập/Học từ mới/Sổ tay, nền xám, nội dung trắng, vàng cho topic và xanh cho hành động.",
+      "acceptanceCriteria": [
+        "Không có tab dashboard/reading riêng; utility mở trong Sổ tay/menu.",
+        "Bố cục desktop/mobile từ 320px, keyboard/focus và vùng bấm phù hợp; không sao chép tài sản thương hiệu của app tham khảo.",
+        "Chỉ gọi service contract BE, không tự tính level/ghi DB trong component."
+      ],
+      "status": "Blocked",
+      "verification": "Not tested"
+    },
+    {
+      "id": "FE-02",
+      "title": "Danh sách bộ từ và topic",
+      "phase": "frontend",
+      "owner": "FE",
+      "dependencies": [
+        "FE-01"
+      ],
+      "branch": "codex/fe-02",
+      "timebox": "2–4 giờ",
+      "files": [
+        "src/features/topics/"
+      ],
+      "scope": "Chọn IELTS/giao tiếp, tìm topic, hàng có tên Anh/Việt, minh họa tùy chọn và tiến độ thực; bấm học hoặc tiếp tục lượt dở.",
+      "acceptanceCriteria": [
+        "100 topic/bộ dùng catalog thật; không giả số từ/tiến độ.",
+        "Topic hết từ chưa học dẫn xem Sổ tay, không reset progress; topic thiếu nội dung có trạng thái nhập dữ liệu rõ.",
+        "Từ topic mới vào service học theo đúng batch tối đa 10."
+      ],
+      "status": "Blocked",
+      "verification": "Not tested"
+    },
+    {
+      "id": "FE-03",
+      "title": "Màn học mới xem → ẩn → viết lại",
+      "phase": "frontend",
+      "owner": "FE",
+      "dependencies": [
+        "FE-02"
+      ],
+      "branch": "codex/fe-03",
+      "timebox": "3–5 giờ",
+      "files": [
+        "src/features/learn/",
+        "src/components/WordCard*"
+      ],
+      "scope": "Thẻ từ/loại/nghĩa/IPA/CEFR/ví dụ, nghe US thường/chậm; Next ẩn đáp án và chuyển sang ô viết toàn bộ từ.",
+      "acceptanceCriteria": [
+        "Mặt viết lại không còn từ/IPA/câu/nút nghe/ảnh lộ đáp án; sai thử lại, Xem lại chưa tạo progress.",
+        "Đúng đợi BE commit L1 +2h rồi tự chuyển tiếp và hiện thông báo gọn; không thêm màn ba bước khác workflow đã chốt.",
+        "Đóng/refresh khôi phục lượt dở; ghi lỗi giữ bài; thiếu ảnh/giọng không chặn học."
+      ],
+      "status": "Blocked",
+      "verification": "Not tested"
+    },
+    {
+      "id": "FE-04",
+      "title": "Trang Ôn tập và phiên điền chữ thiếu",
+      "phase": "frontend",
+      "owner": "FE",
+      "dependencies": [
+        "FE-01",
+        "FE-03"
+      ],
+      "branch": "codex/fe-04",
+      "timebox": "4–7 giờ",
+      "files": [
+        "src/features/review/",
+        "src/components/ClozeSentence*",
+        "src/components/AnswerFeedback*"
+      ],
+      "scope": "Ba trạng thái chưa học/chưa đến hạn/có due; lượt 10/20, lọc nguồn. Phiên ôn có ô chữ trong câu, keyboard, Không nhớ và phản hồi.",
+      "acceptanceCriteria": [
+        "Chỉ lấy từ due thật; mặt câu hỏi không lộ đáp án; thiếu ô chưa chấm.",
+        "Kết quả đầu khóa bài, hiện từ/IPA/CEFR/nghe/level/hạn mới, bấm Từ tiếp theo; không tự lên level bằng logic FE.",
+        "L5 vẫn có ngày ôn 5 ngày, sai về L1; refresh/double-click không chấm lại; đủ trạng thái rỗng/lỗi/đang lưu."
+      ],
+      "status": "Blocked",
+      "verification": "Not tested"
+    },
+    {
+      "id": "FE-05",
+      "title": "Sổ tay, từ cá nhân và chỉnh mục nháp",
+      "phase": "frontend",
+      "owner": "FE",
+      "dependencies": [
+        "FE-01",
+        "FE-03"
+      ],
+      "branch": "codex/fe-05",
+      "timebox": "3–5 giờ",
+      "files": [
+        "src/features/learned/",
+        "src/features/personal/",
+        "src/components/WordDetail*"
+      ],
+      "scope": "Tìm/lọc và chi tiết đã học; Từ của tôi chia Chờ bổ sung/Chưa học/Đang ôn/Thành thạo. Sửa nghĩa/câu và bắt đầu học từ cá nhân.",
+      "acceptanceCriteria": [
+        "Chưa học không có level giả; chỉ đủ trường mới vào bài học.",
+        "CEFR và level trình bày riêng, hiện ngày ôn L5; sửa nghĩa khác tạo mục mới theo BE.",
+        "Nguồn/ghi chú/ngữ cảnh mở xem được; danh sách cập nhật sau học/lưu mà không ghi đè dữ liệu."
+      ],
+      "status": "Blocked",
+      "verification": "Not tested"
+    },
+    {
+      "id": "FE-06",
+      "title": "Reading và popup tra từ trong web",
+      "phase": "frontend",
+      "owner": "FE",
+      "dependencies": [
+        "FE-01",
+        "FE-05"
+      ],
+      "branch": "codex/fe-06",
+      "timebox": "4–6 giờ",
+      "files": [
+        "src/features/reading/",
+        "src/features/lookup/",
+        "src/components/LookupPopover*"
+      ],
+      "scope": "Bảng đọc trong Sổ tay, giữ selection/câu gốc và popup như mẫu: chọn nghĩa, IPA US, ví dụ, ô nghĩa Việt, nguồn và Lưu từ.",
+      "acceptanceCriteria": [
+        "Local trước/API khi cần; đổi selection không hiện kết quả cũ; neo popup trong màn hình, mobile dùng bảng nổi phù hợp.",
+        "Thiếu nghĩa Việt vẫn lưu draft, thiếu CEFR không bịa nhãn; giữ câu gốc tách với ví dụ từ API.",
+        "Lưu thành công chỉ vào Chưa học/Chờ bổ sung; lỗi mạng/không tìm thấy vẫn lưu nháp; thông báo phụ thuộc commit."
+      ],
+      "status": "Blocked",
+      "verification": "Not tested"
+    },
+    {
+      "id": "FE-07",
+      "title": "Popup và vùng chọn trên website qua tiện ích",
+      "phase": "frontend",
+      "owner": "FE",
+      "dependencies": [
+        "FE-06"
+      ],
+      "branch": "codex/fe-07",
+      "timebox": "4–7 giờ",
+      "files": [
+        "extension/content.ts",
+        "extension/ui/",
+        "extension/context-menu.ts",
+        "tests/extension/ui/"
+      ],
+      "scope": "Gắn popup đã thiết kế vào trang được cấp quyền, menu vùng chọn, đóng/mở, bắt câu ngữ cảnh; nối worker/queue/bridge BE đã hoàn thành.",
+      "acceptanceCriteria": [
+        "Bôi đen trên trang HTML thực được cấp quyền mở popup, chọn nghĩa và lưu đúng câu; không đọc input nhạy cảm.",
+        "Server tắt vẫn tra online khi có mạng và lưu; worker/queue restart rồi bật web chuyển đúng một capture.",
+        "Không phá CSS trang đọc; popup trong viewport, bàn phím và link/iframe/trang không hỗ trợ có thông báo/đường nhập thủ công."
+      ],
+      "status": "Blocked",
+      "verification": "Not tested"
+    },
+    {
+      "id": "FE-08",
+      "title": "Bảng IPA và cài đặt giọng Anh-Mỹ",
+      "phase": "frontend",
+      "owner": "FE",
+      "dependencies": [
+        "FE-01",
+        "FE-05"
+      ],
+      "branch": "codex/fe-08",
+      "timebox": "2–4 giờ",
+      "files": [
+        "src/features/ipa/",
+        "src/features/settings/audio/"
+      ],
+      "scope": "Bảng phụ IPA dạng chữ: ký hiệu, nhóm và ví dụ; cài đặt giọng đọc từ/câu en-US thường/chậm và nhớ lựa chọn. Không có nút phát từng âm.",
+      "acceptanceCriteria": [
+        "Bảng IPA chỉ đọc metadata từ service, chia phụ âm/nguyên âm đơn/nguyên âm đôi; không có nút hoặc file audio IPA.",
+        "Giọng từ/câu chỉ en-US, không có US báo rõ; giọng local hoạt động khi không có Internet và thiết bị hỗ trợ.",
+        "Từ cá nhân chưa có IPA vẫn có thể nghe headword; không đưa ký hiệu IPA cho TTS."
+      ],
+      "status": "Blocked",
+      "verification": "Not tested"
+    },
+    {
+      "id": "FE-09",
+      "title": "Nhập/xuất, khôi phục và cài đặt còn lại",
+      "phase": "frontend",
+      "owner": "FE",
+      "dependencies": [
+        "FE-01",
+        "FE-05"
+      ],
+      "branch": "codex/fe-09",
+      "timebox": "3–5 giờ",
+      "files": [
+        "src/features/data/",
+        "src/features/settings/",
+        "src/components/UtilityPanel*"
+      ],
+      "scope": "Trong Sổ tay/menu: file picker gói từ/backup/queue, preview kết quả, xác nhận restore, tải backup và nhắc xuất sau 7 ngày; bật/tắt online và xóa cache.",
+      "acceptanceCriteria": [
+        "Xem trước số mới/cập nhật/lỗi; file lỗi không đổi DB, restore thay thế chỉ thực hiện sau xác nhận theo thiết kế.",
+        "Xuất file thật đọc/nhập lại được; phân biệt backup web và queue chưa chuyển; không gọi lưu local là đã sao lưu.",
+        "Xóa cache không xóa từ/tiến độ; nhận queue hiện kết quả rõ, không tự tạo L1."
+      ],
+      "status": "Blocked",
+      "verification": "Not tested"
+    },
+    {
+      "id": "GATE-FE",
+      "title": "Kiểm tra tích hợp toàn bộ luồng và giao diện",
+      "phase": "gate-fe",
+      "owner": "QA",
+      "dependencies": [
+        "FE-01",
+        "FE-02",
+        "FE-03",
+        "FE-04",
+        "FE-05",
+        "FE-06",
+        "FE-07",
+        "FE-08",
+        "FE-09"
+      ],
+      "branch": "codex/gate-fe",
+      "timebox": "1–2 phiên kiểm tra; lỗi quay về task gốc, không tự đổi luật nghiệp vụ.",
+      "files": [
+        "docs/gates/gate-fe.json"
+      ],
+      "scope": "Kiểm tra bản build dùng dịch vụ thật, DB thật, extension thật và bộ nội dung hoàn chỉnh; đối chiếu FRONTEND.md và thiết kế đã duyệt.",
+      "acceptanceCriteria": [
+        "Typecheck/lint/build và kiểm tra core cần thiết đều đạt; không có lỗi chặn/mất dữ liệu/chấm sai.",
+        "Chạy học → đóng → mở sau 2h giả lập → ôn → L5 → đúng/sai; capture → chọn nghĩa → lưu draft/ready → học; hai tab và backup round-trip.",
+        "Có ảnh/video 3 tab, mặt xem/viết, bài ôn trước/sau chấm, popup website thật; desktop/mobile 320px, keyboard, giọng US và offline được kiểm tra.",
+        "COORD review report, ghi Pass/Fail/Blocked/Not tested trung thực; mẫu minh họa trước đó không thay bằng chứng bản build."
+      ],
+      "status": "Blocked",
+      "verification": "Not tested"
+    },
+    {
+      "id": "REL-01",
+      "title": "Đóng gói bản local, hướng dẫn và khôi phục",
+      "phase": "release",
+      "owner": "COORD",
+      "dependencies": [
+        "GATE-FE",
+        "DATA-03",
+        "DATA-04",
+        "DATA-05"
+      ],
+      "branch": "codex/rel-01",
+      "timebox": "3–5 giờ",
+      "files": [
+        "README.md",
+        "docs/USER_GUIDE.md",
+        "docs/RESTORE.md",
+        "release/"
+      ],
+      "scope": "Gói build và extension, launcher, hướng dẫn cài trên máy cá nhân/khởi động/dừng/backup/restore, ghi version và giới hạn đã xác minh.",
+      "acceptanceCriteria": [
+        "Checkout hoặc thư mục release sạch chạy được theo hướng dẫn, origin localhost:5173 được giữ cố định.",
+        "Có manifest 200 topic/2.000 vị trí, unique count, nguồn/giấy phép và file IPA; không kèm profile/test data cá nhân hoặc khóa bí mật.",
+        "Hướng dẫn cài tiện ích và quyền cần thiết, server tắt vẫn lưu/tra, khác browser không tự dùng chung tiến độ; có backup mẫu không chứa dữ liệu cá nhân."
+      ],
+      "status": "Blocked",
+      "verification": "Not tested"
+    },
+    {
+      "id": "ACCEPT-01",
+      "title": "Người dùng dùng thử và nghiệm thu bản cá nhân",
+      "phase": "acceptance",
+      "owner": "USER",
+      "dependencies": [
+        "REL-01"
+      ],
+      "branch": "codex/accept-01",
+      "timebox": "Một lượt dùng thực tế theo checklist; lỗi ghi thành task tiếp theo.",
+      "files": [],
+      "scope": "Người dùng kiểm tra trên máy/trình duyệt sử dụng hằng ngày: học, ôn, lưu từ lúc đọc, giọng Anh-Mỹ và khôi phục sao lưu.",
+      "acceptanceCriteria": [
+        "Có bản build và hướng dẫn cụ thể để dùng thử, không chỉ ảnh hoặc prototype.",
+        "Người dùng xác nhận hoặc ghi điểm cần sửa; agent không tự ghi User accepted.",
+        "Chỉ đóng toàn dự án khi yêu cầu còn lại đã được xử lý hoặc người dùng chấp nhận giới hạn cụ thể."
+      ],
+      "status": "Blocked",
+      "verification": "Not tested",
+      "remaining": "Final project acceptance is separate from the requested backend acceptance before frontend."
+    }
+  ],
+  "executionMode": "solo; checks in code; no Markdown evidence or separate reviewers",
+  "frontendRequiresUserAcceptance": true,
+  "userAcceptance": {
+    "backend": false,
+    "note": "Scope split explicitly authorized. User has not yet accepted the completed backend or authorized frontend implementation."
+  },
+  "verificationSummary": {
+    "unitTests": 43,
+    "unitResult": "Pass",
+    "nativeBrowserChecks": 7,
+    "nativeExtensionChecks": 5,
+    "liveDictionary": "Pass: Chrome browser CORS at localhost:5173 and MV3 worker live lookup; rechecked for backend handoff.",
+    "productionEntries": 677,
+    "missingIPA": 595,
+    "phonemeAudioFiles": 0,
+    "latestExtensionRun": "Pass: live lookup, offline-server capture, browser/worker restart, lost ACK retry, synced local lookup.",
+    "ipaChartRows": 40,
+    "ipaMode": "text-only; individual IPA audio removed at user request",
+    "nativeWordSpeech": "Pass: headful Chrome, Internet blocked, muted native en-US utterance ended for a newly saved personal draft without IPA",
+    "crawl": {
+      "publishedEntries": 27,
+      "publishedTopics": 5,
+      "sourceEnglishRecords": 133447,
+      "sentencePairs": 12628,
+      "snapshotsVerified": 4,
+      "rawRetained": true,
+      "repeatPublish": "Pass: unchanged hashes, IDs and revisions",
+      "cc0EnglishSentences": 41513,
+      "englishSentencesDetailed": 2039120,
+      "topicsSeeded": 135,
+      "uniqueSeedQueries": 1260,
+      "wordsWithFullExportExample": 1247,
+      "proposedSlots": 1270,
+      "proposalsStatus": "needs-review; not added to production",
+      "offlineFilter": "Pass; zero new API requests",
+      "archivedFileChecks": 530
+    },
+    "backendTechnical": "Pass; user acceptance pending",
+    "verifiedAt": "2026-10-20T15:25:19.677Z"
+  },
+  "executionState": "Awaiting backend acceptance",
+  "scopeUpdates": [
+    {
+      "date": "2026-10-20",
+      "change": "Remove individual IPA phoneme audio; retain a text IPA reference chart and en-US word/sentence pronunciation, including newly added words."
+    },
+    {
+      "date": "2026-10-20",
+      "change": "User chose: Nghiệm thu BE trước, tách task 2.000 từ. Technical backend acceptance uses the current 677 published entries; completing 2000 slots stays in DATA-02..DATA-05 and is not a backend gate dependency."
+    }
+  ]
+}

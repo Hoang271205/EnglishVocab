@@ -1,0 +1,23 @@
+import {createReadStream} from 'node:fs';
+import {readFile,writeFile} from 'node:fs/promises';
+import {createGunzip} from 'node:zlib';
+import {createInterface} from 'node:readline';
+import {createHash} from 'node:crypto';
+import {parseBulkCandidates} from './lib/crawl.ts';
+const seeds=JSON.parse(await readFile(process.argv[2]||'content/crawl/seeds.json','utf8'));
+const metadata=JSON.parse(await readFile('.crawl-cache/source.json','utf8'));if(!metadata.complete)throw Error('Bulk download is not complete; resume crawl:download first');
+const hash=createHash('sha256');for await(const chunk of createReadStream('.crawl-cache/vi-extract.jsonl.gz'))hash.update(chunk);
+if(hash.digest('hex')!==metadata.sha256)throw Error('Bulk source checksum mismatch');
+const wanted=new Set(seeds.topics.flatMap(t=>t.words).map(w=>w.normalize('NFKC').toLowerCase()));
+const stream=createReadStream('.crawl-cache/vi-extract.jsonl.gz').pipe(createGunzip()),lines=createInterface({input:stream,crlfDelay:Infinity});
+let streamError=null;stream.on('error',error=>{streamError=error;lines.close();});
+let records=0,englishRecords=0;const candidates=[],matched=new Set();
+for await(const line of lines){if(!line.trim())continue;records++;const body=JSON.parse(line);if(body.lang_code!=='en')continue;englishRecords++;
+ if(!wanted.has(body.word.normalize('NFKC').toLowerCase()))continue;
+ matched.add(body.word.toLowerCase());candidates.push(...parseBulkCandidates(body,metadata.fetchedAt));
+}
+if(streamError)throw streamError;
+const unique=[...new Map(candidates.map(c=>[c.id,c])).values()];
+const assignments=seeds.topics.flatMap(t=>unique.filter(c=>t.words.map(w=>w.toLowerCase()).includes(c.headword.toLowerCase())).map(c=>({topicId:t.topicId,candidateId:c.id,cefrProposal:t.cefrEstimate,reviewStatus:'needs-review'})));
+const report={schemaVersion:1,mode:'offline bulk extraction; staging only',productionWrite:false,source:{url:metadata.url,sha256:metadata.sha256,fetchedAt:metadata.fetchedAt},records,englishRecords,seedWords:wanted.size,matchedWords:matched.size,candidates:unique.length,completeCandidates:unique.filter(c=>c.meaningViOptions.length&&c.examples.length).length,missingWords:[...wanted].filter(w=>!matched.has(w))};
+await writeFile('content/crawl/bulk-candidates.json',JSON.stringify({schemaVersion:1,candidates:unique,assignments},null,2)+'\n');await writeFile('content/crawl/bulk-run.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

@@ -1,0 +1,110 @@
+# ielts-036
+space exploration|n. phrase|B2|hoạt động tìm hiểu không gian bên ngoài Trái Đất|International cooperation can reduce the cost of [space exploration].
+satellite|n.|B2|thiết bị hoặc thiên thể chuyển động quanh một thiên thể khác|The [satellite] collects images of changing weather patterns.
+orbit|n.|B2|đường chuyển động của một vật quanh thiên thể khác|The spacecraft entered a stable [orbit] around the planet.
+space debris|n. phrase|C1|các vật thể nhân tạo không còn sử dụng tồn tại trong không gian|Small pieces of [space debris] can damage working satellites.
+spacecraft|n.|B2|phương tiện được thiết kế để hoạt động trong không gian|The [spacecraft] sent images back to Earth.
+extraterrestrial life|n. phrase|C1|sự sống có nguồn gốc ngoài Trái Đất|Scientists continue to search for evidence of [extraterrestrial life].
+space mission|n. phrase|B2|chuyến hoạt động trong không gian có mục tiêu cụ thể|The [space mission] will study the surface of the moon.
+launch vehicle|n. phrase|C1|tên lửa hoặc hệ thống đưa tải trọng vào không gian|The [launch vehicle] carried a weather satellite into orbit.
+planetary science|n. phrase|C1|ngành nghiên cứu các hành tinh và hệ hành tinh|The discovery attracted interest in [planetary science].
+microgravity|n.|C1|điều kiện có gia tốc trọng lực biểu kiến rất nhỏ|Astronauts study how plants grow in [microgravity].
+# ielts-037
+hypothesis|n.|C1|giả thuyết có thể được kiểm tra bằng quan sát hoặc nghiên cứu|The experiment was designed to test a [hypothesis].
+peer review|n. phrase|C1|quá trình chuyên gia cùng lĩnh vực đánh giá công trình nghiên cứu|The article underwent [peer review] before publication.
+sample size|n. phrase|B2|số đối tượng hoặc quan sát trong một mẫu nghiên cứu|A larger [sample size] may produce more precise estimates.
+control group|n. phrase|C1|nhóm được dùng làm đối chiếu trong nghiên cứu|The [control group] did not receive the new teaching material.
+replication|n.|C1|việc thực hiện lại nghiên cứu để kiểm tra kết quả|Independent [replication] can strengthen confidence in a finding.
+research methodology|n. phrase|C1|hệ thống phương pháp được sử dụng để thực hiện nghiên cứu|The report explains its [research methodology] in detail.
+empirical evidence|n. phrase|C1|bằng chứng dựa trên quan sát hoặc thực nghiệm|The claim needs stronger [empirical evidence].
+statistical significance|n. phrase|C1|mức độ kết quả đáp ứng tiêu chí thống kê đã đặt ra|The researchers reported [statistical significance] alongside the effect size.
+research funding|n. phrase|B2|nguồn kinh phí hỗ trợ hoạt động nghiên cứu|Public [research funding] supports long-term scientific projects.
+publication bias|n. phrase|C1|sự thiên lệch do loại kết quả ảnh hưởng khả năng được công bố|Unpublished negative results can contribute to [publication bias].
+# ielts-038
+biotechnology|n.|C1|việc ứng dụng sinh vật hoặc quá trình sinh học để tạo sản phẩm và công nghệ|Advances in [biotechnology] have changed agricultural research.
+genetic engineering|n. phrase|C1|việc chủ động thay đổi vật liệu di truyền của sinh vật|The debate focused on the use of [genetic engineering] in food production.
+gene editing|n. phrase|C1|kỹ thuật tạo thay đổi có mục tiêu trong trình tự DNA|Researchers use [gene editing] to study the function of particular genes.
+DNA sequencing|n. phrase|C1|việc xác định thứ tự các thành phần trong phân tử DNA|The cost of [DNA sequencing] has fallen over time.
+clinical trial|n. phrase|C1|nghiên cứu trên người để đánh giá một can thiệp y tế|The treatment is being evaluated in a [clinical trial].
+genetically modified crop|n. phrase|C1|cây trồng có vật liệu di truyền được thay đổi bằng kỹ thuật|A [genetically modified crop] may be developed for resistance to a particular pest.
+bioethics|n.|C1|lĩnh vực xem xét vấn đề đạo đức trong sinh học và y học|New reproductive technologies raise questions in [bioethics].
+stem cell|n. phrase|C1|tế bào có khả năng tạo ra những loại tế bào chuyên biệt hơn|Scientists study how a [stem cell] develops into different cell types.
+biosafety|n.|C1|các nguyên tắc ngăn nguy cơ từ vật liệu và hoạt động sinh học|The laboratory follows strict [biosafety] procedures.
+synthetic biology|n. phrase|C1|lĩnh vực thiết kế hoặc xây dựng lại các hệ thống sinh học|The university opened a center for [synthetic biology].
+# ielts-039
+algorithmic fairness|n. phrase|C1|việc xem xét và hạn chế sự đối xử bất công trong hệ thống thuật toán|The team assessed [algorithmic fairness] across applicant groups.
+digital surveillance|n. phrase|C1|việc theo dõi con người hoặc hoạt động bằng công nghệ số|The proposal prompted debate about [digital surveillance].
+human autonomy|n. phrase|C1|khả năng con người tự quyết định hành động của mình|Technology should support rather than undermine [human autonomy].
+responsible innovation|n. phrase|C1|việc phát triển đổi mới có cân nhắc tác động xã hội và đạo đức|Public consultation can support [responsible innovation].
+ethical framework|n. phrase|C1|hệ thống nguyên tắc dùng để đánh giá quyết định đạo đức|The organization adopted an [ethical framework] for AI development.
+algorithmic accountability|n. phrase|C1|trách nhiệm giải trình về việc xây dựng và sử dụng thuật toán|The report calls for greater [algorithmic accountability].
+unintended consequence|n. phrase|C1|kết quả phát sinh mà người hành động không có ý định tạo ra|An [unintended consequence] of the design was reduced accessibility.
+facial recognition|n. phrase|B2|công nghệ nhận diện hoặc xác minh con người bằng hình ảnh khuôn mặt|The use of [facial recognition] in public spaces remains controversial.
+human-centered design|n. phrase|C1|cách thiết kế bắt đầu từ nhu cầu và hoàn cảnh của con người|Interviews with users are central to [human-centered design].
+technology governance|n. phrase|C1|các cơ chế định hướng và giám sát việc phát triển sử dụng công nghệ|Effective [technology governance] requires clear responsibilities.
+# ielts-040
+e-government|n.|C1|việc cơ quan nhà nước sử dụng công nghệ số để cung cấp dịch vụ và thông tin|Investment in [e-government] can simplify routine applications.
+online application|n. phrase|B1|hồ sơ hoặc quy trình đăng ký được thực hiện qua mạng|Residents can submit an [online application] for a parking permit.
+digital identity|n. phrase|C1|thông tin điện tử dùng để thể hiện hoặc xác minh danh tính|A secure [digital identity] can help people access public services.
+service delivery|n. phrase|C1|quá trình cung cấp dịch vụ tới người sử dụng|The project aims to improve public [service delivery].
+interoperability|n.|C1|khả năng các hệ thống trao đổi và sử dụng thông tin của nhau|A lack of [interoperability] can force citizens to submit the same details repeatedly.
+open data|n. phrase|C1|dữ liệu được cung cấp với điều kiện cho phép truy cập và sử dụng lại|The city publishes [open data] about public transport.
+digital inclusion|n. phrase|C1|việc bảo đảm mọi người có thể tiếp cận và sử dụng dịch vụ số|Assisted service points can improve [digital inclusion].
+citizen portal|n. phrase|C1|cổng trực tuyến giúp người dân tiếp cận thông tin và dịch vụ công|The [citizen portal] lets residents track an application.
+electronic signature|n. phrase|B2|dữ liệu điện tử được dùng để thể hiện việc ký hoặc chấp thuận|The system accepts an [electronic signature] on the form.
+administrative burden|n. phrase|C1|chi phí thời gian và công sức do thủ tục hành chính gây ra|Simpler forms can reduce the [administrative burden] on small businesses.
+# ielts-041
+universal healthcare|n. phrase|C1|hệ thống hướng tới việc mọi người đều tiếp cận được chăm sóc sức khỏe cần thiết|The debate examined different models of [universal healthcare].
+primary care|n. phrase|B2|dịch vụ chăm sóc y tế ban đầu và thường xuyên|Community clinics provide [primary care] for local residents.
+health insurance|n. phrase|B1|bảo hiểm hỗ trợ chi trả chi phí chăm sóc y tế|The survey asked whether households had [health insurance].
+affordable treatment|n. phrase|B2|điều trị có chi phí phù hợp khả năng chi trả|Patients in remote areas may struggle to find [affordable treatment].
+waiting list|n. phrase|B2|danh sách những người đang chờ nhận một dịch vụ|The hospital introduced measures to shorten its [waiting list].
+healthcare shortage|n. phrase|B2|tình trạng nguồn lực y tế không đủ đáp ứng nhu cầu|A regional [healthcare shortage] can increase travel times for patients.
+out-of-pocket cost|n. phrase|C1|khoản chi mà người sử dụng dịch vụ phải tự trả trực tiếp|An unexpected [out-of-pocket cost] can discourage people from seeking care.
+health inequality|n. phrase|C1|sự khác biệt về sức khỏe hoặc tiếp cận chăm sóc giữa các nhóm|The study examines [health inequality] across income groups.
+medical infrastructure|n. phrase|C1|hệ thống cơ sở vật chất và thiết bị phục vụ y tế|The region needs investment in [medical infrastructure].
+rural clinic|n. phrase|B2|cơ sở khám chữa bệnh ở khu vực nông thôn|The [rural clinic] serves several nearby villages.
+# ielts-042
+preventive care|n. phrase|C1|chăm sóc nhằm ngăn bệnh hoặc phát hiện vấn đề sớm|The program expands access to [preventive care].
+vaccination|n.|B2|việc sử dụng vaccine để tạo sự bảo vệ miễn dịch|The clinic organized a [vaccination] campaign.
+screening|n.|C1|việc kiểm tra một nhóm người để tìm dấu hiệu nguy cơ hoặc bệnh|The study evaluated a new [screening] program.
+early detection|n. phrase|B2|việc phát hiện vấn đề sức khỏe ở giai đoạn sớm|The campaign emphasizes the importance of [early detection].
+public health campaign|n. phrase|B2|hoạt động có tổ chức để cải thiện sức khỏe cộng đồng|A [public health campaign] encouraged residents to seek reliable information.
+risk factor|n. phrase|C1|đặc điểm hoặc tình trạng liên quan tới khả năng xảy ra vấn đề cao hơn|The survey asked about a known [risk factor] for the condition.
+health education|n. phrase|B2|việc cung cấp kiến thức và kỹ năng liên quan đến sức khỏe|Schools can support [health education] through age-appropriate lessons.
+regular checkup|n. phrase|B2|buổi kiểm tra sức khỏe định kỳ|The questionnaire asked about the date of the last [regular checkup].
+disease prevention|n. phrase|B2|các hoạt động nhằm hạn chế sự xuất hiện hoặc lây lan bệnh|Clean water is important for [disease prevention].
+community outreach|n. phrase|C1|hoạt động chủ động tiếp cận và hỗ trợ người trong cộng đồng|The clinic uses [community outreach] to reach isolated residents.
+# ielts-043
+balanced diet|n. phrase|B1|chế độ ăn có các nhóm thực phẩm và dưỡng chất với tỷ lệ phù hợp|The lesson explains what is meant by a [balanced diet].
+nutrient|n.|B2|chất mà cơ thể sử dụng để sống và phát triển|The table lists the amount of each [nutrient] in the food.
+dietary fiber|n. phrase|C1|thành phần thực vật trong thức ăn mà cơ thể không tiêu hóa hoàn toàn|The label states how much [dietary fiber] the cereal contains.
+processed food|n. phrase|B2|thực phẩm đã được thay đổi qua một hoặc nhiều công đoạn chế biến|The report distinguishes between different kinds of [processed food].
+portion size|n. phrase|B2|lượng thức ăn trong một phần được phục vụ hoặc sử dụng|The study compared [portion size] across restaurants.
+malnutrition|n.|C1|tình trạng dinh dưỡng không đáp ứng đúng nhu cầu của cơ thể|The relief program aims to reduce child [malnutrition].
+food labeling|n. phrase|B2|việc ghi thông tin về sản phẩm thực phẩm trên bao bì|Clear [food labeling] helps shoppers compare products.
+added sugar|n. phrase|B2|đường được thêm vào thực phẩm trong chế biến hoặc chuẩn bị|The manufacturer reduced the amount of [added sugar] in the drink.
+food allergy|n. phrase|B2|phản ứng miễn dịch bất lợi với một loại thực phẩm|The form asks whether the child has a [food allergy].
+protein intake|n. phrase|C1|lượng protein được nạp qua thức ăn và đồ uống|The researchers recorded daily [protein intake].
+# ielts-044
+sedentary lifestyle|n. phrase|C1|lối sống có nhiều thời gian ngồi và ít vận động|Office design can contribute to a [sedentary lifestyle].
+obesity|n.|B2|tình trạng tích tụ mỡ cơ thể quá mức có thể ảnh hưởng sức khỏe|The report examines social factors associated with [obesity].
+physical inactivity|n. phrase|C1|mức vận động thể chất không đáp ứng ngưỡng được xét đến|The survey measured [physical inactivity] among adults.
+sedentary behavior|n. phrase|C1|hoạt động lúc thức có mức tiêu hao năng lượng thấp khi ngồi hoặc nằm tựa|The researchers tracked [sedentary behavior] during the working day.
+built environment|n. phrase|C1|không gian và công trình do con người tạo ra|The [built environment] can influence opportunities for exercise.
+active commuting|n. phrase|B2|việc đi làm hoặc đi học bằng cách vận động cơ thể|Safe cycle lanes can encourage [active commuting].
+weight stigma|n. phrase|C1|sự kỳ thị hoặc định kiến dựa trên cân nặng|The training addresses [weight stigma] in healthcare settings.
+energy balance|n. phrase|C1|mối quan hệ giữa năng lượng nạp vào và tiêu hao của cơ thể|The textbook introduces the concept of [energy balance].
+metabolic health|n. phrase|C1|tình trạng hoạt động của các quá trình trao đổi chất trong cơ thể|The study included several measures of [metabolic health].
+activity level|n. phrase|B2|mức độ vận động của một người trong khoảng thời gian nhất định|Participants reported their usual [activity level].
+# ielts-045
+mental health|n. phrase|B1|tình trạng sức khỏe liên quan cảm xúc tâm lý và xã hội|The university provides information about [mental health] services.
+anxiety|n.|B2|trạng thái lo âu hoặc bất an|The survey asked students about feelings of [anxiety].
+depression|n.|B2|tình trạng rối loạn khí sắc có thể ảnh hưởng cảm xúc và hoạt động|The course discusses common misconceptions about [depression].
+stigma|n.|C1|sự đánh giá tiêu cực gắn với một đặc điểm hoặc tình trạng|Public discussion can help challenge [stigma] around mental illness.
+psychological support|n. phrase|C1|sự hỗ trợ nhằm giúp đối phó với khó khăn tâm lý|The organization offers [psychological support] after major incidents.
+emotional wellbeing|n. phrase|B2|trạng thái ổn định và tích cực về mặt cảm xúc|The school considers [emotional wellbeing] part of student support.
+mental health literacy|n. phrase|C1|kiến thức và hiểu biết giúp nhận ra và tìm hỗ trợ về sức khỏe tâm thần|The workshop aims to improve [mental health literacy].
+workplace wellbeing|n. phrase|B2|sức khỏe và trạng thái tích cực của người lao động tại nơi làm việc|Managers can include [workplace wellbeing] in regular team discussions.
+therapeutic relationship|n. phrase|C1|mối quan hệ hợp tác giữa chuyên viên trị liệu và người nhận hỗ trợ|Trust is important in a [therapeutic relationship].
+help-seeking behavior|n. phrase|C1|hành vi tìm kiếm sự giúp đỡ khi gặp khó khăn|The research explores barriers to [help-seeking behavior].

@@ -1,0 +1,509 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "crawl-daily-012-a3c644bb8358",
+  "entries": [
+    {
+      "id": "crawl-sense-027a9b56439b94a2513d5019",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "chair",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-027a9b56439b94a2513d5019",
+      "meaningVi": "ghế",
+      "acceptedLearnAnswers": [
+        "chair"
+      ],
+      "cefr": {
+        "level": "A1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": "/t͡ʃɛɚ/",
+        "accent": "en-US"
+      },
+      "examples": [
+        {
+          "id": "example-951564dc9d31a3e56a670454",
+          "prefix": "I sat on my ",
+          "targetSurface": "chair",
+          "suffix": " to have dinner.",
+          "acceptedAnswers": [
+            "chair"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/chair",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/chair",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/chair",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "ipa",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; explicitly US-tagged source transcription",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/chair",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-sense-12a3aa2a60ab323bc22b8077",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "shelf",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-12a3aa2a60ab323bc22b8077",
+      "meaningVi": "giá sách",
+      "acceptedLearnAnswers": [
+        "shelf"
+      ],
+      "cefr": {
+        "level": "A2",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-88ac671592fa5e769bc1dc4f",
+          "prefix": "He put the book on the ",
+          "targetSurface": "shelf",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "shelf"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/shelf",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/shelf",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #1396455 (CK) & #1818980 (haibuihoang); https://www.manythings.org/anki/; translated sentence https://tatoeba.org/en/sentences/show/1818980; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY 2.0 FR (https://creativecommons.org/licenses/by/2.0/fr/)",
+          "url": "https://tatoeba.org/en/sentences/show/1396455",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-sense-1c994a578f3522385bd26b46",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "table",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-1c994a578f3522385bd26b46",
+      "meaningVi": "bàn",
+      "acceptedLearnAnswers": [
+        "table"
+      ],
+      "cefr": {
+        "level": "A1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": "[ˈtʰeɪb(ə)ɫ]",
+        "accent": "en-US"
+      },
+      "examples": [
+        {
+          "id": "example-d9b36b17ac6998c0073b218d",
+          "prefix": "This ",
+          "targetSurface": "table",
+          "suffix": " is heavy.",
+          "acceptedAnswers": [
+            "table"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/table",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/table",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #464216 (lukaszpp) & #4605234 (khoaharp); https://www.manythings.org/anki/; translated sentence https://tatoeba.org/en/sentences/show/4605234; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY 2.0 FR (https://creativecommons.org/licenses/by/2.0/fr/)",
+          "url": "https://tatoeba.org/en/sentences/show/464216",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "ipa",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; explicitly US-tagged source transcription",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/table",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-sense-95ec9645277feafb148a2719",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "sofa",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-95ec9645277feafb148a2719",
+      "meaningVi": "ghế xô-pha",
+      "acceptedLearnAnswers": [
+        "sofa"
+      ],
+      "cefr": {
+        "level": "A1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-cd65990ac21db06dc72fd3f3",
+          "prefix": "He bought a big ",
+          "targetSurface": "sofa",
+          "suffix": " two days before his relatives arrived.",
+          "acceptedAnswers": [
+            "sofa"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/sofa",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/sofa",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/sofa",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-sense-998b59c45e8c99a1cc6ea596",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "blanket",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-998b59c45e8c99a1cc6ea596",
+      "meaningVi": "chăn",
+      "acceptedLearnAnswers": [
+        "blanket"
+      ],
+      "cefr": {
+        "level": "A2",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-6cf0b3e11591eeebb057e751",
+          "prefix": "The baby was cold, so his mother put a ",
+          "targetSurface": "blanket",
+          "suffix": " over him.",
+          "acceptedAnswers": [
+            "blanket"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/blanket",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/blanket",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/blanket",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-sense-eb3b11086df43b7e29cb2dd3",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "bed",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-eb3b11086df43b7e29cb2dd3",
+      "meaningVi": "giường",
+      "acceptedLearnAnswers": [
+        "bed"
+      ],
+      "cefr": {
+        "level": "A1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": "/ˈbɛd/",
+        "accent": "en-US"
+      },
+      "examples": [
+        {
+          "id": "example-2202fee8bf724c778e00e675",
+          "prefix": "My cat often sleeps on my ",
+          "targetSurface": "bed",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "bed"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/bed",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/bed",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/bed",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "ipa",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; explicitly US-tagged source transcription",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/bed",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-vi-sense-a522c131c4814bc090484b86",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "desk",
+      "partOfSpeech": "n.",
+      "senseKey": "vi-sense-a522c131c4814bc090484b86",
+      "meaningVi": "Một cái bàn, cái khung, hoặc cái hộp, thường có mặt trên cùng phẳng và hơi nghiêng, dùng vào mục đích ban đầu là để đọc sách và viết. Chúng thường có ngăn kéo ở dưới.",
+      "acceptedLearnAnswers": [
+        "desk"
+      ],
+      "cefr": {
+        "level": "A1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-293165b81bd7d11302bc8088",
+          "prefix": "This is a ",
+          "targetSurface": "desk",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "desk"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://vi.wiktionary.org/wiki/desk",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #55769 (CK) & #13726747 (leucammieuvu); https://www.manythings.org/anki/; translated sentence https://tatoeba.org/en/sentences/show/13726747; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY 2.0 FR (https://creativecommons.org/licenses/by/2.0/fr/)",
+          "url": "https://tatoeba.org/en/sentences/show/55769",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    }
+  ],
+  "topics": [
+    {
+      "id": "daily-012",
+      "collectionId": "daily",
+      "nameEn": "Furniture and Household Items",
+      "nameVi": "Nội thất và đồ dùng trong nhà",
+      "order": 12,
+      "entryIds": [
+        "crawl-sense-027a9b56439b94a2513d5019",
+        "crawl-sense-12a3aa2a60ab323bc22b8077",
+        "crawl-sense-1c994a578f3522385bd26b46",
+        "crawl-sense-95ec9645277feafb148a2719",
+        "crawl-sense-998b59c45e8c99a1cc6ea596",
+        "crawl-sense-eb3b11086df43b7e29cb2dd3",
+        "crawl-vi-sense-a522c131c4814bc090484b86"
+      ]
+    }
+  ]
+}

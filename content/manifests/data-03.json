@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "status": "in-progress",
+  "slots": 3,
+  "targetSlots": 450,
+  "uniqueEntries": 3,
+  "populatedTopics": 1,
+  "completeTopics": 0,
+  "estimatedCefr": 3,
+  "verifiedCefr": 0,
+  "missingIPA": 3,
+  "packs": [
+    "public/content/ielts/topics-056-100/crawled-ielts-056.json"
+  ],
+  "reviewStatus": "Source senses/examples selected in content/crawl/selections.json; estimated CEFR. Remaining topics are not complete."
+}

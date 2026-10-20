@@ -1,0 +1,10 @@
+{
+  "id": "GATE-FE",
+  "status": "Blocked",
+  "verification": "Not tested",
+  "reviewer": null,
+  "report": null,
+  "blockers": [
+    "GATE-BE is closed"
+  ]
+}

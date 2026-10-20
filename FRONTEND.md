@@ -2,6 +2,8 @@
 
 Ngày: 20/10/2026. Trạng thái: thiết kế FE theo ảnh tham khảo và workflow người dùng đã chốt; chưa phải ứng dụng hoàn chỉnh.
 
+**Điều kiện bắt đầu FE:** toàn bộ task FE-01…FE-09 trong [TASKS.md](TASKS.md) đang Blocked đến khi Gate-BE kỹ thuật Pass và người dùng xác nhận nghiệm thu BE theo [BUILD_PLAN.md](BUILD_PLAN.md). Tài liệu/preview FE là đầu vào thiết kế, chưa phải UI đã triển khai.
+
 ## 1. Phạm vi và bố cục
 
 Thanh điều hướng có đúng **3 tab: Ôn tập – Học từ mới – Sổ tay**. Màn học và màn làm bài ôn là phiên con mở từ các tab này. Popup tra từ là thành phần nổi, không phải một tab thứ tư.
@@ -105,3 +107,7 @@ Hình minh họa topic/từ là tài sản tùy chọn; cần URL hoặc đườ
 - Ảnh/minh họa, giọng đọc hoặc API tạm thiếu không chặn các chức năng học/lưu có đủ dữ liệu.
 
 Các điều kiện trên là yêu cầu nghiệm thu, chưa phải kết quả đã chạy trên ứng dụng.
+
+## Cập nhật đã chốt — bảng IPA chỉ dạng chữ
+
+Bảng IPA trong Sổ tay chỉ có ký hiệu, nhóm nguyên âm/phụ âm/nguyên âm đôi và từ ví dụ. Không có nút nghe từng âm hoặc tải file audio IPA. Chức năng nghe từ/câu en-US vẫn giữ riêng ở thẻ từ, popup và chi tiết; từ tự thêm chưa có IPA vẫn nghe được khi thiết bị có giọng Mỹ. Quyết định này thay thế yêu cầu audio từng âm trong các bản thiết kế cũ.

@@ -1,0 +1,2165 @@
+{
+  "schemaVersion": 1,
+  "topics": [
+    {
+      "topicId": "ielts-056",
+      "cefrEstimate": "B2",
+      "words": [
+        "collision",
+        "pedestrian",
+        "speed limit",
+        "seat belt",
+        "crosswalk",
+        "reckless",
+        "speeding",
+        "road sign",
+        "speed bump",
+        "visibility"
+      ]
+    },
+    {
+      "topicId": "ielts-057",
+      "cefrEstimate": "B2",
+      "words": [
+        "pavement",
+        "cycle lane",
+        "intersection",
+        "footpath",
+        "accessibility",
+        "walkability",
+        "commuter",
+        "bicycle",
+        "underpass",
+        "overpass"
+      ]
+    },
+    {
+      "topicId": "ielts-058",
+      "cefrEstimate": "B2",
+      "words": [
+        "rural",
+        "irrigation",
+        "livelihood",
+        "cultivation",
+        "harvest",
+        "farmland",
+        "village",
+        "infrastructure",
+        "cooperative",
+        "subsidy"
+      ]
+    },
+    {
+      "topicId": "ielts-059",
+      "cefrEstimate": "B2",
+      "words": [
+        "recreation",
+        "playground",
+        "plaza",
+        "amenity",
+        "communal",
+        "gathering",
+        "landscaping",
+        "bench",
+        "fountain",
+        "pedestrianisation"
+      ]
+    },
+    {
+      "topicId": "ielts-060",
+      "cefrEstimate": "B2",
+      "words": [
+        "architecture",
+        "facade",
+        "skyscraper",
+        "renovation",
+        "construction",
+        "demolition",
+        "insulation",
+        "aesthetics",
+        "structure",
+        "blueprint"
+      ]
+    },
+    {
+      "topicId": "ielts-061",
+      "cefrEstimate": "B2",
+      "words": [
+        "household",
+        "kinship",
+        "extended family",
+        "nuclear family",
+        "upbringing",
+        "breadwinner",
+        "parenthood",
+        "cohabitation",
+        "divorce",
+        "guardian"
+      ]
+    },
+    {
+      "topicId": "ielts-062",
+      "cefrEstimate": "B2",
+      "words": [
+        "demographic",
+        "fertility",
+        "mortality",
+        "longevity",
+        "birth rate",
+        "life expectancy",
+        "census",
+        "ageing",
+        "population density",
+        "dependency"
+      ]
+    },
+    {
+      "topicId": "ielts-063",
+      "cefrEstimate": "B2",
+      "words": [
+        "migration",
+        "immigration",
+        "emigration",
+        "integration",
+        "assimilation",
+        "displacement",
+        "refugee",
+        "citizenship",
+        "multicultural",
+        "diaspora"
+      ]
+    },
+    {
+      "topicId": "ielts-064",
+      "cefrEstimate": "B2",
+      "words": [
+        "globalisation",
+        "interdependence",
+        "outsourcing",
+        "multinational",
+        "homogenisation",
+        "connectivity",
+        "standardisation",
+        "localisation",
+        "cross-border",
+        "competitiveness"
+      ]
+    },
+    {
+      "topicId": "ielts-065",
+      "cefrEstimate": "B2",
+      "words": [
+        "heritage",
+        "ancestry",
+        "custom",
+        "ritual",
+        "folklore",
+        "craftsmanship",
+        "preservation",
+        "indigenous",
+        "artefact",
+        "legacy"
+      ]
+    },
+    {
+      "topicId": "ielts-066",
+      "cefrEstimate": "B2",
+      "words": [
+        "bilingual",
+        "multilingual",
+        "dialect",
+        "mother tongue",
+        "fluency",
+        "extinction",
+        "linguistic",
+        "translation",
+        "interpretation",
+        "proficiency"
+      ]
+    },
+    {
+      "topicId": "ielts-067",
+      "cefrEstimate": "B2",
+      "words": [
+        "journalism",
+        "headline",
+        "editorial",
+        "correspondent",
+        "censorship",
+        "bias",
+        "credibility",
+        "sensationalism",
+        "misinformation",
+        "coverage"
+      ]
+    },
+    {
+      "topicId": "ielts-068",
+      "cefrEstimate": "B2",
+      "words": [
+        "advertising",
+        "persuasion",
+        "endorsement",
+        "campaign",
+        "slogan",
+        "branding",
+        "manipulation",
+        "target audience",
+        "publicity",
+        "commercial"
+      ]
+    },
+    {
+      "topicId": "ielts-069",
+      "cefrEstimate": "B2",
+      "words": [
+        "consumerism",
+        "materialism",
+        "disposable",
+        "impulse",
+        "overconsumption",
+        "possession",
+        "luxury",
+        "affluence",
+        "demand",
+        "obsolescence"
+      ]
+    },
+    {
+      "topicId": "ielts-070",
+      "cefrEstimate": "B2",
+      "words": [
+        "inequality",
+        "discrimination",
+        "privilege",
+        "marginalisation",
+        "disparity",
+        "deprivation",
+        "opportunity",
+        "exclusion",
+        "equity",
+        "redistribution"
+      ]
+    },
+    {
+      "topicId": "ielts-071",
+      "cefrEstimate": "B2",
+      "words": [
+        "expenditure",
+        "budget",
+        "allocation",
+        "deficit",
+        "surplus",
+        "austerity",
+        "investment",
+        "funding",
+        "priority",
+        "fiscal"
+      ]
+    },
+    {
+      "topicId": "ielts-072",
+      "cefrEstimate": "B2",
+      "words": [
+        "taxation",
+        "revenue",
+        "levy",
+        "tariff",
+        "exemption",
+        "deduction",
+        "evasion",
+        "progressive",
+        "taxpayer",
+        "income tax"
+      ]
+    },
+    {
+      "topicId": "ielts-073",
+      "cefrEstimate": "B2",
+      "words": [
+        "welfare",
+        "pension",
+        "allowance",
+        "benefit",
+        "entitlement",
+        "eligibility",
+        "safety net",
+        "assistance",
+        "vulnerability",
+        "social security"
+      ]
+    },
+    {
+      "topicId": "ielts-074",
+      "cefrEstimate": "B2",
+      "words": [
+        "crime",
+        "delinquency",
+        "offender",
+        "burglary",
+        "theft",
+        "fraud",
+        "deterrent",
+        "recidivism",
+        "motive",
+        "victim"
+      ]
+    },
+    {
+      "topicId": "ielts-075",
+      "cefrEstimate": "B2",
+      "words": [
+        "prosecution",
+        "conviction",
+        "verdict",
+        "sentence",
+        "jury",
+        "trial",
+        "evidence",
+        "appeal",
+        "imprisonment",
+        "acquittal"
+      ]
+    },
+    {
+      "topicId": "ielts-076",
+      "cefrEstimate": "B2",
+      "words": [
+        "rehabilitation",
+        "reintegration",
+        "counselling",
+        "probation",
+        "parole",
+        "reoffend",
+        "restorative",
+        "remorse",
+        "reform",
+        "stigma"
+      ]
+    },
+    {
+      "topicId": "ielts-077",
+      "cefrEstimate": "B2",
+      "words": [
+        "evacuation",
+        "preparedness",
+        "resilience",
+        "hazard",
+        "emergency",
+        "earthquake",
+        "flood",
+        "shelter",
+        "warning",
+        "contingency"
+      ]
+    },
+    {
+      "topicId": "ielts-078",
+      "cefrEstimate": "B2",
+      "words": [
+        "participation",
+        "petition",
+        "ballot",
+        "referendum",
+        "activism",
+        "volunteering",
+        "advocacy",
+        "representation",
+        "consultation",
+        "engagement"
+      ]
+    },
+    {
+      "topicId": "ielts-079",
+      "cefrEstimate": "B2",
+      "words": [
+        "regulation",
+        "accountability",
+        "transparency",
+        "compliance",
+        "oversight",
+        "enforcement",
+        "legislation",
+        "corruption",
+        "sanction",
+        "audit"
+      ]
+    },
+    {
+      "topicId": "ielts-080",
+      "cefrEstimate": "B2",
+      "words": [
+        "diplomacy",
+        "treaty",
+        "alliance",
+        "negotiation",
+        "consensus",
+        "sovereignty",
+        "humanitarian",
+        "bilateral",
+        "multilateral",
+        "mediation"
+      ]
+    },
+    {
+      "topicId": "ielts-081",
+      "cefrEstimate": "B2",
+      "words": [
+        "productivity",
+        "prosperity",
+        "entrepreneurship",
+        "innovation",
+        "recession",
+        "expansion",
+        "output",
+        "employment",
+        "stimulus",
+        "capital"
+      ]
+    },
+    {
+      "topicId": "ielts-082",
+      "cefrEstimate": "B2",
+      "words": [
+        "inflation",
+        "purchasing power",
+        "affordability",
+        "wages",
+        "price",
+        "scarcity",
+        "stagnation",
+        "devaluation",
+        "interest rate",
+        "living standard"
+      ]
+    },
+    {
+      "topicId": "ielts-083",
+      "cefrEstimate": "B2",
+      "words": [
+        "export",
+        "import",
+        "quota",
+        "protectionism",
+        "liberalisation",
+        "trade",
+        "commodity",
+        "exchange rate",
+        "embargo",
+        "trade deficit"
+      ]
+    },
+    {
+      "topicId": "ielts-084",
+      "cefrEstimate": "B2",
+      "words": [
+        "tourism",
+        "hospitality",
+        "destination",
+        "seasonality",
+        "attraction",
+        "revenue",
+        "excursion",
+        "itinerary",
+        "accommodation",
+        "leakage"
+      ]
+    },
+    {
+      "topicId": "ielts-085",
+      "cefrEstimate": "B2",
+      "words": [
+        "ecotourism",
+        "conservation",
+        "biodiversity",
+        "footprint",
+        "overcrowding",
+        "stewardship",
+        "authenticity",
+        "capacity",
+        "environmental",
+        "responsible"
+      ]
+    },
+    {
+      "topicId": "ielts-086",
+      "cefrEstimate": "B2",
+      "words": [
+        "logistics",
+        "procurement",
+        "distribution",
+        "inventory",
+        "warehouse",
+        "shipment",
+        "disruption",
+        "sourcing",
+        "freight",
+        "traceability"
+      ]
+    },
+    {
+      "topicId": "ielts-087",
+      "cefrEstimate": "B2",
+      "words": [
+        "savings",
+        "debt",
+        "interest",
+        "loan",
+        "mortgage",
+        "repayment",
+        "diversification",
+        "asset",
+        "liability",
+        "compound interest"
+      ]
+    },
+    {
+      "topicId": "ielts-088",
+      "cefrEstimate": "B2",
+      "words": [
+        "recycling",
+        "reuse",
+        "refurbishment",
+        "repair",
+        "durability",
+        "biodegradable",
+        "landfill",
+        "resource",
+        "waste",
+        "circular"
+      ]
+    },
+    {
+      "topicId": "ielts-089",
+      "cefrEstimate": "B2",
+      "words": [
+        "ethics",
+        "sustainability",
+        "stakeholder",
+        "philanthropy",
+        "governance",
+        "disclosure",
+        "exploitation",
+        "reputation",
+        "commitment",
+        "integrity"
+      ]
+    },
+    {
+      "topicId": "ielts-090",
+      "cefrEstimate": "B2",
+      "words": [
+        "poverty",
+        "empowerment",
+        "microfinance",
+        "income",
+        "subsistence",
+        "enterprise",
+        "inclusion",
+        "sanitation",
+        "malnutrition",
+        "development"
+      ]
+    },
+    {
+      "topicId": "ielts-091",
+      "cefrEstimate": "B2",
+      "words": [
+        "patronage",
+        "grant",
+        "endowment",
+        "creativity",
+        "sculpture",
+        "performance",
+        "exhibition",
+        "subsidise",
+        "curator",
+        "commission"
+      ]
+    },
+    {
+      "topicId": "ielts-092",
+      "cefrEstimate": "B2",
+      "words": [
+        "literature",
+        "literacy",
+        "narrative",
+        "fiction",
+        "poetry",
+        "genre",
+        "manuscript",
+        "publication",
+        "readership",
+        "protagonist"
+      ]
+    },
+    {
+      "topicId": "ielts-093",
+      "cefrEstimate": "B2",
+      "words": [
+        "rhythm",
+        "melody",
+        "composition",
+        "orchestra",
+        "harmony",
+        "anthem",
+        "repertoire",
+        "musician",
+        "identity",
+        "fusion"
+      ]
+    },
+    {
+      "topicId": "ielts-094",
+      "cefrEstimate": "B2",
+      "words": [
+        "museum",
+        "archaeology",
+        "restoration",
+        "excavation",
+        "monument",
+        "archive",
+        "antiquity",
+        "authentic",
+        "collection",
+        "conservationist"
+      ]
+    },
+    {
+      "topicId": "ielts-095",
+      "cefrEstimate": "B2",
+      "words": [
+        "expression",
+        "dissent",
+        "liberty",
+        "defamation",
+        "pluralism",
+        "restriction",
+        "debate",
+        "speech",
+        "criticism",
+        "tolerance"
+      ]
+    },
+    {
+      "topicId": "ielts-096",
+      "cefrEstimate": "B2",
+      "words": [
+        "fair trade",
+        "boycott",
+        "ethical",
+        "certification",
+        "transparency",
+        "conscientious",
+        "labour",
+        "organic",
+        "cruelty-free",
+        "consumer"
+      ]
+    },
+    {
+      "topicId": "ielts-097",
+      "cefrEstimate": "B2",
+      "words": [
+        "welfare",
+        "captivity",
+        "habitat",
+        "poaching",
+        "endangered",
+        "species",
+        "sanctuary",
+        "cruelty",
+        "domestication",
+        "sentient"
+      ]
+    },
+    {
+      "topicId": "ielts-098",
+      "cefrEstimate": "B2",
+      "words": [
+        "responsibility",
+        "obligation",
+        "solidarity",
+        "empathy",
+        "altruism",
+        "consequence",
+        "initiative",
+        "duty",
+        "citizen",
+        "collective"
+      ]
+    },
+    {
+      "topicId": "ielts-099",
+      "cefrEstimate": "B2",
+      "words": [
+        "tradition",
+        "modernisation",
+        "generation",
+        "continuity",
+        "adaptation",
+        "convention",
+        "norm",
+        "innovation",
+        "progress",
+        "transformation"
+      ]
+    },
+    {
+      "topicId": "ielts-100",
+      "cefrEstimate": "B2",
+      "words": [
+        "hypothesis",
+        "inference",
+        "assumption",
+        "correlation",
+        "causation",
+        "validity",
+        "reliability",
+        "objectivity",
+        "scepticism",
+        "reasoning"
+      ]
+    },
+    {
+      "topicId": "daily-011",
+      "cefrEstimate": "A1",
+      "words": [
+        "room",
+        "bedroom",
+        "bathroom",
+        "kitchen",
+        "hallway",
+        "attic",
+        "basement",
+        "living room",
+        "dining room",
+        "balcony"
+      ]
+    },
+    {
+      "topicId": "daily-012",
+      "cefrEstimate": "A1",
+      "words": [
+        "chair",
+        "table",
+        "sofa",
+        "desk",
+        "shelf",
+        "wardrobe",
+        "bed",
+        "pillow",
+        "blanket",
+        "curtain"
+      ]
+    },
+    {
+      "topicId": "daily-013",
+      "cefrEstimate": "A2",
+      "words": [
+        "sweep",
+        "mop",
+        "vacuum",
+        "dust",
+        "tidy",
+        "clean",
+        "wash",
+        "wipe",
+        "scrub",
+        "chore"
+      ]
+    },
+    {
+      "topicId": "daily-014",
+      "cefrEstimate": "A2",
+      "words": [
+        "chop",
+        "slice",
+        "peel",
+        "boil",
+        "fry",
+        "bake",
+        "stir",
+        "simmer",
+        "roast",
+        "season"
+      ]
+    },
+    {
+      "topicId": "daily-015",
+      "cefrEstimate": "A2",
+      "words": [
+        "grocery",
+        "basket",
+        "trolley",
+        "checkout",
+        "aisle",
+        "receipt",
+        "cashier",
+        "vegetable",
+        "fruit",
+        "bread"
+      ]
+    },
+    {
+      "topicId": "daily-016",
+      "cefrEstimate": "A2",
+      "words": [
+        "refrigerator",
+        "freezer",
+        "oven",
+        "microwave",
+        "kettle",
+        "toaster",
+        "blender",
+        "dishwasher",
+        "stove",
+        "rice cooker"
+      ]
+    },
+    {
+      "topicId": "daily-017",
+      "cefrEstimate": "A2",
+      "words": [
+        "leak",
+        "pipe",
+        "tap",
+        "socket",
+        "bulb",
+        "hammer",
+        "screw",
+        "ladder",
+        "plumber",
+        "electrician"
+      ]
+    },
+    {
+      "topicId": "daily-018",
+      "cefrEstimate": "A2",
+      "words": [
+        "laundry",
+        "detergent",
+        "softener",
+        "stain",
+        "iron",
+        "hanger",
+        "dryer",
+        "washing machine",
+        "rinse",
+        "fold"
+      ]
+    },
+    {
+      "topicId": "daily-019",
+      "cefrEstimate": "A2",
+      "words": [
+        "neighbour",
+        "neighbourhood",
+        "block",
+        "resident",
+        "noise",
+        "fence",
+        "gate",
+        "community",
+        "nearby",
+        "quiet"
+      ]
+    },
+    {
+      "topicId": "daily-020",
+      "cefrEstimate": "B1",
+      "words": [
+        "rent",
+        "landlord",
+        "tenant",
+        "lease",
+        "deposit",
+        "furnished",
+        "unfurnished",
+        "utility",
+        "contract",
+        "move in"
+      ]
+    },
+    {
+      "topicId": "daily-021",
+      "cefrEstimate": "A1",
+      "words": [
+        "coffee",
+        "tea",
+        "espresso",
+        "latte",
+        "cappuccino",
+        "milk",
+        "sugar",
+        "cup",
+        "straw",
+        "takeaway"
+      ]
+    },
+    {
+      "topicId": "daily-022",
+      "cefrEstimate": "A2",
+      "words": [
+        "menu",
+        "waiter",
+        "waitress",
+        "starter",
+        "main course",
+        "dessert",
+        "reservation",
+        "table",
+        "dish",
+        "tip"
+      ]
+    },
+    {
+      "topicId": "daily-023",
+      "cefrEstimate": "A2",
+      "words": [
+        "delicious",
+        "spicy",
+        "sweet",
+        "sour",
+        "salty",
+        "bitter",
+        "crispy",
+        "fresh",
+        "bland",
+        "flavour"
+      ]
+    },
+    {
+      "topicId": "daily-024",
+      "cefrEstimate": "B1",
+      "words": [
+        "allergy",
+        "allergic",
+        "gluten",
+        "dairy",
+        "nut",
+        "vegetarian",
+        "vegan",
+        "ingredient",
+        "lactose",
+        "intolerance"
+      ]
+    },
+    {
+      "topicId": "daily-025",
+      "cefrEstimate": "A2",
+      "words": [
+        "bill",
+        "cash",
+        "card",
+        "change",
+        "total",
+        "service charge",
+        "split",
+        "payment",
+        "contactless",
+        "terminal"
+      ]
+    },
+    {
+      "topicId": "daily-026",
+      "cefrEstimate": "A1",
+      "words": [
+        "shirt",
+        "trousers",
+        "jacket",
+        "coat",
+        "dress",
+        "skirt",
+        "sock",
+        "shoe",
+        "sweater",
+        "jeans"
+      ]
+    },
+    {
+      "topicId": "daily-027",
+      "cefrEstimate": "A2",
+      "words": [
+        "size",
+        "fit",
+        "tight",
+        "loose",
+        "small",
+        "medium",
+        "large",
+        "waist",
+        "sleeve",
+        "length"
+      ]
+    },
+    {
+      "topicId": "daily-028",
+      "cefrEstimate": "B1",
+      "words": [
+        "cart",
+        "order",
+        "delivery",
+        "shipping",
+        "discount",
+        "voucher",
+        "review",
+        "seller",
+        "stock",
+        "tracking"
+      ]
+    },
+    {
+      "topicId": "daily-029",
+      "cefrEstimate": "B1",
+      "words": [
+        "refund",
+        "return",
+        "exchange",
+        "faulty",
+        "damaged",
+        "warranty",
+        "proof",
+        "purchase",
+        "policy",
+        "replacement"
+      ]
+    },
+    {
+      "topicId": "daily-030",
+      "cefrEstimate": "A2",
+      "words": [
+        "price",
+        "cheap",
+        "expensive",
+        "cost",
+        "bargain",
+        "afford",
+        "deal",
+        "offer",
+        "reduce",
+        "reasonable"
+      ]
+    },
+    {
+      "topicId": "daily-031",
+      "cefrEstimate": "A2",
+      "words": [
+        "left",
+        "right",
+        "straight",
+        "opposite",
+        "corner",
+        "crossroads",
+        "roundabout",
+        "intersection",
+        "turn",
+        "direction"
+      ]
+    },
+    {
+      "topicId": "daily-032",
+      "cefrEstimate": "A2",
+      "words": [
+        "bus",
+        "metro",
+        "station",
+        "stop",
+        "route",
+        "fare",
+        "ticket",
+        "platform",
+        "passenger",
+        "timetable"
+      ]
+    },
+    {
+      "topicId": "daily-033",
+      "cefrEstimate": "A2",
+      "words": [
+        "train",
+        "railway",
+        "carriage",
+        "seat",
+        "departure",
+        "arrival",
+        "delay",
+        "return ticket",
+        "single",
+        "connection"
+      ]
+    },
+    {
+      "topicId": "daily-034",
+      "cefrEstimate": "A2",
+      "words": [
+        "taxi",
+        "driver",
+        "meter",
+        "pickup",
+        "drop-off",
+        "address",
+        "destination",
+        "traffic",
+        "ride",
+        "fare"
+      ]
+    },
+    {
+      "topicId": "daily-035",
+      "cefrEstimate": "A2",
+      "words": [
+        "airport",
+        "passport",
+        "boarding pass",
+        "check-in",
+        "security",
+        "gate",
+        "terminal",
+        "baggage",
+        "departure",
+        "flight"
+      ]
+    },
+    {
+      "topicId": "daily-036",
+      "cefrEstimate": "A2",
+      "words": [
+        "seat belt",
+        "aisle",
+        "window",
+        "overhead",
+        "tray",
+        "blanket",
+        "headphones",
+        "turbulence",
+        "landing",
+        "takeoff"
+      ]
+    },
+    {
+      "topicId": "daily-037",
+      "cefrEstimate": "A2",
+      "words": [
+        "hotel",
+        "reception",
+        "reservation",
+        "check out",
+        "key",
+        "room service",
+        "towel",
+        "breakfast",
+        "vacancy",
+        "suite"
+      ]
+    },
+    {
+      "topicId": "daily-038",
+      "cefrEstimate": "A2",
+      "words": [
+        "sightseeing",
+        "landmark",
+        "guide",
+        "tour",
+        "map",
+        "entrance",
+        "ticket",
+        "souvenir",
+        "gallery",
+        "palace"
+      ]
+    },
+    {
+      "topicId": "daily-039",
+      "cefrEstimate": "B1",
+      "words": [
+        "luggage",
+        "suitcase",
+        "missing",
+        "lost",
+        "claim",
+        "cancel",
+        "compensation",
+        "insurance",
+        "embassy",
+        "assistance"
+      ]
+    },
+    {
+      "topicId": "daily-040",
+      "cefrEstimate": "A1",
+      "words": [
+        "weather",
+        "sunny",
+        "cloudy",
+        "rainy",
+        "windy",
+        "snowy",
+        "warm",
+        "cold",
+        "temperature",
+        "forecast"
+      ]
+    },
+    {
+      "topicId": "daily-041",
+      "cefrEstimate": "A1",
+      "words": [
+        "head",
+        "shoulder",
+        "knee",
+        "toe",
+        "arm",
+        "leg",
+        "hand",
+        "foot",
+        "stomach",
+        "back"
+      ]
+    },
+    {
+      "topicId": "daily-042",
+      "cefrEstimate": "A2",
+      "words": [
+        "headache",
+        "fever",
+        "cough",
+        "cold",
+        "pain",
+        "dizzy",
+        "nausea",
+        "sore throat",
+        "runny nose",
+        "rash"
+      ]
+    },
+    {
+      "topicId": "daily-043",
+      "cefrEstimate": "B1",
+      "words": [
+        "doctor",
+        "appointment",
+        "patient",
+        "examination",
+        "diagnosis",
+        "prescription",
+        "treatment",
+        "clinic",
+        "symptom",
+        "blood pressure"
+      ]
+    },
+    {
+      "topicId": "daily-044",
+      "cefrEstimate": "B1",
+      "words": [
+        "pharmacy",
+        "pharmacist",
+        "medicine",
+        "tablet",
+        "capsule",
+        "dose",
+        "ointment",
+        "painkiller",
+        "antibiotic",
+        "side effect"
+      ]
+    },
+    {
+      "topicId": "daily-045",
+      "cefrEstimate": "A2",
+      "words": [
+        "help",
+        "ambulance",
+        "police",
+        "fire",
+        "accident",
+        "injury",
+        "bleeding",
+        "unconscious",
+        "danger",
+        "rescue"
+      ]
+    },
+    {
+      "topicId": "daily-046",
+      "cefrEstimate": "A2",
+      "words": [
+        "exercise",
+        "gym",
+        "workout",
+        "stretch",
+        "jog",
+        "run",
+        "squat",
+        "push-up",
+        "strength",
+        "stamina"
+      ]
+    },
+    {
+      "topicId": "daily-047",
+      "cefrEstimate": "A2",
+      "words": [
+        "sleep",
+        "rest",
+        "nap",
+        "pillow",
+        "alarm",
+        "bedtime",
+        "insomnia",
+        "snore",
+        "tired",
+        "awake"
+      ]
+    },
+    {
+      "topicId": "daily-048",
+      "cefrEstimate": "B1",
+      "words": [
+        "dentist",
+        "tooth",
+        "gum",
+        "cavity",
+        "filling",
+        "toothache",
+        "floss",
+        "toothbrush",
+        "toothpaste",
+        "braces"
+      ]
+    },
+    {
+      "topicId": "daily-049",
+      "cefrEstimate": "B1",
+      "words": [
+        "balanced",
+        "diet",
+        "nutrition",
+        "protein",
+        "fibre",
+        "calorie",
+        "portion",
+        "hydration",
+        "vitamin",
+        "snack"
+      ]
+    },
+    {
+      "topicId": "daily-050",
+      "cefrEstimate": "B1",
+      "words": [
+        "stress",
+        "anxious",
+        "overwhelmed",
+        "relax",
+        "worry",
+        "pressure",
+        "cope",
+        "calm",
+        "burnout",
+        "break"
+      ]
+    },
+    {
+      "topicId": "daily-051",
+      "cefrEstimate": "A2",
+      "words": [
+        "colleague",
+        "manager",
+        "office",
+        "desk",
+        "department",
+        "introduction",
+        "badge",
+        "orientation",
+        "supervisor",
+        "shift"
+      ]
+    },
+    {
+      "topicId": "daily-052",
+      "cefrEstimate": "A2",
+      "words": [
+        "schedule",
+        "available",
+        "busy",
+        "free",
+        "deadline",
+        "appointment",
+        "calendar",
+        "morning",
+        "afternoon",
+        "evening"
+      ]
+    },
+    {
+      "topicId": "daily-053",
+      "cefrEstimate": "B1",
+      "words": [
+        "meeting",
+        "agenda",
+        "minute",
+        "discuss",
+        "present",
+        "attend",
+        "chairperson",
+        "proposal",
+        "action",
+        "conclusion"
+      ]
+    },
+    {
+      "topicId": "daily-054",
+      "cefrEstimate": "B1",
+      "words": [
+        "email",
+        "subject",
+        "attachment",
+        "recipient",
+        "reply",
+        "forward",
+        "inbox",
+        "regards",
+        "confirm",
+        "request"
+      ]
+    },
+    {
+      "topicId": "daily-055",
+      "cefrEstimate": "B1",
+      "words": [
+        "call",
+        "extension",
+        "voicemail",
+        "hold",
+        "transfer",
+        "message",
+        "caller",
+        "receptionist",
+        "dial",
+        "line"
+      ]
+    },
+    {
+      "topicId": "daily-056",
+      "cefrEstimate": "B1",
+      "words": [
+        "task",
+        "progress",
+        "complete",
+        "pending",
+        "priority",
+        "update",
+        "finish",
+        "start",
+        "assign",
+        "status"
+      ]
+    },
+    {
+      "topicId": "daily-057",
+      "cefrEstimate": "A2",
+      "words": [
+        "explain",
+        "clarify",
+        "repeat",
+        "understand",
+        "meaning",
+        "example",
+        "instruction",
+        "question",
+        "confused",
+        "support"
+      ]
+    },
+    {
+      "topicId": "daily-058",
+      "cefrEstimate": "B1",
+      "words": [
+        "feedback",
+        "suggestion",
+        "improve",
+        "strength",
+        "weakness",
+        "praise",
+        "criticism",
+        "constructive",
+        "specific",
+        "appreciate"
+      ]
+    },
+    {
+      "topicId": "daily-059",
+      "cefrEstimate": "A1",
+      "words": [
+        "classroom",
+        "board",
+        "chalk",
+        "pen",
+        "pencil",
+        "eraser",
+        "ruler",
+        "notebook",
+        "lesson",
+        "teacher"
+      ]
+    },
+    {
+      "topicId": "daily-060",
+      "cefrEstimate": "A2",
+      "words": [
+        "study",
+        "revise",
+        "exam",
+        "test",
+        "practice",
+        "memorise",
+        "mark",
+        "grade",
+        "pass",
+        "fail"
+      ]
+    },
+    {
+      "topicId": "daily-061",
+      "cefrEstimate": "A2",
+      "words": [
+        "invite",
+        "invitation",
+        "join",
+        "guest",
+        "party",
+        "dinner",
+        "lunch",
+        "welcome",
+        "come",
+        "host"
+      ]
+    },
+    {
+      "topicId": "daily-062",
+      "cefrEstimate": "A2",
+      "words": [
+        "plan",
+        "arrange",
+        "meet",
+        "decide",
+        "suggest",
+        "weekend",
+        "tomorrow",
+        "together",
+        "place",
+        "time"
+      ]
+    },
+    {
+      "topicId": "daily-063",
+      "cefrEstimate": "A2",
+      "words": [
+        "accept",
+        "yes",
+        "sure",
+        "glad",
+        "happy",
+        "love",
+        "great",
+        "definitely",
+        "absolutely",
+        "pleasure"
+      ]
+    },
+    {
+      "topicId": "daily-064",
+      "cefrEstimate": "B1",
+      "words": [
+        "decline",
+        "unfortunately",
+        "unable",
+        "perhaps",
+        "another time",
+        "regret",
+        "occupied",
+        "politely",
+        "instead",
+        "afraid"
+      ]
+    },
+    {
+      "topicId": "daily-065",
+      "cefrEstimate": "A2",
+      "words": [
+        "sorry",
+        "apologise",
+        "apology",
+        "mistake",
+        "fault",
+        "forgive",
+        "excuse",
+        "accidentally",
+        "late",
+        "misunderstanding"
+      ]
+    },
+    {
+      "topicId": "daily-066",
+      "cefrEstimate": "A2",
+      "words": [
+        "thank",
+        "thanks",
+        "grateful",
+        "gratitude",
+        "kind",
+        "kindness",
+        "favour",
+        "helpful",
+        "thoughtful",
+        "generous"
+      ]
+    },
+    {
+      "topicId": "daily-067",
+      "cefrEstimate": "A2",
+      "words": [
+        "compliment",
+        "beautiful",
+        "lovely",
+        "excellent",
+        "amazing",
+        "talented",
+        "impressive",
+        "well done",
+        "fantastic",
+        "brilliant"
+      ]
+    },
+    {
+      "topicId": "daily-068",
+      "cefrEstimate": "B1",
+      "words": [
+        "opinion",
+        "think",
+        "believe",
+        "feel",
+        "personally",
+        "view",
+        "perspective",
+        "prefer",
+        "consider",
+        "suppose"
+      ]
+    },
+    {
+      "topicId": "daily-069",
+      "cefrEstimate": "B1",
+      "words": [
+        "agree",
+        "disagree",
+        "exactly",
+        "certainly",
+        "partly",
+        "point",
+        "argument",
+        "fair",
+        "true",
+        "doubt"
+      ]
+    },
+    {
+      "topicId": "daily-070",
+      "cefrEstimate": "A2",
+      "words": [
+        "chat",
+        "conversation",
+        "hometown",
+        "hobby",
+        "interest",
+        "weekend",
+        "recently",
+        "pleasant",
+        "lovely",
+        "news"
+      ]
+    },
+    {
+      "topicId": "daily-071",
+      "cefrEstimate": "B1",
+      "words": [
+        "bank",
+        "account",
+        "balance",
+        "deposit",
+        "withdraw",
+        "transfer",
+        "branch",
+        "statement",
+        "interest",
+        "fee"
+      ]
+    },
+    {
+      "topicId": "daily-072",
+      "cefrEstimate": "A2",
+      "words": [
+        "ATM",
+        "cash",
+        "PIN",
+        "screen",
+        "button",
+        "insert",
+        "enter",
+        "withdrawal",
+        "transaction",
+        "receipt"
+      ]
+    },
+    {
+      "topicId": "daily-073",
+      "cefrEstimate": "B1",
+      "words": [
+        "mobile",
+        "plan",
+        "prepaid",
+        "contract",
+        "data",
+        "roaming",
+        "signal",
+        "network",
+        "top up",
+        "SIM card"
+      ]
+    },
+    {
+      "topicId": "daily-074",
+      "cefrEstimate": "B1",
+      "words": [
+        "internet",
+        "connection",
+        "router",
+        "modem",
+        "password",
+        "disconnect",
+        "restart",
+        "slow",
+        "offline",
+        "Wi-Fi"
+      ]
+    },
+    {
+      "topicId": "daily-075",
+      "cefrEstimate": "A2",
+      "words": [
+        "post office",
+        "stamp",
+        "envelope",
+        "parcel",
+        "postcard",
+        "letter",
+        "postage",
+        "registered",
+        "express",
+        "weigh"
+      ]
+    },
+    {
+      "topicId": "daily-076",
+      "cefrEstimate": "B1",
+      "words": [
+        "courier",
+        "package",
+        "delivery",
+        "signature",
+        "tracking",
+        "collect",
+        "recipient",
+        "notify",
+        "dispatch",
+        "delivered"
+      ]
+    },
+    {
+      "topicId": "daily-077",
+      "cefrEstimate": "A2",
+      "words": [
+        "haircut",
+        "trim",
+        "fringe",
+        "layer",
+        "dye",
+        "shampoo",
+        "conditioner",
+        "blow-dry",
+        "barber",
+        "salon"
+      ]
+    },
+    {
+      "topicId": "daily-078",
+      "cefrEstimate": "B1",
+      "words": [
+        "electricity",
+        "water",
+        "gas",
+        "bill",
+        "meter",
+        "usage",
+        "due",
+        "overdue",
+        "charge",
+        "pay"
+      ]
+    },
+    {
+      "topicId": "daily-079",
+      "cefrEstimate": "B1",
+      "words": [
+        "book",
+        "booking",
+        "appointment",
+        "reschedule",
+        "cancel",
+        "confirm",
+        "availability",
+        "slot",
+        "postpone",
+        "bring forward"
+      ]
+    },
+    {
+      "topicId": "daily-080",
+      "cefrEstimate": "B1",
+      "words": [
+        "customer",
+        "support",
+        "complaint",
+        "issue",
+        "resolve",
+        "reference",
+        "refund",
+        "agent",
+        "response",
+        "escalate"
+      ]
+    },
+    {
+      "topicId": "daily-081",
+      "cefrEstimate": "A2",
+      "words": [
+        "text",
+        "message",
+        "chat",
+        "emoji",
+        "reply",
+        "send",
+        "receive",
+        "notification",
+        "group",
+        "mute"
+      ]
+    },
+    {
+      "topicId": "daily-082",
+      "cefrEstimate": "A2",
+      "words": [
+        "video",
+        "camera",
+        "microphone",
+        "mute",
+        "speaker",
+        "headset",
+        "connect",
+        "freeze",
+        "echo",
+        "reconnect"
+      ]
+    },
+    {
+      "topicId": "daily-083",
+      "cefrEstimate": "B1",
+      "words": [
+        "username",
+        "password",
+        "login",
+        "logout",
+        "register",
+        "verify",
+        "reset",
+        "recovery",
+        "authentication",
+        "account"
+      ]
+    },
+    {
+      "topicId": "daily-084",
+      "cefrEstimate": "B1",
+      "words": [
+        "battery",
+        "charger",
+        "plug",
+        "socket",
+        "screen",
+        "keyboard",
+        "mouse",
+        "crash",
+        "update",
+        "repair"
+      ]
+    },
+    {
+      "topicId": "daily-085",
+      "cefrEstimate": "A2",
+      "words": [
+        "photo",
+        "picture",
+        "selfie",
+        "portrait",
+        "landscape",
+        "focus",
+        "flash",
+        "upload",
+        "share",
+        "album"
+      ]
+    },
+    {
+      "topicId": "daily-086",
+      "cefrEstimate": "B1",
+      "words": [
+        "map",
+        "location",
+        "route",
+        "navigation",
+        "traffic",
+        "shortcut",
+        "distance",
+        "nearby",
+        "destination",
+        "direction"
+      ]
+    },
+    {
+      "topicId": "daily-087",
+      "cefrEstimate": "B1",
+      "words": [
+        "app",
+        "booking",
+        "reservation",
+        "availability",
+        "confirm",
+        "cancel",
+        "rating",
+        "payment",
+        "service",
+        "notification"
+      ]
+    },
+    {
+      "topicId": "daily-088",
+      "cefrEstimate": "B1",
+      "words": [
+        "news",
+        "headline",
+        "article",
+        "report",
+        "source",
+        "journalist",
+        "event",
+        "current",
+        "local",
+        "international"
+      ]
+    },
+    {
+      "topicId": "daily-089",
+      "cefrEstimate": "B1",
+      "words": [
+        "film",
+        "series",
+        "episode",
+        "subtitle",
+        "dub",
+        "stream",
+        "genre",
+        "actor",
+        "plot",
+        "recommend"
+      ]
+    },
+    {
+      "topicId": "daily-090",
+      "cefrEstimate": "B1",
+      "words": [
+        "scam",
+        "fraud",
+        "phishing",
+        "privacy",
+        "secure",
+        "link",
+        "suspicious",
+        "block",
+        "report",
+        "permission"
+      ]
+    },
+    {
+      "topicId": "daily-091",
+      "cefrEstimate": "B1",
+      "words": [
+        "date",
+        "relationship",
+        "partner",
+        "couple",
+        "trust",
+        "respect",
+        "affection",
+        "romantic",
+        "single",
+        "breakup"
+      ]
+    },
+    {
+      "topicId": "daily-092",
+      "cefrEstimate": "A2",
+      "words": [
+        "birthday",
+        "celebration",
+        "cake",
+        "candle",
+        "gift",
+        "surprise",
+        "wish",
+        "decorate",
+        "balloon",
+        "toast"
+      ]
+    },
+    {
+      "topicId": "daily-093",
+      "cefrEstimate": "A2",
+      "words": [
+        "holiday",
+        "festival",
+        "tradition",
+        "celebrate",
+        "parade",
+        "firework",
+        "costume",
+        "ceremony",
+        "gathering",
+        "feast"
+      ]
+    },
+    {
+      "topicId": "daily-094",
+      "cefrEstimate": "A2",
+      "words": [
+        "future",
+        "intend",
+        "hope",
+        "expect",
+        "goal",
+        "dream",
+        "ambition",
+        "soon",
+        "eventually",
+        "promise"
+      ]
+    },
+    {
+      "topicId": "daily-095",
+      "cefrEstimate": "B1",
+      "words": [
+        "decision",
+        "choice",
+        "option",
+        "choose",
+        "compare",
+        "advantage",
+        "disadvantage",
+        "risk",
+        "benefit",
+        "consequence"
+      ]
+    },
+    {
+      "topicId": "daily-096",
+      "cefrEstimate": "B1",
+      "words": [
+        "responsibility",
+        "share",
+        "duty",
+        "chore",
+        "divide",
+        "fair",
+        "teamwork",
+        "cooperate",
+        "contribute",
+        "take turns"
+      ]
+    },
+    {
+      "topicId": "daily-097",
+      "cefrEstimate": "B1",
+      "words": [
+        "problem",
+        "solution",
+        "solve",
+        "fix",
+        "manage",
+        "handle",
+        "alternative",
+        "obstacle",
+        "cause",
+        "prevent"
+      ]
+    },
+    {
+      "topicId": "daily-098",
+      "cefrEstimate": "B1",
+      "words": [
+        "experience",
+        "memory",
+        "remember",
+        "happen",
+        "ago",
+        "previously",
+        "once",
+        "before",
+        "during",
+        "afterwards"
+      ]
+    },
+    {
+      "topicId": "daily-099",
+      "cefrEstimate": "B1",
+      "words": [
+        "boundary",
+        "privacy",
+        "comfortable",
+        "uncomfortable",
+        "personal",
+        "respect",
+        "limit",
+        "refuse",
+        "space",
+        "consent"
+      ]
+    },
+    {
+      "topicId": "daily-100",
+      "cefrEstimate": "B1",
+      "words": [
+        "recommend",
+        "suggest",
+        "advice",
+        "recommendation",
+        "worth",
+        "favourite",
+        "try",
+        "recommendable",
+        "useful",
+        "suitable"
+      ]
+    }
+  ]
+}

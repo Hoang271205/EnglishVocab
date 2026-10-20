@@ -1,0 +1,20 @@
+{
+  "id": "GATE-BE",
+  "status": "Pass",
+  "verification": "Pass",
+  "reviewer": null,
+  "report": null,
+  "blockers": [
+    "Explicit user backend acceptance required before frontend"
+  ],
+  "scope": "Technical backend with current 677 published entries; completing 2000 slots moved to separate content tasks by explicit user choice.",
+  "userAccepted": false,
+  "checks": {
+    "unitTests": 43,
+    "nativeStorageLibrary": 7,
+    "liveBrowserCors": "Pass",
+    "nativeExtension": 5,
+    "nativeAmericanSpeech": "Pass; muted offline draft without IPA"
+  },
+  "checkedAt": "2026-10-20T15:25:19.684Z"
+}

@@ -1,0 +1,433 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "crawl-daily-026-e0264393e063",
+  "entries": [
+    {
+      "id": "crawl-sense-0d883886f9adaf8f73a0851f",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "coat",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-0d883886f9adaf8f73a0851f",
+      "meaningVi": "áo khoác",
+      "acceptedLearnAnswers": [
+        "coat"
+      ],
+      "cefr": {
+        "level": "A1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-ac27fb12dc058991be5a5f1d",
+          "prefix": "Tom was wearing a blue ",
+          "targetSurface": "coat",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "coat"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/coat",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/coat",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #8351440 (CK) & #10273156 (Alex_do); https://www.manythings.org/anki/; translated sentence https://tatoeba.org/en/sentences/show/10273156; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY 2.0 FR (https://creativecommons.org/licenses/by/2.0/fr/)",
+          "url": "https://tatoeba.org/en/sentences/show/8351440",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-sense-3d6e6aad048a96b6fc0aaca5",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "jeans",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-3d6e6aad048a96b6fc0aaca5",
+      "meaningVi": "quần jeans",
+      "acceptedLearnAnswers": [
+        "jeans"
+      ],
+      "cefr": {
+        "level": "A1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-5d8bfba59990596378620898",
+          "prefix": "I like these blue ",
+          "targetSurface": "jeans",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "jeans"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/jeans",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/jeans",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #11277796 (chaule3) & #11277797 (chaule3); https://www.manythings.org/anki/; translated sentence https://tatoeba.org/en/sentences/show/11277797; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY 2.0 FR (https://creativecommons.org/licenses/by/2.0/fr/)",
+          "url": "https://tatoeba.org/en/sentences/show/11277796",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-sense-4a6dbc2395386046dbaa07a1",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "shoe",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-4a6dbc2395386046dbaa07a1",
+      "meaningVi": "giày",
+      "acceptedLearnAnswers": [
+        "shoe"
+      ],
+      "cefr": {
+        "level": "A1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": "/ˈʃu/",
+        "accent": "en-US"
+      },
+      "examples": [
+        {
+          "id": "example-ea6cdbf150df7ec76d077f19",
+          "prefix": "She manages a ",
+          "targetSurface": "shoe",
+          "suffix": " store.",
+          "acceptedAnswers": [
+            "shoe"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/shoe",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/shoe",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #313352 (CK) & #1571588 (trieuho); https://www.manythings.org/anki/; translated sentence https://tatoeba.org/en/sentences/show/1571588; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY 2.0 FR (https://creativecommons.org/licenses/by/2.0/fr/)",
+          "url": "https://tatoeba.org/en/sentences/show/313352",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "ipa",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; explicitly US-tagged source transcription",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/shoe",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-sense-6d0fca1e615f18f1e8259d05",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "shirt",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-6d0fca1e615f18f1e8259d05",
+      "meaningVi": "áo sơ mi",
+      "acceptedLearnAnswers": [
+        "shirt"
+      ],
+      "cefr": {
+        "level": "A1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": "/ʃɜɹt/",
+        "accent": "en-US"
+      },
+      "examples": [
+        {
+          "id": "example-a466d99e9ff5c4ab4b71208c",
+          "prefix": "It can take a while to learn how to iron a ",
+          "targetSurface": "shirt",
+          "suffix": " properly.",
+          "acceptedAnswers": [
+            "shirt"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/shirt",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/shirt",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/shirt",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "ipa",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; explicitly US-tagged source transcription",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/shirt",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-sense-e50775c4bfbc8d890b81027b",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "sweater",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-e50775c4bfbc8d890b81027b",
+      "meaningVi": "áo len",
+      "acceptedLearnAnswers": [
+        "sweater"
+      ],
+      "cefr": {
+        "level": "A2",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-f0c10d1d7300f6acdc36202e",
+          "prefix": "Try on this ",
+          "targetSurface": "sweater",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "sweater"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/sweater",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/sweater",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #60937 (CK) & #9415544 (dotheduyet1999); https://www.manythings.org/anki/; translated sentence https://tatoeba.org/en/sentences/show/9415544; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY 2.0 FR (https://creativecommons.org/licenses/by/2.0/fr/)",
+          "url": "https://tatoeba.org/en/sentences/show/60937",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-vi-sense-467cda5b527e566954995add",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "trousers",
+      "partOfSpeech": "n.",
+      "senseKey": "vi-sense-467cda5b527e566954995add",
+      "meaningVi": "Quần Âu.",
+      "acceptedLearnAnswers": [
+        "trousers"
+      ],
+      "cefr": {
+        "level": "A2",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. Explicit cross-source sense alignment reviewed for identical headword/POS. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-a9cacc6253a4eaa81df89c6f",
+          "prefix": "The ",
+          "targetSurface": "trousers",
+          "suffix": " need to be shortened.",
+          "acceptedAnswers": [
+            "trousers"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://vi.wiktionary.org/wiki/trousers",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/trousers",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    }
+  ],
+  "topics": [
+    {
+      "id": "daily-026",
+      "collectionId": "daily",
+      "nameEn": "Shopping for Clothes",
+      "nameVi": "Mua quần áo",
+      "order": 26,
+      "entryIds": [
+        "crawl-sense-0d883886f9adaf8f73a0851f",
+        "crawl-sense-3d6e6aad048a96b6fc0aaca5",
+        "crawl-sense-4a6dbc2395386046dbaa07a1",
+        "crawl-sense-6d0fca1e615f18f1e8259d05",
+        "crawl-sense-e50775c4bfbc8d890b81027b",
+        "crawl-vi-sense-467cda5b527e566954995add"
+      ]
+    }
+  ]
+}

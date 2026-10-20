@@ -1,0 +1,469 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "crawl-daily-011-d499afb58dd4",
+  "entries": [
+    {
+      "id": "crawl-sense-54a3d0a7160ccf10abc12ec9",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "living room",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-54a3d0a7160ccf10abc12ec9",
+      "meaningVi": "phòng khách",
+      "acceptedLearnAnswers": [
+        "living room"
+      ],
+      "cefr": {
+        "level": "A1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-2421600b6e81f4cd68cf760f",
+          "prefix": "We relax in the ",
+          "targetSurface": "living room",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "living room"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/living room",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/living room",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/living room",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-sense-7e7ceda3e06b96b92115cc88",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "kitchen",
+      "partOfSpeech": "n.",
+      "senseKey": "sense-7e7ceda3e06b96b92115cc88",
+      "meaningVi": "nhà bếp",
+      "acceptedLearnAnswers": [
+        "kitchen"
+      ],
+      "cefr": {
+        "level": "A1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": "/ˈkɪt͡ʃ(ə)n/",
+        "accent": "en-US"
+      },
+      "examples": [
+        {
+          "id": "example-6da1f99a5d6efc653c6219ad",
+          "prefix": "We cook in the ",
+          "targetSurface": "kitchen",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "kitchen"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/kitchen",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "definition",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/kitchen",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/kitchen",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "ipa",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; explicitly US-tagged source transcription",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/kitchen",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-vi-sense-09b3e18875c25d3c70bb37d5",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "basement",
+      "partOfSpeech": "n.",
+      "senseKey": "vi-sense-09b3e18875c25d3c70bb37d5",
+      "meaningVi": "Tầng hầm.",
+      "acceptedLearnAnswers": [
+        "basement"
+      ],
+      "cefr": {
+        "level": "A2",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-7c1de3b16b800e1758841c33",
+          "prefix": "My ",
+          "targetSurface": "basement",
+          "suffix": " is flooded.",
+          "acceptedAnswers": [
+            "basement"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://vi.wiktionary.org/wiki/basement",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #10296201 (Smoky) & #13628502 (leucammieuvu); https://www.manythings.org/anki/; translated sentence https://tatoeba.org/en/sentences/show/13628502; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY 2.0 FR (https://creativecommons.org/licenses/by/2.0/fr/)",
+          "url": "https://tatoeba.org/en/sentences/show/10296201",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-vi-sense-2fc32a7d671922bc400cd7e3",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "bathroom",
+      "partOfSpeech": "n.",
+      "senseKey": "vi-sense-2fc32a7d671922bc400cd7e3",
+      "meaningVi": "Buồng tắm, phòng tắm, nhà vệ sinh.",
+      "acceptedLearnAnswers": [
+        "bathroom"
+      ],
+      "cefr": {
+        "level": "A1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-fe57b20a9e3517a69b5efd13",
+          "prefix": "Where is the ",
+          "targetSurface": "bathroom",
+          "suffix": "?",
+          "acceptedAnswers": [
+            "bathroom"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://vi.wiktionary.org/wiki/bathroom",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #2136 (brauliobezerra) & #12572708 (thanhcona40); https://www.manythings.org/anki/; translated sentence https://tatoeba.org/en/sentences/show/12572708; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY 2.0 FR (https://creativecommons.org/licenses/by/2.0/fr/)",
+          "url": "https://tatoeba.org/en/sentences/show/2136",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-vi-sense-4e1299a88eaffe35c7db0e06",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "room",
+      "partOfSpeech": "n.",
+      "senseKey": "vi-sense-4e1299a88eaffe35c7db0e06",
+      "meaningVi": "Buồng, phòng.",
+      "acceptedLearnAnswers": [
+        "room"
+      ],
+      "cefr": {
+        "level": "A1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-9d9bee2736e3d7c8f02e450d",
+          "prefix": "This is my ",
+          "targetSurface": "room",
+          "suffix": ".",
+          "acceptedAnswers": [
+            "room"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://vi.wiktionary.org/wiki/room",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #1273375 (CK) & #2979564 (khoaharp); https://www.manythings.org/anki/; translated sentence https://tatoeba.org/en/sentences/show/2979564; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY 2.0 FR (https://creativecommons.org/licenses/by/2.0/fr/)",
+          "url": "https://tatoeba.org/en/sentences/show/1273375",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-vi-sense-9c333363f96f65021d14cccd",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "bedroom",
+      "partOfSpeech": "n.",
+      "senseKey": "vi-sense-9c333363f96f65021d14cccd",
+      "meaningVi": "Buồng ngủ.",
+      "acceptedLearnAnswers": [
+        "bedroom"
+      ],
+      "cefr": {
+        "level": "A1",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. Explicit cross-source sense alignment reviewed for identical headword/POS. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": "/ˈbed.rʊm/",
+        "accent": "en-US"
+      },
+      "examples": [
+        {
+          "id": "example-841ac420363dcae77d20ebd0",
+          "prefix": "Please don't enter my ",
+          "targetSurface": "bedroom",
+          "suffix": " without knocking.",
+          "acceptedAnswers": [
+            "bedroom"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://vi.wiktionary.org/wiki/bedroom",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/bedroom",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "ipa",
+          "attribution": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract; explicitly US-tagged source transcription",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://vi.wiktionary.org/wiki/bedroom",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    },
+    {
+      "id": "crawl-vi-sense-bf197c6ab55dbf694019f264",
+      "revision": 1,
+      "collectionId": "daily",
+      "headword": "attic",
+      "partOfSpeech": "n.",
+      "senseKey": "vi-sense-bf197c6ab55dbf694019f264",
+      "meaningVi": "Gác mái.",
+      "acceptedLearnAnswers": [
+        "attic"
+      ],
+      "cefr": {
+        "level": "A2",
+        "status": "estimated",
+        "note": "Reviewed source meaning and example for this topic; common usage estimate. Explicit cross-source sense alignment reviewed for identical headword/POS. CEFR is an editorial estimate, not provided or verified by Wiktionary."
+      },
+      "pronunciation": {
+        "ipa": null,
+        "accent": null
+      },
+      "examples": [
+        {
+          "id": "example-01b561b4224032e5c0622f92",
+          "prefix": "We went up to the ",
+          "targetSurface": "attic",
+          "suffix": " to look for the boxes containing our childhood keepsakes.",
+          "acceptedAnswers": [
+            "attic"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "field": "meaning",
+          "attribution": "Vietnamese Wiktionary contributors; extracted by Kaikki / Wiktextract; selected from source sense. NFKC/whitespace normalized; example split for cloze.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://vi.wiktionary.org/wiki/attic",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "example",
+          "attribution": "FreeDictionaryAPI.com / English Wiktionary; source sentence split for cloze; NFKC/whitespace normalized.",
+          "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+          "url": "https://en.wiktionary.org/wiki/attic",
+          "status": "unverified",
+          "checkedAt": null
+        },
+        {
+          "field": "cefr",
+          "attribution": "EnglishVocab editorial estimate",
+          "license": "Original editorial annotation",
+          "url": null,
+          "status": "authored",
+          "checkedAt": null
+        }
+      ],
+      "contentStatus": "ready"
+    }
+  ],
+  "topics": [
+    {
+      "id": "daily-011",
+      "collectionId": "daily",
+      "nameEn": "Rooms in a Home",
+      "nameVi": "Các phòng trong nhà",
+      "order": 11,
+      "entryIds": [
+        "crawl-sense-54a3d0a7160ccf10abc12ec9",
+        "crawl-sense-7e7ceda3e06b96b92115cc88",
+        "crawl-vi-sense-09b3e18875c25d3c70bb37d5",
+        "crawl-vi-sense-2fc32a7d671922bc400cd7e3",
+        "crawl-vi-sense-4e1299a88eaffe35c7db0e06",
+        "crawl-vi-sense-9c333363f96f65021d14cccd",
+        "crawl-vi-sense-bf197c6ab55dbf694019f264"
+      ]
+    }
+  ]
+}

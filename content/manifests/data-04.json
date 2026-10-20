@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "status": "in-progress",
+  "slots": 0,
+  "targetSlots": 450,
+  "uniqueEntries": 0,
+  "populatedTopics": 0,
+  "completeTopics": 0,
+  "estimatedCefr": 0,
+  "verifiedCefr": 0,
+  "missingIPA": 0,
+  "packs": [],
+  "reviewStatus": "Source senses/examples selected in content/crawl/selections.json; estimated CEFR. Remaining topics are not complete."
+}
