@@ -1,5 +1,5 @@
-import SiteHeader from './shared/SiteHeader';
-import type { Tab } from './shared/navigation';
+import SiteHeader from './components/SiteHeader';
+import type { Tab } from './components/navigation';
 import { useState } from 'react';
 import type { SessionView } from '../domain/types';
 import LearnPage from './features/learn/LearnPage';
