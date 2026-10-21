@@ -1,36 +1,26 @@
 import { useEffect, useState } from 'react';
-import type { CefrLevel, CollectionId, SessionView } from '../domain/types';
-import { backend, initializeBackend } from './backend';
+import type {
+  CefrLevel,
+  CollectionId,
+  SessionView,
+} from '../../../domain/types';
+import { backend, initializeBackend } from '../../backend';
 import EntryDetails from './EntryDetails';
 import PersonalEntryEditor from './PersonalEntryEditor';
-import ReadingPanel from './ReadingPanel';
+import ReadingPanel from '../reading/ReadingPanel';
 
-type NotebookRow = Awaited<
-  ReturnType<typeof backend.queries.notebook>
->[number];
+type NotebookRow = Awaited<ReturnType<typeof backend.queries.notebook>>[number];
 
 type Scope = 'learned' | 'personal';
 
-type PersonalStatus =
-  | 'all'
-  | 'draft'
-  | 'unlearned'
-  | 'reviewing'
-  | 'mastered';
+type PersonalStatus = 'all' | 'draft' | 'unlearned' | 'reviewing' | 'mastered';
 
 type NotebookPageProps = {
   onLearn: () => void;
   onOpenSession: (session: SessionView) => void;
 };
 
-const cefrLevels: CefrLevel[] = [
-  'A1',
-  'A2',
-  'B1',
-  'B2',
-  'C1',
-  'C2',
-];
+const cefrLevels: CefrLevel[] = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
 const personalStatuses: {
   id: PersonalStatus;
@@ -51,7 +41,6 @@ const statusLabels: Record<string, string> = {
 };
 
 export default function NotebookPage({
-    
   onLearn,
   onOpenSession,
 }: NotebookPageProps) {
@@ -59,8 +48,7 @@ export default function NotebookPage({
   const [readingOpen, setReadingOpen] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
   const [scope, setScope] = useState<Scope>('learned');
-  const [collection, setCollection] =
-    useState<CollectionId | 'all'>('all');
+  const [collection, setCollection] = useState<CollectionId | 'all'>('all');
 
   const [search, setSearch] = useState('');
   const [cefr, setCefr] = useState<CefrLevel | ''>('');
@@ -73,8 +61,7 @@ export default function NotebookPage({
   const [error, setError] = useState<string | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
 
-  const [selectedId, setSelectedId] =
-    useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -86,9 +73,7 @@ export default function NotebookPage({
       try {
         await initializeBackend();
 
-        const query: Parameters<
-          typeof backend.queries.notebook
-        >[0] = {
+        const query: Parameters<typeof backend.queries.notebook>[0] = {
           search,
         };
 
@@ -115,10 +100,7 @@ export default function NotebookPage({
         const visible =
           scope === 'learned'
             ? result.filter((row) => row.progress !== null)
-            : result.filter(
-                (row) =>
-                  status === 'all' || row.status === status,
-              );
+            : result.filter((row) => status === 'all' || row.status === status);
 
         if (!cancelled) {
           setRows(visible);
@@ -126,9 +108,7 @@ export default function NotebookPage({
       } catch (cause: unknown) {
         if (!cancelled) {
           setError(
-            cause instanceof Error
-              ? cause.message
-              : 'Không tải được Sổ tay.',
+            cause instanceof Error ? cause.message : 'Không tải được Sổ tay.',
           );
         }
       } finally {
@@ -143,27 +123,18 @@ export default function NotebookPage({
     return () => {
       cancelled = true;
     };
-  }, [
-    scope,
-    collection,
-    search,
-    cefr,
-    level,
-    dueOnly,
-    status,
-    reloadKey,
-  ]);
+  }, [scope, collection, search, cefr, level, dueOnly, status, reloadKey]);
 
   useEffect(() => {
     function refresh() {
       if (
-  document.visibilityState === 'visible' &&
-  !selectedId &&
-  !creating &&
-  !readingOpen
-) {
-  setReloadKey((value) => value + 1);
-}
+        document.visibilityState === 'visible' &&
+        !selectedId &&
+        !creating &&
+        !readingOpen
+      ) {
+        setReloadKey((value) => value + 1);
+      }
     }
 
     window.addEventListener('focus', refresh);
@@ -187,8 +158,12 @@ export default function NotebookPage({
     setLevel('');
     setDueOnly(false);
     setSelectedId(id);
-    setReloadKey(value => value + 1);
-    setNotice(copied ? 'Đã tạo mục mới. Tiến độ của mục cũ được giữ nguyên.' : 'Đã lưu từ.');
+    setReloadKey((value) => value + 1);
+    setNotice(
+      copied
+        ? 'Đã tạo mục mới. Tiến độ của mục cũ được giữ nguyên.'
+        : 'Đã lưu từ.',
+    );
   }
 
   function chooseScope(nextScope: Scope) {
@@ -201,30 +176,50 @@ export default function NotebookPage({
     <section aria-labelledby="notebook-title">
       <p className="eyebrow">TỪ VỰNG CỦA BẠN</p>
       <h1 id="notebook-title">Sổ tay</h1>
-      <button className="primary-button" type="button" onClick={() => {setCreating(true);setSelectedId(null);setNotice(null);}}>Thêm từ cá nhân</button>
       <button
-  className="secondary-button reading-open-button"
-  type="button"
-  onClick={() => {
-    setCreating(false);
-    setSelectedId(null);
-    setReadingOpen(true);
-  }}
->
-  Reading — Đọc và lưu từ
-</button>
+        className="primary-button"
+        type="button"
+        onClick={() => {
+          setCreating(true);
+          setSelectedId(null);
+          setNotice(null);
+        }}
+      >
+        Thêm từ cá nhân
+      </button>
+      <button
+        className="secondary-button reading-open-button"
+        type="button"
+        onClick={() => {
+          setCreating(false);
+          setSelectedId(null);
+          setReadingOpen(true);
+        }}
+      >
+        Reading — Đọc và lưu từ
+      </button>
 
-{readingOpen && (
-  <ReadingPanel
-    onClose={() => setReadingOpen(false)}
-    onSaved={() => {
-      setNotice('Đã lưu từ/ngữ cảnh từ Reading.');
-      setReloadKey((value) => value + 1);
-    }}
-  />
-)}
-      {notice && <p className="study-notice is-success" role="status">{notice}</p>}
-      {creating && <PersonalEntryEditor initial={null} onSaved={saved} onCancel={() => setCreating(false)}/>}
+      {readingOpen && (
+        <ReadingPanel
+          onClose={() => setReadingOpen(false)}
+          onSaved={() => {
+            setNotice('Đã lưu từ/ngữ cảnh từ Reading.');
+            setReloadKey((value) => value + 1);
+          }}
+        />
+      )}
+      {notice && (
+        <p className="study-notice is-success" role="status">
+          {notice}
+        </p>
+      )}
+      {creating && (
+        <PersonalEntryEditor
+          initial={null}
+          onSaved={saved}
+          onCancel={() => setCreating(false)}
+        />
+      )}
 
       <div className="collection-picker" aria-label="Nhóm từ">
         <button
@@ -270,9 +265,7 @@ export default function NotebookPage({
             <select
               value={collection}
               onChange={(event) =>
-                setCollection(
-                  event.target.value as CollectionId | 'all',
-                )
+                setCollection(event.target.value as CollectionId | 'all')
               }
             >
               <option value="all">Tất cả</option>
@@ -287,9 +280,7 @@ export default function NotebookPage({
           CEFR
           <select
             value={cefr}
-            onChange={(event) =>
-              setCefr(event.target.value as CefrLevel | '')
-            }
+            onChange={(event) => setCefr(event.target.value as CefrLevel | '')}
           >
             <option value="">Tất cả</option>
 
@@ -328,10 +319,7 @@ export default function NotebookPage({
       </div>
 
       {scope === 'personal' && (
-        <div
-          className="collection-picker"
-          aria-label="Trạng thái từ cá nhân"
-        >
+        <div className="collection-picker" aria-label="Trạng thái từ cá nhân">
           {personalStatuses.map((item) => (
             <button
               key={item.id}
@@ -383,15 +371,9 @@ export default function NotebookPage({
         <div className="review-state">
           <h2>Chưa có từ phù hợp</h2>
 
-          <p>
-            Bạn có thể đổi bộ lọc hoặc học thêm từ mới.
-          </p>
+          <p>Bạn có thể đổi bộ lọc hoặc học thêm từ mới.</p>
 
-          <button
-            className="primary-button"
-            type="button"
-            onClick={onLearn}
-          >
+          <button className="primary-button" type="button" onClick={onLearn}>
             Học từ mới
           </button>
         </div>
@@ -428,9 +410,7 @@ export default function NotebookPage({
                       : 'Chưa có level'}
                   </span>
 
-                  <span>
-                    {statusLabels[row.status] ?? row.status}
-                  </span>
+                  <span>{statusLabels[row.status] ?? row.status}</span>
                 </span>
               </button>
             </li>

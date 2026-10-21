@@ -1,0 +1,159 @@
+.review-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.review-stats p {
+  display: grid;
+  flex: 1;
+  min-width: 130px;
+  gap: 8px;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  color: var(--muted);
+}
+
+.review-stats strong {
+  color: #283126;
+  font-size: 28px;
+}
+
+.review-state {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  padding: 48px 20px;
+  text-align: center;
+}
+
+.review-state .empty-illustration {
+  margin-bottom: 0;
+}
+
+.review-state h2,
+.review-state p {
+  margin: 0;
+}
+
+.review-state h2 {
+  font-size: clamp(24px, 4vw, 32px);
+}
+
+.review-state > p:not(.due-count) {
+  max-width: 500px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.due-count {
+  color: var(--green);
+  font-size: 76px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.review-batch {
+  display: grid;
+  gap: 10px;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.review-batch label {
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.review-batch select {
+  min-height: 48px;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+.review-sentence {
+  margin: 28px 0;
+  font-size: 21px;
+  line-height: 2.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.cloze-word {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  padding: 0 5px;
+  vertical-align: middle;
+}
+
+.cloze-fixed {
+  display: inline-grid;
+  min-width: 0.7em;
+  place-items: center;
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+.cloze-fixed.is-space {
+  min-width: 0.8em;
+  white-space: pre;
+}
+
+.cloze-letter {
+  width: 36px;
+  height: 46px;
+  padding: 4px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: #fffdf3;
+  color: inherit;
+  font: inherit;
+  line-height: 1;
+  text-align: center;
+}
+
+.cloze-letter:focus-visible {
+  border-color: var(--green);
+  outline: 3px solid #dcefd9;
+  outline-offset: 1px;
+}
+
+.cloze-letter:disabled {
+  background: #f1f3ee;
+}
+
+.review-result {
+  margin: 24px 0;
+  padding: 18px;
+  border-radius: 16px;
+  background: #f2f6ee;
+}
+
+.review-result p {
+  margin: 0;
+}
+
+.review-result p + p {
+  margin-top: 12px;
+}
+
+@media (max-width: 600px) {
+  .review-sentence {
+    font-size: 18px;
+  }
+
+  .cloze-letter {
+    width: 32px;
+    height: 44px;
+  }
+}

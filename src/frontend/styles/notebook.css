@@ -1,0 +1,144 @@
+.notebook-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.notebook-filters > label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.notebook-filters select {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+.notebook-filters .due-filter {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.due-filter input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--green);
+}
+
+.notebook-toolbar,
+.entry-details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.notebook-list {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.notebook-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fff;
+  color: inherit;
+  text-align: left;
+}
+
+.notebook-row:hover,
+.notebook-row.is-selected {
+  border-color: var(--green);
+  background: #f4f9f0;
+}
+
+.notebook-word,
+.notebook-meta {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.notebook-word strong {
+  font-size: 20px;
+}
+
+.notebook-word > span,
+.notebook-meta {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.entry-details {
+  margin: 24px 0;
+  padding: 28px;
+  border: 2px solid #d4e4cc;
+  border-radius: 22px;
+  background: #fbfdf8;
+  overflow-wrap: anywhere;
+}
+
+.entry-details-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.detail-section {
+  margin-top: 24px;
+  line-height: 1.8;
+}
+
+.detail-section summary {
+  cursor: pointer;
+  font-weight: 650;
+}
+
+.detail-section a {
+  color: var(--green);
+}
+
+.capture-context {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #f0f3eb;
+}
+
+.capture-context p {
+  white-space: pre-wrap;
+}
+
+@media (max-width: 600px) {
+  .notebook-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .notebook-filters > label {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .entry-details {
+    padding: 20px 16px;
+  }
+}

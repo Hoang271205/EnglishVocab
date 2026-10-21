@@ -1,0 +1,160 @@
+.study-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.study-title {
+  margin-top: 32px;
+}
+
+.study-card {
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: #fff;
+}
+
+.study-card p {
+  line-height: 1.7;
+}
+
+.study-word {
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+  font-size: clamp(30px, 6vw, 48px);
+  line-height: 1.2;
+}
+
+.word-type,
+.cefr-label,
+.study-ipa,
+.draft-status {
+  color: var(--muted);
+}
+
+.cefr-label {
+  font-size: 14px;
+}
+
+.study-meaning {
+  margin: 24px 0 12px;
+  font-size: 22px;
+  font-weight: 650;
+}
+
+.study-ipa {
+  font-size: 18px;
+}
+
+.audio-actions,
+.study-answer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.study-example {
+  margin-top: 28px;
+  padding: 20px;
+  border-radius: 16px;
+  background: #f7f8f4;
+}
+
+.study-example p {
+  margin-top: 0;
+  overflow-wrap: anywhere;
+}
+
+.audio-message {
+  color: #835b14;
+  font-size: 14px;
+}
+
+.study-sources {
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.study-sources summary {
+  cursor: pointer;
+}
+
+.study-sources a {
+  color: var(--green);
+}
+
+.study-next {
+  display: block;
+  width: 100%;
+  margin-top: 32px;
+}
+
+.answer-label {
+  display: block;
+  margin-top: 28px;
+  margin-bottom: 10px;
+  font-weight: 650;
+}
+
+.learn-answer {
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  color: inherit;
+  font-size: 20px;
+}
+
+.learn-answer:focus-visible {
+  border-color: var(--green);
+  outline: 3px solid #dcefd9;
+}
+
+.draft-status {
+  min-height: 24px;
+  font-size: 13px;
+}
+
+.study-notice {
+  padding: 16px 20px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  line-height: 1.7;
+}
+
+.study-notice.is-success {
+  border-color: #bfd9b9;
+  background: #eff8ec;
+  color: #23652a;
+}
+
+.study-notice.is-hint {
+  border-color: #e9d183;
+  background: #fff8de;
+  color: #765515;
+}
+
+@media (max-width: 600px) {
+  .study-card {
+    padding: 22px 16px;
+  }
+
+  .study-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .study-answer-actions > button {
+    width: 100%;
+  }
+}

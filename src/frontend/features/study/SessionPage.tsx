@@ -1,6 +1,6 @@
-import type { SessionView } from '../domain/types';
-import LearnSession from './LearnSession';
-import ReviewSession from './ReviewSession';
+import type { SessionView } from '../../../domain/types';
+import LearnSession from '../learn/LearnSession';
+import ReviewSession from '../review/ReviewSession';
 
 type SessionPageProps = {
   session: SessionView;

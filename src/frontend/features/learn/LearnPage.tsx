@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import type { SessionView } from '../domain/types';
-import { backend, initializeBackend } from './backend';
+import type { SessionView } from '../../../domain/types';
+import { backend, initializeBackend } from '../../backend';
 
 type Collection = 'ielts' | 'daily';
 
-type TopicSummary = Awaited<
-  ReturnType<typeof backend.queries.topics>
->[number];
+type TopicSummary = Awaited<ReturnType<typeof backend.queries.topics>>[number];
 
 type TopicGroups = Record<Collection, TopicSummary[]>;
 
@@ -25,12 +23,11 @@ export default function LearnPage({
   const [error, setError] = useState<string | null>(null);
   const [retryKey, setRetryKey] = useState(0);
 
-  const [selectedTopicId, setSelectedTopicId] = useState<string | null>(
+  const [selectedTopicId, setSelectedTopicId] = useState<string | null>(null);
+
+  const [pendingSession, setPendingSession] = useState<SessionView | null>(
     null,
   );
-
-  const [pendingSession, setPendingSession] =
-    useState<SessionView | null>(null);
 
   const [batchSize, setBatchSize] = useState<5 | 10>(10);
   const [working, setWorking] = useState(false);
@@ -81,10 +78,7 @@ export default function LearnPage({
 
   const allTopics = groups?.[collection] ?? [];
 
-  const normalizedSearch = search
-    .normalize('NFKC')
-    .toLowerCase()
-    .trim();
+  const normalizedSearch = search.normalize('NFKC').toLowerCase().trim();
 
   const visibleTopics = allTopics.filter((topic) =>
     `${topic.nameEn} ${topic.nameVi}`
@@ -93,9 +87,7 @@ export default function LearnPage({
       .includes(normalizedSearch),
   );
 
-  const populatedCount = allTopics.filter(
-    (topic) => topic.total > 0,
-  ).length;
+  const populatedCount = allTopics.filter((topic) => topic.total > 0).length;
 
   const selectedTopic =
     allTopics.find((topic) => topic.id === selectedTopicId) ?? null;
@@ -189,11 +181,7 @@ export default function LearnPage({
       }
 
       const session = current.paused
-        ? await backend.study.transition(
-            current.id,
-            current.version,
-            'resume',
-          )
+        ? await backend.study.transition(current.id, current.version, 'resume')
         : current;
 
       onOpenSession(session);
@@ -325,8 +313,8 @@ export default function LearnPage({
                 <p>{selectedTopic.nameVi}</p>
 
                 <p>
-                  Đã học {selectedTopic.learned}/{selectedTopic.total} từ.
-                  Mỗi lượt tối đa {batchSize} từ chưa học.
+                  Đã học {selectedTopic.learned}/{selectedTopic.total} từ. Mỗi
+                  lượt tối đa {batchSize} từ chưa học.
                 </p>
 
                 <button
@@ -359,16 +347,13 @@ export default function LearnPage({
               {visibleTopics.map((topic) => {
                 const hasContent = topic.total > 0;
 
-                const completed =
-                  hasContent && topic.learned >= topic.total;
+                const completed = hasContent && topic.learned >= topic.total;
 
                 return (
                   <li key={topic.id}>
                     <button
                       className={`topic-row${
-                        selectedTopicId === topic.id
-                          ? ' is-selected'
-                          : ''
+                        selectedTopicId === topic.id ? ' is-selected' : ''
                       }`}
                       type="button"
                       disabled={!hasContent || working}

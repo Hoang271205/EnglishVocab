@@ -1,0 +1,172 @@
+.topic-message {
+  margin: 24px 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.search-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.topic-search {
+  width: 100%;
+  min-height: 48px;
+  margin-bottom: 24px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  color: inherit;
+}
+
+.topic-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topic-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  min-height: 122px;
+  padding: 20px;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  background: #f4f5f1;
+  color: inherit;
+  text-align: left;
+}
+
+.topic-row:hover:not(:disabled) {
+  border-color: var(--yellow);
+  background: #fffbed;
+}
+
+.topic-row.is-selected {
+  border-color: var(--yellow);
+  background: #fff8d8;
+}
+
+.topic-row:disabled {
+  cursor: default;
+  color: var(--muted);
+}
+
+.topic-number {
+  display: grid;
+  flex-shrink: 0;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--green);
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.topic-info {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  gap: 5px;
+  overflow-wrap: anywhere;
+}
+
+.topic-info strong {
+  font-size: 18px;
+}
+
+.topic-translation,
+.topic-progress-text {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.topic-progress {
+  width: min(100%, 220px);
+  height: 8px;
+  margin-top: 5px;
+  accent-color: var(--green);
+}
+
+.topic-action {
+  flex-shrink: 0;
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.topic-row:disabled .topic-action {
+  color: var(--muted);
+}
+
+.selected-topic {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 20px;
+  border: 1px solid #cfe3cd;
+  border-radius: 18px;
+  background: #f0f8ed;
+}
+
+.selected-topic p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.close-selection {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: inherit;
+  font-size: 24px;
+}
+
+.load-error {
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid #e5b6ad;
+  border-radius: 18px;
+  background: #fff2ee;
+}
+
+.error-detail {
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .topic-row {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .topic-number {
+    width: 42px;
+    height: 42px;
+  }
+
+  .topic-info strong {
+    font-size: 16px;
+  }
+
+  .topic-action {
+    width: 100%;
+    padding-left: 54px;
+  }
+}

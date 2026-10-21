@@ -1,12 +1,11 @@
+import { errorMessage, formatTime } from '../../components/format';
 import { useEffect, useRef, useState } from 'react';
-import type { CollectionId, SessionView } from '../domain/types';
-import { backend, initializeBackend } from './backend';
+import type { CollectionId, SessionView } from '../../../domain/types';
+import { backend, initializeBackend } from '../../backend';
 
 type ReviewFilter = 'all' | CollectionId;
 
-type Overview = Awaited<
-  ReturnType<typeof backend.queries.overview>
->;
+type Overview = Awaited<ReturnType<typeof backend.queries.overview>>;
 
 type ReviewData = {
   filter: ReviewFilter;
@@ -26,16 +25,6 @@ const filters: { id: ReviewFilter; label: string }[] = [
   { id: 'daily', label: 'Giao tiếp' },
   { id: 'personal', label: 'Từ của tôi' },
 ];
-
-function errorMessage(cause: unknown): string {
-  return cause instanceof Error
-    ? cause.message
-    : 'Không thực hiện được thao tác.';
-}
-
-function formatTime(timestamp: number): string {
-  return new Date(timestamp).toLocaleString('vi-VN');
-}
 
 export default function ReviewPage({
   onLearn,
@@ -66,9 +55,7 @@ export default function ReviewPage({
         await initializeBackend();
 
         const query =
-          filter === 'all'
-            ? { due: true }
-            : { due: true, collection: filter };
+          filter === 'all' ? { due: true } : { due: true, collection: filter };
 
         const [overview, dueRows, pending] = await Promise.all([
           backend.queries.overview(),
@@ -108,20 +95,14 @@ export default function ReviewPage({
     }, 30_000);
 
     window.addEventListener('focus', refreshWhenVisible);
-    document.addEventListener(
-      'visibilitychange',
-      refreshWhenVisible,
-    );
+    document.addEventListener('visibilitychange', refreshWhenVisible);
 
     return () => {
       alive = false;
       window.clearInterval(timer);
 
       window.removeEventListener('focus', refreshWhenVisible);
-      document.removeEventListener(
-        'visibilitychange',
-        refreshWhenVisible,
-      );
+      document.removeEventListener('visibilitychange', refreshWhenVisible);
     };
   }, [filter, reloadKey]);
 
@@ -190,11 +171,7 @@ export default function ReviewPage({
       }
 
       const session = latest.paused
-        ? await backend.study.transition(
-            latest.id,
-            latest.version,
-            'resume',
-          )
+        ? await backend.study.transition(latest.id, latest.version, 'resume')
         : latest;
 
       onOpenSession(session);
@@ -297,9 +274,7 @@ export default function ReviewPage({
 
               <h2>Bắt đầu với những từ đầu tiên</h2>
 
-              <p>
-                Học từ mới để thêm từ vào lịch ôn của bạn.
-              </p>
+              <p>Học từ mới để thêm từ vào lịch ôn của bạn.</p>
 
               <button
                 className="primary-button"
@@ -328,9 +303,7 @@ export default function ReviewPage({
                 content.overview.nextReviewAt !== null && (
                   <p>
                     Lần ôn tiếp theo:{' '}
-                    <strong>
-                      {formatTime(content.overview.nextReviewAt)}
-                    </strong>
+                    <strong>{formatTime(content.overview.nextReviewAt)}</strong>
                   </p>
                 )}
 
@@ -350,23 +323,19 @@ export default function ReviewPage({
               <h2>Từ đang đến hạn ôn</h2>
 
               <p>
-                Chọn số từ cho lượt ôn này. Các từ còn lại sẽ tiếp tục
-                nằm trong danh sách đến hạn.
+                Chọn số từ cho lượt ôn này. Các từ còn lại sẽ tiếp tục nằm trong
+                danh sách đến hạn.
               </p>
 
               <div className="review-batch">
-                <label htmlFor="review-batch-size">
-                  Số từ mỗi lượt
-                </label>
+                <label htmlFor="review-batch-size">Số từ mỗi lượt</label>
 
                 <select
                   id="review-batch-size"
                   value={batchSize}
                   disabled={working}
                   onChange={(event) =>
-                    setBatchSize(
-                      event.target.value === '20' ? 20 : 10,
-                    )
+                    setBatchSize(event.target.value === '20' ? 20 : 10)
                   }
                 >
                   <option value="10">Tối đa 10 từ</option>
@@ -377,11 +346,7 @@ export default function ReviewPage({
               <button
                 className="primary-button"
                 type="button"
-                disabled={
-                  working ||
-                  content.pending !== null ||
-                  error !== null
-                }
+                disabled={working || content.pending !== null || error !== null}
                 onClick={startReview}
               >
                 {working ? 'Đang mở…' : 'Bắt đầu ôn tập'}

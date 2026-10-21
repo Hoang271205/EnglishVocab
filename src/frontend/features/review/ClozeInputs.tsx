@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import type { ClozeCell } from '../domain/types';
+import type { ClozeCell } from '../../../domain/types';
 
 type ClozeInputsProps = {
   cells: ClozeCell[];
@@ -38,11 +38,7 @@ export default function ClozeInputs({
   let blankIndex = 0;
 
   return (
-    <span
-      className="cloze-word"
-      role="group"
-      aria-label="Các chữ cần điền"
-    >
+    <span className="cloze-word" role="group" aria-label="Các chữ cần điền">
       {cells.map((cell, cellIndex) => {
         if (cell.kind === 'fixed') {
           return (
@@ -77,9 +73,7 @@ export default function ClozeInputs({
             spellCheck={false}
             aria-label={`Chữ còn thiếu ${index + 1}`}
             onFocus={(event) => event.currentTarget.select()}
-            onChange={(event) =>
-              changeLetter(index, event.target.value)
-            }
+            onChange={(event) => changeLetter(index, event.target.value)}
             onKeyDown={(event) => {
               if (event.nativeEvent.isComposing) {
                 return;
@@ -90,19 +84,12 @@ export default function ClozeInputs({
                 focus(index - 1);
               }
 
-              if (
-                event.key === 'ArrowRight' &&
-                index < values.length - 1
-              ) {
+              if (event.key === 'ArrowRight' && index < values.length - 1) {
                 event.preventDefault();
                 focus(index + 1);
               }
 
-              if (
-                event.key === 'Backspace' &&
-                !values[index] &&
-                index > 0
-              ) {
+              if (event.key === 'Backspace' && !values[index] && index > 0) {
                 event.preventDefault();
 
                 const next = [...values];
@@ -115,9 +102,7 @@ export default function ClozeInputs({
               event.preventDefault();
 
               const characters = Array.from(
-                event.clipboardData
-                  .getData('text')
-                  .normalize('NFKC'),
+                event.clipboardData.getData('text').normalize('NFKC'),
               ).filter((character) => /^\p{L}$/u.test(character));
 
               if (!characters.length) {
@@ -128,8 +113,7 @@ export default function ClozeInputs({
 
               for (
                 let offset = 0;
-                offset < characters.length &&
-                index + offset < next.length;
+                offset < characters.length && index + offset < next.length;
                 offset++
               ) {
                 next[index + offset] = characters[offset] ?? '';
@@ -137,12 +121,7 @@ export default function ClozeInputs({
 
               onChange(next);
 
-              focus(
-                Math.min(
-                  index + characters.length,
-                  values.length - 1,
-                ),
-              );
+              focus(Math.min(index + characters.length, values.length - 1));
             }}
           />
         );

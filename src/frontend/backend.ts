@@ -5,12 +5,14 @@ export const backend = createBackend();
 
 const manifestSchema = z.object({
   schemaVersion: z.literal(1),
-  packs: z.array(
-    z.object({
-      url: z.string().startsWith('/content/'),
-      contentVersion: z.string().min(1),
-    }),
-  ).min(1),
+  packs: z
+    .array(
+      z.object({
+        url: z.string().startsWith('/content/'),
+        contentVersion: z.string().min(1),
+      }),
+    )
+    .min(1),
 });
 
 let initialization: Promise<void> | undefined;
@@ -28,14 +30,10 @@ async function readJson(path: string): Promise<unknown> {
 }
 
 async function loadContent(): Promise<void> {
-  const manifest = manifestSchema.parse(
-    await readJson('/content/index.json'),
-  );
+  const manifest = manifestSchema.parse(await readJson('/content/index.json'));
 
   for (const item of manifest.packs) {
-    const pack = backend.content.inspect(
-      await readJson(item.url),
-    );
+    const pack = backend.content.inspect(await readJson(item.url));
 
     if (pack.contentVersion !== item.contentVersion) {
       throw new Error(`Phiên bản gói từ không khớp: ${item.url}`);

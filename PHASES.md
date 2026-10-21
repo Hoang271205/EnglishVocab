@@ -78,9 +78,9 @@ Chỉ giữ checklist gọn và kiểm thử trong mã; không có Markdown evid
 
 1/4 task đã triển khai; FE-06 chưa kiểm thử đầy đủ trên trình duyệt.
 
-- [x] **FE-06** Reading và popup tra từ trong web — Done / Typecheck Pass; UI Not tested.
+- [x] **FE-06** Reading và popup tra từ trong web — Done / Build Pass; UI luồng local Pass, API/lỗi mạng chưa kiểm thử đầy đủ.
   Đã có ReadingPanel trong Sổ tay: dán bài đọc, lưu URL nguồn, lấy từ và câu gốc khi bôi đen. Bôi đen chỉ hiện icon 🔍; bấm icon mới mở LookupPopup. Có tra local/cache/API, chọn nghĩa, nhập nghĩa tiếng Việt, lưu từ/ngữ cảnh và giữ tiến độ từ đã tồn tại; thiếu dữ liệu thì lưu nháp.
-  Phạm vi hiện tại: chỉ vùng bài đọc trong ReadingPanel, chưa áp dụng toàn ứng dụng hoặc website khác. Cần kiểm thử icon → popup → lưu, lỗi mạng, đổi vùng chọn và bố cục mobile. Ảnh người dùng bôi đen tên topic ở trang Học từ mới không xác nhận luồng Reading đã chạy.
+  Phạm vi hiện tại: chỉ vùng bài đọc trong ReadingPanel, chưa áp dụng toàn ứng dụng hoặc website khác. Đã kiểm thử icon → popup → tra local → lưu ngữ cảnh và popup vừa màn hình mobile 390px. Còn kiểm thử API/lỗi mạng và đổi vùng chọn. Ảnh người dùng bôi đen tên topic ở trang Học từ mới không xác nhận luồng Reading đã chạy.
 - [ ] **FE-07** Popup và vùng chọn trên website qua tiện ích — Blocked / Not tested.
 - [ ] **FE-08** Bảng IPA và cài đặt giọng Anh-Mỹ — Blocked / Not tested.
 - [ ] **FE-09** Nhập/xuất, khôi phục và cài đặt còn lại — Blocked / Not tested.
@@ -118,12 +118,12 @@ Chỉ giữ checklist gọn và kiểm thử trong mã; không có Markdown evid
 
 - Sau FE-05: `npm test` 48/48 Pass; lint các file FE-05 vừa sửa Pass; 5 ca UI Chrome/IndexedDB thật Pass trên origin và bộ nhớ riêng, không dùng tiến độ học của người dùng.
 
-- Sau FE-06: `npm run typecheck` Pass ngày 21/10/2026 trên code hiện tại. Chưa chạy lại build hoặc kiểm thử UI Reading trong lượt cập nhật checklist này.
+- Sau refactor FE (21/10/2026): tổ chức code theo feature, tách hook điều khiển học/ôn, helper Reading và CSS theo chức năng; giữ logic và thiết kế. `npm run check` Pass (53 test), `npm run build` Pass, formatter Pass. 7 nhóm kiểm tra UI Chrome/IndexedDB riêng Pass: thêm/sửa từ, học, giữ tiến độ, Reading icon/popup/lưu và ôn tạm dừng/đúng/sai/tải lại feedback. Có lệnh `npm run test:frontend` để chạy lại; không dùng dữ liệu học của người dùng. Không coi đây là nghiệm thu toàn bộ FE hoặc hoàn tất FE-07…FE-09.
 
 ## Điểm tiếp tục
 
 1. Xem task đang In progress và phần Còn lại ở trên; không làm lại các task đã tích.
-2. P6 đã triển khai 5/5 task; FE-06 đã thêm code theo hướng dẫn trong chat. Tiếp tục kiểm thử FE-06 ở Sổ tay → Reading → Mở bài đọc → bôi đen → icon → popup → lưu. Không tự mở rộng sang bôi đen toàn ứng dụng hoặc FE-07. Kiểm tra đầy đủ FE-01…FE-04 vẫn cần bổ sung ở GATE-FE.
+2. P6 đã triển khai 5/5 task; FE-06 đã thêm code theo hướng dẫn trong chat. FE-06 đã kiểm tra luồng Reading local; tiếp tục kiểm thử API/lỗi mạng, đổi vùng chọn và các trường hợp còn lại. Không tự mở rộng sang bôi đen toàn ứng dụng hoặc FE-07. Kiểm tra đầy đủ FE-01…FE-04 vẫn cần bổ sung ở GATE-FE.
 3. Bộ đủ 2.000 từ đã tách sang P-DATA theo lựa chọn người dùng. Giữ raw/snapshot, rà soát proposals trước publish; hiện 677 mục, không tự nhập ứng viên chưa rà soát.
 4. P7 và P8 chưa triển khai xong. P6 hoàn tất phần triển khai; không coi đó là nghiệm thu toàn bộ giao diện hoặc ứng dụng.
 

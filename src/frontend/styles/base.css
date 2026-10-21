@@ -1,0 +1,256 @@
+:root {
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  color: #283126;
+  background: #f1f3ee;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --green: #248232;
+  --yellow: #ffda3d;
+  --muted: #6e7867;
+  --border: #e3e7de;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 8% 35%, #fff 0 7%, transparent 7.2%),
+    radial-gradient(ellipse at 94% 72%, #fff 0 8%, transparent 8.2%), #f1f3ee;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #3288d2;
+  outline-offset: 4px;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.site-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 88px;
+  padding: 0 32px;
+  border-bottom: 1px solid var(--border);
+  background: #fff;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  color: #283126;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-decoration: none;
+}
+
+.main-nav {
+  display: flex;
+  align-self: stretch;
+}
+
+.nav-item {
+  display: grid;
+  min-width: 130px;
+  align-content: center;
+  justify-items: center;
+  gap: 5px;
+  padding: 12px 20px;
+  border: 0;
+  border-bottom: 4px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.nav-item.is-active {
+  border-bottom-color: var(--yellow);
+  background: #fff8d8;
+  color: #283126;
+}
+
+.nav-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.personal-label {
+  justify-self: end;
+  color: var(--muted);
+}
+
+.page-container {
+  width: min(100% - 32px, 1040px);
+  min-height: calc(100vh - 150px);
+  margin: 0 auto;
+  padding: 48px;
+  background: #fff;
+}
+
+h1 {
+  margin: 12px 0 24px;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.2;
+  letter-spacing: -1.3px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.empty-state {
+  display: grid;
+  min-height: 580px;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.empty-illustration {
+  display: grid;
+  width: 150px;
+  height: 150px;
+  margin-bottom: 36px;
+  place-items: center;
+  border: 3px solid var(--yellow);
+  border-radius: 44%;
+  background: #fff8d8;
+  font-size: 62px;
+}
+
+.page-description {
+  max-width: 480px;
+  margin: 0 0 32px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.primary-button {
+  min-height: 48px;
+  padding: 14px 30px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 750;
+}
+
+.primary-button:hover {
+  background: #1b6d29;
+}
+
+.learn-page {
+  padding-top: 8px;
+}
+
+.collection-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.collection-chip {
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: #f1f3ee;
+  color: var(--muted);
+}
+
+.collection-chip.is-selected {
+  background: #fff8d8;
+  color: #283126;
+  font-weight: 750;
+}
+
+.collection-banner {
+  padding: 24px;
+  border-radius: 20px;
+  background: var(--yellow);
+  text-align: center;
+  font-weight: 800;
+}
+
+.topic-placeholder {
+  margin-top: 24px;
+  padding: 28px;
+  border: 1px dashed var(--border);
+  border-radius: 18px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.site-footer {
+  padding: 20px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .site-header {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 16px 16px 0;
+  }
+
+  .brand {
+    justify-self: center;
+  }
+
+  .main-nav {
+    width: 100%;
+  }
+
+  .nav-item {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 6px;
+    font-size: 14px;
+  }
+
+  .personal-label {
+    display: none;
+  }
+
+  .page-container {
+    padding: 28px 18px;
+  }
+
+  .empty-state {
+    min-height: 480px;
+  }
+}

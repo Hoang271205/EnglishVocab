@@ -1,11 +1,10 @@
+import { formatTime } from '../../components/format';
 import { useEffect, useRef, useState } from 'react';
-import { backend } from './backend';
+import { backend } from '../../backend';
 import PersonalEntryEditor from './PersonalEntryEditor';
-import type { SessionView } from '../domain/types';
+import type { SessionView } from '../../../domain/types';
 
-type Details = Awaited<
-  ReturnType<typeof backend.queries.details>
->;
+type Details = Awaited<ReturnType<typeof backend.queries.details>>;
 
 type EntryDetailsProps = {
   entryId: string;
@@ -13,10 +12,6 @@ type EntryDetailsProps = {
   onSaved: (id: string, copied: boolean) => void;
   onOpenSession: (session: SessionView) => void;
 };
-
-function formatTime(timestamp: number): string {
-  return new Date(timestamp).toLocaleString('vi-VN');
-}
 
 export default function EntryDetails({
   entryId,
@@ -86,9 +81,7 @@ export default function EntryDetails({
     } catch (cause: unknown) {
       if (alive.current && turn === audioTurn.current) {
         setAudioError(
-          cause instanceof Error
-            ? cause.message
-            : 'Không phát được giọng đọc.',
+          cause instanceof Error ? cause.message : 'Không phát được giọng đọc.',
         );
       }
     }
@@ -112,12 +105,18 @@ export default function EntryDetails({
       }
       const latest = await backend.queries.details(entryId);
       if (latest.progress || latest.entry.contentStatus !== 'ready') {
-        throw new Error('Từ chưa sẵn sàng hoặc đã được học. Hãy mở lại chi tiết.');
+        throw new Error(
+          'Từ chưa sẵn sàng hoặc đã được học. Hãy mở lại chi tiết.',
+        );
       }
       const settings = await backend.settings.get();
-      onOpenSession(await backend.study.create('learn', settings.learnBatchSize, [entryId]));
+      onOpenSession(
+        await backend.study.create('learn', settings.learnBatchSize, [entryId]),
+      );
     } catch (cause: unknown) {
-      setError(cause instanceof Error ? cause.message : 'Không mở được phiên học.');
+      setError(
+        cause instanceof Error ? cause.message : 'Không mở được phiên học.',
+      );
     } finally {
       actionLock.current = false;
       setWorking(false);
@@ -125,18 +124,21 @@ export default function EntryDetails({
   }
 
   if (editing && data) {
-    return <PersonalEntryEditor
-      initial={{entry: data.entry, note: data.note, hasProgress: data.progress !== null}}
-      onCancel={() => setEditing(false)}
-      onSaved={onSaved}
-    />;
+    return (
+      <PersonalEntryEditor
+        initial={{
+          entry: data.entry,
+          note: data.note,
+          hasProgress: data.progress !== null,
+        }}
+        onCancel={() => setEditing(false)}
+        onSaved={onSaved}
+      />
+    );
   }
 
   return (
-    <section
-      className="entry-details"
-      aria-labelledby="entry-details-title"
-    >
+    <section className="entry-details" aria-labelledby="entry-details-title">
       <div className="entry-details-header">
         <h2 id="entry-details-title">Chi tiết từ</h2>
 
@@ -164,27 +166,42 @@ export default function EntryDetails({
         </div>
       )}
 
-      {!data && !error && (
-        <p role="status">Đang tải chi tiết…</p>
-      )}
+      {!data && !error && <p role="status">Đang tải chi tiết…</p>}
 
       {data && (
         <>
           {data.entry.collectionId === 'personal' && (
             <div className="study-answer-actions">
-              <button className="secondary-button" type="button" disabled={working} onClick={() => {
-                audioTurn.current++;
-                backend.audio.stop();
-                setEditing(true);
-              }}>Chỉnh sửa</button>
+              <button
+                className="secondary-button"
+                type="button"
+                disabled={working}
+                onClick={() => {
+                  audioTurn.current++;
+                  backend.audio.stop();
+                  setEditing(true);
+                }}
+              >
+                Chỉnh sửa
+              </button>
               {data.entry.contentStatus === 'ready' && !data.progress && (
-                <button className="primary-button" type="button" disabled={working} onClick={() => void startLearning()}>
+                <button
+                  className="primary-button"
+                  type="button"
+                  disabled={working}
+                  onClick={() => void startLearning()}
+                >
                   {working ? 'Đang mở…' : 'Học từ này / tiếp tục phiên dở'}
                 </button>
               )}
             </div>
           )}
-          {data.note && <div className="detail-section"><h3>Ghi chú cá nhân</h3><p className="personal-note">{data.note}</p></div>}
+          {data.note && (
+            <div className="detail-section">
+              <h3>Ghi chú cá nhân</h3>
+              <p className="personal-note">{data.note}</p>
+            </div>
+          )}
           <p className="word-type">
             {data.entry.partOfSpeech || 'Chưa có từ loại'}
           </p>
@@ -201,23 +218,18 @@ export default function EntryDetails({
 
           <p>
             CEFR: <strong>{data.entry.cefr.level ?? 'Chưa có'}</strong>
-            {data.entry.cefr.status === 'estimated'
-              ? ' · tham khảo'
-              : ''}
+            {data.entry.cefr.status === 'estimated' ? ' · tham khảo' : ''}
           </p>
 
           {data.progress ? (
             <div className="review-result">
               <p>
-                Level ghi nhớ:{' '}
-                <strong>{data.progress.level}</strong>
+                Level ghi nhớ: <strong>{data.progress.level}</strong>
               </p>
 
               <p>
                 Lần ôn tiếp theo:{' '}
-                <strong>
-                  {formatTime(data.progress.nextReviewAt)}
-                </strong>
+                <strong>{formatTime(data.progress.nextReviewAt)}</strong>
               </p>
 
               <p>
@@ -273,9 +285,7 @@ export default function EntryDetails({
               <button
                 className="secondary-button"
                 type="button"
-                onClick={() =>
-                  void playAudio({ exampleId: example.id })
-                }
+                onClick={() => void playAudio({ exampleId: example.id })}
               >
                 Nghe câu ví dụ
               </button>
@@ -315,11 +325,7 @@ export default function EntryDetails({
                   {source.url && (
                     <>
                       {' · '}
-                      <a
-                        href={source.url}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
+                      <a href={source.url} target="_blank" rel="noreferrer">
                         Xem nguồn
                       </a>
                     </>
@@ -330,9 +336,7 @@ export default function EntryDetails({
           </details>
 
           <details className="detail-section">
-            <summary>
-              Ngữ cảnh đã lưu ({data.captures.length})
-            </summary>
+            <summary>Ngữ cảnh đã lưu ({data.captures.length})</summary>
 
             {data.captures.length === 0 ? (
               <p>Chưa có ngữ cảnh được lưu cho từ này.</p>
@@ -343,16 +347,9 @@ export default function EntryDetails({
                     <strong>{capture.selectedText}</strong>
                   </p>
 
-                  <p>
-                    {capture.originalSentence ||
-                      'Không có câu ngữ cảnh.'}
-                  </p>
+                  <p>{capture.originalSentence || 'Không có câu ngữ cảnh.'}</p>
 
-                  <a
-                    href={capture.sourceUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                  <a href={capture.sourceUrl} target="_blank" rel="noreferrer">
                     Mở trang nguồn
                   </a>
 
