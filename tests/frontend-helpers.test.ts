@@ -4,7 +4,7 @@ import {
   createReadingEntry,
   dictionaryExample,
   remoteIpa,
-} from '../src/frontend/features/reading/entry';
+} from '../src/dictionary/readingEntry';
 import {
   makeDraft,
   restoreLetters,

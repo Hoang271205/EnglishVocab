@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "EnglishVocab — lưu từ cá nhân",
   "version": "0.1.0",
-  "description": "Nền tra từ và hàng đợi capture; giao diện bôi đen sẽ được bổ sung sau Gate-BE.",
+  "description": "Bôi đen để tra từ và lưu từ vựng về EnglishVocab.",
   "permissions": [
     "storage"
   ],
@@ -20,6 +20,19 @@
       ],
       "js": [
         "bridge.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "http://localhost/*"
+      ],
+      "js": [
+        "content.js"
       ],
       "run_at": "document_idle"
     }

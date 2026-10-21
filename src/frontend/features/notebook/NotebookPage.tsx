@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import ExtensionSyncPanel from './ExtensionSyncPanel';
+import StudyTools from '../reference/StudyTools';
+import BackupPanel from '../data/BackupPanel';
 import type {
   CefrLevel,
   CollectionId,
@@ -49,7 +52,7 @@ export default function NotebookPage({
   const [notice, setNotice] = useState<string | null>(null);
   const [scope, setScope] = useState<Scope>('learned');
   const [collection, setCollection] = useState<CollectionId | 'all'>('all');
-
+  const [referenceVersion, setReferenceVersion] = useState(0);
   const [search, setSearch] = useState('');
   const [cefr, setCefr] = useState<CefrLevel | ''>('');
   const [level, setLevel] = useState('');
@@ -198,7 +201,20 @@ export default function NotebookPage({
       >
         Reading — Đọc và lưu từ
       </button>
-
+      <ExtensionSyncPanel
+      disabled={creating || readingOpen || selectedId !== null}
+      onReceived={() => {
+            setScope('personal');
+             setCollection('all');
+             setStatus('all');
+             setSearch('');
+             setCefr('');
+            setLevel('');
+            setDueOnly(false);
+            setSelectedId(null);
+            setReloadKey((value) => value + 1);
+  }}
+/>
       {readingOpen && (
         <ReadingPanel
           onClose={() => setReadingOpen(false)}
@@ -417,6 +433,23 @@ export default function NotebookPage({
           ))}
         </ul>
       )}
+    <StudyTools key={referenceVersion} />
+
+<BackupPanel
+  disabled={creating || readingOpen || selectedId !== null}
+  onRestored={() => {
+    setSelectedId(null);
+    setSearch('');
+    setCollection('all');
+    setCefr('');
+    setLevel('');
+    setDueOnly(false);
+    setStatus('all');
+
+    setReloadKey((value) => value + 1);
+    setReferenceVersion((value) => value + 1);
+  }}
+/>
     </section>
   );
 }

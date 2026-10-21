@@ -142,3 +142,10 @@
     padding: 20px 16px;
   }
 }
+.extension-sync {
+  margin-top: 24px;
+}
+
+.extension-sync h2 {
+  margin-top: 0;
+}

@@ -1,8 +1,5 @@
-import type { Entry, Example, Source } from '../../../domain/types';
-import type {
-  LookupResult,
-  LookupSense,
-} from '../../../dictionary/freeDictionary';
+import type { Entry, Example, Source } from '../domain/types';
+import type { LookupResult, LookupSense } from './freeDictionary';
 
 export function dictionaryExample(
   sentence: string | null,
