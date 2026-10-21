@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import ExtensionSyncPanel from './ExtensionSyncPanel';
 import StudyTools from '../reference/StudyTools';
 import BackupPanel from '../data/BackupPanel';
+import ContentImportPanel from '../data/ContentImportPanel';
+import QueueImportPanel from '../data/QueueImportPanel';
+import AppSettingsPanel from '../data/AppSettingsPanel';
 import type {
   CefrLevel,
   CollectionId,
@@ -202,19 +205,19 @@ export default function NotebookPage({
         Reading — Đọc và lưu từ
       </button>
       <ExtensionSyncPanel
-      disabled={creating || readingOpen || selectedId !== null}
-      onReceived={() => {
-            setScope('personal');
-             setCollection('all');
-             setStatus('all');
-             setSearch('');
-             setCefr('');
-            setLevel('');
-            setDueOnly(false);
-            setSelectedId(null);
-            setReloadKey((value) => value + 1);
-  }}
-/>
+        disabled={creating || readingOpen || selectedId !== null}
+        onReceived={() => {
+          setScope('personal');
+          setCollection('all');
+          setStatus('all');
+          setSearch('');
+          setCefr('');
+          setLevel('');
+          setDueOnly(false);
+          setSelectedId(null);
+          setReloadKey((value) => value + 1);
+        }}
+      />
       {readingOpen && (
         <ReadingPanel
           onClose={() => setReadingOpen(false)}
@@ -433,23 +436,55 @@ export default function NotebookPage({
           ))}
         </ul>
       )}
-    <StudyTools key={referenceVersion} />
+      <StudyTools key={referenceVersion} />
 
-<BackupPanel
-  disabled={creating || readingOpen || selectedId !== null}
-  onRestored={() => {
-    setSelectedId(null);
-    setSearch('');
-    setCollection('all');
-    setCefr('');
-    setLevel('');
-    setDueOnly(false);
-    setStatus('all');
+      <BackupPanel
+        disabled={creating || readingOpen || selectedId !== null}
+        onRestored={() => {
+          setSelectedId(null);
+          setSearch('');
+          setCollection('all');
+          setCefr('');
+          setLevel('');
+          setDueOnly(false);
+          setStatus('all');
 
-    setReloadKey((value) => value + 1);
-    setReferenceVersion((value) => value + 1);
-  }}
-/>
+          setReloadKey((value) => value + 1);
+          setReferenceVersion((value) => value + 1);
+        }}
+      />
+      <ContentImportPanel
+        disabled={creating || readingOpen || selectedId !== null}
+        onImported={() => {
+          setSearch('');
+          setCollection('all');
+          setCefr('');
+          setLevel('');
+          setDueOnly(false);
+          setStatus('all');
+
+          setReloadKey((value) => value + 1);
+          setReferenceVersion((value) => value + 1);
+        }}
+      />
+      <QueueImportPanel
+        disabled={creating || readingOpen || selectedId !== null}
+        onImported={() => {
+          setScope('personal');
+          setCollection('all');
+          setStatus('all');
+          setSearch('');
+          setCefr('');
+          setLevel('');
+          setDueOnly(false);
+
+          setReloadKey((value) => value + 1);
+        }}
+      />
+      <AppSettingsPanel
+        key={`settings-${referenceVersion}`}
+        disabled={creating || readingOpen || selectedId !== null}
+      />
     </section>
   );
 }

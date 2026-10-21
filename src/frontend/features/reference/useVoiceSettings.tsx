@@ -65,8 +65,7 @@ export function useVoiceSettings() {
         if (cancelled) return;
 
         const sampleRow =
-          rows.find((row) => row.entry.examples.length > 0) ??
-          rows[0];
+          rows.find((row) => row.entry.examples.length > 0) ?? rows[0];
 
         setVoiceURI(settings.voiceURI ?? '');
         setSample(sampleRow?.entry ?? null);
@@ -96,10 +95,7 @@ export function useVoiceSettings() {
       mounted.current = false;
       voiceRequest++;
 
-      synth?.removeEventListener(
-        'voiceschanged',
-        handleVoicesChanged,
-      );
+      synth?.removeEventListener('voiceschanged', handleVoicesChanged);
 
       backend.audio.stop();
     };

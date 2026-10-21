@@ -1,5 +1,8 @@
 import { useLookupPosition } from './useLookupPosition';
-import { createReadingEntry, remoteIpa } from '../../../dictionary/readingEntry';
+import {
+  createReadingEntry,
+  remoteIpa,
+} from '../../../dictionary/readingEntry';
 import type { ReadingSelection } from './types';
 import { useEffect, useRef, useState } from 'react';
 

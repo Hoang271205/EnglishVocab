@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { SessionView } from '../../../domain/types';
 import { backend, initializeBackend } from '../../backend';
+import DailyGoal from './DailyGoal';
 
 type Collection = 'ielts' | 'daily';
 
@@ -34,7 +35,6 @@ export default function LearnPage({
   const [actionError, setActionError] = useState<string | null>(null);
 
   const actionLock = useRef(false);
-
   useEffect(() => {
     let cancelled = false;
 
@@ -192,6 +192,7 @@ export default function LearnPage({
     <section className="learn-page" aria-labelledby="learn-title">
       <p className="eyebrow">MỖI NGÀY MỘT CHÚT</p>
       <h1 id="learn-title">Học từ mới</h1>
+      <DailyGoal />
 
       <div className="collection-picker" aria-label="Chọn bộ từ">
         <button

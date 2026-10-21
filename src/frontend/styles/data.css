@@ -1,0 +1,50 @@
+.settings-form fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.settings-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.settings-options label {
+  display: grid;
+  gap: 8px;
+  font-weight: 650;
+}
+
+.settings-options input,
+.settings-options select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+  color: inherit;
+  font: inherit;
+}
+
+.settings-online {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.daily-goal {
+  margin: 20px 0;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #f5f7f1;
+}
+
+.daily-goal progress {
+  width: 100%;
+  accent-color: var(--green);
+}

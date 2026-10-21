@@ -23,5 +23,5 @@
      "src/**/*.tsx",
      "tests/**/*.ts",
      "extension/**/*.ts"
-  ]
+, "extension/DictionaryForm.tsx"  ]
 }

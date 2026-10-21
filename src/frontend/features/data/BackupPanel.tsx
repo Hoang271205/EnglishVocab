@@ -1,9 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import {
-  downloadBackup,
-  readBackup,
-  restoreBackup,
-} from './backupFiles';
+import { downloadBackup, readBackup, restoreBackup } from './backupFiles';
 import type { Backup } from './backupFiles';
 
 type BackupPanelProps = {
@@ -56,10 +52,7 @@ export default function BackupPanel({
     };
   }, []);
 
-  async function run(
-    nextOperation: Operation,
-    action: () => Promise<void>,
-  ) {
+  async function run(nextOperation: Operation, action: () => Promise<void>) {
     if (lock.current || disabled) return;
 
     lock.current = true;
@@ -95,7 +88,7 @@ export default function BackupPanel({
       setPendingExport(exportedAt);
       setNotice(
         'Đã gửi yêu cầu tải file tới trình duyệt. ' +
-        'Hãy kiểm tra tệp trong thư mục tải xuống.',
+          'Hãy kiểm tra tệp trong thư mục tải xuống.',
       );
     });
   }
@@ -104,10 +97,7 @@ export default function BackupPanel({
     if (pendingExport === null) return;
 
     try {
-      localStorage.setItem(
-        LAST_CHECKED_KEY,
-        String(pendingExport),
-      );
+      localStorage.setItem(LAST_CHECKED_KEY, String(pendingExport));
 
       setLastChecked(pendingExport);
       setPendingExport(null);
@@ -116,7 +106,7 @@ export default function BackupPanel({
     } catch {
       setError(
         'Không lưu được mốc nhắc sao lưu trên trình duyệt. ' +
-        'Tệp bạn đã tải không bị ảnh hưởng.',
+          'Tệp bạn đã tải không bị ảnh hưởng.',
       );
     }
   }
@@ -149,7 +139,7 @@ export default function BackupPanel({
       setFileName('');
       setNotice(
         `Đã khôi phục ${result.entries} mục từ và ` +
-        `${result.progress} tiến độ học.`,
+          `${result.progress} tiến độ học.`,
       );
 
       onRestored();
@@ -158,20 +148,15 @@ export default function BackupPanel({
 
   const busy = operation !== null;
   const blocked = disabled || busy;
-  const backupDue =
-    lastChecked === 0 || Date.now() - lastChecked >= SEVEN_DAYS;
+  const backupDue = lastChecked === 0 || Date.now() - lastChecked >= SEVEN_DAYS;
 
   return (
-    <section
-      className="entry-details"
-      aria-labelledby="backup-title"
-    >
+    <section className="entry-details" aria-labelledby="backup-title">
       <h2 id="backup-title">Sao lưu và khôi phục</h2>
 
       <p className="topic-message">
-        Tải file để giữ một bản riêng của thư viện và tiến độ.
-        Các lượt lưu còn chờ trong extension chưa nằm trong
-        bản sao lưu của web.
+        Tải file để giữ một bản riêng của thư viện và tiến độ. Các lượt lưu còn
+        chờ trong extension chưa nằm trong bản sao lưu của web.
       </p>
 
       {backupDue && (
@@ -184,8 +169,7 @@ export default function BackupPanel({
 
       {lastChecked > 0 && (
         <p className="draft-status">
-          Bản sao lưu đã kiểm tra gần nhất:
-          {' '}{formatTime(lastChecked)}
+          Bản sao lưu đã kiểm tra gần nhất: {formatTime(lastChecked)}
         </p>
       )}
 
@@ -195,17 +179,14 @@ export default function BackupPanel({
         disabled={blocked}
         onClick={() => void exportFile()}
       >
-        {operation === 'export'
-          ? 'Đang tạo file…'
-          : 'Tải bản sao lưu'}
+        {operation === 'export' ? 'Đang tạo file…' : 'Tải bản sao lưu'}
       </button>
 
       {pendingExport !== null && (
         <div className="review-result">
           <p>
-            Trình duyệt không báo cho web biết bạn đã giữ tệp
-            thành công hay chưa. Sau khi mở và kiểm tra tệp,
-            bạn có thể ghi nhận bên dưới.
+            Trình duyệt không báo cho web biết bạn đã giữ tệp thành công hay
+            chưa. Sau khi mở và kiểm tra tệp, bạn có thể ghi nhận bên dưới.
           </p>
 
           <button
@@ -224,13 +205,12 @@ export default function BackupPanel({
       <h3>Khôi phục từ file</h3>
 
       <p className="topic-message">
-        Chọn file để xem trước. Dữ liệu hiện tại chỉ được thay thế
-        khi bạn xác nhận và bấm khôi phục.
+        Chọn file để xem trước. Dữ liệu hiện tại chỉ được thay thế khi bạn xác
+        nhận và bấm khôi phục.
       </p>
 
       <label className="lookup-label">
         Chọn bản sao lưu JSON
-
         <input
           type="file"
           accept=".json,application/json"
@@ -247,9 +227,7 @@ export default function BackupPanel({
         />
       </label>
 
-      {operation === 'inspect' && (
-        <p role="status">Đang kiểm tra file…</p>
-      )}
+      {operation === 'inspect' && <p role="status">Đang kiểm tra file…</p>}
 
       {preview && (
         <div className="review-result">
@@ -263,8 +241,8 @@ export default function BackupPanel({
           <p>Số phiên học/ôn: {preview.sessions.length}</p>
 
           <p>
-            Khôi phục thay thế dữ liệu web hiện tại bằng nội dung
-            trong file, gồm cả tiến độ và cài đặt.
+            Khôi phục thay thế dữ liệu web hiện tại bằng nội dung trong file,
+            gồm cả tiến độ và cài đặt.
           </p>
 
           <label className="due-filter">
@@ -272,9 +250,7 @@ export default function BackupPanel({
               type="checkbox"
               checked={confirmed}
               disabled={blocked}
-              onChange={(event) =>
-                setConfirmed(event.target.checked)
-              }
+              onChange={(event) => setConfirmed(event.target.checked)}
             />
             Tôi đồng ý thay thế dữ liệu hiện tại bằng bản sao lưu này.
           </label>

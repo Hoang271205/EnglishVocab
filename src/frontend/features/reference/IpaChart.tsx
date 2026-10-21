@@ -27,9 +27,7 @@ export default function IpaChart() {
       (cause: unknown) => {
         if (!cancelled) {
           setError(
-            cause instanceof Error
-              ? cause.message
-              : 'Không tải được bảng IPA.',
+            cause instanceof Error ? cause.message : 'Không tải được bảng IPA.',
           );
         }
       },
@@ -44,9 +42,7 @@ export default function IpaChart() {
     <section className="ipa-chart" aria-labelledby="ipa-chart-title">
       <h3 id="ipa-chart-title">Bảng tra IPA · Anh-Mỹ</h3>
 
-      {!catalog && !error && (
-        <p role="status">Đang tải bảng IPA…</p>
-      )}
+      {!catalog && !error && <p role="status">Đang tải bảng IPA…</p>}
 
       {error && (
         <div className="load-error" role="alert">

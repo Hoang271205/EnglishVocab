@@ -39,7 +39,7 @@ async function loadContent(): Promise<void> {
       throw new Error(`Phiên bản gói từ không khớp: ${item.url}`);
     }
 
-    await backend.content.import(pack);
+    await backend.content.seed(pack);
   }
 }
 

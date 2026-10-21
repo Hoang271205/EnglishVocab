@@ -65,7 +65,12 @@ try {
     .getByRole('heading', { name: 'stargazing', exact: true })
     .waitFor();
   assert.match(
-    await page.locator('.entry-details').innerText(),
+    await page
+  .getByRole('region', {
+    name: 'Chi tiết từ',
+    exact: true,
+  })
+  .innerText(),
     /chưa có level ghi nhớ/,
   );
   await page

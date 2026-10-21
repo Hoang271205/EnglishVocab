@@ -39,6 +39,7 @@ export default function ReviewPage({
   const [reloadKey, setReloadKey] = useState(0);
 
   const actionLock = useRef(false);
+  const preferencesLoaded = useRef(false);
 
   useEffect(() => {
     let alive = true;
@@ -57,14 +58,20 @@ export default function ReviewPage({
         const query =
           filter === 'all' ? { due: true } : { due: true, collection: filter };
 
-        const [overview, dueRows, pending] = await Promise.all([
+        const [overview, dueRows, pending, settings] = await Promise.all([
           backend.queries.overview(),
           backend.queries.notebook(query),
           backend.study.active(),
+          backend.settings.get(),
         ]);
 
         if (!alive || request !== requestNumber) {
           return;
+        }
+
+        if (!preferencesLoaded.current) {
+          setBatchSize(settings.reviewBatchSize);
+          preferencesLoaded.current = true;
         }
 
         setData({

@@ -1,5 +1,6 @@
 import type { SelectedWord } from './SelectionPopup';
 import { useCaptureLookup } from './useCaptureLookup';
+import QueueExportButton from './QueueExportButton';
 
 type DictionaryFormProps = {
   selection: SelectedWord;
@@ -167,6 +168,7 @@ export default function DictionaryForm({
               : 'Lưu từ'}
         </button>
       )}
+      <QueueExportButton disabled={model.saving} />
     </form>
   );
 }

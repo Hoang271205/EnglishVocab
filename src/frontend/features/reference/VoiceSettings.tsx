@@ -14,30 +14,22 @@ export default function VoiceSettings() {
     model.voices.length === 0;
 
   return (
-    <section
-      className="voice-settings"
-      aria-labelledby="voice-settings-title"
-    >
+    <section className="voice-settings" aria-labelledby="voice-settings-title">
       <h3 id="voice-settings-title">Giọng đọc Anh-Mỹ</h3>
 
       <p className="topic-message">
-        Lựa chọn này áp dụng cho nút nghe từ và câu trong web.
-        Từ chưa có IPA vẫn nghe được bằng chữ tiếng Anh đã lưu.
+        Lựa chọn này áp dụng cho nút nghe từ và câu trong web. Từ chưa có IPA
+        vẫn nghe được bằng chữ tiếng Anh đã lưu.
       </p>
 
-      {model.loading && (
-        <p role="status">Đang tải giọng đọc…</p>
-      )}
+      {model.loading && <p role="status">Đang tải giọng đọc…</p>}
 
       <label className="voice-picker">
         Chọn giọng en-US
-
         <select
           value={model.voiceURI}
           disabled={model.loading || model.working}
-          onChange={(event) =>
-            void model.saveVoice(event.target.value)
-          }
+          onChange={(event) => void model.saveVoice(event.target.value)}
         >
           <option value="">Tự chọn giọng Mỹ có sẵn</option>
 
@@ -58,16 +50,15 @@ export default function VoiceSettings() {
 
       {savedVoiceMissing && !model.loading && (
         <p className="study-notice is-hint">
-          Giọng đã lưu không có trên máy hiện tại. Bạn có thể
-          chọn giọng khác; khi đọc, hệ thống sẽ dùng một giọng Mỹ
-          còn khả dụng.
+          Giọng đã lưu không có trên máy hiện tại. Bạn có thể chọn giọng khác;
+          khi đọc, hệ thống sẽ dùng một giọng Mỹ còn khả dụng.
         </p>
       )}
 
       {!model.loading && model.voices.length === 0 && (
         <p className="study-notice is-hint" role="status">
-          Chưa tìm thấy giọng Anh-Mỹ. Hãy kiểm tra giọng
-          English (United States) trên thiết bị rồi tải lại danh sách.
+          Chưa tìm thấy giọng Anh-Mỹ. Hãy kiểm tra giọng English (United States)
+          trên thiết bị rồi tải lại danh sách.
         </p>
       )}
 
@@ -121,11 +112,7 @@ export default function VoiceSettings() {
           Nghe câu
         </button>
 
-        <button
-          className="secondary-button"
-          type="button"
-          onClick={model.stop}
-        >
+        <button className="secondary-button" type="button" onClick={model.stop}>
           Dừng đọc
         </button>
 
@@ -152,8 +139,8 @@ export default function VoiceSettings() {
       )}
 
       <p className="draft-status">
-        Danh sách phụ thuộc thiết bị và trình duyệt. Nếu máy có
-        giọng Google Mỹ thì giọng đó sẽ xuất hiện để chọn.
+        Danh sách phụ thuộc thiết bị và trình duyệt. Nếu máy có giọng Google Mỹ
+        thì giọng đó sẽ xuất hiện để chọn.
       </p>
     </section>
   );

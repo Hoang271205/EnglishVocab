@@ -20,8 +20,8 @@ export default function ExtensionSyncPanel({
       <h2 id="extension-sync-title">Đồng bộ extension</h2>
 
       <p className="topic-message">
-        Nhận các từ đã lưu khi đọc website, hoặc gửi thư viện hiện
-        tại để extension tra từ có sẵn trên thiết bị.
+        Nhận các từ đã lưu khi đọc website, hoặc gửi thư viện hiện tại để
+        extension tra từ có sẵn trên thiết bị.
       </p>
 
       <div className="study-answer-actions">
@@ -31,9 +31,7 @@ export default function ExtensionSyncPanel({
           disabled={disabled || busy}
           onClick={() => void model.receive()}
         >
-          {model.operation === 'receive'
-            ? 'Đang nhận…'
-            : 'Nhận từ extension'}
+          {model.operation === 'receive' ? 'Đang nhận…' : 'Nhận từ extension'}
         </button>
 
         <button
@@ -55,10 +53,7 @@ export default function ExtensionSyncPanel({
       )}
 
       {model.notice && (
-        <p
-          className={`study-notice is-${model.notice.kind}`}
-          role="status"
-        >
+        <p className={`study-notice is-${model.notice.kind}`} role="status">
           {model.notice.text}
         </p>
       )}
@@ -67,8 +62,8 @@ export default function ExtensionSyncPanel({
         <div className="load-error" role="alert">
           <p>{model.error}</p>
           <p>
-            Kiểm tra extension đã bật, mở web tại
-            {' '}http://localhost:5173 và tải lại trang.
+            Kiểm tra extension đã bật, mở web tại http://localhost:5173 và tải
+            lại trang.
           </p>
         </div>
       )}
