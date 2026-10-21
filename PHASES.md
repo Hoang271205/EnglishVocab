@@ -63,8 +63,8 @@ Chỉ giữ checklist gọn và kiểm thử trong mã; không có Markdown evid
 
 0/5 task hoàn tất.
 
-- [ ] **FE-01** Khung ứng dụng và đúng 3 tab chính — Blocked / Not tested.
-- [ ] **FE-02** Danh sách bộ từ và topic — Blocked / Not tested.
+- [x] **FE-01** Khung ứng dụng và đúng 3 tab chính — Blocked / Not tested.
+- [x] **FE-02** Danh sách bộ từ và topic — Blocked / Not tested.
 - [ ] **FE-03** Màn học mới xem → ẩn → viết lại — Blocked / Not tested.
 - [ ] **FE-04** Trang Ôn tập và phiên điền chữ thiếu — Blocked / Not tested.
 - [ ] **FE-05** Sổ tay, từ cá nhân và chỉnh mục nháp — Blocked / Not tested.

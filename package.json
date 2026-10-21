@@ -7,6 +7,8 @@
     "node": ">=22.14"
   },
   "scripts": {
+    "build:frontend": "node scripts/build-frontend.mjs",
+    "build": "npm run typecheck && npm run build:frontend",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src extension tests scripts --max-warnings=0",
     "test": "node --import tsx --test tests/*.test.ts",
@@ -40,16 +42,20 @@
   },
   "dependencies": {
     "dexie": "4.4.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "zod": "4.6.7"
   },
   "devDependencies": {
     "@types/node": "26.6.5",
-    "typescript": "5.9.3",
-    "tsx": "4.23.15",
-    "eslint": "10.13.0",
-    "typescript-eslint": "8.72.0",
-    "fake-indexeddb": "6.2.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "esbuild": "0.28.2",
-    "playwright": "1.64.1"
+    "eslint": "10.13.0",
+    "fake-indexeddb": "6.2.6",
+    "playwright": "1.64.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.72.0"
   }
 }

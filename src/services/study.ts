@@ -7,6 +7,20 @@ import { initialProgress, reviewProgress } from '../domain/scheduler';
 function view(s:Session):SessionView { return {...s,items:s.items.map(i=>({attemptId:i.attemptId}))}; }
 export class StudyService {
  constructor(private readonly db: VocabDB, private readonly clock: Clock = {now:()=>Date.now()}, private readonly makeId:()=>string = ()=>crypto.randomUUID()) {}
+ async active(): Promise<SessionView | null> {
+  const sessions = await this.db.sessions.toArray();
+
+  const unfinished = sessions
+    .filter((session) => session.phase !== 'complete')
+    .sort(
+      (first, second) =>
+        first.createdAt - second.createdAt ||
+        first.id.localeCompare(second.id),
+    )[0];
+
+  return unfinished ? view(unfinished) : null;
+ }
+
  async create(mode:'learn'|'review', limit:5|10|20, entryIds?:string[]): Promise<SessionView> {
   if ((mode==='learn' && ![5,10].includes(limit)) || (mode==='review' && ![10,20].includes(limit))) throw new ServiceError('validation','Invalid batch');
   return this.db.transaction('rw',this.db.entries,this.db.progress,this.db.sessions,async()=>{
