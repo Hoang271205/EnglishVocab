@@ -336,7 +336,7 @@ export default function EntryDetails({
           </details>
 
           <details className="detail-section">
-            <summary>Ngữ cảnh đã lưu ({data.captures.length})</summary>
+            <summary>Nguồn bài đọc đã lưu ({data.captures.length})</summary>
 
             {data.captures.length === 0 ? (
               <p>Chưa có ngữ cảnh được lưu cho từ này.</p>
@@ -346,8 +346,6 @@ export default function EntryDetails({
                   <p>
                     <strong>{capture.selectedText}</strong>
                   </p>
-
-                  <p>{capture.originalSentence || 'Không có câu ngữ cảnh.'}</p>
 
                   <a href={capture.sourceUrl} target="_blank" rel="noreferrer">
                     Mở trang nguồn

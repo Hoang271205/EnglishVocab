@@ -13,6 +13,7 @@ const queue = new CaptureQueue({
 
 const provider = new WiktionaryDictionary();
 const pending = new Map<string, string[]>();
+let cacheGeneration = 0;
 
 const messageSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('snapshot-update'), snapshot: z.unknown() }).strict(),
@@ -33,6 +34,13 @@ const messageSchema = z.discriminatedUnion('type', [
       forceOnline: z.boolean().optional(),
     })
     .strict(),
+  z
+    .object({
+      type: z.literal('personal-delete'),
+      entryId: z.string().min(1).max(128),
+      headword: z.string().min(1).max(500),
+    })
+    .strict(),
 ]);
 
 function isLocal(sender: ExtensionSender) {
@@ -50,6 +58,7 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
   }
 
   const parsed = messageSchema.safeParse(raw);
+
   if (!parsed.success) {
     respond({ ok: false, error: 'Invalid message' });
     return false;
@@ -58,10 +67,13 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
   const message = parsed.data;
 
   void (async () => {
-    if (message.type === 'queue-save') return queue.save(message.item);
+    if (message.type === 'queue-save') {
+      return queue.save(message.item);
+    }
 
     if (message.type === 'lookup') {
       const key = normalizeAnswer(message.query);
+      const generation = cacheGeneration;
 
       if (!message.forceOnline) {
         const raw = (await chrome.storage.local.get('snapshot')).snapshot;
@@ -76,7 +88,6 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
           return {
             query: key,
             source: 'local',
-            entries,
             senses: entries.map((entry) => ({
               entryId: entry.id,
               partOfSpeech: entry.partOfSpeech,
@@ -86,15 +97,21 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
                   entry.examples[0].targetSurface +
                   entry.examples[0].suffix
                 : null,
-              sourceUrls: entry.provenance.flatMap((source) =>
-                source.url ? [source.url] : [],
-              ),
+              sourceUrls: entry.provenance
+                .map((source) => source.url)
+                .filter(Boolean),
               licenses: entry.provenance.map((source) => ({
                 name: source.license,
                 url: source.url,
               })),
             })),
-            phonetics: [],
+            phonetics: entries
+              .filter((entry) => entry.pronunciation.ipa)
+              .map((entry) => ({
+                text: entry.pronunciation.ipa,
+                audio: null,
+                accent: entry.pronunciation.accent,
+              })),
           };
         }
       }
@@ -116,12 +133,19 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
       const result = await provider.lookup(message.query);
 
       try {
-        await chrome.storage.local.set({
-          lookupCache: [
-            ...cached.filter((item) => item.query !== result.query),
-            result,
-          ].slice(-500),
-        });
+        if (generation === cacheGeneration) {
+          await chrome.storage.local.set({
+            lookupCache: [
+              ...cached.filter((item) => item.query !== result.query),
+              result,
+            ].slice(-500),
+          });
+
+          // If deletion happens while storage is writing, clear the old result.
+          if (generation !== cacheGeneration) {
+            await chrome.storage.local.set({ lookupCache: [] });
+          }
+        }
       } catch {
         /* Optional cache must not hide a successful lookup. */
       }
@@ -142,11 +166,60 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
       throw Error('Transfer only allowed on http://localhost:5173');
     }
 
+    if (message.type === 'personal-delete') {
+      cacheGeneration++;
+
+      await queue.removeEntry(message.entryId);
+
+      const [snapshotStorage, cacheStorage] = await Promise.all([
+  chrome.storage.local.get('snapshot'),
+  chrome.storage.local.get('lookupCache'),
+]);
+
+const stored = {
+  snapshot: snapshotStorage.snapshot,
+  lookupCache: cacheStorage.lookupCache,
+};
+
+      const snapshot = snapshotSchema.safeParse(stored.snapshot);
+      const key = normalizeAnswer(message.headword);
+
+      const cache = Array.isArray(stored.lookupCache)
+        ? stored.lookupCache
+        : [];
+
+      const lookupCache = cache.filter(
+        (item: unknown) =>
+          !item ||
+          typeof item !== 'object' ||
+          !('query' in item) ||
+          typeof item.query !== 'string' ||
+          normalizeAnswer(item.query) !== key,
+      );
+
+      if (snapshot.success) {
+        await chrome.storage.local.set({
+          snapshot: {
+            ...snapshot.data,
+            entries: snapshot.data.entries.filter(
+              (entry) => entry.id !== message.entryId,
+            ),
+          },
+          lookupCache,
+        });
+      } else {
+        await chrome.storage.local.set({ lookupCache });
+      }
+
+      return { deleted: true };
+    }
+
     if (message.type === 'snapshot-update') {
       const snapshot = snapshotSchema.parse(message.snapshot);
 
       if (
-        new TextEncoder().encode(JSON.stringify(snapshot)).length > 8_000_000
+        new TextEncoder().encode(JSON.stringify(snapshot)).length >
+        8_000_000
       ) {
         throw Error('Snapshot too large');
       }
@@ -164,7 +237,9 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
     }
 
     if (message.type === 'queue-transfer') {
-      if (pending.size > 100) pending.clear();
+      if (pending.size > 100) {
+        pending.clear();
+      }
 
       const captures = await queue.list();
       const transferId = crypto.randomUUID();

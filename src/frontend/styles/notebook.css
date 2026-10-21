@@ -149,3 +149,45 @@
 .extension-sync h2 {
   margin-top: 0;
 }
+.notebook-list-item {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.notebook-list-item > .notebook-row {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+}
+
+.delete-word-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 48px;
+  align-self: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid #edc9c9;
+  border-radius: 14px;
+  background: #fff;
+  color: #b42318;
+  cursor: pointer;
+}
+
+.delete-word-button:hover:not(:disabled) {
+  border-color: #b42318;
+  background: #fff1f0;
+}
+
+.delete-word-button:focus-visible {
+  outline: 3px solid #efb4ae;
+  outline-offset: 3px;
+}
+
+.delete-word-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

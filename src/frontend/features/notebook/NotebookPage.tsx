@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { deletePersonalWord } from './deletePersonalWord';
 import ExtensionSyncPanel from './ExtensionSyncPanel';
 import StudyTools from '../reference/StudyTools';
 import BackupPanel from '../data/BackupPanel';
@@ -68,6 +69,8 @@ export default function NotebookPage({
   const [reloadKey, setReloadKey] = useState(0);
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const deleteLock = useRef(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -178,6 +181,45 @@ export default function NotebookPage({
     setSelectedId(null);
   }
 
+  async function deleteWord(row: NotebookRow) {
+    if (deleteLock.current) return;
+
+    const confirmed = window.confirm(
+      `Xóa "${row.entry.headword}"?\n\n` +
+        'Thao tác này sẽ xóa từ, ngữ cảnh, ghi chú, tiến độ, ' +
+        'lịch sử ôn và cache liên quan trên web và extension.\n\n' +
+        'Không thể hoàn tác trong ứng dụng.',
+    );
+
+    if (!confirmed) return;
+
+    deleteLock.current = true;
+    setDeletingId(row.entry.id);
+    setError(null);
+    setNotice(null);
+
+    try {
+      await deletePersonalWord(row.entry.id, row.entry.revision);
+
+      setRows((current) =>
+        current.filter((item) => item.entry.id !== row.entry.id),
+      );
+
+      if (selectedId === row.entry.id) {
+        setSelectedId(null);
+      }
+
+      setNotice(`Đã xóa "${row.entry.headword}" và dữ liệu liên quan.`);
+      setReloadKey((value) => value + 1);
+      setReferenceVersion((value) => value + 1);
+    } catch (cause: unknown) {
+      setError(cause instanceof Error ? cause.message : 'Không xóa được từ.');
+    } finally {
+      deleteLock.current = false;
+      setDeletingId(null);
+    }
+  }
+
   return (
     <section aria-labelledby="notebook-title">
       <p className="eyebrow">TỪ VỰNG CỦA BẠN</p>
@@ -205,7 +247,9 @@ export default function NotebookPage({
         Reading — Đọc và lưu từ
       </button>
       <ExtensionSyncPanel
-        disabled={creating || readingOpen || selectedId !== null}
+        disabled={
+          deletingId !== null || creating || readingOpen || selectedId !== null
+        }
         onReceived={() => {
           setScope('personal');
           setCollection('all');
@@ -401,7 +445,7 @@ export default function NotebookPage({
       {!loading && !error && rows.length > 0 && (
         <ul className="notebook-list">
           {rows.map((row) => (
-            <li key={row.entry.id}>
+            <li key={row.entry.id} className="notebook-list-item">
               <button
                 className={`notebook-row${
                   selectedId === row.entry.id ? ' is-selected' : ''
@@ -432,14 +476,55 @@ export default function NotebookPage({
                   <span>{statusLabels[row.status] ?? row.status}</span>
                 </span>
               </button>
+
+              {scope === 'personal' &&
+                row.entry.collectionId === 'personal' && (
+                  <button
+                    className="delete-word-button"
+                    type="button"
+                    title={`Xóa ${row.entry.headword}`}
+                    aria-label={`Xóa từ ${row.entry.headword}`}
+                    disabled={
+                      deletingId !== null ||
+                      creating ||
+                      readingOpen ||
+                      selectedId !== null
+                    }
+                    onClick={() => void deleteWord(row)}
+                  >
+                    {deletingId === row.entry.id ? (
+                      <span aria-hidden="true">…</span>
+                    ) : (
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M3 6h18" />
+                        <path d="M9 6V4h6v2" />
+                        <path d="M5 6l1 14h12l1-14" />
+                        <path d="M10 10v6M14 10v6" />
+                      </svg>
+                    )}
+                  </button>
+                )}
             </li>
           ))}
         </ul>
       )}
+
       <StudyTools key={referenceVersion} />
 
       <BackupPanel
-        disabled={creating || readingOpen || selectedId !== null}
+        disabled={
+          deletingId !== null || creating || readingOpen || selectedId !== null
+        }
         onRestored={() => {
           setSelectedId(null);
           setSearch('');
@@ -454,7 +539,9 @@ export default function NotebookPage({
         }}
       />
       <ContentImportPanel
-        disabled={creating || readingOpen || selectedId !== null}
+        disabled={
+          deletingId !== null || creating || readingOpen || selectedId !== null
+        }
         onImported={() => {
           setSearch('');
           setCollection('all');
@@ -468,7 +555,9 @@ export default function NotebookPage({
         }}
       />
       <QueueImportPanel
-        disabled={creating || readingOpen || selectedId !== null}
+        disabled={
+          deletingId !== null || creating || readingOpen || selectedId !== null
+        }
         onImported={() => {
           setScope('personal');
           setCollection('all');
@@ -483,7 +572,9 @@ export default function NotebookPage({
       />
       <AppSettingsPanel
         key={`settings-${referenceVersion}`}
-        disabled={creating || readingOpen || selectedId !== null}
+        disabled={
+          deletingId !== null || creating || readingOpen || selectedId !== null
+        }
       />
     </section>
   );

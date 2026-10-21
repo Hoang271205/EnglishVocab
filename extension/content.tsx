@@ -73,20 +73,13 @@ function startSelectionPopup() {
       return;
     }
 
-    const contextElement =
-      startElement.closest(
-        'p, li, blockquote, figcaption, td, h1, h2, h3, h4',
-      ) ?? startElement;
-
-    const originalSentence =
-      (contextElement.textContent ?? word).trim().slice(0, 20_000);
+     
 
     const selection: SelectedWord = {
-      word,
-      originalSentence,
-      sourceUrl: window.location.href,
-      range: range.cloneRange(),
-    };
+  word,
+  sourceUrl: window.location.href,
+  range: range.cloneRange(),
+};
 
     root.render(
       <SelectionPopup

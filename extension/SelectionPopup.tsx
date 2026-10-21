@@ -3,7 +3,6 @@ import DictionaryForm from './DictionaryForm';
 
 export type SelectedWord = {
   word: string;
-  originalSentence: string;
   sourceUrl: string;
   range: Range;
 };
@@ -91,8 +90,7 @@ export default function SelectionPopup({
 
       <h2>{selection.word}</h2>
       <DictionaryForm selection={selection} />
-      <p className="label">Ngữ cảnh trong bài đọc</p>
-      <p className="context">{selection.originalSentence}</p>
+      
 
       
     </section>

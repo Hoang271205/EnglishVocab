@@ -124,7 +124,7 @@ export function useCaptureLookup(selection: SelectedWord) {
             id: crypto.randomUUID(),
             entryId: entry.id,
             selectedText: selection.word,
-            originalSentence: selection.originalSentence,
+            originalSentence: '',
             sourceUrl: selection.sourceUrl,
             capturedAt: Date.now(),
           },
@@ -147,7 +147,7 @@ export function useCaptureLookup(selection: SelectedWord) {
 
       setSaved(
         localEntry
-          ? 'Đã lưu ngữ cảnh trong extension. Khi chuyển về web, tiến độ của từ hiện có được giữ nguyên.'
+          ? 'Đã lưu trong extension. Khi chuyển về web, tiến độ của từ hiện có được giữ nguyên.'
           : pendingItem.current.entry.contentStatus === 'ready'
             ? 'Đã lưu từ trong extension, chờ chuyển về web để học.'
             : 'Đã lưu bản nháp trong extension. Bạn có thể bổ sung sau khi chuyển về web.',

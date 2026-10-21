@@ -190,7 +190,7 @@ export default function LookupPopup({
           id: ids.current.capture,
           entryId: entry.id,
           selectedText: selection.word,
-          originalSentence: selection.originalSentence,
+          originalSentence: '',
           sourceUrl: selection.sourceUrl,
           capturedAt: selection.capturedAt,
         },
@@ -198,7 +198,7 @@ export default function LookupPopup({
 
       setSaved(
         selectedLocal
-          ? 'Đã lưu ngữ cảnh. Nội dung và tiến độ hiện có được giữ nguyên.'
+          ? 'Từ đã có trong Sổ tay. Nội dung và tiến độ hiện có được giữ nguyên.'
           : entry.contentStatus === 'ready'
             ? 'Đã lưu vào Từ của tôi — Chưa học.'
             : 'Đã lưu vào Từ của tôi — Chờ bổ sung.',
@@ -333,11 +333,6 @@ export default function LookupPopup({
           <p>{sense.example}</p>
         </div>
       )}
-
-      <div className="study-example">
-        <strong>Ngữ cảnh gốc trong bài đọc</strong>
-        <p>{selection.originalSentence}</p>
-      </div>
 
       {sense && (
         <details className="detail-section">

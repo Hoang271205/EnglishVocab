@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { entrySchema, parseEntry } from '../content/schema';
 import { VocabDB } from '../storage/db';
 import { ServiceError } from '../domain/types';
+import { deletePersonalEntry } from './personalDeletion';
 
 const captureSchema = z
   .object({
@@ -39,7 +40,13 @@ type CaptureTransfer = z.infer<typeof captureTransferSchema>;
 
 export class PersonalService {
   constructor(private readonly db: VocabDB) {}
+  async checkRemoval(entryId: string, revision: number) {
+    return deletePersonalEntry(this.db, entryId, revision, true);
+  }
 
+  async remove(entryId: string, revision: number) {
+    return deletePersonalEntry(this.db, entryId, revision);
+  }
   inspectTransfer(input: unknown) {
     const parsed = captureTransferSchema.safeParse(input);
 
