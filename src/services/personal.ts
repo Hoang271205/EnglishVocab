@@ -1,3 +1,4 @@
+import {savePersonalEdit} from './personalEditor';
 import {z} from 'zod';
 import {entrySchema,parseEntry} from '../content/schema';
 import {VocabDB} from '../storage/db';
@@ -5,6 +6,7 @@ import {ServiceError} from '../domain/types';
 const captureSchema=z.object({id:z.string().min(1).max(128),entryId:z.string().min(1).max(128),selectedText:z.string().trim().min(1).max(500),originalSentence:z.string().max(20_000),sourceUrl:z.url().refine(s=>['https:','http:'].includes(new URL(s).protocol)),capturedAt:z.number().int().nonnegative()}).strict();
 export const captureTransferSchema=z.object({protocol:z.literal(1),type:z.literal('capture-transfer'),transferId:z.string().min(1).max(128),captures:z.array(z.object({capture:captureSchema,entry:entrySchema}).strict()).max(500)}).strict();
 export class PersonalService {
+ async saveManual(input:unknown){return savePersonalEdit(this.db,input);}
  constructor(private readonly db:VocabDB){}
  async save(input:unknown){
   const parsed=z.object({capture:captureSchema,entry:entrySchema}).strict().safeParse(input);

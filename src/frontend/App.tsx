@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { SessionView } from '../domain/types';
 import LearnPage from './LearnPage';
 import SessionPage from './SessionPage';
+import ReviewPage from './ReviewPage';
+import NotebookPage from './NotebookPage';
 
 type Tab = 'review' | 'learn' | 'notebook';
 
@@ -19,7 +21,12 @@ export default function App() {
   function renderPage() {
     switch (activeTab) {
       case 'review':
-        return <ReviewPage onLearn={() => setActiveTab('learn')} />;
+      return (
+       <ReviewPage
+         onLearn={() => setActiveTab('learn')}
+         onOpenSession={(session) => setActiveSession(session)}
+    />
+  );
 
       case 'learn':
         return (
@@ -30,7 +37,7 @@ export default function App() {
         );
 
       case 'notebook':
-        return <NotebookPage onLearn={() => setActiveTab('learn')} />;
+        return <NotebookPage onLearn={() => setActiveTab('learn')} onOpenSession={session => setActiveSession(session)} />;
     }
   }
 
@@ -42,9 +49,11 @@ export default function App() {
             key={activeSession.id}
             session={activeSession}
             onExit={() => {
-              setActiveSession(null);
-              setActiveTab('learn');
-            }}
+              setActiveTab(
+              activeSession.mode === 'review' ? 'review' : 'learn',
+            );
+        setActiveSession(null);
+}}
           />
         </main>
       </div>
@@ -96,41 +105,5 @@ export default function App() {
         Mỗi ngày một chút, nhớ lâu hơn.
       </footer>
     </div>
-  );
-}
-
-function ReviewPage({ onLearn }: { onLearn: () => void }) {
-  return (
-    <section className="empty-state" aria-labelledby="review-title">
-      <div className="empty-illustration" aria-hidden="true">
-        📖
-      </div>
-      <p className="eyebrow">ÔN TẬP MỖI NGÀY</p>
-      <h1 id="review-title">Một chút mỗi ngày, thêm nhiều từ mới</h1>
-      <p className="page-description">
-        Học từ theo chủ đề và quay lại ôn khi đến hạn.
-      </p>
-      <button className="primary-button" type="button" onClick={onLearn}>
-        Học từ mới
-      </button>
-    </section>
-  );
-}
-
-function NotebookPage({ onLearn }: { onLearn: () => void }) {
-  return (
-    <section className="empty-state" aria-labelledby="notebook-title">
-      <div className="empty-illustration" aria-hidden="true">
-        📒
-      </div>
-      <p className="eyebrow">SỔ TAY CỦA BẠN</p>
-      <h1 id="notebook-title">Từ đã học sẽ xuất hiện ở đây</h1>
-      <p className="page-description">
-        Bắt đầu học từ mới để tạo sổ tay từ vựng của riêng bạn.
-      </p>
-      <button className="primary-button" type="button" onClick={onLearn}>
-        Khám phá chủ đề
-      </button>
-    </section>
   );
 }

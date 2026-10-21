@@ -21,6 +21,41 @@ export class StudyService {
   return unfinished ? view(unfinished) : null;
  }
 
+ async saveDraft(
+  id: string,
+  version: number,
+  answer: string,
+): Promise<SessionView> {
+  return this.db.transaction('rw', this.db.sessions, async () => {
+    const session = await this.loadSession(id);
+
+    if (session.version !== version) {
+      throw new ServiceError(
+        'conflict',
+        'Phiên đã thay đổi ở tab khác. Hãy tải lại phiên.',
+      );
+    }
+
+    const canAnswer =
+      (session.mode === 'learn' && session.phase === 'recall') ||
+      (session.mode === 'review' && session.phase === 'question');
+
+    if (!canAnswer || session.paused) {
+      throw new ServiceError(
+        'conflict',
+        'Phiên hiện không ở bước nhập đáp án.',
+      );
+    }
+
+    session.draftAnswer = answer.slice(0, 10_000);
+    session.version++;
+
+    await this.db.sessions.put(session);
+
+    return view(session);
+  });
+}
+
  async create(mode:'learn'|'review', limit:5|10|20, entryIds?:string[]): Promise<SessionView> {
   if ((mode==='learn' && ![5,10].includes(limit)) || (mode==='review' && ![10,20].includes(limit))) throw new ServiceError('validation','Invalid batch');
   return this.db.transaction('rw',this.db.entries,this.db.progress,this.db.sessions,async()=>{

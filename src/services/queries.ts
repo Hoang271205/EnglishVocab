@@ -1,6 +1,51 @@
+import {personalNotesSchema} from './personalEditor';
 import {VocabDB} from '../storage/db';
+import { ServiceError } from '../domain/types';
 import type {Clock,CollectionId,CefrLevel} from '../domain/types';
 export class QueryService {
+  async details(entryId: string) {
+  return this.db.transaction(
+    'r',
+    this.db.entries,
+    this.db.progress,
+    this.db.captures,
+    this.db.topics,
+    this.db.settings,
+    async () => {
+      const [entry, progress, captures, topics, note] = await Promise.all([
+        this.db.entries.get(entryId),
+        this.db.progress.get(entryId),
+        this.db.captures
+          .where('entryId')
+          .equals(entryId)
+          .toArray(),
+        this.db.topics
+          .where('entryIds')
+          .equals(entryId)
+          .toArray(),
+        this.db.settings.get('personalNotes'),
+      ]);
+
+      if (!entry) {
+        throw new ServiceError(
+          'not-found',
+          'Không tìm thấy từ trong thư viện.',
+        );
+      }
+
+      return {
+        entry,
+        note: personalNotesSchema.parse(note?.value ?? {})[entryId] ?? '',
+        progress: progress ?? null,
+        captures: captures.sort(
+          (first, second) =>
+            second.capturedAt - first.capturedAt,
+        ),
+        topics,
+      };
+    },
+  );
+}
  constructor(private readonly db:VocabDB,private readonly clock:Clock={now:()=>Date.now()}){}
  async overview(){return this.db.transaction('r',this.db.entries,this.db.progress,this.db.topics,async()=>{
   const [entries,progress,topics]=await Promise.all([this.db.entries.toArray(),this.db.progress.toArray(),this.db.topics.toArray()]);
