@@ -1,5 +1,5 @@
-import { ServiceError } from './types';
-import type { ClozeCell } from './types';
+import { ServiceError } from './types.js';
+import type { ClozeCell } from './types.js';
 export function createMask(surface: string): ClozeCell[] {
  const normalized=surface.normalize('NFKC');
  const letters = Array.from(normalized).filter(c => /\p{L}/u.test(c)).length;

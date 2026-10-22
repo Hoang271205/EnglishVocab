@@ -1,4 +1,7 @@
-import { ServiceError } from './types';
+import { POLICY, ServiceError } from './types.js';
+import type { Level, Progress } from './types.js';
+
+
 export function normalizeAnswer(value: string): string {
  return value.normalize('NFKC').replace(/[‘’]/g, "'").trim().replace(/\s+/gu,' ').toLocaleLowerCase('en-US');
 }

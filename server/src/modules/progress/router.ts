@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import { z } from 'zod';
+import { ServiceError } from '../../../../src/domain/types.js';
+import { client } from '../../database/mongo.js';
 import { requireAuth } from '../../middleware/require-auth.js';
 import { requireJsonWrite } from '../../middleware/require-json-write.js';
-import { sharedEntries } from '../library/collections.js';
+import { resolveReadyEntries } from '../entries/service.js';
 import {
   reviewPreferences,
   userProgress,
@@ -154,49 +156,53 @@ progressRouter.patch(
       return;
     }
 
-    const entry = await sharedEntries.findOne(
-      {
-        _id: parsedId.data,
-        contentStatus: 'ready',
-      },
-      { projection: { _id: 1 } },
+    const userId = request.session.userId!;
+
+    const preference = await client.withSession(
+      async (mongoSession) =>
+        mongoSession.withTransaction(async () => {
+          const entries = await resolveReadyEntries(
+            userId,
+            [parsedId.data],
+            mongoSession,
+          );
+
+          if (!entries.length) {
+            throw new ServiceError(
+              'not-found',
+              'Không tìm thấy từ đủ điều kiện ôn tập.',
+            );
+          }
+
+          const value = {
+            userId,
+            entryId: parsedId.data,
+            reviewEnabled: parsedBody.data.reviewEnabled,
+            updatedAt: Date.now(),
+          };
+
+          await reviewPreferences.updateOne(
+            {
+              _id: JSON.stringify([
+                userId,
+                parsedId.data,
+              ]),
+            },
+            { $set: value },
+            {
+              upsert: true,
+              session: mongoSession,
+            },
+          );
+
+          return {
+            entryId: value.entryId,
+            reviewEnabled: value.reviewEnabled,
+            updatedAt: value.updatedAt,
+          };
+        }),
     );
 
-    if (!entry) {
-      response.status(404).json({
-        error: {
-          code: 'ENTRY_NOT_FOUND',
-          message: 'Không tìm thấy từ trong thư viện.',
-        },
-      });
-      return;
-    }
-
-    const preference = {
-      userId: request.session.userId!,
-      entryId: parsedId.data,
-      reviewEnabled: parsedBody.data.reviewEnabled,
-      updatedAt: Date.now(),
-    };
-
-    // ID cố định giúp các yêu cầu đồng thời cùng ghi một document.
-    const preferenceId = JSON.stringify([
-      preference.userId,
-      preference.entryId,
-    ]);
-
-    await reviewPreferences.updateOne(
-      { _id: preferenceId },
-      { $set: preference },
-      { upsert: true },
-    );
-
-    response.json({
-      preference: {
-        entryId: preference.entryId,
-        reviewEnabled: preference.reviewEnabled,
-        updatedAt: preference.updatedAt,
-      },
-    });
+    response.json({ preference });
   },
 );

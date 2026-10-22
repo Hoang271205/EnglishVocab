@@ -5,12 +5,26 @@ import { createSessionMiddleware } from './middleware/session.js';
 import { authRouter } from './modules/auth/router.js';
 import { libraryRouter } from './modules/library/router.js';
 import { progressRouter } from './modules/progress/router.js';
+import { studyRouter } from './modules/study/router.js';
+import { z } from 'zod';
+import { ServiceError } from '../../src/domain/types.js';
+import { personalRouter } from './modules/personal/router.js';
+import { settingsRouter } from './modules/settings/router.js';
+import { transfersRouter } from './modules/transfers/router.js';
+
+
+
 
 export function createApp() {
   const app = express();
 
   app.disable('x-powered-by');
-  app.use(express.json({ limit: '1mb' }));
+  app.use(
+  '/api/transfers',
+  express.json({ limit: '2mb' }),
+);
+
+app.use(express.json({ limit: '1mb' }));
 
   app.get('/api/health', async (_request, response) => {
     try {
@@ -29,11 +43,15 @@ export function createApp() {
       });
     }
   });
-
   app.use(createSessionMiddleware());
   app.use('/api/auth', authRouter);
+  app.use('/api/personal', personalRouter);
   app.use('/api/library', libraryRouter);
   app.use('/api/progress', progressRouter);
+  app.use('/api/study', studyRouter);
+  app.use('/api/settings', settingsRouter);
+  app.use('/api/transfers', transfersRouter);
+
   app.use((_request, response) => {
     response.status(404).json({
       error: {
@@ -49,11 +67,62 @@ export function createApp() {
     response,
     _next,
   ) => {
+    if (error instanceof z.ZodError) {
+  response.status(400).json({
+    error: {
+      code: 'INVALID_INPUT',
+      message: 'Thông tin gửi lên không hợp lệ.',
+      issues: error.issues.map((issue) => ({
+        path: issue.path.join('.'),
+        message: issue.message,
+      })),
+    },
+  });
+  return;
+}
+
+if (error instanceof ServiceError) {
+  const status =
+    error.code === 'not-found'
+      ? 404
+      : error.code === 'conflict'
+        ? 409
+        : error.code === 'validation'
+          ? 400
+          : 500;
+
+  response.status(status).json({
+    error: {
+      code: error.code,
+      message: error.message,
+    },
+  });
+  return;
+}
     const invalidJson =
       error !== null &&
       typeof error === 'object' &&
       'type' in error &&
       error.type === 'entity.parse.failed';
+              
+
+
+
+      const payloadTooLarge =
+                error !== null &&
+                typeof error === 'object' &&
+                'type' in error &&
+                error.type === 'entity.too.large';
+
+      if (payloadTooLarge) {
+               response.status(413).json({
+               error: {
+               code: 'PAYLOAD_TOO_LARGE',
+          message: 'Dữ liệu gửi lên vượt giới hạn cho phép.',
+    },
+  });
+  return;
+}
 
     response.status(invalidJson ? 400 : 500).json({
       error: {
