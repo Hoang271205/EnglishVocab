@@ -4,7 +4,7 @@ dist/
 *.tsbuildinfo
 .DS_Store
 dist-extension/
-
+.env
 .dictionary-cache/
 
 .crawl-cache/

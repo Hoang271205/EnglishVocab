@@ -7,6 +7,11 @@
     "node": ">=22.14"
   },
   "scripts": {
+    "dev:server": "tsx watch server/src/index.ts",
+    "user:create": "tsx server/src/scripts/create-user.ts",
+    "typecheck:server": "tsc -p server/tsconfig.json --noEmit",
+    "build:server": "tsc -p server/tsconfig.json",
+    "start:server": "node dist-server/server/src/index.js",
     "build:frontend": "node scripts/build-frontend.mjs",
     "build": "npm run typecheck && npm run build:frontend",
     "typecheck": "tsc --noEmit",
@@ -24,7 +29,6 @@
     "progress:update": "node scripts/progress.mjs --write",
     "enrich:ipa": "node --import tsx scripts/enrich-ipa.mjs",
     "content:build": "node --import tsx scripts/build-authored-pack.mjs",
-    "test:audio:browser": "node scripts/audio-check.mjs",
     "content:index": "node --import tsx scripts/index-content.mjs",
     "crawl:api": "node --import tsx scripts/crawl-api.mjs",
     "crawl:download": "node scripts/fetch-wiktionary.mjs",
@@ -44,12 +48,21 @@
     "test:frontend": "npm run build && node scripts/frontend-check.mjs"
   },
   "dependencies": {
+    "connect-mongo": "^6.0.0",
     "dexie": "4.4.6",
+    "dotenv": "^18.0.8",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.1",
+    "express-session": "^1.19.0",
+    "mongodb": "^7.7.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "zod": "4.6.7"
   },
   "devDependencies": {
+    "@inquirer/prompts": "^8.7.4",
+    "@types/express": "^5.0.6",
+    "@types/express-session": "^1.19.0",
     "@types/node": "26.6.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
