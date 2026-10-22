@@ -1,0 +1,47 @@
+import { apiRequest } from '../../api/client';
+import type {
+  Entry,
+  Topic,
+} from '../../../domain/types';
+import type {
+  ProgressResponse,
+  VocabularyCollection,
+} from './topics.types';
+
+export const topicsApi = {
+  async list(
+    collection: VocabularyCollection,
+    signal: AbortSignal,
+  ) {
+    const query = new URLSearchParams({ collection });
+
+    const result = await apiRequest<{
+      topics: Topic[];
+    }>(`/api/library/topics?${query}`, { signal });
+
+    return result.topics;
+  },
+
+  async progress(signal: AbortSignal) {
+    const result = await apiRequest<ProgressResponse>(
+      '/api/progress',
+      { signal },
+    );
+
+    return result.progress;
+  },
+
+  async entries(
+    topicId: string,
+    signal: AbortSignal,
+  ) {
+    const result = await apiRequest<{
+      entries: Entry[];
+    }>(
+      `/api/library/topics/${encodeURIComponent(topicId)}/entries`,
+      { signal },
+    );
+
+    return result.entries;
+  },
+};

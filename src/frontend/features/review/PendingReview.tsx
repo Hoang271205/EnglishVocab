@@ -1,23 +1,34 @@
 import type { useReviewPage } from './useReviewPage';
 
+type PendingReviewProps = {
+  model: ReturnType<typeof useReviewPage>;
+};
+
 export default function PendingReview({
   model,
-}: {
-  model: ReturnType<typeof useReviewPage>;
-}) {
-  const { content, working, resumeSession } = model;
-  if (!content) return null;
+}: PendingReviewProps) {
+  const {
+    content,
+    working,
+    resumeSession,
+  } = model;
+
+  const pending = content?.pending;
+
+  if (!pending) return null;
+
   return (
     <div className="pending-session">
       <div>
         <strong>
-          Bạn có một phiên {content.pending.mode === 'learn' ? 'học' : 'ôn'}{' '}
+          Bạn có một phiên{' '}
+          {pending.mode === 'learn' ? 'học' : 'ôn'}{' '}
           đang dở
         </strong>
 
         <p>
-          Đã hoàn thành {content.pending.index}/{content.pending.items.length}{' '}
-          từ.
+          Đã hoàn thành {pending.index}/
+          {pending.items.length} từ.
         </p>
       </div>
 

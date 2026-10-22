@@ -1,21 +1,32 @@
 import type { useLearnPage } from './useLearnPage';
 
+type PendingLearningProps = {
+  model: ReturnType<typeof useLearnPage>;
+};
+
 export default function PendingLearning({
   model,
-}: {
-  model: ReturnType<typeof useLearnPage>;
-}) {
-  const { pendingSession, working, resumePendingSession } = model;
+}: PendingLearningProps) {
+  const {
+    pendingSession,
+    working,
+    resumePendingSession,
+  } = model;
+
+  if (!pendingSession) return null;
+
   return (
     <div className="pending-session">
       <div>
         <strong>
-          Bạn có một phiên {pendingSession.mode === 'learn' ? 'học' : 'ôn'} đang
-          dở
+          Bạn có một phiên{' '}
+          {pendingSession.mode === 'learn' ? 'học' : 'ôn'}{' '}
+          đang dở
         </strong>
 
         <p>
-          Đã hoàn thành {pendingSession.index}/{pendingSession.items.length} từ.
+          Đã hoàn thành {pendingSession.index}/
+          {pendingSession.items.length} từ.
         </p>
       </div>
 

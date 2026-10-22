@@ -9,3 +9,8 @@
 @import './styles/reading.css';
 @import './styles/reference.css';
 @import './styles/data.css';
+@import './styles/ui.css';
+@import './styles/auth.css';
+@import './styles/dashboard.css';
+@import './styles/online-topics.css';
+@import './styles/online-learning.css';

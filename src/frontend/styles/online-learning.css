@@ -1,0 +1,21 @@
+.learning-notices {
+  display: grid;
+  gap: 16px;
+}
+
+.learning-notices:not(:empty) {
+  margin-bottom: 28px;
+}
+
+.session-page > .session-progress {
+  margin-bottom: 24px;
+}
+
+.session-page > .ui-message,
+.session-page > .dashboard-error {
+  margin-bottom: 20px;
+}
+
+.study-card > .ui-message {
+  margin-top: 20px;
+}
