@@ -3,6 +3,8 @@ import type { ErrorRequestHandler } from 'express';
 import { db } from './database/mongo.js';
 import { createSessionMiddleware } from './middleware/session.js';
 import { authRouter } from './modules/auth/router.js';
+import { libraryRouter } from './modules/library/router.js';
+import { progressRouter } from './modules/progress/router.js';
 
 export function createApp() {
   const app = express();
@@ -30,7 +32,8 @@ export function createApp() {
 
   app.use(createSessionMiddleware());
   app.use('/api/auth', authRouter);
-
+  app.use('/api/library', libraryRouter);
+  app.use('/api/progress', progressRouter);
   app.use((_request, response) => {
     response.status(404).json({
       error: {

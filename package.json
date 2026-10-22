@@ -45,7 +45,8 @@
     "crawl:filter": "node scripts/filter-crawl.mjs",
     "format:frontend": "prettier --write \"src/frontend/**/*.{ts,tsx,css}\"",
     "format:frontend:check": "prettier --check \"src/frontend/**/*.{ts,tsx,css}\"",
-    "test:frontend": "npm run build && node scripts/frontend-check.mjs"
+    "test:frontend": "npm run build && node scripts/frontend-check.mjs",
+    "library:seed": "tsx server/src/scripts/seed-library.ts"
   },
   "dependencies": {
     "connect-mongo": "^6.0.0",

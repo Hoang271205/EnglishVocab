@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { Entry, Topic } from '../domain/types';
+import type { Entry, Topic } from '../domain/types.js';
 const text = z.string().trim().min(1).max(10_000);
 const id = z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}$/);
 const source = z.object({field:z.enum(['meaning','ipa','cefr','example','audio','definition']),attribution:text,license:text,url:z.url().refine(s=>['https:','http:'].includes(new URL(s).protocol)).nullable(),status:z.enum(['authored','verified','unverified']),checkedAt:z.number().int().nonnegative().nullable()}).strict();

@@ -2,6 +2,8 @@ import { createServer } from 'node:http';
 import { createApp } from './app.js';
 import { ensureUserIndexes } from './modules/auth/users.js';
 import { env } from './config/env.js';
+import { ensureLibraryIndexes } from './modules/library/collections.js';
+import { ensureProgressIndexes } from './modules/progress/collections.js';
 
 import {
   closeMongo,
@@ -10,9 +12,13 @@ import {
 
 async function start() {
   await connectMongo();
+
   await ensureUserIndexes();
 
+  await ensureLibraryIndexes();
+  await ensureProgressIndexes();
   const server = createServer(createApp());
+  
   await new Promise<void>((resolve, reject) => {
     server.once('error', reject);
 
