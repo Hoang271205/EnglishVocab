@@ -32,8 +32,16 @@ export function useCaptureLookup(selection: SelectedWord) {
   const [saved, setSaved] = useState<string | null>(null);
   const [frozen, setFrozen] = useState(false);
 
+  const [translating, setTranslating] = useState(false);
+  const [translationError, setTranslationError] =
+    useState<string | null>(null);
+  const [translationSuggested, setTranslationSuggested] =
+    useState(false);
+
   const saveLock = useRef(false);
   const pendingItem = useRef<CaptureItem | null>(null);
+  const meaningEdited = useRef(false);
+  const translationRequest = useRef(0);
 
   const sense = result?.senses[senseIndex];
 
@@ -46,7 +54,7 @@ export function useCaptureLookup(selection: SelectedWord) {
       ? localEntry?.pronunciation.accent === 'en-US'
         ? localEntry.pronunciation.ipa
         : null
-      : remoteIpa(result, sense)?.text ?? null;
+      : (remoteIpa(result, sense)?.text ?? null);
 
   useEffect(() => {
     let cancelled = false;
@@ -80,14 +88,99 @@ export function useCaptureLookup(selection: SelectedWord) {
     };
   }, [selection]);
 
+  useEffect(() => {
+    let cancelled = false;
+    const requestId = ++translationRequest.current;
+
+    meaningEdited.current = false;
+    setMeaningVi('');
+    setTranslationError(null);
+    setTranslationSuggested(false);
+    setTranslating(false);
+
+    // Từ trong thư viện sử dụng nghĩa Việt đã lưu.
+    if (!sense || sense.entryId) return;
+
+    const input = {
+      word: selection.word,
+      partOfSpeech: sense.partOfSpeech,
+      definition: sense.definition,
+    };
+
+    setTranslating(true);
+
+    function isCurrentRequest() {
+      return (
+        !cancelled &&
+        requestId === translationRequest.current
+      );
+    }
+
+    async function loadTranslation() {
+      try {
+        const response = await requestWorker<{
+          text: string;
+          source: 'cache' | 'api';
+        }>({
+          type: 'translate-sense',
+          input,
+        });
+
+        if (
+          typeof response.text !== 'string' ||
+          !response.text.trim()
+        ) {
+          throw new Error('Dịch vụ chưa trả về nghĩa tiếng Việt.');
+        }
+
+        if (isCurrentRequest() && !meaningEdited.current) {
+          setMeaningVi(response.text);
+          setTranslationSuggested(true);
+        }
+      } catch (cause: unknown) {
+        if (isCurrentRequest()) {
+          setTranslationError(errorMessage(cause));
+        }
+      } finally {
+        if (isCurrentRequest()) {
+          setTranslating(false);
+        }
+      }
+    }
+
+    void loadTranslation();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [sense, selection.word]);
+
+  function editMeaningVi(value: string) {
+    meaningEdited.current = true;
+    setMeaningVi(value);
+  }
+
   function chooseSense(index: number) {
-    if (saving || frozen || saved) {
+    if (
+      saving ||
+      frozen ||
+      saved ||
+      index === senseIndex ||
+      !result?.senses[index]
+    ) {
       return;
     }
 
+    // Vô hiệu hóa ngay kết quả dịch của nghĩa trước.
+    translationRequest.current++;
+    meaningEdited.current = false;
+
     setSenseIndex(index);
     setMeaningVi('');
-    setPartOfSpeech(result?.senses[index]?.partOfSpeech ?? '');
+    setTranslationError(null);
+    setTranslationSuggested(false);
+    setTranslating(true);
+    setPartOfSpeech(result.senses[index].partOfSpeech);
     setSaveError(null);
   }
 
@@ -95,6 +188,7 @@ export function useCaptureLookup(selection: SelectedWord) {
     if (
       saveLock.current ||
       loading ||
+      translating ||
       saved ||
       (sense?.entryId && !localEntry)
     ) {
@@ -117,6 +211,28 @@ export function useCaptureLookup(selection: SelectedWord) {
             meaningVi,
             partOfSpeech,
           });
+
+        if (
+          !localEntry &&
+          translationSuggested &&
+          meaningVi.trim()
+        ) {
+          entry.provenance = [
+            ...entry.provenance.filter(
+              (source) => source.field !== 'meaning',
+            ),
+            {
+              field: 'meaning',
+              attribution: meaningEdited.current
+                ? 'Gợi ý dịch MyMemory, được người dùng chỉnh sửa'
+                : 'MyMemory — bản dịch máy tham khảo',
+              license: 'Theo điều khoản nhà cung cấp; chưa xác minh',
+              url: 'https://mymemory.translated.net/',
+              status: 'unverified',
+              checkedAt: null,
+            },
+          ];
+        }
 
         pendingItem.current = {
           entry,
@@ -173,9 +289,12 @@ export function useCaptureLookup(selection: SelectedWord) {
     saveError,
     saving,
     saved,
+    translating,
+    translationError,
+    translationSuggested,
     locked: loading || saving || frozen || Boolean(saved),
     chooseSense,
-    setMeaningVi,
+    setMeaningVi: editMeaningVi,
     setPartOfSpeech,
     save,
   };

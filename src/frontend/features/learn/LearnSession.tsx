@@ -1,3 +1,5 @@
+import LearnRecallCard from './LearnRecallCard';
+import LearnFrontCard from './LearnFrontCard';
 import type { SessionView } from '../../../domain/types';
 import { useLearnSession } from './useLearnSession';
 
@@ -7,6 +9,7 @@ type LearnSessionProps = {
 };
 
 export default function LearnSession({ session, onExit }: LearnSessionProps) {
+  const controller = useLearnSession(session, onExit);
   const {
     model,
     busy,
@@ -14,20 +17,10 @@ export default function LearnSession({ session, onExit }: LearnSessionProps) {
     error,
     entry,
     question,
-    answer,
-    audioError,
-    draftState,
-    example,
     reloadSession,
     pauseSession,
     resumeSession,
-    playAudio,
-    goToRecall,
-    submitAnswer,
-    changeAnswer,
-    showFrontAgain,
-  } = useLearnSession(session, onExit);
-
+  } = controller;
   return (
     <section className="session-page" aria-labelledby="session-title">
       <div className="study-toolbar">
@@ -104,154 +97,9 @@ export default function LearnSession({ session, onExit }: LearnSessionProps) {
           </button>
         </div>
       ) : model.phase === 'front' && entry ? (
-        <div className="study-card">
-          <p className="word-type">{entry.partOfSpeech}</p>
-          <h2 className="study-word">{entry.headword}</h2>
-
-          <p className="cefr-label">
-            {entry.cefr.level ?? 'Chưa có CEFR'}
-            {entry.cefr.status === 'estimated' ? ' · tham khảo' : ''}
-          </p>
-
-          <p className="study-meaning">{entry.meaningVi}</p>
-
-          <p className="study-ipa">
-            {entry.pronunciation.ipa ?? 'Chưa có phiên âm IPA'}
-          </p>
-
-          <div className="audio-actions">
-            <button
-              className="secondary-button"
-              type="button"
-              disabled={busy}
-              onClick={() => void playAudio()}
-            >
-              Nghe từ · Mỹ
-            </button>
-
-            <button
-              className="secondary-button"
-              type="button"
-              disabled={busy}
-              onClick={() => void playAudio({ slow: true })}
-            >
-              Nghe chậm
-            </button>
-          </div>
-
-          {example && (
-            <div className="study-example">
-              <p>
-                {example.prefix}
-                <strong>{example.targetSurface}</strong>
-                {example.suffix}
-              </p>
-
-              <button
-                className="secondary-button"
-                type="button"
-                disabled={busy}
-                onClick={() => void playAudio({ exampleId: example.id })}
-              >
-                Nghe câu ví dụ
-              </button>
-            </div>
-          )}
-
-          {audioError && (
-            <p className="audio-message" role="status">
-              {audioError} Bạn vẫn có thể tiếp tục học.
-            </p>
-          )}
-
-          <details className="study-sources">
-            <summary>Nguồn dữ liệu</summary>
-
-            {entry.provenance.map((source, index) => (
-              <p key={`${source.field}-${index}`}>
-                {source.attribution} · {source.license}
-                {source.url && (
-                  <>
-                    {' · '}
-                    <a href={source.url} target="_blank" rel="noreferrer">
-                      Xem nguồn
-                    </a>
-                  </>
-                )}
-              </p>
-            ))}
-          </details>
-
-          <button
-            className="primary-button study-next"
-            type="button"
-            disabled={busy}
-            onClick={goToRecall}
-          >
-            Next — Viết lại từ
-          </button>
-        </div>
+        <LearnFrontCard controller={controller} />
       ) : model.phase === 'recall' && question ? (
-        <form
-          className="study-card"
-          onSubmit={(event) => {
-            event.preventDefault();
-            submitAnswer();
-          }}
-        >
-          <p className="eyebrow">NHỚ VÀ VIẾT LẠI</p>
-
-          <p className="study-meaning">{question.meaningVi}</p>
-
-          <p className="word-type">{question.partOfSpeech}</p>
-
-          <label className="answer-label" htmlFor="learn-answer">
-            Viết lại từ hoặc cụm từ vừa học
-          </label>
-
-          <input
-            key={question.attemptId}
-            id="learn-answer"
-            className="learn-answer"
-            type="text"
-            value={answer}
-            maxLength={10_000}
-            disabled={busy}
-            autoFocus
-            autoComplete="off"
-            autoCorrect="off"
-            autoCapitalize="none"
-            spellCheck={false}
-            onChange={(event) => changeAnswer(event.target.value)}
-          />
-
-          <p className="draft-status" role="status">
-            {draftState === 'saving'
-              ? 'Đang lưu bản nháp…'
-              : draftState === 'error'
-                ? 'Chưa lưu được bản nháp.'
-                : 'Bản nháp đã lưu trên thiết bị.'}
-          </p>
-
-          <div className="study-answer-actions">
-            <button
-              className="primary-button"
-              type="submit"
-              disabled={busy || !answer.trim()}
-            >
-              {busy ? 'Đang xử lý…' : 'Kiểm tra'}
-            </button>
-
-            <button
-              className="secondary-button"
-              type="button"
-              disabled={busy}
-              onClick={showFrontAgain}
-            >
-              Xem lại từ
-            </button>
-          </div>
-        </form>
+        <LearnRecallCard controller={controller} />
       ) : (
         <p className="topic-message" role="status">
           {busy ? 'Đang tải từ…' : 'Chưa tải được nội dung phiên.'}

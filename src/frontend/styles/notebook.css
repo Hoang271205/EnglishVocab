@@ -191,3 +191,130 @@
   opacity: 0.45;
   cursor: not-allowed;
 }
+.notebook-list-item {
+  display: block;
+}
+
+.notebook-item-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notebook-item-main > .notebook-row {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+}
+
+.notebook-list-item > .entry-details {
+  margin: 10px 0 0;
+}
+
+.review-toggle {
+  flex: 0 0 70px;
+}
+
+.review-toggle label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.review-toggle input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--green);
+}
+
+.review-toggle-error {
+  margin: 8px 0 0;
+  color: #b42318;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  .notebook-item-main {
+    flex-wrap: wrap;
+  }
+
+  .review-toggle {
+    flex-basis: 44px;
+  }
+
+  .notebook-item-main > .notebook-row {
+    flex-basis: calc(100% - 56px);
+  }
+}
+.notebook-stacks {
+  display: grid;
+  gap: 28px;
+  margin-top: 24px;
+}
+
+.notebook-stack {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: #fff;
+}
+
+.notebook-stack-header {
+  margin-bottom: 18px;
+}
+
+.notebook-stack-header h2 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  font-size: 20px;
+}
+
+.notebook-stack-header p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.notebook-stack-count {
+  display: inline-grid;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 3px 9px;
+  place-items: center;
+  border-radius: 999px;
+  background: #eaf4e5;
+  color: var(--green);
+  font-size: 14px;
+}
+
+.notebook-stack-disabled {
+  background: #fafaf7;
+}
+
+.notebook-stack-disabled .notebook-stack-count {
+  background: #eaece6;
+  color: var(--muted);
+}
+
+.notebook-stack-empty {
+  margin: 0;
+  padding: 16px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .notebook-stack {
+    padding: 16px 12px;
+  }
+}

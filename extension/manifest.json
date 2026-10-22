@@ -7,8 +7,9 @@
     "storage"
   ],
   "host_permissions": [
-    "https://freedictionaryapi.com/*"
-  ],
+  "https://freedictionaryapi.com/*",
+  "https://api.mymemory.translated.net/*"
+],
   "background": {
     "service_worker": "service-worker.js",
     "type": "module"

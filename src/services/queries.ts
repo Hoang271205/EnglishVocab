@@ -3,8 +3,63 @@ import { VocabDB } from '../storage/db';
 import { ServiceError } from '../domain/types';
 import type { Clock, CollectionId, CefrLevel } from '../domain/types';
 import { SettingsService } from './settings';
+import { readReviewDisabledIds,REVIEW_DISABLED_KEY} from './reviewPreferences';
 
 export class QueryService {
+    async setReviewEnabled(entryId: string, enabled: boolean) {
+    if (typeof enabled !== 'boolean') {
+      throw new ServiceError('validation', 'Lựa chọn ôn tập không hợp lệ.');
+    }
+
+    return this.db.transaction(
+            'rw',
+            this.db.entries,
+            this.db.sessions,
+            this.db.settings,
+                async () => {
+        const entry = await this.db.entries.get(entryId);
+
+        if (!entry) {
+          throw new ServiceError('not-found', 'Không tìm thấy từ.');
+        }
+
+        const disabledIds = await readReviewDisabledIds(this.db);
+        const currentEnabled = !disabledIds.has(entryId);
+
+        if (currentEnabled === enabled) {
+          return { entryId, enabled };
+        }
+
+        const sessions = await this.db.sessions.toArray();
+
+        const inSession = sessions.some(
+          (session) =>
+            session.phase !== 'complete' &&
+            session.items.some((item) => item.entryId === entryId),
+        );
+
+        if (inSession) {
+          throw new ServiceError(
+            'conflict',
+            'Hãy hoàn thành phiên học hoặc ôn đang chứa từ này trước khi thay đổi.',
+          );
+        }
+
+        if (enabled) {
+          disabledIds.delete(entryId);
+        } else {
+          disabledIds.add(entryId);
+        }
+
+        await this.db.settings.put({
+          key: REVIEW_DISABLED_KEY,
+          value: [...disabledIds],
+        });
+
+        return { entryId, enabled };
+      },
+    );
+  }
   async details(entryId: string) {
     return this.db.transaction(
       'r',
@@ -88,16 +143,22 @@ export class QueryService {
       this.db.entries,
       this.db.progress,
       this.db.topics,
+      this.db.settings,
       async () => {
         const [entries, progress, topics] = await Promise.all([
           this.db.entries.toArray(),
           this.db.progress.toArray(),
           this.db.topics.toArray(),
         ]);
-
+       const disabledIds = await readReviewDisabledIds(this.db);
+       const reviewable = progress.filter(
+      (item) => !disabledIds.has(item.entryId),
+);
         const learned = new Set(progress.map((item) => item.entryId));
         const now = this.clock.now();
-        const due = progress.filter((item) => item.nextReviewAt <= now);
+        const due = reviewable.filter(
+  (item) => item.nextReviewAt <= now,
+);
 
         return {
           learned: progress.length,
@@ -109,9 +170,9 @@ export class QueryService {
             (entry) =>
               entry.contentStatus === 'ready' && !learned.has(entry.id),
           ).length,
-          nextReviewAt: progress.length
-            ? Math.min(...progress.map((item) => item.nextReviewAt))
-            : null,
+          nextReviewAt: reviewable.length
+  ? Math.min(...reviewable.map((item) => item.nextReviewAt))
+  : null,
           collections: (['ielts', 'daily'] as const).map((id) => {
             const slots = topics
               .filter((topic) => topic.collectionId === id)
@@ -137,6 +198,7 @@ export class QueryService {
       this.db.entries,
       this.db.progress,
       async () => {
+        const disabledIds = await readReviewDisabledIds(this.db);
         const topics = await this.db.topics
           .where('collectionId')
           .equals(collection)
@@ -169,9 +231,10 @@ export class QueryService {
             total: topic.entryIds.filter((id) => ready.has(id)).length,
             learned: topic.entryIds.filter((id) => progress.has(id)).length,
             due: topic.entryIds.filter(
-              (id) =>
-                (progress.get(id)?.nextReviewAt ?? Infinity) <=
-                this.clock.now(),
+                (id) =>
+               !disabledIds.has(id) &&
+               (progress.get(id)?.nextReviewAt ?? Infinity) <=
+              this.clock.now(),
             ).length,
           }));
       },
@@ -194,7 +257,9 @@ export class QueryService {
       this.db.entries,
       this.db.progress,
       this.db.topics,
+      this.db.settings,
       async () => {
+        const disabledIds = await readReviewDisabledIds(this.db);
         const entries = await this.db.entries.toArray();
         const progress = new Map(
           (await this.db.progress.toArray()).map((item) => [
@@ -236,8 +301,9 @@ export class QueryService {
               (!filter.level ||
                 progress.get(entry.id)?.level === filter.level) &&
               (!filter.due ||
-                (progress.get(entry.id)?.nextReviewAt ?? Infinity) <=
-                  this.clock.now()) &&
+                (!disabledIds.has(entry.id) &&
+                 (progress.get(entry.id)?.nextReviewAt ?? Infinity) <=
+                   this.clock.now())) &&
               (!query ||
                 (entry.headword + ' ' + entry.meaningVi)
                   .normalize('NFKC')
@@ -250,6 +316,7 @@ export class QueryService {
             return {
               entry,
               progress: itemProgress,
+              reviewEnabled: !disabledIds.has(entry.id),
               status:
                 entry.contentStatus === 'draft'
                   ? 'draft'

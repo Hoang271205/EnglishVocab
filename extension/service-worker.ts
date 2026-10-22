@@ -1,8 +1,13 @@
+import { z } from 'zod';
 import { snapshotSchema } from '../src/services/snapshot';
 import { normalizeAnswer } from '../src/domain/grading';
-import { CaptureQueue } from './queue';
 import { WiktionaryDictionary } from '../src/dictionary/wiktionaryDictionary';
-import { z } from 'zod';
+import { CaptureQueue } from './queue';
+import {
+  forgetTranslations,
+  translateSense,
+  translationInputSchema,
+} from './translation';
 
 const queue = new CaptureQueue({
   get: async (key) => (await chrome.storage.local.get(key))[key],
@@ -13,39 +18,58 @@ const queue = new CaptureQueue({
 
 const provider = new WiktionaryDictionary();
 const pending = new Map<string, string[]>();
+
 let cacheGeneration = 0;
 
 const messageSchema = z.discriminatedUnion('type', [
-  z.object({ type: z.literal('snapshot-update'), snapshot: z.unknown() }).strict(),
-  z.object({ type: z.literal('queue-save'), item: z.unknown() }).strict(),
-  z.object({ type: z.literal('queue-export') }).strict(),
-  z.object({ type: z.literal('queue-transfer') }).strict(),
-  z
-    .object({
-      type: z.literal('queue-ack'),
-      transferId: z.string(),
-      captureIds: z.array(z.string()).max(500),
-    })
-    .strict(),
-  z
-    .object({
-      type: z.literal('lookup'),
-      query: z.string().max(120),
-      forceOnline: z.boolean().optional(),
-    })
-    .strict(),
-  z
-    .object({
-      type: z.literal('personal-delete'),
-      entryId: z.string().min(1).max(128),
-      headword: z.string().min(1).max(500),
-    })
-    .strict(),
+  z.object({
+    type: z.literal('lookup'),
+    query: z.string().min(1).max(120),
+    forceOnline: z.boolean().optional(),
+  }).strict(),
+
+  z.object({
+    type: z.literal('translate-sense'),
+    input: translationInputSchema,
+  }).strict(),
+
+  z.object({
+    type: z.literal('queue-save'),
+    item: z.unknown(),
+  }).strict(),
+
+  z.object({
+    type: z.literal('queue-export'),
+  }).strict(),
+
+  z.object({
+    type: z.literal('queue-transfer'),
+  }).strict(),
+
+  z.object({
+    type: z.literal('queue-ack'),
+    transferId: z.string(),
+    captureIds: z.array(z.string()).max(500),
+  }).strict(),
+
+  z.object({
+    type: z.literal('snapshot-update'),
+    snapshot: z.unknown(),
+  }).strict(),
+
+  z.object({
+    type: z.literal('personal-delete'),
+    entryId: z.string().min(1).max(128),
+    headword: z.string().min(1).max(500),
+  }).strict(),
 ]);
 
 function isLocal(sender: ExtensionSender) {
   try {
-    return new URL(sender.url ?? '').origin === 'http://localhost:5173';
+    return (
+      new URL(sender.url ?? '').origin ===
+      'http://localhost:5173'
+    );
   } catch {
     return false;
   }
@@ -71,13 +95,18 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
       return queue.save(message.item);
     }
 
+    if (message.type === 'translate-sense') {
+      return translateSense(message.input);
+    }
+
     if (message.type === 'lookup') {
       const key = normalizeAnswer(message.query);
       const generation = cacheGeneration;
 
       if (!message.forceOnline) {
-        const raw = (await chrome.storage.local.get('snapshot')).snapshot;
-        const snapshot = snapshotSchema.safeParse(raw);
+        const stored = await chrome.storage.local.get('snapshot');
+        const snapshot = snapshotSchema.safeParse(stored.snapshot);
+
         const entries = snapshot.success
           ? snapshot.data.entries.filter(
               (entry) => normalizeAnswer(entry.headword) === key,
@@ -88,6 +117,7 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
           return {
             query: key,
             source: 'local',
+            entries,
             senses: entries.map((entry) => ({
               entryId: entry.id,
               partOfSpeech: entry.partOfSpeech,
@@ -97,9 +127,9 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
                   entry.examples[0].targetSurface +
                   entry.examples[0].suffix
                 : null,
-              sourceUrls: entry.provenance
-                .map((source) => source.url)
-                .filter(Boolean),
+              sourceUrls: entry.provenance.flatMap((source) =>
+                source.url ? [source.url] : [],
+              ),
               licenses: entry.provenance.map((source) => ({
                 name: source.license,
                 url: source.url,
@@ -111,19 +141,24 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
                 text: entry.pronunciation.ipa,
                 audio: null,
                 accent: entry.pronunciation.accent,
+                sourceUrl: null,
+                license: null,
               })),
           };
         }
       }
 
-      // Worker cache is independent from the web cache, and survives suspension.
-      const rawCache = (await chrome.storage.local.get('lookupCache'))
-        .lookupCache;
-      const cached =
-        Array.isArray(rawCache) &&
-        rawCache.every((item) => item && typeof item === 'object')
-          ? rawCache
-          : [];
+      const stored = await chrome.storage.local.get('lookupCache');
+
+      const cached = Array.isArray(stored.lookupCache)
+        ? stored.lookupCache.filter(
+            (item) =>
+              item &&
+              typeof item === 'object' &&
+              typeof item.query === 'string',
+          )
+        : [];
+
       const found = cached.find((item) => item.query === key);
 
       if (found && !message.forceOnline) {
@@ -136,18 +171,19 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
         if (generation === cacheGeneration) {
           await chrome.storage.local.set({
             lookupCache: [
-              ...cached.filter((item) => item.query !== result.query),
+              ...cached.filter(
+                (item) => item.query !== result.query,
+              ),
               result,
             ].slice(-500),
           });
 
-          // If deletion happens while storage is writing, clear the old result.
           if (generation !== cacheGeneration) {
             await chrome.storage.local.set({ lookupCache: [] });
           }
         }
       } catch {
-        /* Optional cache must not hide a successful lookup. */
+        // Lỗi cache không ngăn hiển thị kết quả tra từ.
       }
 
       return result;
@@ -163,29 +199,30 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
     }
 
     if (!isLocal(sender)) {
-      throw Error('Transfer only allowed on http://localhost:5173');
+      throw new Error(
+        'Thao tác này chỉ được phép từ http://localhost:5173',
+      );
     }
 
     if (message.type === 'personal-delete') {
       cacheGeneration++;
 
       await queue.removeEntry(message.entryId);
+      await forgetTranslations(message.headword);
 
       const [snapshotStorage, cacheStorage] = await Promise.all([
-  chrome.storage.local.get('snapshot'),
-  chrome.storage.local.get('lookupCache'),
-]);
+        chrome.storage.local.get('snapshot'),
+        chrome.storage.local.get('lookupCache'),
+      ]);
 
-const stored = {
-  snapshot: snapshotStorage.snapshot,
-  lookupCache: cacheStorage.lookupCache,
-};
+      const snapshot = snapshotSchema.safeParse(
+        snapshotStorage.snapshot,
+      );
 
-      const snapshot = snapshotSchema.safeParse(stored.snapshot);
       const key = normalizeAnswer(message.headword);
 
-      const cache = Array.isArray(stored.lookupCache)
-        ? stored.lookupCache
+      const cache = Array.isArray(cacheStorage.lookupCache)
+        ? cacheStorage.lookupCache
         : [];
 
       const lookupCache = cache.filter(
@@ -221,25 +258,26 @@ const stored = {
         new TextEncoder().encode(JSON.stringify(snapshot)).length >
         8_000_000
       ) {
-        throw Error('Snapshot too large');
+        throw new Error('Snapshot too large');
       }
 
-      const old = snapshotSchema.safeParse(
-        (await chrome.storage.local.get('snapshot')).snapshot,
-      );
+      const stored = await chrome.storage.local.get('snapshot');
+      const old = snapshotSchema.safeParse(stored.snapshot);
 
       if (old.success && old.data.version > snapshot.version) {
-        throw Error('Snapshot is stale');
+        throw new Error('Snapshot is stale');
       }
 
       await chrome.storage.local.set({ snapshot });
-      return { updated: true, version: snapshot.version };
+
+      return {
+        updated: true,
+        version: snapshot.version,
+      };
     }
 
     if (message.type === 'queue-transfer') {
-      if (pending.size > 100) {
-        pending.clear();
-      }
+      if (pending.size > 100) pending.clear();
 
       const captures = await queue.list();
       const transferId = crypto.randomUUID();
@@ -265,20 +303,21 @@ const stored = {
       new Set(message.captureIds).size !== expected.length ||
       message.captureIds.some((id) => !expected.includes(id))
     ) {
-      throw Error('Unexpected ACK');
+      throw new Error('Unexpected ACK');
     }
 
     const result = await queue.acknowledge(message.captureIds);
     pending.delete(message.transferId);
+
     return result;
   })().then(
     (value) => respond({ ok: true, value }),
-    (error) =>
+    (cause: unknown) =>
       respond({
         ok: false,
         error:
-          error instanceof Error
-            ? error.message
+          cause instanceof Error
+            ? cause.message
             : 'Extension operation failed',
       }),
   );

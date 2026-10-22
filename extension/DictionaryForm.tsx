@@ -19,9 +19,7 @@ export default function DictionaryForm({
         void model.save();
       }}
     >
-      {model.loading && (
-        <p role="status">Đang tra từ…</p>
-      )}
+      {model.loading && <p role="status">Đang tra từ…</p>}
 
       {model.lookupError && (
         <p className="message" role="status">
@@ -62,9 +60,7 @@ export default function DictionaryForm({
         {model.sense && (
           <div>
             <strong>
-              {model.localEntry
-                ? 'Nghĩa đã lưu'
-                : 'Định nghĩa tiếng Anh'}
+              {model.localEntry ? 'Nghĩa đã lưu' : 'Định nghĩa tiếng Anh'}
             </strong>
             <p>{model.sense.definition}</p>
           </div>
@@ -82,14 +78,10 @@ export default function DictionaryForm({
         <label>
           Từ loại
           <input
-            value={
-              model.localEntry?.partOfSpeech ?? model.partOfSpeech
-            }
+            value={model.localEntry?.partOfSpeech ?? model.partOfSpeech}
             readOnly={Boolean(model.sense?.entryId)}
             maxLength={100}
-            onChange={(event) =>
-              model.setPartOfSpeech(event.target.value)
-            }
+            onChange={(event) => model.setPartOfSpeech(event.target.value)}
           />
         </label>
 
@@ -100,11 +92,27 @@ export default function DictionaryForm({
             readOnly={Boolean(model.sense?.entryId)}
             maxLength={10_000}
             placeholder="Có thể để trống và bổ sung sau."
-            onChange={(event) =>
-              model.setMeaningVi(event.target.value)
-            }
+            onChange={(event) => model.setMeaningVi(event.target.value)}
           />
         </label>
+
+        {model.translating && (
+          <p className="label" role="status">
+            Đang dịch nghĩa đang chọn…
+          </p>
+        )}
+
+        {model.translationSuggested && (
+          <p className="label">
+            Dịch tham khảo — MyMemory. Bạn có thể sửa trước khi lưu.
+          </p>
+        )}
+
+        {model.translationError && (
+          <p className="message" role="status">
+            {model.translationError}
+          </p>
+        )}
 
         {model.sense?.example && (
           <div>
@@ -134,15 +142,14 @@ export default function DictionaryForm({
 
       {!model.localEntry && (
         <p className="label">
-          Thiếu nghĩa tiếng Việt, từ loại hoặc ví dụ phù hợp thì
-          lưu thành bản nháp. IPA và CEFR có thể để trống.
+          Thiếu nghĩa tiếng Việt, từ loại hoặc ví dụ phù hợp thì lưu thành bản
+          nháp. IPA và CEFR có thể để trống.
         </p>
       )}
 
       {model.saveError && (
         <p className="message" role="alert">
-          {model.saveError}
-          {' '}
+          {model.saveError}{' '}
           {model.locked
             ? 'Bấm Thử lưu lại để gửi lại cùng lượt lưu.'
             : ''}
@@ -150,13 +157,16 @@ export default function DictionaryForm({
       )}
 
       {model.saved ? (
-        <p className="message" role="status">{model.saved}</p>
+        <p className="message" role="status">
+          {model.saved}
+        </p>
       ) : (
         <button
           className="save-word"
           type="submit"
           disabled={
             model.loading ||
+            model.translating ||
             model.saving ||
             Boolean(model.sense?.entryId && !model.localEntry)
           }
@@ -168,6 +178,7 @@ export default function DictionaryForm({
               : 'Lưu từ'}
         </button>
       )}
+
       <QueueExportButton disabled={model.saving} />
     </form>
   );

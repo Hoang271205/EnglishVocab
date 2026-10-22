@@ -2,6 +2,10 @@ import { normalizeAnswer } from '../domain/grading';
 import { ServiceError } from '../domain/types';
 import { VocabDB } from '../storage/db';
 import { personalNotesSchema } from './personalEditor';
+import {
+  readReviewDisabledIds,
+  REVIEW_DISABLED_KEY,
+} from './reviewPreferences';
 
 export async function deletePersonalEntry(
   db: VocabDB,
@@ -44,9 +48,7 @@ export async function deletePersonalEntry(
         session.items.some((item) => item.entryId === entryId),
       );
 
-      if (
-        relatedSessions.some((session) => session.phase !== 'complete')
-      ) {
+      if (relatedSessions.some((session) => session.phase !== 'complete')) {
         throw new ServiceError(
           'conflict',
           'Từ đang nằm trong phiên học hoặc ôn chưa hoàn tất. Hãy hoàn thành phiên trước khi xóa.',
@@ -111,6 +113,16 @@ export async function deletePersonalEntry(
         .map((record) => record.key);
 
       await db.lookupCache.bulkDelete(cacheKeys);
+
+      const disabledIds = await readReviewDisabledIds(db);
+
+      if (disabledIds.delete(entryId)) {
+        await db.settings.put({
+          key: REVIEW_DISABLED_KEY,
+          value: [...disabledIds],
+        });
+      }
+
       await db.entries.delete(entryId);
 
       return { entryId, headword: entry.headword };
