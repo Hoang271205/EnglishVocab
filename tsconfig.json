@@ -19,9 +19,17 @@
     ]
   },
   "include": [
-     "src/**/*.ts",
-     "src/**/*.tsx",
-     "tests/**/*.ts",
-     "extension/**/*.ts"
-, "extension/DictionaryForm.tsx"  ]
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "tests/**/*.ts",
+    "extension/**/*.ts",
+    "extension/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "dist-extension",
+    "dist-server",
+    "legacy"
+  ]
 }

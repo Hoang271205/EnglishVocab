@@ -6,12 +6,14 @@ import LearningStartButton from '../learning/LearningStartButton';
 interface TopicDetailsProps {
   topicId: string;
   topicName: string;
+  remaining: number;
   onClose: () => void;
 }
 
 export default function TopicDetails({
   topicId,
   topicName,
+  remaining,
   onClose,
 }: TopicDetailsProps) {
   const resource = useTopicEntries(topicId);
@@ -26,32 +28,25 @@ export default function TopicDetails({
       <div className="online-topic-details">
         <strong>{topicName}</strong>
 
-        {resource.loading && (
-          <StatusMessage>
-            Đang tải từ vựng…
-          </StatusMessage>
-        )}
+        {resource.loading && <StatusMessage>Đang tải từ vựng…</StatusMessage>}
 
         {resource.error && (
           <>
-            <StatusMessage tone="error">
-              {resource.error}
-            </StatusMessage>
+            <StatusMessage tone="error">{resource.error}</StatusMessage>
 
-            <Button onClick={resource.reload}>
-              Thử lại
-            </Button>
+            <Button onClick={resource.reload}>Thử lại</Button>
           </>
         )}
 
         {resource.data && (
           <>
             <p>
-              {resource.data.length} từ sẵn sàng trong chủ đề.
+              {resource.data.length} từ sẵn sàng trong chủ đề · {remaining} từ
+              chưa học hoặc chưa đánh dấu đã biết.
             </p>
             <LearningStartButton
               topicId={topicId}
-              disabled={resource.data.length === 0}
+              disabled={resource.data.length === 0 || remaining === 0}
             />
 
             {resource.data.length === 0 ? (

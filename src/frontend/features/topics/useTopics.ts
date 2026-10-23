@@ -1,29 +1,17 @@
-import {
-  useCallback,
-  useMemo,
-  useState,
-} from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useAsyncResource } from '../../hooks/useAsyncResource';
 import { topicsApi } from './topics.api';
-import type {
-  TopicSummary,
-  VocabularyCollection,
-} from './topics.types';
+import type { TopicSummary, VocabularyCollection } from './topics.types';
 
 function normalizeSearch(value: string) {
-  return value
-    .normalize('NFKC')
-    .toLocaleLowerCase('vi')
-    .trim();
+  return value.normalize('NFKC').toLocaleLowerCase('vi').trim();
 }
 
 export function useTopics() {
-  const [collection, setCollection] =
-    useState<VocabularyCollection>('ielts');
+  const [collection, setCollection] = useState<VocabularyCollection>('ielts');
 
   const [search, setSearch] = useState('');
-  const [selectedId, setSelectedId] =
-    useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const load = useCallback(
     async (signal: AbortSignal) => {
@@ -32,19 +20,18 @@ export function useTopics() {
         topicsApi.progress(signal),
       ]);
 
-      const learnedIds = new Set(
-        progress.map((item) => item.entryId),
-      );
+      const learnedIds = new Set(progress.progress.map((item) => item.entryId));
 
-      const summaries: TopicSummary[] = topics.map(
-        (topic) => ({
-          ...topic,
-          total: topic.entryIds.length,
-          learned: topic.entryIds.filter(
-            (id) => learnedIds.has(id),
-          ).length,
-        }),
-      );
+      const knownIds = new Set(progress.knownEntryIds ?? []);
+
+      const summaries: TopicSummary[] = topics.map((topic) => ({
+        ...topic,
+        total: topic.entryIds.length,
+        known: topic.entryIds.filter(
+          (id) => knownIds.has(id) && !learnedIds.has(id),
+        ).length,
+        learned: topic.entryIds.filter((id) => learnedIds.has(id)).length,
+      }));
 
       return summaries;
     },
@@ -58,15 +45,11 @@ export function useTopics() {
     const query = normalizeSearch(search);
 
     return (topics ?? []).filter((topic) =>
-      normalizeSearch(
-        `${topic.nameEn} ${topic.nameVi}`,
-      ).includes(query),
+      normalizeSearch(`${topic.nameEn} ${topic.nameVi}`).includes(query),
     );
   }, [topics, search]);
 
-  function chooseCollection(
-    next: VocabularyCollection,
-  ) {
+  function chooseCollection(next: VocabularyCollection) {
     if (next === collection) return;
 
     setCollection(next);
@@ -75,9 +58,7 @@ export function useTopics() {
   }
 
   function toggleTopic(topicId: string) {
-    setSelectedId((current) =>
-      current === topicId ? null : topicId,
-    );
+    setSelectedId((current) => (current === topicId ? null : topicId));
   }
 
   return {
@@ -87,8 +68,7 @@ export function useTopics() {
     selectedId,
     visibleTopics,
     topicCount: topics?.length ?? 0,
-    populatedCount:
-      topics?.filter((topic) => topic.total > 0).length ?? 0,
+    populatedCount: topics?.filter((topic) => topic.total > 0).length ?? 0,
     setSearch,
     chooseCollection,
     toggleTopic,

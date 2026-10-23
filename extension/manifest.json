@@ -2,40 +2,33 @@
   "manifest_version": 3,
   "name": "EnglishVocab — lưu từ cá nhân",
   "version": "0.1.0",
-  "description": "Bôi đen để tra từ và lưu từ vựng về EnglishVocab.",
-  "permissions": [
-    "storage"
-  ],
+  "description": "Bôi đen, tra nghĩa và lưu từ trực tiếp vào tài khoản EnglishVocab.",
+  "permissions": ["storage"],
   "host_permissions": [
-  "https://freedictionaryapi.com/*",
-  "https://api.mymemory.translated.net/*"
-],
+    "https://freedictionaryapi.com/*",
+    "https://api.mymemory.translated.net/*",
+    "http://127.0.0.1/*",
+    "http://localhost/*"
+  ],
   "background": {
     "service_worker": "service-worker.js",
     "type": "module"
   },
   "content_scripts": [
     {
-      "matches": [
-        "http://localhost/*"
-      ],
-      "js": [
-        "bridge.js"
-      ],
+      "matches": ["http://localhost/*", "http://127.0.0.1/*"],
+      "js": ["bridge.js"],
       "run_at": "document_idle"
     },
     {
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "exclude_matches": [
-        "http://localhost/*"
-      ],
-      "js": [
-        "content.js"
-      ],
+      "matches": ["http://*/*", "https://*/*"],
+      "exclude_matches": ["http://localhost/*", "http://127.0.0.1/*"],
+      "js": ["content.js"],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "action": {
+    "default_title": "Tài khoản EnglishVocab",
+    "default_popup": "account.html"
+  }
 }

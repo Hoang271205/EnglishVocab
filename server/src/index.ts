@@ -1,5 +1,6 @@
 import { createServer } from 'node:http';
 import { createApp } from './app.js';
+import { ensureExtensionIndexes } from './modules/extension/access.js';
 import { ensureUserIndexes } from './modules/auth/users.js';
 import { env } from './config/env.js';
 import { ensureLibraryIndexes } from './modules/library/collections.js';
@@ -8,15 +9,13 @@ import { ensureStudyIndexes } from './modules/study/collections.js';
 import { ensurePersonalIndexes } from './modules/personal/collections.js';
 import { ensureTransferIndexes } from './modules/transfers/collections.js';
 import { ensureSnapshotCounter } from './modules/transfers/snapshot-counter.js';
-import {
-  closeMongo,
-  connectMongo,
-} from './database/mongo.js';
+import { closeMongo, connectMongo } from './database/mongo.js';
 
 async function start() {
   await connectMongo();
- 
+
   await ensureUserIndexes();
+  await ensureExtensionIndexes();
   await ensurePersonalIndexes();
   await ensureLibraryIndexes();
   await ensureProgressIndexes();
@@ -24,7 +23,7 @@ async function start() {
   await ensureTransferIndexes();
   await ensureSnapshotCounter();
   const server = createServer(createApp());
-  
+
   await new Promise<void>((resolve, reject) => {
     server.once('error', reject);
 

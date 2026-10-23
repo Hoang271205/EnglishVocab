@@ -27,27 +27,29 @@ export const learningApi = {
     return result.settings;
   },
 
-  async create(
-    topicId: string,
-    limit: 5 | 10,
-    signal: AbortSignal,
-  ) {
-    const result = await apiRequest<SessionResponse>(
-      '/api/study/learn',
-      {
-        method: 'POST',
-        body: { topicId, limit },
-        signal,
-      },
-    );
+  async create(topicId: string, limit: 5 | 10, signal: AbortSignal) {
+    const result = await apiRequest<SessionResponse>('/api/study/learn', {
+      method: 'POST',
+      body: { topicId, limit },
+      signal,
+    });
 
     return result.session;
   },
 
-  async session(
-    sessionId: string,
-    signal: AbortSignal,
-  ) {
+  async createPersonal(entryIds: string[], limit: 5 | 10, signal: AbortSignal) {
+    const result = await apiRequest<SessionResponse>(
+      '/api/study/personal/learn',
+      {
+        method: 'POST',
+        body: { entryIds, limit },
+        signal,
+      },
+    );
+    return result.session;
+  },
+
+  async session(sessionId: string, signal: AbortSignal) {
     const result = await apiRequest<SessionResponse>(
       `/api/study/learn/${encodeURIComponent(sessionId)}`,
       { signal },
@@ -78,11 +80,7 @@ export const learningApi = {
     return result.session;
   },
 
-  submit(
-    session: LearningSession,
-    answer: string,
-    signal: AbortSignal,
-  ) {
+  submit(session: LearningSession, answer: string, signal: AbortSignal) {
     return apiRequest<LearningResult>(
       `/api/study/learn/${encodeURIComponent(session.id)}/answer`,
       {

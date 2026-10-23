@@ -24,6 +24,8 @@ export function createSessionMiddleware() {
     dbName: env.MONGODB_DB,
     collectionName: 'auth_sessions',
     ttl: 7 * 24 * 60 * 60,
+    // Throttle expiry-only writes; changed session data is still saved immediately.
+    touchAfter: 5 * 60,
   });
 
   store.on('error', () => {

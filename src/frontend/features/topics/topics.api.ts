@@ -1,18 +1,9 @@
 import { apiRequest } from '../../api/client';
-import type {
-  Entry,
-  Topic,
-} from '../../../domain/types';
-import type {
-  ProgressResponse,
-  VocabularyCollection,
-} from './topics.types';
+import type { Entry, Topic } from '../../../domain/types';
+import type { ProgressResponse, VocabularyCollection } from './topics.types';
 
 export const topicsApi = {
-  async list(
-    collection: VocabularyCollection,
-    signal: AbortSignal,
-  ) {
+  async list(collection: VocabularyCollection, signal: AbortSignal) {
     const query = new URLSearchParams({ collection });
 
     const result = await apiRequest<{
@@ -23,24 +14,19 @@ export const topicsApi = {
   },
 
   async progress(signal: AbortSignal) {
-    const result = await apiRequest<ProgressResponse>(
-      '/api/progress',
-      { signal },
-    );
+    const result = await apiRequest<ProgressResponse>('/api/progress', {
+      signal,
+    });
 
-    return result.progress;
+    return result;
   },
 
-  async entries(
-    topicId: string,
-    signal: AbortSignal,
-  ) {
+  async entries(topicId: string, signal: AbortSignal) {
     const result = await apiRequest<{
       entries: Entry[];
-    }>(
-      `/api/library/topics/${encodeURIComponent(topicId)}/entries`,
-      { signal },
-    );
+    }>(`/api/library/topics/${encodeURIComponent(topicId)}/entries`, {
+      signal,
+    });
 
     return result.entries;
   },

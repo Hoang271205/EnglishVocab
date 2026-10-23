@@ -2,6 +2,7 @@ import { Router } from 'express';
 import type { RequestHandler } from 'express';
 import { MongoServerError } from 'mongodb';
 import { z } from 'zod';
+import { REVIEW_BATCH_SIZES } from '../../../../src/shared/studyOptions.js';
 import { ServiceError } from '../../../../src/domain/types.js';
 import { requireAuth } from '../../middleware/require-auth.js';
 import { requireJsonWrite } from '../../middleware/require-json-write.js';
@@ -32,17 +33,11 @@ studyRouter.use((_request, response, next) => {
 
 const sessionIdSchema = z.uuid();
 
-const versionSchema = z
-  .number()
-  .int()
-  .min(1)
-  .max(Number.MAX_SAFE_INTEGER);
+const versionSchema = z.number().int().min(1).max(Number.MAX_SAFE_INTEGER);
 
 const createSchema = z
   .object({
-    topicId: z
-      .string()
-      .regex(/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}$/),
+    topicId: z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}$/),
     limit: z.union([z.literal(5), z.literal(10)]).default(10),
   })
   .strict();
@@ -50,13 +45,7 @@ const createSchema = z
 const actionSchema = z
   .object({
     version: versionSchema,
-    action: z.enum([
-      'recall',
-      'front',
-      'pause',
-      'resume',
-      'draft',
-    ]),
+    action: z.enum(['recall', 'front', 'pause', 'resume', 'draft', 'skip']),
     answer: z.string().max(1000).default(''),
   })
   .strict();
@@ -103,15 +92,11 @@ function handle(handler: RequestHandler): RequestHandler {
         return;
       }
 
-      if (
-        error instanceof MongoServerError &&
-        error.code === 11000
-      ) {
+      if (error instanceof MongoServerError && error.code === 11000) {
         response.status(409).json({
           error: {
             code: 'CONFLICT',
-            message:
-              'Dữ liệu vừa thay đổi. Hãy tải lại phiên đang dở.',
+            message: 'Dữ liệu vừa thay đổi. Hãy tải lại phiên đang dở.',
           },
         });
         return;
@@ -126,9 +111,7 @@ function handle(handler: RequestHandler): RequestHandler {
 studyRouter.get(
   '/learn/active',
   handle(async (request, response) => {
-    const session = await getActiveLearnSession(
-      request.session.userId!,
-    );
+    const session = await getActiveLearnSession(request.session.userId!);
 
     response.json({ session });
   }),
@@ -153,14 +136,9 @@ studyRouter.post(
 studyRouter.get(
   '/learn/:sessionId',
   handle(async (request, response) => {
-    const sessionId = sessionIdSchema.parse(
-      request.params.sessionId,
-    );
+    const sessionId = sessionIdSchema.parse(request.params.sessionId);
 
-    const session = await getLearnSession(
-      request.session.userId!,
-      sessionId,
-    );
+    const session = await getLearnSession(request.session.userId!, sessionId);
 
     response.json({ session });
   }),
@@ -170,9 +148,7 @@ studyRouter.post(
   '/learn/:sessionId/action',
   requireJsonWrite,
   handle(async (request, response) => {
-    const sessionId = sessionIdSchema.parse(
-      request.params.sessionId,
-    );
+    const sessionId = sessionIdSchema.parse(request.params.sessionId);
 
     const input = actionSchema.parse(request.body);
 
@@ -192,9 +168,7 @@ studyRouter.post(
   '/learn/:sessionId/answer',
   requireJsonWrite,
   handle(async (request, response) => {
-    const sessionId = sessionIdSchema.parse(
-      request.params.sessionId,
-    );
+    const sessionId = sessionIdSchema.parse(request.params.sessionId);
 
     const input = answerSchema.parse(request.body);
 
@@ -212,19 +186,15 @@ studyRouter.post(
 
 const createReviewSchema = z
   .object({
-    limit: z
-      .union([z.literal(10), z.literal(20)])
-      .default(10),
-    collection: z
-  .enum(['ielts', 'daily', 'personal'])
-  .optional(),
+    limit: z.literal(REVIEW_BATCH_SIZES).default(10),
+    collection: z.enum(['ielts', 'daily', 'personal']).optional(),
   })
   .strict();
 
 const reviewActionSchema = z
   .object({
     version: versionSchema,
-    action: z.enum(['next', 'pause', 'resume', 'draft']),
+    action: z.enum(['next', 'pause', 'resume', 'draft', 'finish']),
     answer: z.string().max(1000).default(''),
   })
   .strict();
@@ -237,21 +207,15 @@ const reviewAnswerSchema = z
     forgotten: z.boolean().default(false),
   })
   .strict()
-  .refine(
-    (input) =>
-      input.forgotten || input.answer.trim().length > 0,
-    {
-      message: 'Hãy nhập đáp án hoặc chọn Không nhớ.',
-      path: ['answer'],
-    },
-  );
+  .refine((input) => input.forgotten || input.answer.trim().length > 0, {
+    message: 'Hãy nhập đáp án hoặc chọn Không nhớ.',
+    path: ['answer'],
+  });
 
 studyRouter.get(
   '/review/active',
   handle(async (request, response) => {
-    const session = await getActiveReviewSession(
-      request.session.userId!,
-    );
+    const session = await getActiveReviewSession(request.session.userId!);
 
     response.json({ session });
   }),
@@ -276,14 +240,9 @@ studyRouter.post(
 studyRouter.get(
   '/review/:sessionId',
   handle(async (request, response) => {
-    const sessionId = sessionIdSchema.parse(
-      request.params.sessionId,
-    );
+    const sessionId = sessionIdSchema.parse(request.params.sessionId);
 
-    const session = await getReviewSession(
-      request.session.userId!,
-      sessionId,
-    );
+    const session = await getReviewSession(request.session.userId!, sessionId);
 
     response.json({ session });
   }),
@@ -293,9 +252,7 @@ studyRouter.post(
   '/review/:sessionId/action',
   requireJsonWrite,
   handle(async (request, response) => {
-    const sessionId = sessionIdSchema.parse(
-      request.params.sessionId,
-    );
+    const sessionId = sessionIdSchema.parse(request.params.sessionId);
 
     const input = reviewActionSchema.parse(request.body);
 
@@ -315,9 +272,7 @@ studyRouter.post(
   '/review/:sessionId/answer',
   requireJsonWrite,
   handle(async (request, response) => {
-    const sessionId = sessionIdSchema.parse(
-      request.params.sessionId,
-    );
+    const sessionId = sessionIdSchema.parse(request.params.sessionId);
 
     const input = reviewAnswerSchema.parse(request.body);
 

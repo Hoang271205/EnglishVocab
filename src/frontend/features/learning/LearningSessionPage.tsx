@@ -18,7 +18,7 @@ export default function LearningSessionPage({
   const model = useLearningSession(sessionId, onExit);
   const session = model.session;
 
-  const blocked = model.busy || model.needsReload;
+  const blocked = model.busy || model.needsReload || Boolean(model.error);
 
   return (
     <section className="session-page">
@@ -26,9 +26,7 @@ export default function LearningSessionPage({
         <div className="dashboard-error">
           <StatusMessage tone="error">
             {model.error}
-            {model.needsReload
-              ? ' Hãy tải lại phiên trước khi tiếp tục.'
-              : ''}
+            {model.needsReload ? ' Hãy tải lại phiên trước khi tiếp tục.' : ''}
           </StatusMessage>
 
           <Button
@@ -42,17 +40,12 @@ export default function LearningSessionPage({
       )}
 
       {!session ? (
-        !model.error && (
-          <StatusMessage>
-            Đang tải phiên học…
-          </StatusMessage>
-        )
+        !model.error && <StatusMessage>Đang tải phiên học…</StatusMessage>
       ) : (
         <>
           <div className="study-toolbar">
             <span>
-              Đã hoàn thành {session.index}/
-              {session.total} từ
+              Đã hoàn thành {session.index}/{session.total} từ
             </span>
 
             <Button
@@ -73,24 +66,19 @@ export default function LearningSessionPage({
             aria-label="Tiến độ phiên học"
           />
 
-          {model.notice && (
-            <StatusMessage>
-              {model.notice}
-            </StatusMessage>
-          )}
+          {model.notice && <StatusMessage>{model.notice}</StatusMessage>}
 
           {session.phase === 'complete' ? (
             <div className="session-summary">
               <h1>Hoàn thành lượt học!</h1>
 
               <p>
-                Các từ vừa học đã được lưu vào lịch ôn.
+                Các từ đã viết đúng được lưu vào lịch ôn.{' '}
+                {session.knownCount ?? 0} từ được đánh dấu đã biết, không tạo
+                lịch ôn.
               </p>
 
-              <Button
-                disabled={blocked}
-                onClick={() => void model.exit()}
-              >
+              <Button disabled={blocked} onClick={() => void model.exit()}>
                 Về danh sách chủ đề
               </Button>
             </div>
@@ -100,26 +88,20 @@ export default function LearningSessionPage({
 
               <Button
                 disabled={blocked}
-                onClick={() =>
-                  void model.transition('resume')
-                }
+                onClick={() => void model.transition('resume')}
               >
                 Tiếp tục học
               </Button>
             </div>
-          ) : session.phase === 'front' &&
-            session.front ? (
+          ) : session.phase === 'front' && session.front ? (
             <LearningFrontCard
               key={session.attemptId}
               entry={session.front}
               voiceURI={voiceURI}
               busy={blocked}
-              onNext={() =>
-                void model.transition('recall')
-              }
+              onNext={() => void model.transition('recall')}
             />
-          ) : session.phase === 'recall' &&
-            session.hint ? (
+          ) : session.phase === 'recall' && session.hint ? (
             <LearningRecallCard
               key={session.attemptId}
               meaningVi={session.hint.meaningVi}
@@ -128,14 +110,21 @@ export default function LearningSessionPage({
               busy={blocked}
               onChange={model.setAnswer}
               onSubmit={() => void model.submit()}
-              onShowFront={() =>
-                void model.transition('front')
-              }
-              onSaveDraft={() =>
-                void model.transition('draft')
-              }
+              onShowFront={() => void model.transition('front')}
+              onSaveDraft={() => void model.transition('draft')}
             />
           ) : null}
+
+          {session.phase !== 'complete' && !session.paused && (
+            <button
+              type="button"
+              className="learning-skip-button"
+              disabled={blocked}
+              onClick={() => void model.transition('skip')}
+            >
+              Skip — Mình đã biết từ này
+            </button>
+          )}
         </>
       )}
     </section>

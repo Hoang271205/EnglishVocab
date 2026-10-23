@@ -25,12 +25,16 @@ export interface LearnSession extends BaseSession {
   items: {
     attemptId: string;
     entry: Entry;
+    known?: boolean;
   }[];
 }
 
 export interface ReviewSession extends BaseSession {
   mode: 'review';
   topicId: null;
+  endedEarly?: boolean;
+  reviewedCount?: number;
+  remainingCount?: number;
   phase: 'question' | 'feedback' | 'complete';
   items: {
     attemptId: string;
@@ -55,11 +59,9 @@ export interface StudyReceipt {
   event: ReviewEvent;
 }
 
-export const studySessions =
-  db.collection<StudySession>('study_sessions');
+export const studySessions = db.collection<StudySession>('study_sessions');
 
-export const studyReceipts =
-  db.collection<StudyReceipt>('study_receipts');
+export const studyReceipts = db.collection<StudyReceipt>('study_receipts');
 
 export async function ensureStudyIndexes() {
   await studySessions.createIndex(

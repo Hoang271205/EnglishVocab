@@ -1,4 +1,5 @@
 import { createHash, randomUUID } from 'node:crypto';
+import type { ClientSession } from 'mongodb';
 import { ServiceError } from '../../../../src/domain/types.js';
 import { client } from '../../database/mongo.js';
 import { sharedEntries } from '../library/collections.js';
@@ -11,9 +12,7 @@ import {
 import type { CaptureTransfer } from './schema.js';
 
 function hash(value: unknown) {
-  return createHash('sha256')
-    .update(JSON.stringify(value))
-    .digest('hex');
+  return createHash('sha256').update(JSON.stringify(value)).digest('hex');
 }
 
 function identityHash(entry: {
@@ -21,28 +20,23 @@ function identityHash(entry: {
   partOfSpeech: string;
   senseKey: string;
 }) {
-  return hash([
-    entry.headword,
-    entry.partOfSpeech,
-    entry.senseKey,
-  ]);
+  return hash([entry.headword, entry.partOfSpeech, entry.senseKey]);
 }
 
 export async function receiveTransfer(
   userId: string,
   transfer: CaptureTransfer,
+  authorize?: (session: ClientSession) => Promise<void>,
 ) {
   return client.withSession(async (mongoSession) =>
     mongoSession.withTransaction(async () => {
+      if (authorize) await authorize(mongoSession);
       let createdEntries = 0;
       let receivedCaptures = 0;
       let duplicateCaptures = 0;
 
       for (const item of transfer.captures) {
-        const receiptId = JSON.stringify([
-          userId,
-          item.capture.id,
-        ]);
+        const receiptId = JSON.stringify([userId, item.capture.id]);
 
         // Không đưa đoạn văn bài đọc vào dữ liệu lưu.
         const payloadHash = hash({
@@ -76,20 +70,32 @@ export async function receiveTransfer(
         let entryId: string;
 
         if (item.entry.collectionId === 'personal') {
-          const linkId = JSON.stringify([
-            userId,
-            item.entry.id,
-          ]);
+          const linkId = JSON.stringify([userId, item.entry.id]);
 
           const link = await extensionEntryLinks.findOne(
             { _id: linkId, userId },
             { session: mongoSession },
           );
 
-          if (link) {
-            if (
-              link.identityHash !== identityHash(item.entry)
-            ) {
+          const canonical = await personalEntries.findOne(
+            { userId, 'entry.id': item.entry.id },
+            { session: mongoSession },
+          );
+          if (canonical) {
+            if (identityHash(canonical.entry) !== identityHash(item.entry)) {
+              throw new ServiceError(
+                'conflict',
+                'Từ đã được đổi nghĩa trên web. Hãy tra lại trước khi lưu.',
+              );
+            }
+            await personalEntries.updateOne(
+              { _id: canonical._id, userId },
+              { $inc: { studyUseVersion: 1 } },
+              { session: mongoSession },
+            );
+            entryId = canonical.entry.id;
+          } else if (link) {
+            if (link.identityHash !== identityHash(item.entry)) {
               throw new ServiceError(
                 'conflict',
                 'ID từ bên extension đã thuộc một nghĩa khác.',
@@ -115,6 +121,15 @@ export async function receiveTransfer(
             // Không ghi đè nội dung người dùng đã sửa trên web.
             entryId = link.entryId;
           } else {
+            const deleted = await importReceipts.findOne(
+              { userId, entryId: item.entry.id, deleted: true },
+              { session: mongoSession },
+            );
+            if (deleted)
+              throw new ServiceError(
+                'conflict',
+                'Từ này đã bị xoá. Hãy cập nhật thư viện và tra lại.',
+              );
             entryId = `personal-${randomUUID()}`;
             const now = Date.now();
 
@@ -158,10 +173,7 @@ export async function receiveTransfer(
             { session: mongoSession },
           );
 
-          if (
-            !shared ||
-            identityHash(shared) !== identityHash(item.entry)
-          ) {
+          if (!shared || identityHash(shared) !== identityHash(item.entry)) {
             throw new ServiceError(
               'not-found',
               'Không tìm thấy từ tương ứng trong thư viện chung.',
@@ -206,11 +218,7 @@ export async function receiveTransfer(
         transferId: transfer.transferId,
 
         captureIds: [
-          ...new Set(
-            transfer.captures.map(
-              (item) => item.capture.id,
-            ),
-          ),
+          ...new Set(transfer.captures.map((item) => item.capture.id)),
         ],
 
         summary: {

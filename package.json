@@ -17,15 +17,12 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint src extension tests scripts --max-warnings=0",
     "test": "node --import tsx --test tests/*.test.ts",
-    "test:browser": "node scripts/browser-check.mjs",
     "check": "npm run typecheck && npm run lint && npm test",
     "check:gate": "node scripts/check-gate.mjs",
     "progress": "node scripts/progress.mjs",
     "start": "node scripts/serve.mjs --open",
     "validate:content": "node --import tsx scripts/validate-content.mjs",
     "build:extension": "node scripts/build-extension.mjs",
-    "test:extension": "npm run build:extension && node scripts/test-extension.mjs",
-    "test:dictionary:live": "node scripts/browser-check.mjs --live-dictionary",
     "progress:update": "node scripts/progress.mjs --write",
     "enrich:ipa": "node --import tsx scripts/enrich-ipa.mjs",
     "content:build": "node --import tsx scripts/build-authored-pack.mjs",
@@ -45,8 +42,8 @@
     "crawl:filter": "node scripts/filter-crawl.mjs",
     "format:frontend": "prettier --write \"src/frontend/**/*.{ts,tsx,css}\"",
     "format:frontend:check": "prettier --check \"src/frontend/**/*.{ts,tsx,css}\"",
-    "test:frontend": "npm run build && node scripts/frontend-check.mjs",
-    "library:seed": "tsx server/src/scripts/seed-library.ts"
+    "library:seed": "tsx server/src/scripts/seed-library.ts",
+    "test:legacy": "node --import tsx --test legacy/local/tests/*.test.ts"
   },
   "dependencies": {
     "connect-mongo": "^6.0.0",

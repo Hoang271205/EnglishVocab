@@ -1,16 +1,18 @@
 /* Import order preserves the existing cascade. */
 @import './styles/base.css';
-@import './styles/topics.css';
-@import './styles/sessions.css';
-@import './styles/study.css';
-@import './styles/review.css';
-@import './styles/notebook.css';
-@import './styles/personal-editor.css';
-@import './styles/reading.css';
-@import './styles/reference.css';
-@import './styles/data.css';
+@import './styles/shared/topics.css';
+@import './styles/shared/sessions.css';
+@import './styles/shared/study.css';
+@import './styles/shared/review.css';
+@import './styles/shared/notebook.css';
+@import './styles/shared/personal-editor.css';
+@import './styles/shared/reading.css';
+@import './styles/shared/reference.css';
+@import './styles/shared/data.css';
 @import './styles/ui.css';
 @import './styles/auth.css';
 @import './styles/dashboard.css';
 @import './styles/online-topics.css';
 @import './styles/online-learning.css';
+@import './styles/online-review.css';
+@import './styles/online-notebook.css';

@@ -6,18 +6,18 @@ import {
   SESSION_COOKIE_NAME,
   sessionCookieOptions,
 } from '../../middleware/session.js';
-import {
-  DUMMY_PASSWORD_HASH,
-  verifyPassword,
-} from './password.js';
+import { DUMMY_PASSWORD_HASH, verifyPassword } from './password.js';
 import { publicUser, users } from './users.js';
+import { revokeSessionExtensions } from '../extension/access.js';
 
 export const authRouter = Router();
 
-const loginSchema = z.object({
-  email: z.string().trim().toLowerCase().email().max(254),
-  password: z.string().min(1).max(128),
-}).strict();
+const loginSchema = z
+  .object({
+    email: z.string().trim().toLowerCase().email().max(254),
+    password: z.string().min(1).max(128),
+  })
+  .strict();
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -100,6 +100,8 @@ authRouter.post('/login', loginLimiter, async (request, response) => {
     return;
   }
 
+  await revokeSessionExtensions(request.sessionID);
+
   // Tạo session ID mới sau khi đăng nhập.
   await new Promise<void>((resolve, reject) => {
     request.session.regenerate((error) => {
@@ -138,6 +140,7 @@ authRouter.get('/me', async (request, response) => {
 });
 
 authRouter.post('/logout', async (request, response) => {
+  await revokeSessionExtensions(request.sessionID);
   await new Promise<void>((resolve, reject) => {
     request.session.destroy((error) => {
       if (error) reject(error);

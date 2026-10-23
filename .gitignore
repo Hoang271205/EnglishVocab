@@ -16,3 +16,6 @@ dist-extension/
 content/crawl/*-candidates.json
 content/crawl/*-example-pool.json
 content/crawl/proposals.json
+
+# Compiled MongoDB API output.
+dist-server/

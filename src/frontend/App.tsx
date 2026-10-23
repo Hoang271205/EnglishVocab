@@ -11,31 +11,25 @@ export default function App() {
   if (auth.checking) {
     return (
       <AuthLayout title="Đăng nhập">
-        <StatusMessage>
-          Đang kiểm tra phiên đăng nhập…
-        </StatusMessage>
+        <StatusMessage>Đang kiểm tra phiên đăng nhập…</StatusMessage>
       </AuthLayout>
     );
   }
 
   if (!auth.user) {
     return (
-      <LoginPage
-        busy={auth.busy}
-        error={auth.error}
-        onLogin={auth.login}
-      />
+      <LoginPage busy={auth.busy} error={auth.error} onLogin={auth.login} />
     );
   }
 
   return (
-  <LearningProvider key={auth.user.id}>
-    <Workspace
-      user={auth.user}
-      busy={auth.busy}
-      authError={auth.error}
-      onLogout={auth.logout}
-    />
-  </LearningProvider>
-);
+    <LearningProvider key={auth.user.id}>
+      <Workspace
+        user={auth.user}
+        busy={auth.busy}
+        authError={auth.error}
+        onLogout={auth.logout}
+      />
+    </LearningProvider>
+  );
 }

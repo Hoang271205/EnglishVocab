@@ -1,31 +1,21 @@
 import { randomUUID } from 'node:crypto';
+import type { ReviewBatchSize } from '../../../../src/shared/studyOptions.js';
+import { finishReview } from './finish-review.js';
 import {
   createMask,
   validateClozeAnswer,
 } from '../../../../src/domain/cloze.js';
 import { gradeAnswer } from '../../../../src/domain/grading.js';
 import { reviewProgress } from '../../../../src/domain/scheduler.js';
-import {
-  POLICY,
-  ServiceError,
-} from '../../../../src/domain/types.js';
-import type {
-  Progress,
-  ReviewEvent,
-} from '../../../../src/domain/types.js';
+import { POLICY, ServiceError } from '../../../../src/domain/types.js';
+import type { Progress, ReviewEvent } from '../../../../src/domain/types.js';
 import { client } from '../../database/mongo.js';
 import { resolveReadyEntries } from '../entries/service.js';
-import {
-  reviewPreferences,
-  userProgress,
-} from '../progress/collections.js';
-import {
-  studyReceipts,
-  studySessions,
-} from './collections.js';
+import { reviewPreferences, userProgress } from '../progress/collections.js';
+import { studyReceipts, studySessions } from './collections.js';
 import type { ReviewSession } from './collections.js';
 
-type ReviewAction = 'next' | 'pause' | 'resume' | 'draft';
+type ReviewAction = 'next' | 'pause' | 'resume' | 'draft' | 'finish';
 
 function reviewView(session: ReviewSession) {
   const item = session.items[session.index];
@@ -37,14 +27,15 @@ function reviewView(session: ReviewSession) {
     phase: session.phase,
     index: session.index,
     total: session.items.length,
+    endedEarly: session.endedEarly ?? false,
+    reviewedCount: session.reviewedCount ?? null,
+    remainingCount: session.remainingCount ?? null,
     paused: session.paused,
     draftAnswer: session.draftAnswer,
     createdAt: session.createdAt,
 
     question:
-      !session.paused &&
-      session.phase === 'question' &&
-      item
+      !session.paused && session.phase === 'question' && item
         ? {
             attemptId: item.attemptId,
             meaningVi: item.entry.meaningVi,
@@ -69,10 +60,7 @@ function reviewView(session: ReviewSession) {
   };
 }
 
-async function requireReviewSession(
-  userId: string,
-  sessionId: string,
-) {
+async function requireReviewSession(userId: string, sessionId: string) {
   const session = await studySessions.findOne({
     _id: sessionId,
     userId,
@@ -80,22 +68,23 @@ async function requireReviewSession(
   });
 
   if (!session || session.mode !== 'review') {
-    throw new ServiceError(
-      'not-found',
-      'Không tìm thấy phiên ôn tập.',
-    );
+    throw new ServiceError('not-found', 'Không tìm thấy phiên ôn tập.');
   }
 
   return session;
 }
 
-export async function getReviewSession(
-  userId: string,
-  sessionId: string,
-) {
-  return reviewView(
-    await requireReviewSession(userId, sessionId),
-  );
+export async function getReviewSession(userId: string, sessionId: string) {
+  const session = await requireReviewSession(userId, sessionId);
+  const item = session.items[session.index];
+  const preference =
+    item && session.phase === 'question'
+      ? await reviewPreferences.findOne({ userId, entryId: item.entry.id })
+      : null;
+  return {
+    ...reviewView(session),
+    reviewDisabled: preference?.reviewEnabled === false,
+  };
 }
 
 export async function getActiveReviewSession(userId: string) {
@@ -105,14 +94,12 @@ export async function getActiveReviewSession(userId: string) {
     mode: 'review',
   });
 
-  return session?.mode === 'review'
-    ? reviewView(session)
-    : null;
+  return session?.mode === 'review' ? reviewView(session) : null;
 }
 
 export async function createReviewSession(
   userId: string,
-  limit: 10 | 20,
+  limit: ReviewBatchSize,
   collection?: 'ielts' | 'daily' | 'personal',
 ) {
   return client.withSession(async (mongoSession) =>
@@ -132,15 +119,10 @@ export async function createReviewSession(
       const now = Date.now();
 
       const disabled = await reviewPreferences
-        .find(
-          { userId, reviewEnabled: false },
-          { session: mongoSession },
-        )
+        .find({ userId, reviewEnabled: false }, { session: mongoSession })
         .toArray();
 
-      const disabledIds = new Set(
-        disabled.map((item) => item.entryId),
-      );
+      const disabledIds = new Set(disabled.map((item) => item.entryId));
 
       const due = await userProgress
         .find(
@@ -153,9 +135,7 @@ export async function createReviewSession(
         .sort({ nextReviewAt: 1, entryId: 1 })
         .toArray();
 
-      const eligible = due.filter(
-        (item) => !disabledIds.has(item.entryId),
-      );
+      const eligible = due.filter((item) => !disabledIds.has(item.entryId));
 
       const resolved = await resolveReadyEntries(
         userId,
@@ -164,14 +144,10 @@ export async function createReviewSession(
       );
 
       const entries = collection
-        ? resolved.filter(
-            (entry) => entry.collectionId === collection,
-          )
+        ? resolved.filter((entry) => entry.collectionId === collection)
         : resolved;
 
-      const byId = new Map(
-        entries.map((entry) => [entry.id, entry]),
-      );
+      const byId = new Map(entries.map((entry) => [entry.id, entry]));
 
       const items: ReviewSession['items'] = [];
 
@@ -231,22 +207,19 @@ export async function changeReviewSession(
   action: ReviewAction,
   answer: string,
 ) {
-  const session = await requireReviewSession(
-    userId,
-    sessionId,
-  );
+  if (action === 'finish') {
+    return reviewView(await finishReview(userId, sessionId, version));
+  }
+
+  const session = await requireReviewSession(userId, sessionId);
 
   if (!session.active || session.version !== version) {
-    throw new ServiceError(
-      'conflict',
-      'Phiên đã thay đổi. Hãy tải lại.',
-    );
+    throw new ServiceError('conflict', 'Phiên đã thay đổi. Hãy tải lại.');
   }
 
   if (action === 'pause') {
     session.paused = true;
-    session.draftAnswer =
-      session.phase === 'question' ? answer : '';
+    session.draftAnswer = session.phase === 'question' ? answer : '';
   } else if (action === 'resume') {
     session.paused = false;
   } else if (session.paused) {
@@ -254,10 +227,7 @@ export async function changeReviewSession(
       'conflict',
       'Hãy tiếp tục phiên trước khi thao tác.',
     );
-  } else if (
-    action === 'draft' &&
-    session.phase === 'question'
-  ) {
+  } else if (action === 'draft' && session.phase === 'question') {
     session.draftAnswer = answer;
   } else if (action === 'next') {
     // Nếu người dùng vừa bỏ tick từ đang được hỏi,
@@ -274,31 +244,19 @@ export async function changeReviewSession(
         : null;
 
       if (!disabled) {
-        throw new ServiceError(
-          'conflict',
-          'Hãy trả lời câu hiện tại trước.',
-        );
+        throw new ServiceError('conflict', 'Hãy trả lời câu hiện tại trước.');
       }
     } else if (session.phase !== 'feedback') {
-      throw new ServiceError(
-        'conflict',
-        'Chưa thể chuyển câu.',
-      );
+      throw new ServiceError('conflict', 'Chưa thể chuyển câu.');
     }
 
     session.index += 1;
     session.draftAnswer = '';
     session.feedback = null;
-    session.active =
-      session.index < session.items.length;
-    session.phase = session.active
-      ? 'question'
-      : 'complete';
+    session.active = session.index < session.items.length;
+    session.phase = session.active ? 'question' : 'complete';
   } else {
-    throw new ServiceError(
-      'conflict',
-      'Thao tác không phù hợp.',
-    );
+    throw new ServiceError('conflict', 'Thao tác không phù hợp.');
   }
 
   session.version += 1;
@@ -344,10 +302,7 @@ export async function submitReviewAnswer(
       );
 
       if (!session || session.mode !== 'review') {
-        throw new ServiceError(
-          'not-found',
-          'Không tìm thấy phiên ôn tập.',
-        );
+        throw new ServiceError('not-found', 'Không tìm thấy phiên ôn tập.');
       }
 
       const receipt = await studyReceipts.findOne(
@@ -430,16 +385,9 @@ export async function submitReviewAnswer(
 
       const correct = forgotten
         ? false
-        : gradeAnswer(
-            answer,
-            item.example.acceptedAnswers,
-          );
+        : gradeAnswer(answer, item.example.acceptedAnswers);
 
-      const progress = reviewProgress(
-        before,
-        correct,
-        now,
-      );
+      const progress = reviewProgress(before, correct, now);
 
       const event: ReviewEvent = {
         id: attemptId,
@@ -488,11 +436,9 @@ export async function submitReviewAnswer(
       session.draftAnswer = '';
       session.feedback = { progress, event };
 
-      await studySessions.replaceOne(
-        { _id: sessionId, userId },
-        session,
-        { session: mongoSession },
-      );
+      await studySessions.replaceOne({ _id: sessionId, userId }, session, {
+        session: mongoSession,
+      });
 
       return {
         kind: 'committed' as const,

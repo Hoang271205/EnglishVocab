@@ -1,27 +1,17 @@
 import { randomUUID } from 'node:crypto';
 import { gradeAnswer } from '../../../../src/domain/grading.js';
 import { initialProgress } from '../../../../src/domain/scheduler.js';
-import {
-  POLICY,
-  ServiceError,
-} from '../../../../src/domain/types.js';
+import { POLICY, ServiceError } from '../../../../src/domain/types.js';
 import type { ReviewEvent } from '../../../../src/domain/types.js';
 import { client } from '../../database/mongo.js';
 import { sharedTopics } from '../library/collections.js';
 import { resolveReadyEntries } from '../entries/service.js';
-import { userProgress } from '../progress/collections.js';
-import {
-  studyReceipts,
-  studySessions,
-} from './collections.js';
+import { knownWords, userProgress } from '../progress/collections.js';
+import { skipKnownWord } from './skip-known-word.js';
+import { studyReceipts, studySessions } from './collections.js';
 import type { LearnSession } from './collections.js';
 
-type LearnAction =
-  | 'recall'
-  | 'front'
-  | 'pause'
-  | 'resume'
-  | 'draft';
+type LearnAction = 'recall' | 'front' | 'pause' | 'resume' | 'draft' | 'skip';
 
 export function sessionView(session: LearnSession) {
   const item = session.items[session.index];
@@ -35,15 +25,13 @@ export function sessionView(session: LearnSession) {
     phase: session.phase,
     index: session.index,
     total: session.items.length,
+    knownCount: session.items.filter((item) => item.known).length,
     paused: session.paused,
     draftAnswer: session.draftAnswer,
     createdAt: session.createdAt,
     attemptId: item?.attemptId ?? null,
 
-    front:
-      visible && session.phase === 'front'
-        ? item!.entry
-        : null,
+    front: visible && session.phase === 'front' ? item!.entry : null,
 
     hint:
       visible && session.phase === 'recall'
@@ -55,32 +43,21 @@ export function sessionView(session: LearnSession) {
   };
 }
 
-async function requireSession(
-  userId: string,
-  sessionId: string,
-) {
+async function requireSession(userId: string, sessionId: string) {
   const session = await studySessions.findOne({
     _id: sessionId,
     userId,
   });
 
   if (!session || session.mode !== 'learn') {
-    throw new ServiceError(
-      'not-found',
-      'Không tìm thấy phiên học.',
-    );
+    throw new ServiceError('not-found', 'Không tìm thấy phiên học.');
   }
 
   return session;
 }
 
-export async function getLearnSession(
-  userId: string,
-  sessionId: string,
-) {
-  return sessionView(
-    await requireSession(userId, sessionId),
-  );
+export async function getLearnSession(userId: string, sessionId: string) {
+  return sessionView(await requireSession(userId, sessionId));
 }
 
 export async function getActiveLearnSession(userId: string) {
@@ -90,9 +67,7 @@ export async function getActiveLearnSession(userId: string) {
     mode: 'learn',
   });
 
-  return session?.mode === 'learn'
-    ? sessionView(session)
-    : null;
+  return session?.mode === 'learn' ? sessionView(session) : null;
 }
 
 type LearningSource =
@@ -110,11 +85,7 @@ export async function createLearnSession(
   topicId: string,
   limit: 5 | 10,
 ) {
-  return createLearningFromSource(
-    userId,
-    { kind: 'topic', topicId },
-    limit,
-  );
+  return createLearningFromSource(userId, { kind: 'topic', topicId }, limit);
 }
 
 export async function createPersonalLearnSession(
@@ -158,10 +129,7 @@ async function createLearningFromSource(
         );
 
         if (!topic) {
-          throw new ServiceError(
-            'not-found',
-            'Không tìm thấy topic.',
-          );
+          throw new ServiceError('not-found', 'Không tìm thấy topic.');
         }
 
         topicId = topic.id;
@@ -170,20 +138,12 @@ async function createLearningFromSource(
         ids = [...new Set(source.entryIds)];
       }
 
-      const entries = await resolveReadyEntries(
-        userId,
-        ids,
-        mongoSession,
-      );
+      const entries = await resolveReadyEntries(userId, ids, mongoSession);
 
       if (
         source.kind === 'personal' &&
-        (
-          entries.length !== ids.length ||
-          entries.some(
-            (entry) => entry.collectionId !== 'personal',
-          )
-        )
+        (entries.length !== ids.length ||
+          entries.some((entry) => entry.collectionId !== 'personal'))
       ) {
         throw new ServiceError(
           'not-found',
@@ -201,16 +161,17 @@ async function createLearningFromSource(
         )
         .toArray();
 
-      const learnedIds = new Set(
-        progress.map((item) => item.entryId),
-      );
+      const learnedIds = new Set(progress.map((item) => item.entryId));
 
-      const byId = new Map(
-        entries.map((entry) => [entry.id, entry]),
-      );
+      const byId = new Map(entries.map((entry) => [entry.id, entry]));
+
+      const known = await knownWords
+        .find({ userId, entryId: { $in: ids } }, { session: mongoSession })
+        .toArray();
+      const knownIds = new Set(known.map((item) => item.entryId));
 
       const selected = ids
-        .filter((id) => !learnedIds.has(id))
+        .filter((id) => !learnedIds.has(id) && !knownIds.has(id))
         .flatMap((id) => {
           const entry = byId.get(id);
           return entry ? [entry] : [];
@@ -220,7 +181,7 @@ async function createLearningFromSource(
       if (!selected.length) {
         throw new ServiceError(
           'not-found',
-          'Không còn từ mới đủ điều kiện học.',
+          'Không còn từ mới chưa biết đủ điều kiện học.',
         );
       }
 
@@ -258,13 +219,14 @@ export async function changeLearnSession(
   action: LearnAction,
   answer: string,
 ) {
+  if (action === 'skip') {
+    return sessionView(await skipKnownWord(userId, sessionId, version));
+  }
+
   const session = await requireSession(userId, sessionId);
 
   if (!session.active || session.version !== version) {
-    throw new ServiceError(
-      'conflict',
-      'Phiên đã thay đổi. Hãy tải lại phiên.',
-    );
+    throw new ServiceError('conflict', 'Phiên đã thay đổi. Hãy tải lại phiên.');
   }
 
   if (action === 'pause') {
@@ -277,22 +239,13 @@ export async function changeLearnSession(
       'conflict',
       'Hãy tiếp tục phiên trước khi thao tác.',
     );
-  } else if (
-    action === 'recall' &&
-    session.phase === 'front'
-  ) {
+  } else if (action === 'recall' && session.phase === 'front') {
     session.phase = 'recall';
     session.draftAnswer = '';
-  } else if (
-    action === 'front' &&
-    session.phase === 'recall'
-  ) {
+  } else if (action === 'front' && session.phase === 'recall') {
     session.phase = 'front';
     session.draftAnswer = '';
-  } else if (
-    action === 'draft' &&
-    session.phase === 'recall'
-  ) {
+  } else if (action === 'draft' && session.phase === 'recall') {
     session.draftAnswer = answer;
   } else {
     throw new ServiceError(
@@ -338,11 +291,8 @@ export async function submitLearnAnswer(
       );
 
       if (!session || session.mode !== 'learn') {
-  throw new ServiceError(
-    'not-found',
-    'Không tìm thấy phiên học.',
-  );
-}
+        throw new ServiceError('not-found', 'Không tìm thấy phiên học.');
+      }
 
       const receipt = await studyReceipts.findOne(
         {
@@ -389,16 +339,10 @@ export async function submitLearnAnswer(
       );
 
       if (before) {
-        throw new ServiceError(
-          'conflict',
-          'Từ này đã có tiến độ học.',
-        );
+        throw new ServiceError('conflict', 'Từ này đã có tiến độ học.');
       }
 
-      const correct = gradeAnswer(
-        answer,
-        item.entry.acceptedLearnAnswers,
-      );
+      const correct = gradeAnswer(answer, item.entry.acceptedLearnAnswers);
 
       if (!correct) {
         return {
@@ -409,10 +353,7 @@ export async function submitLearnAnswer(
 
       const now = Date.now();
 
-      const progress = initialProgress(
-        item.entry.id,
-        now,
-      );
+      const progress = initialProgress(item.entry.id, now);
 
       const event: ReviewEvent = {
         id: attemptId,
@@ -448,17 +389,14 @@ export async function submitLearnAnswer(
       session.version += 1;
       session.draftAnswer = '';
 
-      const complete =
-        session.index >= session.items.length;
+      const complete = session.index >= session.items.length;
 
       session.phase = complete ? 'complete' : 'front';
       session.active = !complete;
 
-      await studySessions.replaceOne(
-        { _id: sessionId, userId },
-        session,
-        { session: mongoSession },
-      );
+      await studySessions.replaceOne({ _id: sessionId, userId }, session, {
+        session: mongoSession,
+      });
 
       return {
         kind: 'committed' as const,

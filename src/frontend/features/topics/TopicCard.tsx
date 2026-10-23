@@ -23,11 +23,7 @@ export default function TopicCard({
         type="button"
         disabled={!hasContent}
         aria-expanded={selected}
-        aria-controls={
-          selected
-            ? `online-topic-${topic.id}`
-            : undefined
-        }
+        aria-controls={selected ? `online-topic-${topic.id}` : undefined}
         onClick={onToggle}
       >
         <span className="topic-number" aria-hidden="true">
@@ -37,21 +33,20 @@ export default function TopicCard({
         <span className="topic-info">
           <strong>{topic.nameEn}</strong>
 
-          <span className="topic-translation">
-            {topic.nameVi}
-          </span>
+          <span className="topic-translation">{topic.nameVi}</span>
 
           <span className="topic-progress-text">
             {hasContent
               ? `${topic.learned}/${topic.total} từ đã học`
               : 'Chưa có nội dung'}
+            {topic.known > 0 && ` · ${topic.known} từ đã biết`}
           </span>
 
           {hasContent && (
             <progress
               className="topic-progress"
               max={topic.total}
-              value={Math.min(topic.learned, topic.total)}
+              value={Math.min(topic.learned + topic.known, topic.total)}
               aria-label={`Tiến độ ${topic.nameVi}`}
             />
           )}
@@ -67,6 +62,7 @@ export default function TopicCard({
           key={topic.id}
           topicId={topic.id}
           topicName={topic.nameVi}
+          remaining={Math.max(0, topic.total - topic.learned - topic.known)}
           onClose={onClose}
         />
       )}

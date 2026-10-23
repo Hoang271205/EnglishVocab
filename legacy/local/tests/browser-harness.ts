@@ -1,0 +1,11 @@
+import {createBackend} from '../src/backend';
+import {SnapshotService} from '../src/services/snapshot';
+import {PersonalService} from '../src/services/personal';
+import {TransferService} from '../src/services/transfer';
+import {BackupService} from '../src/storage/backup';
+import {WiktionaryDictionary} from '../../../src/dictionary/wiktionaryDictionary';
+import {VocabDB} from '../src/storage/db';
+import {StudyService} from '../src/services/study';
+import {sample} from '../../../tests/fixtures';
+import {Dexie} from 'dexie';
+Object.assign(globalThis,{createBackend,VocabDB,StudyService,sample,Dexie,PersonalService,TransferService,BackupService,WiktionaryDictionary,SnapshotService});

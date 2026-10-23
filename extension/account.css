@@ -1,0 +1,75 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #283126;
+  background: #f1f3ee;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  width: 360px;
+  max-width: 100%;
+  min-width: 320px;
+  margin: 0 auto;
+}
+.account-page {
+  padding: 24px;
+}
+header strong {
+  color: #248232;
+  font-size: 24px;
+}
+header p,
+section > p {
+  color: #6e7867;
+  overflow-wrap: anywhere;
+}
+h1 {
+  margin-top: 28px;
+  font-size: 24px;
+}
+form,
+label {
+  display: grid;
+  gap: 10px;
+}
+form {
+  gap: 18px;
+}
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dce3d7;
+  border-radius: 12px;
+  background: #fff;
+  font: inherit;
+}
+button {
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 24px;
+  background: #248232;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.secondary {
+  color: #283126;
+  background: #e3e7de;
+}
+.message {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #fff8d9;
+  overflow-wrap: anywhere;
+}
+:focus-visible {
+  outline: 3px solid #3288d2;
+  outline-offset: 3px;
+}

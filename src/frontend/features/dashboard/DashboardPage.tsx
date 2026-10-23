@@ -1,17 +1,22 @@
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
 import type { AuthUser } from '../auth/auth.types';
-import LevelDistribution from '../review/LevelDistribution';
+import LevelDistribution from '../../components/charts/LevelDistribution';
 import DashboardStats from './DashboardStats';
 import { useDashboard } from './useDashboard';
+import type { ReactNode } from 'react';
 
 interface DashboardPageProps {
   user: AuthUser;
+  children?: ReactNode;
+
 }
 
 export default function DashboardPage({
   user,
+  children,
 }: DashboardPageProps) {
+
   const dashboard = useDashboard(user.id);
 
   return (
@@ -40,7 +45,7 @@ export default function DashboardPage({
       {dashboard.summary && (
         <>
           <DashboardStats summary={dashboard.summary} />
-
+          {children}
           <LevelDistribution
             counts={dashboard.summary.levels}
           />

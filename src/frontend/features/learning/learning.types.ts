@@ -1,8 +1,4 @@
-import type {
-  Entry,
-  Progress,
-  ReviewEvent,
-} from '../../../domain/types';
+import type { Entry, Progress, ReviewEvent } from '../../../domain/types';
 
 export interface LearningSession {
   id: string;
@@ -12,6 +8,7 @@ export interface LearningSession {
   phase: 'front' | 'recall' | 'complete';
   index: number;
   total: number;
+  knownCount: number;
   paused: boolean;
   draftAnswer: string;
   createdAt: number;
@@ -29,11 +26,7 @@ export interface LearningPreferences {
 }
 
 export type LearningAction =
-  | 'recall'
-  | 'front'
-  | 'pause'
-  | 'resume'
-  | 'draft';
+  'recall' | 'front' | 'pause' | 'resume' | 'draft' | 'skip';
 
 export type LearningResult =
   | {

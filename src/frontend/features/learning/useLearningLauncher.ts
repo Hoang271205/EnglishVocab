@@ -4,8 +4,7 @@ import { useAsyncResource } from '../../hooks/useAsyncResource';
 import { learningApi } from './learning.api';
 
 export function useLearningLauncher() {
-  const [sessionId, setSessionId] =
-    useState<string | null>(null);
+  const [sessionId, setSessionId] = useState<string | null>(null);
 
   const action = useAsyncAction();
 
@@ -21,18 +20,11 @@ export function useLearningLauncher() {
   const resource = useAsyncResource(load);
 
   const pending = resource.data?.pending ?? null;
-  const batchSize =
-    resource.data?.preferences.learnBatchSize ?? 10;
-  const voiceURI =
-    resource.data?.preferences.voiceURI ?? null;
+  const batchSize = resource.data?.preferences.learnBatchSize ?? 10;
+  const voiceURI = resource.data?.preferences.voiceURI ?? null;
 
   async function start(topicId: string) {
-    if (
-      resource.loading ||
-      resource.error ||
-      !resource.data ||
-      pending
-    ) {
+    if (resource.loading || resource.error || !resource.data || pending) {
       return;
     }
 
@@ -47,6 +39,15 @@ export function useLearningLauncher() {
       // tải lại để người dùng có thể tiếp tục phiên đó.
       resource.reload();
     }
+  }
+
+  async function startPersonal(entryIds: string[]) {
+    if (resource.loading || resource.error || !resource.data || pending) return;
+    const session = await action.run((signal) =>
+      learningApi.createPersonal(entryIds, batchSize, signal),
+    );
+    if (session) setSessionId(session.id);
+    else resource.reload();
   }
 
   function openPending() {
@@ -74,6 +75,7 @@ export function useLearningLauncher() {
     working: action.busy,
     error: action.error?.message ?? resource.error,
     start,
+    startPersonal,
     openPending,
     closeSession,
     reload,

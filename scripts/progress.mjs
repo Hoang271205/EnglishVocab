@@ -28,6 +28,6 @@ lines.push('## Kết quả kiểm tra hiện tại','',
  '2. BE đã đạt kiểm tra kỹ thuật; dừng chờ người dùng nghiệm thu. Technical Pass không phải xác nhận của người dùng.',
  '3. Bộ đủ 2.000 từ đã tách sang P-DATA theo lựa chọn người dùng. Giữ raw/snapshot, rà soát proposals trước publish; hiện 677 mục, không tự nhập ứng viên chưa rà soát.',
  '4. Chỉ sau xác nhận trực tiếp của người dùng mới đánh dấu backend accepted và mở task FE. Không tự bắt đầu FE trong lượt bàn giao.',
- '', 'Lệnh: `npm run check`, `npm run test:browser`, `npm run test:extension`, `npm run validate:content -- public/content/pilot/pilot-200.json`, `npm run check:gate`. Chạy `npm run progress:update` sau khi đổi tasks.json để cập nhật checklist này.','');
+ '', 'Lệnh: `npm run check`, `npm run test:legacy`, `npm run validate:content -- public/content/pilot/pilot-200.json`, `npm run check:gate`. Chạy `npm run progress:update` sau khi đổi tasks.json để cập nhật checklist này.','');
 if(process.argv.includes('--write')){writeFileSync(new URL('PHASES.md',root),lines.join('\n'));console.log('Updated PHASES.md');}
 else for(const phase of phases){const items=phase.tasks.map(id=>tasks.find(t=>t.id===id));console.log(`${items.every(t=>t.status==='Done')?'[x]':'[ ]'} ${phase.id}: ${items.filter(t=>t.status==='Done').length}/${items.length} done — ${phase.title}`);}

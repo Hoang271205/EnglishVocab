@@ -12,11 +12,14 @@ import { ServiceError } from '../../src/domain/types.js';
 import { personalRouter } from './modules/personal/router.js';
 import { settingsRouter } from './modules/settings/router.js';
 import { transfersRouter } from './modules/transfers/router.js';
+import { notebookRouter } from './modules/notebook/router.js';
+import { extensionRouter } from './modules/extension/router.js';
 
 export function createApp() {
   const app = express();
 
   app.disable('x-powered-by');
+  if (process.env.NODE_ENV === 'production') app.set('trust proxy', 1);
   app.use('/api/transfers', express.json({ limit: '2mb' }));
   app.use(express.json({ limit: '1mb' }));
 
@@ -38,7 +41,8 @@ export function createApp() {
     }
   });
 
-  app.use(createSessionMiddleware());
+  // Static assets do not need to read or touch authentication sessions.
+  app.use('/api', createSessionMiddleware());
   app.use('/api/auth', authRouter);
   app.use('/api/personal', personalRouter);
   app.use('/api/library', libraryRouter);
@@ -46,6 +50,8 @@ export function createApp() {
   app.use('/api/study', studyRouter);
   app.use('/api/settings', settingsRouter);
   app.use('/api/transfers', transfersRouter);
+  app.use('/api/notebook', notebookRouter);
+  app.use('/api/extension', extensionRouter);
 
   app.use('/api', (_request, response) => {
     response.status(404).json({

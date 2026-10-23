@@ -1,18 +1,11 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ApiError,
   API_UNAUTHORIZED_EVENT,
   getErrorMessage,
 } from '../../api/client';
 import { authApi } from './auth.api';
-import type {
-  AuthUser,
-  LoginCredentials,
-} from './auth.types';
+import type { AuthUser, LoginCredentials } from './auth.types';
 
 export function useAuth() {
   const [user, setUser] = useState<AuthUser | null>(null);
@@ -29,16 +22,11 @@ export function useAuth() {
       setUser(null);
     }
 
-    window.addEventListener(
-      API_UNAUTHORIZED_EVENT,
-      handleUnauthorized,
-    );
+    window.addEventListener(API_UNAUTHORIZED_EVENT, handleUnauthorized);
 
     async function restoreSession() {
       try {
-        const restoredUser = await authApi.currentUser(
-          controller.signal,
-        );
+        const restoredUser = await authApi.currentUser(controller.signal);
 
         if (!controller.signal.aborted) {
           setUser(restoredUser);
@@ -47,8 +35,7 @@ export function useAuth() {
         if (controller.signal.aborted) return;
 
         const unauthenticated =
-          cause instanceof ApiError &&
-          cause.status === 401;
+          cause instanceof ApiError && cause.status === 401;
 
         if (!unauthenticated) {
           setError(getErrorMessage(cause));
@@ -65,16 +52,11 @@ export function useAuth() {
     return () => {
       controller.abort();
 
-      window.removeEventListener(
-        API_UNAUTHORIZED_EVENT,
-        handleUnauthorized,
-      );
+      window.removeEventListener(API_UNAUTHORIZED_EVENT, handleUnauthorized);
     };
   }, []);
 
-  async function login(
-    credentials: LoginCredentials,
-  ): Promise<boolean> {
+  async function login(credentials: LoginCredentials): Promise<boolean> {
     if (actionLock.current) return false;
 
     actionLock.current = true;
@@ -103,7 +85,6 @@ export function useAuth() {
 
     try {
       await authApi.logout();
-
       window.speechSynthesis?.cancel();
       setUser(null);
     } catch (cause) {

@@ -128,3 +128,76 @@ Chỉ giữ checklist gọn và kiểm thử trong mã; không có Markdown evid
 4. P7 và P8 chưa triển khai xong. P6 hoàn tất phần triển khai; không coi đó là nghiệm thu toàn bộ giao diện hoặc ứng dụng.
 
 Lệnh: `npm run check`, `npm run test:browser`, `npm run test:extension`, `npm run validate:content -- public/content/pilot/pilot-200.json`, `npm run check:gate`. Checklist FE trong file này đã cập nhật trực tiếp theo code ngày 21/10/2026; trạng thái FE trong tasks.json/TASKS.md chưa đồng bộ. Cần đồng bộ các trạng thái đó trước khi chạy `npm run progress:update` để tránh ghi đè tiến độ hiện tại.
+
+
+## FE online — triển khai nối MongoDB (22/10/2026)
+
+Các mục dưới đây ghi nhận code đã bổ sung, không thay thế nghiệm thu bản local ở trên.
+Người dùng yêu cầu không chạy test, build, typecheck hoặc lint trong lượt này.
+
+- [x] **ONLINE-FE-05** Sổ tay tài khoản: danh sách từ đã học/từ cá nhân, tìm kiếm và lọc CEFR/level/trạng thái/đến hạn; chi tiết mở ngay dưới dòng từ — Implemented / Not tested.
+- [x] **ONLINE-FE-06** Thêm/sửa nháp, đổi nghĩa tạo mục mới, học từ cá nhân qua API; checkbox bật/tắt ôn và hai nhóm; bỏ qua từ đã tắt trong phiên ôn dở; xoá dữ liệu server, dọn cache extension và thử lại khi mất kết nối — Implemented / Not tested.
+- [x] **ONLINE-FE-07** Reading trong web: bôi đen → icon → popup; chọn nghĩa, gợi ý dịch Việt theo nghĩa, lưu từ/URL nguồn; không lưu đoạn văn — Implemented / Not tested.
+- [x] **ONLINE-FE-08** Cài đặt giọng Mỹ, số từ/lượt học/lượt ôn/mục tiêu ngày/tra cứu mạng; bảng IPA dạng chữ — Implemented / Not tested.
+- [x] **ONLINE-FE-09** Nhận hàng đợi extension, ACK sau server commit, nhập file hàng đợi, gửi snapshot; extension nhận origin 127.0.0.1:3001/localhost:3001 và tách hàng đợi theo tài khoản, chặn lưu từ popup cũ sau khi đổi tài khoản và chống snapshot cũ khôi phục từ đã xoá — Implemented / Not tested.
+- [x] **ONLINE-FE-10** Xuất dữ liệu của tài khoản (từ, tiến độ, tuỳ chọn ôn, cài đặt, URL nguồn), không xuất thông tin đăng nhập — Implemented / Not tested.
+- [ ] **ONLINE-GATE-FE** Người dùng chạy build và kiểm kê các luồng trên, gồm đổi tài khoản/đồng bộ/xoá/phiên đang dở — Pending user verification.
+- [ ] **ONLINE-RESTORE** Khôi phục file xuất tài khoản và chuyển dữ liệu IndexedDB cũ lên MongoDB — chưa triển khai; UI không hiển thị nút khôi phục.
+- [ ] **DEPLOY-EXTENSION** Sau khi có domain deploy, cấu hình origin bridge/manifest đúng domain. Hiện bridge chỉ cho phép các origin phát triển đã khai báo, không tự mở mọi website.
+
+Phạm vi: code học/ôn online đã có trước lượt này được giữ lại. Không đánh dấu Pass cho các thay đổi mới và không tạo tài liệu evidence.
+
+
+## Extension lưu trực tiếp — 22/10/2026
+
+- [x] Popup Lưu từ gọi API → MongoDB; chỉ báo thành công sau server commit, giữ capture ID trong popup cho lượt thử lại — Implemented / Not tested.
+- [x] Mất mạng/chưa kết nối: báo lỗi, không ghi hàng đợi offline. Hàng đợi cũ giữ nguyên để người dùng nhập một lần — Implemented / Not tested.
+- [x] Kết nối theo tài khoản đăng nhập bằng token giới hạn quyền lưu từ, lưu hash trên server, hết hạn theo session và thu hồi khi đăng xuất — Implemented / Not tested.
+- [x] Domain extension lấy từ EXTENSION_APP_ORIGIN hoặc APP_ORIGIN lúc build; manifest và bridge cùng origin; domain deploy bắt buộc HTTPS — Implemented / Not tested.
+- [x] Sổ tay tải lại khi quay về tab web; từ trong snapshot đã có trên server không bị tạo bản cá nhân trùng chỉ vì ID canonical; từ thư viện chung đã lưu được hiển thị trong Từ của tôi — Implemented / Not tested.
+- [ ] Người dùng build FE/extension, restart API và kiểm kê lưu trực tiếp, retry, đổi tài khoản, logout, bản deploy — Pending user verification.
+
+Không chạy test/build/typecheck/lint trong lượt này theo yêu cầu người dùng.
+
+
+## Đăng nhập trực tiếp trong extension — bước 2 đến 6 (22/10/2026)
+
+- [x] Sửa vị trí AccountPage/LoginForm, giữ import hook useAccount theo thư mục account; entry React trỏ vào extension/account — Implemented / Not tested.
+- [x] Hoàn thiện account.css, action popup, entry build account.tsx và sao chép HTML/CSS; TypeScript bao gồm extension/**/*.tsx — Implemented / Not tested.
+- [x] Nối auth-status/auth-login/auth-logout/auth-open; giữ kiểm tra trang đăng nhập riêng, token trong worker và luồng lưu trực tiếp qua API — Implemented / Not tested.
+- [x] Gỡ tự kết nối/đăng xuất extension theo tài khoản web; đồng bộ chỉ cho phép tài khoản extension trùng tài khoản web — Implemented / Not tested.
+- [ ] Bước 7: người dùng tự build FE/extension, reload Chrome và kiểm tra trang đăng nhập.
+- [ ] Bước tiếp theo: hiển thị tên/nút Đăng nhập dưới logo của popup bôi đen. Chưa mở rộng phần giao diện này trong lượt sửa hiện tại.
+
+Không chạy build, typecheck, lint, test hoặc mở trình duyệt theo yêu cầu người dùng. Các file gốc extension/AccountPage.tsx và extension/LoginForm.tsx được giữ dưới dạng re-export để không xoá file người dùng đã tạo.
+
+## Dọn cấu trúc sau chuyển MongoDB — 22/10/2026
+
+- [x] Tách ClozeInputs và LevelDistribution sang components dùng chung, cập nhật import — Implemented / Not tested.
+- [x] Tách captureTransferSchema và snapshotSchema sang src/shared/schemas, gỡ phụ thuộc backend IndexedDB khỏi extension đang chạy — Implemented / Not tested.
+- [x] Gom FE/backend local, test local, file extension dư và browser harness cũ vào legacy/local; giữ nội dung để tra lại — Implemented / Not tested.
+- [x] Gom CSS tái sử dụng vào styles/shared, giữ nguyên declaration và thứ tự cascade; chuyển HTML mẫu vào docs/mockups — Implemented / Not tested.
+- [x] Cập nhật scripts/config/README, tách test:legacy khỏi test mặc định; giữ kho crawl và đầu ra build trên ổ — Implemented / Not tested.
+- [ ] Người dùng tự build FE/API/extension và kiểm kê giao diện, học/ôn, đăng nhập, lưu từ và đồng bộ.
+
+Các đường dẫn/lệnh local trong ghi chép phase phía trên là lịch sử trước khi dọn. Không chạy build, typecheck, lint hoặc test trong lượt này.
+
+## Tối ưu truy vấn Sổ tay và session — 23/10/2026
+
+- [x] Truy vấn thư viện trong Sổ tay dùng `_id` thay cho `id`, tận dụng index mặc định và giữ nguyên định dạng phản hồi — Implemented / Not tested.
+- [x] Chỉ gắn session middleware vào `/api`; file tĩnh không đọc hoặc touch session. Health check vẫn nằm trước middleware — Implemented / Not tested.
+- [x] Cấu hình `connect-mongo.touchAfter` 300 giây để giảm ghi gia hạn khi session không đổi; giữ `resave: false`, `saveUninitialized: false` và thời hạn 7 ngày — Implemented / Not tested.
+- [ ] Người dùng restart API và kiểm kê đăng nhập/đăng xuất, Sổ tay và file tĩnh sau thay đổi.
+
+Không chạy test, build, typecheck hoặc lint; không thực hiện migration hay ghi/xoá dữ liệu MongoDB trong lượt này.
+
+
+## Skip từ đã biết và kết thúc ôn sớm — 23/10/2026
+
+- [x] Nút Skip nhỏ dưới màn học: ghi trạng thái đã biết theo tài khoản vào known_words, chuyển từ; không tạo level/lịch ôn, loại khỏi các lượt học mới — Implemented / Not tested.
+- [x] Hiển thị số từ đã biết trong topic và trạng thái trong Từ của tôi; xoá từ cá nhân dọn cả dấu đã biết — Implemented / Not tested.
+- [x] Đồng bộ giới hạn ôn 10/20/50/100 từ giữa API, UI và cài đặt, dùng danh sách chung — Implemented / Not tested.
+- [x] Kết thúc lượt ôn sớm bằng transaction: giữ kết quả đã commit, bỏ nháp chưa gửi, đóng phiên và giữ nguyên lịch của các từ chưa làm; retry không chấm thêm — Implemented / Not tested.
+- [ ] Người dùng build FE, restart API để tạo index known_words, kiểm kê Skip sau reload và kết thúc sớm ở màn câu hỏi/phản hồi/tạm dừng.
+
+Ví dụ: đã gửi đáp án 6/20 từ thì giữ 6 kết quả, 14 từ chưa làm vẫn đến hạn cho lượt ôn sau. Chỉ đang đứng ở câu thứ 6 mà chưa gửi thì mới có 5 kết quả được giữ. Không chạy test/build/typecheck/lint, không trực tiếp ghi dữ liệu MongoDB trong lượt này.

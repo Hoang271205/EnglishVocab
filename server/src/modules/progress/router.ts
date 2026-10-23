@@ -5,10 +5,7 @@ import { client } from '../../database/mongo.js';
 import { requireAuth } from '../../middleware/require-auth.js';
 import { requireJsonWrite } from '../../middleware/require-json-write.js';
 import { resolveReadyEntries } from '../entries/service.js';
-import {
-  reviewPreferences,
-  userProgress,
-} from './collections.js';
+import { reviewPreferences, userProgress, knownWords } from './collections.js';
 
 export const progressRouter = Router();
 
@@ -19,9 +16,7 @@ progressRouter.use((_request, response, next) => {
   next();
 });
 
-const entryIdSchema = z
-  .string()
-  .regex(/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}$/);
+const entryIdSchema = z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}$/);
 
 const reviewPreferenceSchema = z
   .object({
@@ -33,32 +28,27 @@ const reviewPreferenceSchema = z
 progressRouter.get('/', async (request, response) => {
   const userId = request.session.userId!;
 
-  const [progress, preferences] = await Promise.all([
+  const [progress, preferences, known] = await Promise.all([
     userProgress
       .find({ userId }, { projection: { _id: 0, userId: 0 } })
       .sort({ learnedAt: -1, entryId: 1 })
       .toArray(),
 
     reviewPreferences
-      .find(
-        { userId },
-        { projection: { _id: 0, userId: 0 } },
-      )
+      .find({ userId }, { projection: { _id: 0, userId: 0 } })
       .toArray(),
+    knownWords.find({ userId }, { projection: { entryId: 1 } }).toArray(),
   ]);
 
   const preferenceByEntryId = new Map(
-    preferences.map((item) => [
-      item.entryId,
-      item.reviewEnabled,
-    ]),
+    preferences.map((item) => [item.entryId, item.reviewEnabled]),
   );
 
   response.json({
+    knownEntryIds: known.map((item) => item.entryId),
     progress: progress.map((item) => ({
       ...item,
-      reviewEnabled:
-        preferenceByEntryId.get(item.entryId) ?? true,
+      reviewEnabled: preferenceByEntryId.get(item.entryId) ?? true,
     })),
   });
 });
@@ -79,9 +69,7 @@ progressRouter.get('/summary', async (request, response) => {
       .toArray(),
   ]);
 
-  const disabledIds = new Set(
-    disabledPreferences.map((item) => item.entryId),
-  );
+  const disabledIds = new Set(disabledPreferences.map((item) => item.entryId));
 
   const levels: Record<1 | 2 | 3 | 4 | 5, number> = {
     1: 0,
@@ -111,10 +99,7 @@ progressRouter.get('/summary', async (request, response) => {
 
     if (item.nextReviewAt <= now) {
       dueCount += 1;
-    } else if (
-      nextReviewAt === null ||
-      item.nextReviewAt < nextReviewAt
-    ) {
+    } else if (nextReviewAt === null || item.nextReviewAt < nextReviewAt) {
       nextReviewAt = item.nextReviewAt;
     }
   }
@@ -138,13 +123,9 @@ progressRouter.patch(
   '/:entryId/review-preference',
   requireJsonWrite,
   async (request, response) => {
-    const parsedId = entryIdSchema.safeParse(
-      request.params.entryId,
-    );
+    const parsedId = entryIdSchema.safeParse(request.params.entryId);
 
-    const parsedBody = reviewPreferenceSchema.safeParse(
-      request.body,
-    );
+    const parsedBody = reviewPreferenceSchema.safeParse(request.body);
 
     if (!parsedId.success || !parsedBody.success) {
       response.status(400).json({
@@ -158,49 +139,45 @@ progressRouter.patch(
 
     const userId = request.session.userId!;
 
-    const preference = await client.withSession(
-      async (mongoSession) =>
-        mongoSession.withTransaction(async () => {
-          const entries = await resolveReadyEntries(
-            userId,
-            [parsedId.data],
-            mongoSession,
+    const preference = await client.withSession(async (mongoSession) =>
+      mongoSession.withTransaction(async () => {
+        const entries = await resolveReadyEntries(
+          userId,
+          [parsedId.data],
+          mongoSession,
+        );
+
+        if (!entries.length) {
+          throw new ServiceError(
+            'not-found',
+            'Không tìm thấy từ đủ điều kiện ôn tập.',
           );
+        }
 
-          if (!entries.length) {
-            throw new ServiceError(
-              'not-found',
-              'Không tìm thấy từ đủ điều kiện ôn tập.',
-            );
-          }
+        const value = {
+          userId,
+          entryId: parsedId.data,
+          reviewEnabled: parsedBody.data.reviewEnabled,
+          updatedAt: Date.now(),
+        };
 
-          const value = {
-            userId,
-            entryId: parsedId.data,
-            reviewEnabled: parsedBody.data.reviewEnabled,
-            updatedAt: Date.now(),
-          };
+        await reviewPreferences.updateOne(
+          {
+            _id: JSON.stringify([userId, parsedId.data]),
+          },
+          { $set: value },
+          {
+            upsert: true,
+            session: mongoSession,
+          },
+        );
 
-          await reviewPreferences.updateOne(
-            {
-              _id: JSON.stringify([
-                userId,
-                parsedId.data,
-              ]),
-            },
-            { $set: value },
-            {
-              upsert: true,
-              session: mongoSession,
-            },
-          );
-
-          return {
-            entryId: value.entryId,
-            reviewEnabled: value.reviewEnabled,
-            updatedAt: value.updatedAt,
-          };
-        }),
+        return {
+          entryId: value.entryId,
+          reviewEnabled: value.reviewEnabled,
+          updatedAt: value.updatedAt,
+        };
+      }),
     );
 
     response.json({ preference });

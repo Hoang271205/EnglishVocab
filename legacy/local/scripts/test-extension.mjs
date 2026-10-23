@@ -1,0 +1,48 @@
+import {build} from 'esbuild';
+import {chromium} from 'playwright';
+import {createServer} from 'node:http';
+import {readFile,writeFile,mkdir,rm} from 'node:fs/promises';
+import {resolve,dirname,join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {homedir,tmpdir} from 'node:os';
+import {readdir} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const base=resolve(dirname(fileURLToPath(import.meta.url)),'../../..');
+const ext=resolve(base,'dist-extension');
+const profile=resolve(base,'.browser-check/extension-profile');
+const cache=join(homedir(),'Library/Caches/ms-playwright');
+const candidates=(await readdir(cache).catch(()=>[])).filter(x=>/^chromium-\d+$/.test(x)).sort((a,b)=>Number(b.split('-')[1])-Number(a.split('-')[1]));
+const executablePath=process.env.ENGLISHVOCAB_CHROME ?? (candidates[0]?join(cache,candidates[0],'chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing'):null);
+if(!executablePath)throw Error('Set ENGLISHVOCAB_CHROME to Chrome for Testing for the isolated extension test');
+await writeFile(resolve(ext,'test-harness.html'),'<!doctype html><title>Extension BE harness</title>');
+await build({entryPoints:[resolve(base,'legacy/local/tests/browser-harness.ts')],bundle:true,format:'iife',platform:'browser',outfile:join(tmpdir(),'englishvocab-native-harness.js')});
+await mkdir(profile,{recursive:true});
+const options={executablePath,headless:true,ignoreDefaultArgs:['--disable-extensions'],args:['--disable-extensions-except='+ext,'--load-extension='+ext]};
+let context,server;
+try{
+ context=await chromium.launchPersistentContext(profile,options);
+ let worker=context.serviceWorkers()[0]??await context.waitForEvent('serviceworker',{timeout:10000});
+ const id=new URL(worker.url()).hostname;
+ let page=await context.newPage();await page.goto(`chrome-extension://${id}/test-harness.html`);
+ const saved=await page.evaluate(async()=>chrome.runtime.sendMessage({type:'queue-save',item:{entry:{id:'personal-native',revision:1,collectionId:'personal',headword:'hobby',partOfSpeech:'n.',senseKey:'activity',meaningVi:'sở thích',acceptedLearnAnswers:['hobby'],cefr:{level:null,status:'unknown',note:''},pronunciation:{ipa:null,accent:null},examples:[{id:'native-ex',prefix:'My ',targetSurface:'hobby',suffix:' is reading.',acceptedAnswers:['hobby']}],provenance:[{field:'example',attribution:'Test fixture',license:'CC0-1.0',url:null,status:'authored',checkedAt:null}],contentStatus:'ready'},capture:{id:'capture-native',entryId:'personal-native',selectedText:'hobby',originalSentence:'My hobby is reading.',sourceUrl:'https://example.org',capturedAt:0}}}));
+ assert.equal(saved.ok,true);const live=await page.evaluate(()=>chrome.runtime.sendMessage({type:'lookup',query:'hello',forceOnline:true}));assert.equal(live.ok,true,JSON.stringify(live));assert.equal(live.value.source,'api');console.log('PASS: worker live API lookup succeeds while local server is off');console.log('PASS: actual worker saves capture with local server off');
+ await context.close();context=await chromium.launchPersistentContext(profile,options);
+ worker=context.serviceWorkers()[0]??await context.waitForEvent('serviceworker',{timeout:10000});
+ page=await context.newPage();await page.goto(`chrome-extension://${id}/test-harness.html`);
+ const queued=await page.evaluate(()=>chrome.runtime.sendMessage({type:'queue-export'}));assert.equal(queued.value.captures.length,1);console.log('PASS: chrome.storage.local capture survives browser/worker restart');
+ server=createServer(async(req,res)=>{res.setHeader('Content-Type',req.url==='/harness.js'?'text/javascript':'text/html');res.end(req.url==='/harness.js'?await readFile(join(tmpdir(),'englishvocab-native-harness.js')):'<!doctype html><title>BE bridge harness</title><script src="/harness.js"></script>');});
+ await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(5173,'localhost',resolve);});
+ const web=await context.newPage();await web.goto('http://localhost:5173');await web.waitForFunction(()=>globalThis.PersonalService);
+ const transfer=await web.evaluate(async()=>{
+  const request=message=>new Promise((resolve,reject)=>{const requestId=crypto.randomUUID();const timeout=setTimeout(()=>{window.removeEventListener('message',receive);reject(Error('Bridge timeout'));},5000);function receive(event){if(event.source!==window||event.data?.marker!=='englishvocab-bridge-v1-response'||event.data.requestId!==requestId)return;clearTimeout(timeout);window.removeEventListener('message',receive);resolve(event.data.result);}window.addEventListener('message',receive);window.postMessage({marker:'englishvocab-bridge-v1',requestId,...message},location.origin);});
+  const db=new VocabDB('native-transfer');const personal=new PersonalService(db);let lost=true;
+  const bridge={request:async message=>message.type==='queue-ack'&&lost?{ok:false}:request(message)};
+  const service=new TransferService(personal,bridge);const first=await service.receive();lost=false;const second=await service.receive();
+  const snapshot=await new SnapshotService(db).export();const updated=await request({type:'snapshot-update',snapshot});if(!updated.ok)throw Error('Snapshot update failed');
+  const data={first,second,captures:await db.captures.count(),entries:await db.entries.count(),progress:await db.progress.count()};await db.delete();return data;
+ });assert.equal(transfer.first.ackPending,true);assert.equal(transfer.second.ackPending,false);assert.equal(transfer.captures,1);assert.equal(transfer.progress,0);
+ const drained=await page.evaluate(()=>chrome.runtime.sendMessage({type:'queue-export'}));assert.equal(drained.value.captures.length,0);
+ console.log('PASS: real localhost bridge commits once, retries lost ACK, then drains queue without learning');
+ const local=await page.evaluate(()=>chrome.runtime.sendMessage({type:'lookup',query:'hobby'}));assert.equal(local.value.source,'local');console.log('PASS: worker dictionary uses synced local snapshot before network');
+ console.log(JSON.stringify(transfer));
+}finally{await context?.close();if(server)await new Promise(r=>server.close(r));await rm(profile,{recursive:true,force:true});await rm(resolve(ext,'test-harness.html'),{force:true});}

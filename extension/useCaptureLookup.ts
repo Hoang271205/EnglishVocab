@@ -1,16 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Entry } from '../src/domain/types';
 import type { LookupResult } from '../src/dictionary/freeDictionary';
-import {
-  createReadingEntry,
-  remoteIpa,
-} from '../src/dictionary/readingEntry';
+import { createReadingEntry, remoteIpa } from '../src/dictionary/readingEntry';
 import type { SelectedWord } from './SelectionPopup';
 import type { CaptureItem } from './queue';
 import { requestWorker } from './client';
 
 type ExtensionLookup = LookupResult & {
   entries?: Entry[];
+  ownerId?: string | null;
 };
 
 function errorMessage(cause: unknown): string {
@@ -33,10 +31,8 @@ export function useCaptureLookup(selection: SelectedWord) {
   const [frozen, setFrozen] = useState(false);
 
   const [translating, setTranslating] = useState(false);
-  const [translationError, setTranslationError] =
-    useState<string | null>(null);
-  const [translationSuggested, setTranslationSuggested] =
-    useState(false);
+  const [translationError, setTranslationError] = useState<string | null>(null);
+  const [translationSuggested, setTranslationSuggested] = useState(false);
 
   const saveLock = useRef(false);
   const pendingItem = useRef<CaptureItem | null>(null);
@@ -110,10 +106,7 @@ export function useCaptureLookup(selection: SelectedWord) {
     setTranslating(true);
 
     function isCurrentRequest() {
-      return (
-        !cancelled &&
-        requestId === translationRequest.current
-      );
+      return !cancelled && requestId === translationRequest.current;
     }
 
     async function loadTranslation() {
@@ -126,10 +119,7 @@ export function useCaptureLookup(selection: SelectedWord) {
           input,
         });
 
-        if (
-          typeof response.text !== 'string' ||
-          !response.text.trim()
-        ) {
+        if (typeof response.text !== 'string' || !response.text.trim()) {
           throw new Error('Dịch vụ chưa trả về nghĩa tiếng Việt.');
         }
 
@@ -212,15 +202,9 @@ export function useCaptureLookup(selection: SelectedWord) {
             partOfSpeech,
           });
 
-        if (
-          !localEntry &&
-          translationSuggested &&
-          meaningVi.trim()
-        ) {
+        if (!localEntry && translationSuggested && meaningVi.trim()) {
           entry.provenance = [
-            ...entry.provenance.filter(
-              (source) => source.field !== 'meaning',
-            ),
+            ...entry.provenance.filter((source) => source.field !== 'meaning'),
             {
               field: 'meaning',
               attribution: meaningEdited.current
@@ -252,21 +236,23 @@ export function useCaptureLookup(selection: SelectedWord) {
       const acknowledgment = await requestWorker<{
         saved: boolean;
         duplicate: boolean;
+        contentStatus: 'draft' | 'ready';
       }>({
-        type: 'queue-save',
+        type: 'capture-save',
+        ...(result ? { ownerId: result.ownerId ?? null } : {}),
         item: pendingItem.current,
       });
 
       if (acknowledgment.saved !== true) {
-        throw new Error('Extension chưa xác nhận lưu thành công.');
+        throw new Error('Server chưa xác nhận lưu thành công.');
       }
 
       setSaved(
         localEntry
-          ? 'Đã lưu trong extension. Khi chuyển về web, tiến độ của từ hiện có được giữ nguyên.'
-          : pendingItem.current.entry.contentStatus === 'ready'
-            ? 'Đã lưu từ trong extension, chờ chuyển về web để học.'
-            : 'Đã lưu bản nháp trong extension. Bạn có thể bổ sung sau khi chuyển về web.',
+          ? 'Đã lưu. Tiến độ của từ hiện có được giữ nguyên.'
+          : acknowledgment.contentStatus === 'ready'
+            ? 'Đã lưu. Mở Sổ tay để học từ này.'
+            : 'Đã lưu bản nháp. Mở Sổ tay → Chờ bổ sung để chỉnh sửa.',
       );
     } catch (cause: unknown) {
       setSaveError(errorMessage(cause));

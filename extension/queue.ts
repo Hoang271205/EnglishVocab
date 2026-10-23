@@ -1,4 +1,4 @@
-import { captureTransferSchema } from '../src/services/personal';
+import { captureTransferSchema } from '../src/shared/schemas/captureTransfer';
 import type { z } from 'zod';
 import { ServiceError } from '../src/domain/types';
 

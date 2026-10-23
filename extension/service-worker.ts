@@ -1,5 +1,17 @@
+import {
+  currentExtensionUser,
+  loginExtension,
+  logoutExtension,
+} from './accountApi';
+import { trustedAppOrigins } from './config';
+import {
+  connectionSchema,
+  connectionState,
+  initializePrivateStorage,
+  saveToCloud,
+} from './cloud';
 import { z } from 'zod';
-import { snapshotSchema } from '../src/services/snapshot';
+import { snapshotSchema } from '../src/shared/schemas/snapshot';
 import { normalizeAnswer } from '../src/domain/grading';
 import { WiktionaryDictionary } from '../src/dictionary/wiktionaryDictionary';
 import { CaptureQueue } from './queue';
@@ -9,67 +21,139 @@ import {
   translationInputSchema,
 } from './translation';
 
-const queue = new CaptureQueue({
-  get: async (key) => (await chrome.storage.local.get(key))[key],
-  set: async (key, value) => {
-    await chrome.storage.local.set({ [key]: value });
-  },
-});
+const queues = new Map<string, CaptureQueue>();
+function accountQueue(ownerId: string | null) {
+  const key = ownerId ? `captures:${ownerId}` : 'captures';
+  let queue = queues.get(key);
+  if (!queue) {
+    queue = new CaptureQueue({
+      get: async () => (await chrome.storage.local.get(key))[key],
+      set: async (_key, value) => {
+        await chrome.storage.local.set({ [key]: value });
+      },
+    });
+    queues.set(key, queue);
+  }
+  return queue;
+}
+let mutationTail: Promise<unknown> = Promise.resolve();
+function serialMutation<T>(work: () => Promise<T>): Promise<T> {
+  const next = mutationTail.then(work);
+  mutationTail = next.catch(() => {});
+  return next;
+}
 
 const provider = new WiktionaryDictionary();
 const pending = new Map<string, string[]>();
 
 let cacheGeneration = 0;
 
+const privateStorage = initializePrivateStorage();
 const messageSchema = z.discriminatedUnion('type', [
-  z.object({
-    type: z.literal('lookup'),
-    query: z.string().min(1).max(120),
-    forceOnline: z.boolean().optional(),
-  }).strict(),
+  z.object({ type: z.literal('auth-status') }).strict(),
+  z.object({ type: z.literal('auth-open') }).strict(),
+  z
+    .object({
+      type: z.literal('auth-login'),
+      email: z.string().trim().email().max(254),
+      password: z.string().min(1).max(128),
+    })
+    .strict(),
+  z.object({ type: z.literal('auth-logout') }).strict(),
+  z.object({ type: z.literal('extension-state') }).strict(),
+  z
+    .object({
+      type: z.literal('connection-install'),
+      connection: connectionSchema,
+    })
+    .strict(),
+  z
+    .object({
+      type: z.literal('capture-save'),
+      ownerId: z.string().min(1).max(128).nullable().optional(),
+      item: z.unknown(),
+    })
+    .strict(),
+  z
+    .object({
+      type: z.literal('account-bind'),
+      ownerId: z.string().min(1).max(128),
+      adoptGuest: z.boolean().default(false),
+    })
+    .strict(),
+  z
+    .object({
+      type: z.literal('account-release'),
+      ownerId: z.string().min(1).max(128),
+    })
+    .strict(),
+  z
+    .object({
+      type: z.literal('lookup'),
+      query: z.string().min(1).max(120),
+      forceOnline: z.boolean().optional(),
+    })
+    .strict(),
 
-  z.object({
-    type: z.literal('translate-sense'),
-    input: translationInputSchema,
-  }).strict(),
+  z
+    .object({
+      type: z.literal('translate-sense'),
+      input: translationInputSchema,
+    })
+    .strict(),
 
-  z.object({
-    type: z.literal('queue-save'),
-    item: z.unknown(),
-  }).strict(),
+  z
+    .object({
+      type: z.literal('queue-save'),
+      ownerId: z.string().min(1).max(128).nullable().optional(),
+      item: z.unknown(),
+    })
+    .strict(),
 
-  z.object({
-    type: z.literal('queue-export'),
-  }).strict(),
+  z
+    .object({
+      type: z.literal('queue-export'),
+    })
+    .strict(),
 
-  z.object({
-    type: z.literal('queue-transfer'),
-  }).strict(),
+  z
+    .object({
+      type: z.literal('queue-transfer'),
+      ownerId: z.string().min(1).max(128).optional(),
+    })
+    .strict(),
 
-  z.object({
-    type: z.literal('queue-ack'),
-    transferId: z.string(),
-    captureIds: z.array(z.string()).max(500),
-  }).strict(),
+  z
+    .object({
+      type: z.literal('queue-ack'),
+      ownerId: z.string().min(1).max(128).optional(),
+      transferId: z.string(),
+      captureIds: z.array(z.string()).max(500),
+    })
+    .strict(),
 
-  z.object({
-    type: z.literal('snapshot-update'),
-    snapshot: z.unknown(),
-  }).strict(),
+  z
+    .object({
+      type: z.literal('snapshot-update'),
+      ownerId: z.string().min(1).max(128).optional(),
+      snapshot: z.unknown(),
+    })
+    .strict(),
 
-  z.object({
-    type: z.literal('personal-delete'),
-    entryId: z.string().min(1).max(128),
-    headword: z.string().min(1).max(500),
-  }).strict(),
+  z
+    .object({
+      type: z.literal('personal-delete'),
+      ownerId: z.string().min(1).max(128).optional(),
+      entryId: z.string().min(1).max(128),
+      headword: z.string().min(1).max(500),
+      sourceIds: z.array(z.string().min(1).max(128)).max(500).default([]),
+    })
+    .strict(),
 ]);
 
 function isLocal(sender: ExtensionSender) {
   try {
-    return (
-      new URL(sender.url ?? '').origin ===
-      'http://localhost:5173'
-    );
+    return trustedAppOrigins.has(new URL(sender.url ?? '').origin);
   } catch {
     return false;
   }
@@ -90,9 +174,115 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
 
   const message = parsed.data;
 
-  void (async () => {
+  const work = async () => {
+    await privateStorage;
+    const accountStorage = await chrome.storage.local.get('accountOwner');
+    const ownerId =
+      typeof accountStorage.accountOwner === 'string'
+        ? accountStorage.accountOwner
+        : null;
+    const queue = accountQueue(ownerId);
+    const deletedKey = `deletedEntryIds:${ownerId ?? 'guest'}`;
+    async function deletedIds(): Promise<string[]> {
+      const stored = (await chrome.storage.local.get(deletedKey))[deletedKey];
+      return Array.isArray(stored)
+        ? stored.filter((id): id is string => typeof id === 'string')
+        : [];
+    }
+
+    if (message.type === 'auth-open') {
+      await chrome.tabs.create({ url: chrome.runtime.getURL('account.html') });
+      return { opened: true };
+    }
+
+    if (message.type === 'auth-status') {
+      const user = await currentExtensionUser();
+      if (!user || ownerId !== user.id) {
+        cacheGeneration++;
+        pending.clear();
+        await chrome.storage.local.set({
+          accountOwner: user?.id ?? null,
+          snapshot: null,
+          lookupCache: [],
+        });
+      }
+      return { user };
+    }
+
+    if (message.type === 'auth-login') {
+      if (sender.url !== chrome.runtime.getURL('account.html')) {
+        throw new Error('Hãy đăng nhập từ trang tài khoản của extension.');
+      }
+      cacheGeneration++;
+      const user = await loginExtension({
+        email: message.email,
+        password: message.password,
+      });
+      cacheGeneration++;
+      pending.clear();
+      await chrome.storage.local.set({
+        accountOwner: user.id,
+        snapshot: null,
+        lookupCache: [],
+      });
+      return { user };
+    }
+
+    if (message.type === 'auth-logout') {
+      cacheGeneration++;
+      pending.clear();
+      return logoutExtension();
+    }
+
     if (message.type === 'queue-save') {
-      return queue.save(message.item);
+      throw new Error(
+        'Luồng hàng đợi đã dừng. Hãy reload extension và trang bài đọc để dùng Lưu trực tiếp.',
+      );
+    }
+
+    if (message.type === 'capture-save') {
+      const candidate = z
+        .object({ entry: z.object({ id: z.string() }) })
+        .safeParse(message.item);
+      if (
+        candidate.success &&
+        (await deletedIds()).includes(candidate.data.entry.id)
+      ) {
+        throw new Error(
+          'Từ này đã bị xoá. Hãy đóng popup và tra lại để tạo lượt lưu mới.',
+        );
+      }
+      const result = await saveToCloud(message.item, message.ownerId);
+      try {
+        const storage = await chrome.storage.local.get('snapshot');
+        const snapshot = snapshotSchema.safeParse(storage.snapshot);
+        // Cache only the committed server entry, never an offline capture queue.
+        await chrome.storage.local.set({
+          snapshot: {
+            protocol: 1,
+            version: snapshot.success ? snapshot.data.version : 0,
+            entries: [
+              ...(snapshot.success
+                ? snapshot.data.entries.filter(
+                    (entry) =>
+                      entry.id !== result.entry.id &&
+                      (!candidate.success ||
+                        entry.id !== candidate.data.entry.id),
+                  )
+                : []),
+              result.entry,
+            ],
+          },
+        });
+      } catch {
+        /* The server commit succeeded; cache is optional. */
+      }
+      return {
+        saved: true,
+        duplicate: result.duplicate,
+        entryId: result.entry.id,
+        contentStatus: result.entry.contentStatus,
+      };
     }
 
     if (message.type === 'translate-sense') {
@@ -117,6 +307,7 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
           return {
             query: key,
             source: 'local',
+            ownerId,
             entries,
             senses: entries.map((entry) => ({
               entryId: entry.id,
@@ -162,7 +353,7 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
       const found = cached.find((item) => item.query === key);
 
       if (found && !message.forceOnline) {
-        return { ...found, source: 'cache' };
+        return { ...found, source: 'cache', ownerId };
       }
 
       const result = await provider.lookup(message.query);
@@ -171,9 +362,7 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
         if (generation === cacheGeneration) {
           await chrome.storage.local.set({
             lookupCache: [
-              ...cached.filter(
-                (item) => item.query !== result.query,
-              ),
+              ...cached.filter((item) => item.query !== result.query),
               result,
             ].slice(-500),
           });
@@ -186,7 +375,7 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
         // Lỗi cache không ngăn hiển thị kết quả tra từ.
       }
 
-      return result;
+      return { ...result, ownerId };
     }
 
     if (message.type === 'queue-export') {
@@ -200,14 +389,95 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
 
     if (!isLocal(sender)) {
       throw new Error(
-        'Thao tác này chỉ được phép từ http://localhost:5173',
+        'Thao tác chỉ được phép từ trang EnglishVocab đã cấu hình.',
+      );
+    }
+
+    if (message.type === 'extension-state') {
+      const stored = await chrome.storage.local.get('extensionDeviceId');
+      const parsedId = z.uuid().safeParse(stored.extensionDeviceId);
+      const deviceId = parsedId.success ? parsedId.data : crypto.randomUUID();
+      if (!parsedId.success)
+        await chrome.storage.local.set({ extensionDeviceId: deviceId });
+      const connection = await connectionState();
+      return {
+        deviceId,
+        connected: connection !== null,
+        ownerId: connection?.ownerId ?? null,
+        expiresAt: connection?.expiresAt ?? null,
+      };
+    }
+
+    if (message.type === 'connection-install') {
+      throw new Error('Hãy đăng nhập trực tiếp trong extension.');
+    }
+
+    if (message.type === 'account-bind') {
+      const connection = await connectionState();
+      if (!connection || connection.ownerId !== message.ownerId) {
+        throw new Error('Hãy đăng nhập cùng tài khoản trong extension.');
+      }
+
+      if (ownerId !== message.ownerId) {
+        cacheGeneration++;
+        pending.clear();
+        await chrome.storage.local.set({
+          accountOwner: message.ownerId,
+          snapshot: null,
+          lookupCache: [],
+        });
+      }
+      const guest = accountQueue(null);
+      const guestItems = await guest.list();
+      if (message.adoptGuest && guestItems.length) {
+        const owned = accountQueue(message.ownerId);
+        for (const item of guestItems) await owned.save(item);
+        await guest.acknowledge(guestItems.map((item) => item.capture.id));
+      }
+      return {
+        bound: true,
+        ownerId: message.ownerId,
+        guestCount: message.adoptGuest ? 0 : guestItems.length,
+      };
+    }
+
+    if (message.type === 'account-release') {
+      if (ownerId === message.ownerId) {
+        cacheGeneration++;
+        pending.clear();
+        await chrome.storage.local.set({
+          accountOwner: null,
+          cloudConnection: null,
+          snapshot: null,
+          lookupCache: [],
+        });
+      }
+      return { released: true };
+    }
+
+    if (
+      message.ownerId !== ownerId &&
+      !(ownerId === null && message.ownerId === undefined)
+    ) {
+      throw new Error(
+        'Tài khoản extension đã thay đổi. Hãy tải lại trang và đồng bộ lại.',
       );
     }
 
     if (message.type === 'personal-delete') {
       cacheGeneration++;
+      await chrome.storage.local.set({
+        [deletedKey]: [
+          ...new Set([
+            ...(await deletedIds()),
+            message.entryId,
+            ...message.sourceIds,
+          ]),
+        ],
+      });
 
-      await queue.removeEntry(message.entryId);
+      for (const id of new Set([message.entryId, ...message.sourceIds]))
+        await queue.removeEntry(id);
       await forgetTranslations(message.headword);
 
       const [snapshotStorage, cacheStorage] = await Promise.all([
@@ -215,9 +485,7 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
         chrome.storage.local.get('lookupCache'),
       ]);
 
-      const snapshot = snapshotSchema.safeParse(
-        snapshotStorage.snapshot,
-      );
+      const snapshot = snapshotSchema.safeParse(snapshotStorage.snapshot);
 
       const key = normalizeAnswer(message.headword);
 
@@ -239,7 +507,9 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
           snapshot: {
             ...snapshot.data,
             entries: snapshot.data.entries.filter(
-              (entry) => entry.id !== message.entryId,
+              (entry) =>
+                entry.id !== message.entryId &&
+                !message.sourceIds.includes(entry.id),
             ),
           },
           lookupCache,
@@ -255,8 +525,7 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
       const snapshot = snapshotSchema.parse(message.snapshot);
 
       if (
-        new TextEncoder().encode(JSON.stringify(snapshot)).length >
-        8_000_000
+        new TextEncoder().encode(JSON.stringify(snapshot)).length > 8_000_000
       ) {
         throw new Error('Snapshot too large');
       }
@@ -268,7 +537,13 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
         throw new Error('Snapshot is stale');
       }
 
-      await chrome.storage.local.set({ snapshot });
+      const deleted = new Set(await deletedIds());
+      await chrome.storage.local.set({
+        snapshot: {
+          ...snapshot,
+          entries: snapshot.entries.filter((entry) => !deleted.has(entry.id)),
+        },
+      });
 
       return {
         updated: true,
@@ -310,15 +585,18 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
     pending.delete(message.transferId);
 
     return result;
-  })().then(
+  };
+  const operation =
+    message.type === 'lookup' || message.type === 'translate-sense'
+      ? work()
+      : serialMutation(work);
+  void operation.then(
     (value) => respond({ ok: true, value }),
     (cause: unknown) =>
       respond({
         ok: false,
         error:
-          cause instanceof Error
-            ? cause.message
-            : 'Extension operation failed',
+          cause instanceof Error ? cause.message : 'Extension operation failed',
       }),
   );
 

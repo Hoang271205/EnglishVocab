@@ -19,3 +19,21 @@
 .study-card > .ui-message {
   margin-top: 20px;
 }
+
+.learning-skip-button {
+  display: block;
+  margin: 18px auto 0;
+  padding: 8px 12px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.learning-skip-button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}

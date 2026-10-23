@@ -1,14 +1,11 @@
 import type { SelectedWord } from './SelectionPopup';
 import { useCaptureLookup } from './useCaptureLookup';
-import QueueExportButton from './QueueExportButton';
 
 type DictionaryFormProps = {
   selection: SelectedWord;
 };
 
-export default function DictionaryForm({
-  selection,
-}: DictionaryFormProps) {
+export default function DictionaryForm({ selection }: DictionaryFormProps) {
   const model = useCaptureLookup(selection);
 
   return (
@@ -70,9 +67,7 @@ export default function DictionaryForm({
 
         <p>
           CEFR: {model.localEntry?.cefr.level ?? 'Chưa có'}
-          {model.localEntry?.cefr.status === 'estimated'
-            ? ' · tham khảo'
-            : ''}
+          {model.localEntry?.cefr.status === 'estimated' ? ' · tham khảo' : ''}
         </p>
 
         <label>
@@ -150,9 +145,7 @@ export default function DictionaryForm({
       {model.saveError && (
         <p className="message" role="alert">
           {model.saveError}{' '}
-          {model.locked
-            ? 'Bấm Thử lưu lại để gửi lại cùng lượt lưu.'
-            : ''}
+          {model.locked ? 'Bấm Thử lưu lại để gửi lại cùng lượt lưu.' : ''}
         </p>
       )}
 
@@ -179,7 +172,10 @@ export default function DictionaryForm({
         </button>
       )}
 
-      <QueueExportButton disabled={model.saving} />
+      <p className="label">
+        Lưu trực tiếp lên tài khoản trên server. Cần có mạng và đã kết nối
+        extension; không tạo hàng đợi offline.
+      </p>
     </form>
   );
 }
