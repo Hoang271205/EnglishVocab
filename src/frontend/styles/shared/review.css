@@ -269,3 +269,33 @@
     font-size: 12px;
   }
 }
+
+/* Hints are visual overlays, never input values or submitted answers. */
+.cloze-cell {
+  display: inline-grid;
+  position: relative;
+  flex-shrink: 0;
+}
+.cloze-cell .cloze-letter {
+  grid-area: 1 / 1;
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+.cloze-cell {
+  background: #fffdf3;
+  border-radius: 8px;
+}
+.cloze-letter-hint {
+  grid-area: 1 / 1;
+  display: grid;
+  place-items: center;
+  color: #63765a;
+  opacity: 0.42;
+  filter: blur(0.8px);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}

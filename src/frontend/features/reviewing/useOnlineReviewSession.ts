@@ -83,7 +83,7 @@ export function useOnlineReviewSession(sessionId: string, onExit: () => void) {
 
     const answer = forgotten
       ? ''
-      : assembleAnswer(session.question.cells, letters);
+      : assembleAnswer(session.question.cells, letters, true);
 
     setNotice(null);
 

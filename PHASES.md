@@ -213,3 +213,17 @@ Ví dụ: đã gửi đáp án 6/20 từ thì giữ 6 kết quả, 14 từ chưa
 - [ ] Người dùng điền Gmail App Password vào `.env`, build FE, restart API và kiểm kê chức năng/giao diện. Chưa gửi email thật, chưa chạy build/typecheck/lint/test.
 
 Các yêu cầu hiển thị tên dưới logo popup extension và chuyển dữ liệu backup cũ vẫn không nằm trong lượt triển khai này.
+
+## Giảm tải dữ liệu trang chủ đề — 23/10/2026
+
+- [x] Gộp danh sách topic và số từ đã học/đã biết vào một API; chỉ đọc entryId từ các collection cá nhân, không tải toàn bộ tiến độ và review preferences — Implemented / Not tested.
+- [x] Cache catalogue chung tối đa 2 bộ từ, TTL 30 giây, dùng chung request đang chạy; không cache tiến độ riêng trên server — Implemented / Not tested.
+- [x] Cache phản hồi topic trên RAM trình duyệt tối đa 15 giây/8 mục; xóa cache khi ghi dữ liệu hoặc gặp 401; generation ngăn request cũ chèn lại cache sau thay đổi — Implemented / Not tested.
+- [x] API đọc có thời gian chờ 20 giây và thông báo thử lại; không tự timeout các thao tác ghi — Implemented / Not tested.
+- [ ] Người dùng build FE, restart API và kiểm kê thời gian tải topic/chuyển bộ từ sau học hoặc Skip. Chưa đo latency, chưa chạy build/typecheck/lint/test, chưa truy cập dữ liệu thật.
+
+## Gợi ý chữ mờ trong bài ôn — 23/10/2026
+
+- [x] Chữ gợi ý là lớp chữ mờ trong ô nhập, không tự điền vào đáp án; có thể gõ đè, xoá để hiện lại gợi ý — Implemented / Not tested.
+- [x] Nhập/paste, lưu nháp và khôi phục áp dụng cho tất cả chữ cái; khoảng trắng/dấu câu giữ nguyên. API chấm cả chữ đã gõ đè, không từ chối chỉ vì khác gợi ý — Implemented / Not tested.
+- [ ] Người dùng build FE, restart API và kiểm kê với từ attendance. Không chạy build/typecheck/lint/test.

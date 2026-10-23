@@ -380,7 +380,7 @@ export async function submitReviewAnswer(
       }
 
       if (!forgotten) {
-        validateClozeAnswer(answer, item.cells);
+        validateClozeAnswer(answer, item.cells, true);
       }
 
       const correct = forgotten

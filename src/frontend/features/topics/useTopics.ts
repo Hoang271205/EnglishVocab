@@ -1,7 +1,8 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useAsyncResource } from '../../hooks/useAsyncResource';
+import { clearReadCache } from '../../api/readCache';
 import { topicsApi } from './topics.api';
-import type { TopicSummary, VocabularyCollection } from './topics.types';
+import type { VocabularyCollection } from './topics.types';
 
 function normalizeSearch(value: string) {
   return value.normalize('NFKC').toLocaleLowerCase('vi').trim();
@@ -14,27 +15,7 @@ export function useTopics() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const load = useCallback(
-    async (signal: AbortSignal) => {
-      const [topics, progress] = await Promise.all([
-        topicsApi.list(collection, signal),
-        topicsApi.progress(signal),
-      ]);
-
-      const learnedIds = new Set(progress.progress.map((item) => item.entryId));
-
-      const knownIds = new Set(progress.knownEntryIds ?? []);
-
-      const summaries: TopicSummary[] = topics.map((topic) => ({
-        ...topic,
-        total: topic.entryIds.length,
-        known: topic.entryIds.filter(
-          (id) => knownIds.has(id) && !learnedIds.has(id),
-        ).length,
-        learned: topic.entryIds.filter((id) => learnedIds.has(id)).length,
-      }));
-
-      return summaries;
-    },
+    (signal: AbortSignal) => topicsApi.summaries(collection, signal),
     [collection],
   );
 
@@ -63,6 +44,10 @@ export function useTopics() {
 
   return {
     ...resource,
+    reload: () => {
+      clearReadCache();
+      resource.reload();
+    },
     collection,
     search,
     selectedId,
