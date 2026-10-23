@@ -10,7 +10,10 @@ export default function SettingsPanel({ onSaved }: { onSaved: () => void }) {
     (signal: AbortSignal) => settingsApi.get(signal),
     [],
   );
-  const resource = useAsyncResource(load);
+  const resource = useAsyncResource(load, {
+    cacheKey: 'settings',
+    keepStaleData: false,
+  });
   return (
     <section className="cloud-panel">
       <div className="cloud-toolbar">

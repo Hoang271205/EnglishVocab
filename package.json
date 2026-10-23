@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint src extension tests scripts --max-warnings=0",
     "test": "node --import tsx --test tests/*.test.ts",
+    "test:navigation": "npm run build:frontend && node --import tsx --test tests/browser/navigation.test.ts",
     "check": "npm run typecheck && npm run lint && npm test",
     "check:gate": "node scripts/check-gate.mjs",
     "progress": "node scripts/progress.mjs",
@@ -49,6 +50,7 @@
   },
   "dependencies": {
     "@vercel/functions": "^3.10.3",
+    "@vercel/speed-insights": "^2.0.0",
     "connect-mongo": "^6.0.0",
     "dexie": "4.4.6",
     "dotenv": "^18.0.8",

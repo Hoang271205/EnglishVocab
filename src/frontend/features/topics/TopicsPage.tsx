@@ -30,11 +30,7 @@ export default function TopicsPage() {
         />
       </div>
 
-      {topics.loading ? (
-        <StatusMessage>
-          Đang tải chủ đề…
-        </StatusMessage>
-      ) : topics.error ? (
+      {topics.error && (
         <div className="dashboard-error">
           <StatusMessage tone="error">
             {topics.error}
@@ -44,7 +40,13 @@ export default function TopicsPage() {
             Thử lại
           </Button>
         </div>
-      ) : (
+      )}
+
+      {topics.loading ? (
+        <StatusMessage>
+          Đang tải chủ đề…
+        </StatusMessage>
+      ) : topics.data ? (
         <>
           <p className="topic-message">
             {topics.topicCount} chủ đề ·{' '}
@@ -73,7 +75,7 @@ export default function TopicsPage() {
             </ul>
           )}
         </>
-      )}
+      ) : null}
     </section>
   );
 }

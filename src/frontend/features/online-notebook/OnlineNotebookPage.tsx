@@ -30,7 +30,10 @@ export default function OnlineNotebookPage({
     (signal: AbortSignal) => settingsApi.get(signal),
     [],
   );
-  const preferences = useAsyncResource(loadSettings);
+  const preferences = useAsyncResource(loadSettings, {
+    cacheKey: 'settings',
+    keepStaleData: false,
+  });
   const rows = model.resource.data ?? [];
   const filtered = filterRows(rows, model.filters, Date.now());
   function settingsChanged() {
@@ -89,7 +92,7 @@ export default function OnlineNotebookPage({
         />
       )}
       {!model.resource.loading &&
-        !model.resource.error &&
+        model.resource.data &&
         [true, false].map((enabled) => (
           <NotebookStack
             key={String(enabled)}

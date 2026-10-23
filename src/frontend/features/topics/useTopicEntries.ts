@@ -9,5 +9,5 @@ export function useTopicEntries(topicId: string) {
     [topicId],
   );
 
-  return useAsyncResource(load);
+  return useAsyncResource(load, { cacheKey: `topic-entries:${topicId}` });
 }

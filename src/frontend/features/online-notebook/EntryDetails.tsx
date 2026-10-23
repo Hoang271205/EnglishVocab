@@ -43,7 +43,7 @@ export default function EntryDetails({
       ).sources,
     [entry.id],
   );
-  const sources = useAsyncResource(load);
+  const sources = useAsyncResource(load, { cacheKey: `entry-sources:${entry.id}` });
   return (
     <section
       className="cloud-entry-details"
