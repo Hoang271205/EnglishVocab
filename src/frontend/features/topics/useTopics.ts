@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useAsyncResource } from '../../hooks/useAsyncResource';
-import { clearReadCache } from '../../api/readCache';
 import { topicsApi } from './topics.api';
 import type { VocabularyCollection } from './topics.types';
 
@@ -19,7 +18,7 @@ export function useTopics() {
     [collection],
   );
 
-  const resource = useAsyncResource(load);
+  const resource = useAsyncResource(load, { cacheKey: `topics:${collection}` });
   const topics = resource.data;
 
   const visibleTopics = useMemo(() => {
@@ -44,10 +43,6 @@ export function useTopics() {
 
   return {
     ...resource,
-    reload: () => {
-      clearReadCache();
-      resource.reload();
-    },
     collection,
     search,
     selectedId,

@@ -11,7 +11,7 @@ export const topicsApi = {
     const query = new URLSearchParams({ collection });
     const result = await apiRequest<{ topics: TopicSummary[] }>(
       `/api/library/topic-summaries?${query}`,
-      { signal, cacheTtlMs: 15000 },
+      { signal },
     );
     return result.topics;
   },

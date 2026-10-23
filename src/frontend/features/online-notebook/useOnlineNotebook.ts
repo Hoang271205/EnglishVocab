@@ -12,7 +12,7 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
     (signal: AbortSignal) => notebookApi.list(signal),
     [],
   );
-  const resource = useAsyncResource(load);
+  const resource = useAsyncResource(load, { cacheKey: `notebook:${ownerId}` });
   const action = useAsyncAction();
   const [filters, setFilters] = useState(initialFilters);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -122,7 +122,7 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
   }
   return {
     resource,
-    busy: action.busy,
+    busy: action.busy || resource.refreshing,
     error: action.error?.message,
     filters,
     setFilters,

@@ -17,7 +17,7 @@ export default function OnlineIpaChart() {
     if (!response.ok) throw new Error('Không tải được bảng IPA.');
     return ipaChartSchema.parse(await response.json());
   }, []);
-  const resource = useAsyncResource(load);
+  const resource = useAsyncResource(load, { cacheKey: 'ipa-chart' });
   return (
     <section className="cloud-panel ipa-chart">
       <h2>Bảng IPA · Anh-Mỹ</h2>

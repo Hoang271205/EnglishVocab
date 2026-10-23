@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import App from './App';
 import './styles.css';
 
@@ -8,4 +9,9 @@ if (!rootElement) {
   throw new Error('Không tìm thấy phần tử #root');
 }
 
-createRoot(rootElement).render(<App />);
+createRoot(rootElement).render(
+  <>
+    <App />
+    <SpeedInsights />
+  </>,
+);
