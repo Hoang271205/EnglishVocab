@@ -5,7 +5,7 @@ import { client } from '../../database/mongo.js';
 import { requireAuth } from '../../middleware/require-auth.js';
 import { requireJsonWrite } from '../../middleware/require-json-write.js';
 import { resolveReadyEntries } from '../entries/service.js';
-import { reviewPreferences, userProgress, knownWords } from './collections.js';
+import { reviewPreferences, userProgress } from './collections.js';
 
 export const progressRouter = Router();
 
@@ -28,7 +28,7 @@ const reviewPreferenceSchema = z
 progressRouter.get('/', async (request, response) => {
   const userId = request.session.userId!;
 
-  const [progress, preferences, known] = await Promise.all([
+  const [progress, preferences] = await Promise.all([
     userProgress
       .find({ userId }, { projection: { _id: 0, userId: 0 } })
       .sort({ learnedAt: -1, entryId: 1 })
@@ -37,7 +37,6 @@ progressRouter.get('/', async (request, response) => {
     reviewPreferences
       .find({ userId }, { projection: { _id: 0, userId: 0 } })
       .toArray(),
-    knownWords.find({ userId }, { projection: { entryId: 1 } }).toArray(),
   ]);
 
   const preferenceByEntryId = new Map(
@@ -45,7 +44,6 @@ progressRouter.get('/', async (request, response) => {
   );
 
   response.json({
-    knownEntryIds: known.map((item) => item.entryId),
     progress: progress.map((item) => ({
       ...item,
       reviewEnabled: preferenceByEntryId.get(item.entryId) ?? true,

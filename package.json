@@ -44,9 +44,11 @@
     "format:frontend": "prettier --write \"src/frontend/**/*.{ts,tsx,css}\"",
     "format:frontend:check": "prettier --check \"src/frontend/**/*.{ts,tsx,css}\"",
     "library:seed": "tsx server/src/scripts/seed-library.ts",
+    "library:import-reviewed": "tsx server/src/scripts/import-reviewed-content.ts",
     "test:legacy": "node --import tsx --test legacy/local/tests/*.test.ts",
     "build:vercel": "npm run build:frontend",
-    "db:prepare": "tsx server/src/scripts/prepare-database.ts"
+    "db:prepare": "tsx server/src/scripts/prepare-database.ts",
+    "db:migrate:topics": "tsx server/src/scripts/migrate-topic-learning.ts"
   },
   "dependencies": {
     "@vercel/functions": "^3.10.3",

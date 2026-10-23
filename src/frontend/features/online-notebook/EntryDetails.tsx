@@ -44,7 +44,9 @@ export default function EntryDetails({
       ).sources,
     [entry.id],
   );
-  const sources = useAsyncResource(load, { cacheKey: `entry-sources:${entry.id}` });
+  const sources = useAsyncResource(load, {
+    cacheKey: `entry-sources:${entry.id}`,
+  });
   return (
     <section
       className="cloud-entry-details"
@@ -85,13 +87,9 @@ export default function EntryDetails({
           </p>
         </div>
       ) : (
-        <p>
-          {row.known
-            ? 'Đã đánh dấu biết từ này. Không tạo level hoặc lịch ôn.'
-            : 'Từ này chưa được học nên chưa có level ghi nhớ.'}
-        </p>
+        <p>Từ này chưa được học nên chưa có level ghi nhớ.</p>
       )}
-      {!progress && !row.known && entry.collectionId !== 'personal' && (
+      {!progress && entry.collectionId !== 'personal' && (
         <StatusMessage>
           Từ đã được lưu từ thư viện chung. Bạn có thể học từ này trong mục Học
           từ mới.
@@ -161,7 +159,9 @@ export default function EntryDetails({
       </details>
       <details>
         <summary>Nguồn bài đọc đã lưu ({sources.data?.length ?? 0})</summary>
-        {sources.loading && <LoadingSkeleton variant="detail" label="Đang tải nguồn" />}
+        {sources.loading && (
+          <LoadingSkeleton variant="detail" label="Đang tải nguồn" />
+        )}
         {sources.error && (
           <StatusMessage tone="error">{sources.error}</StatusMessage>
         )}

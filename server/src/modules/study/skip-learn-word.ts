@@ -1,9 +1,10 @@
 import { client } from '../../database/mongo.js';
 import { ServiceError } from '../../../../src/domain/types.js';
-import { knownWords, userProgress } from '../progress/collections.js';
+import { userProgress } from '../progress/collections.js';
 import { studySessions } from './collections.js';
+import { recordTopicPosition } from './topic-learning.js';
 
-export async function skipKnownWord(
+export async function skipLearnWord(
   userId: string,
   sessionId: string,
   version: number,
@@ -40,19 +41,8 @@ export async function skipKnownWord(
         );
       }
 
-      await knownWords.updateOne(
-        { _id: JSON.stringify([userId, item.entry.id]) },
-        {
-          $setOnInsert: {
-            userId,
-            entryId: item.entry.id,
-            markedAt: Date.now(),
-          },
-        },
-        { upsert: true, session: mongoSession },
-      );
-
-      item.known = true;
+      await recordTopicPosition(session, item.entry.id, mongoSession);
+      item.skipped = true;
       session.index += 1;
       session.version += 1;
       session.draftAnswer = '';
@@ -68,7 +58,7 @@ export async function skipKnownWord(
         throw new ServiceError('conflict', 'Phiên vừa thay đổi ở tab khác.');
       }
 
-      // Marking a word as known never invents a level or a review event.
+      // Skipping only advances this learning session and its topic cursor.
       return session;
     }),
   );

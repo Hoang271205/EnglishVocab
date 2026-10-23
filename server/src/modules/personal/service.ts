@@ -11,7 +11,6 @@ import {
 import {
   reviewPreferences,
   userProgress,
-  knownWords,
 } from '../progress/collections.js';
 import { studyReceipts, studySessions } from '../study/collections.js';
 import { personalEntries } from './collections.js';
@@ -270,11 +269,6 @@ export async function deletePersonalEntry(
 
       await studyReceipts.deleteMany(
         { userId, 'event.entryId': entryId },
-        { session: mongoSession },
-      );
-
-      await knownWords.deleteMany(
-        { userId, entryId },
         { session: mongoSession },
       );
 

@@ -4,7 +4,6 @@ export interface NotebookRow {
   progress: Progress | null;
   reviewEnabled: boolean;
   saved?: boolean;
-  known?: boolean;
 }
 export interface NotebookFilters {
   scope: 'learned' | 'personal';

@@ -39,14 +39,14 @@ export default function TopicCard({
             {hasContent
               ? `${topic.learned}/${topic.total} từ đã học`
               : 'Chưa có nội dung'}
-            {topic.known > 0 && ` · ${topic.known} từ đã biết`}
+            {topic.processed >= topic.total && hasContent && ' · Đã hoàn thành'}
           </span>
 
           {hasContent && (
             <progress
               className="topic-progress"
               max={topic.total}
-              value={Math.min(topic.learned + topic.known, topic.total)}
+              value={Math.min(topic.processed, topic.total)}
               aria-label={`Tiến độ ${topic.nameVi}`}
             />
           )}
@@ -62,7 +62,7 @@ export default function TopicCard({
           key={topic.id}
           topicId={topic.id}
           topicName={topic.nameVi}
-          remaining={Math.max(0, topic.total - topic.learned - topic.known)}
+          remaining={Math.max(0, topic.total - topic.processed)}
           onClose={onClose}
         />
       )}
