@@ -65,9 +65,15 @@ export default function Workspace({
 
   const account = (
     <>
-      <span>{user.name}</span>
+      <span className="account-name">
+        <span className="account-avatar" aria-hidden="true">
+          {user.name.trim().charAt(0).toUpperCase()}
+        </span>
+        {user.name}
+      </span>
 
       <Button
+        icon="logout"
         variant="secondary"
         loading={busy}
         disabled={preparing}

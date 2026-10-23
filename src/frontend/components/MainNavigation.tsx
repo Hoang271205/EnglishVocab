@@ -1,3 +1,4 @@
+import Icon from './ui/Icon';
 import { navigation } from './navigation';
 import type { Tab } from './navigation';
 
@@ -13,10 +14,7 @@ export default function MainNavigation({
   items = navigation,
 }: MainNavigationProps) {
   return (
-    <nav
-      className="main-nav"
-      aria-label="Điều hướng chính"
-    >
+    <nav className="main-nav" aria-label="Điều hướng chính">
       {items.map((item) => {
         const active = activeTab === item.id;
 
@@ -29,7 +27,7 @@ export default function MainNavigation({
             onClick={() => onNavigate(item.id)}
           >
             <span className="nav-icon" aria-hidden="true">
-              {item.icon}
+              <Icon name={item.icon} />
             </span>
 
             <span>{item.label}</span>

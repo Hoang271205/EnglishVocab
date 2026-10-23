@@ -1,3 +1,5 @@
+import { signIn } from './sign-in.js';
+import { accountRouter } from './account-router.js';
 import { Router } from 'express';
 import { rateLimit } from 'express-rate-limit';
 import { z } from 'zod';
@@ -70,6 +72,8 @@ authRouter.use((request, response, next) => {
   next();
 });
 
+authRouter.use(accountRouter);
+
 authRouter.post('/login', loginLimiter, async (request, response) => {
   const parsed = loginSchema.safeParse(request.body);
 
@@ -100,24 +104,7 @@ authRouter.post('/login', loginLimiter, async (request, response) => {
     return;
   }
 
-  await revokeSessionExtensions(request.sessionID);
-
-  // Tạo session ID mới sau khi đăng nhập.
-  await new Promise<void>((resolve, reject) => {
-    request.session.regenerate((error) => {
-      if (error) reject(error);
-      else resolve();
-    });
-  });
-
-  request.session.userId = user._id;
-
-  await new Promise<void>((resolve, reject) => {
-    request.session.save((error) => {
-      if (error) reject(error);
-      else resolve();
-    });
-  });
+  await signIn(request, user);
 
   response.json({ user: publicUser(user) });
 });
@@ -126,7 +113,11 @@ authRouter.get('/me', async (request, response) => {
   const userId = request.session.userId;
   const user = userId ? await users.findOne({ _id: userId }) : null;
 
-  if (!user || !user.active) {
+  if (
+    !user ||
+    !user.active ||
+    (request.session.authVersion ?? 0) !== (user.authVersion ?? 0)
+  ) {
     response.status(401).json({
       error: {
         code: 'UNAUTHENTICATED',

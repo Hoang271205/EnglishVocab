@@ -1,3 +1,4 @@
+import { ensurePasswordResetIndexes } from './modules/auth/reset-store.js';
 import { createServer } from 'node:http';
 import { createApp } from './app.js';
 import { ensureExtensionIndexes } from './modules/extension/access.js';
@@ -15,6 +16,7 @@ async function start() {
   await connectMongo();
 
   await ensureUserIndexes();
+  await ensurePasswordResetIndexes();
   await ensureExtensionIndexes();
   await ensurePersonalIndexes();
   await ensureLibraryIndexes();

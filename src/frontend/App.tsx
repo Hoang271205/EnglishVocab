@@ -1,12 +1,19 @@
 import StatusMessage from './components/ui/StatusMessage';
 import AuthLayout from './features/auth/AuthLayout';
-import LoginPage from './features/auth/LoginPage';
+import AuthScreen from './features/auth/AuthScreen';
+import { useAuthRoute } from './features/auth/useAuthRoute';
+import { useEffect } from 'react';
 import { useAuth } from './features/auth/useAuth';
 import Workspace from './features/workspace/Workspace';
 import { LearningProvider } from './features/learning/LearningContext';
 
 export default function App() {
   const auth = useAuth();
+  const route = useAuthRoute();
+  const clearAuthError = auth.clearError;
+  useEffect(() => {
+    clearAuthError();
+  }, [route.page, clearAuthError]);
 
   if (auth.checking) {
     return (
@@ -16,10 +23,8 @@ export default function App() {
     );
   }
 
-  if (!auth.user) {
-    return (
-      <LoginPage busy={auth.busy} error={auth.error} onLogin={auth.login} />
-    );
+  if (!auth.user || route.page === 'reset-password') {
+    return <AuthScreen page={route.page} token={route.token} auth={auth} />;
   }
 
   return (

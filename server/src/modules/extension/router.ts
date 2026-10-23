@@ -33,25 +33,21 @@ const handle =
       await handler(request, response, next);
     } catch (error) {
       if (error instanceof ExtensionAccessError) {
-        response
-          .status(401)
-          .json({
-            error: {
-              code: 'EXTENSION_UNAUTHENTICATED',
-              message: error.message,
-            },
-          });
+        response.status(401).json({
+          error: {
+            code: 'EXTENSION_UNAUTHENTICATED',
+            message: error.message,
+          },
+        });
         return;
       }
       if (error instanceof MongoServerError && error.code === 11000) {
-        response
-          .status(409)
-          .json({
-            error: {
-              code: 'RETRY_CAPTURE',
-              message: 'Có lượt lưu đồng thời. Hãy thử lại cùng lượt lưu.',
-            },
-          });
+        response.status(409).json({
+          error: {
+            code: 'RETRY_CAPTURE',
+            message: 'Có lượt lưu đồng thời. Hãy thử lại cùng lượt lưu.',
+          },
+        });
         return;
       }
       next(error);
@@ -85,6 +81,7 @@ extensionRouter.post(
       request.sessionID,
       deviceId,
       request.session.cookie.expires ?? undefined,
+      request.session.authVersion ?? 0,
     );
     response.json({ ownerId, apiOrigin: env.APP_ORIGIN, ...grant });
   }),
@@ -127,15 +124,13 @@ extensionRouter.post(
       captureId: body.item.capture.id,
     });
     if (!receipt || receipt.deleted) {
-      response
-        .status(409)
-        .json({
-          error: {
-            code: 'CAPTURE_DELETED',
-            message:
-              'Lượt lưu này đã bị xoá. Hãy đóng popup và tra lại để tạo lượt mới.',
-          },
-        });
+      response.status(409).json({
+        error: {
+          code: 'CAPTURE_DELETED',
+          message:
+            'Lượt lưu này đã bị xoá. Hãy đóng popup và tra lại để tạo lượt mới.',
+        },
+      });
       return;
     }
     const personal = await personalEntries.findOne({
@@ -154,13 +149,11 @@ extensionRouter.post(
         .json({ error: { message: 'Từ vừa bị xoá. Hãy tra lại.' } });
       return;
     }
-    response
-      .status(ack.summary.duplicateCaptures ? 200 : 201)
-      .json({
-        saved: true,
-        duplicate: ack.summary.duplicateCaptures > 0,
-        ownerId: grant.userId,
-        entry,
-      });
+    response.status(ack.summary.duplicateCaptures ? 200 : 201).json({
+      saved: true,
+      duplicate: ack.summary.duplicateCaptures > 0,
+      ownerId: grant.userId,
+      entry,
+    });
   }),
 );

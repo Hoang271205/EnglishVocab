@@ -10,13 +10,15 @@ export interface LoginCredentials {
   password: string;
 }
 
+export interface RegisterCredentials extends LoginCredentials {
+  name: string;
+}
+
 export interface AuthUserResponse {
   user: AuthUser;
 }
 
-export type LoginAction = (
-  credentials: LoginCredentials,
-) => Promise<boolean>;
+export type LoginAction = (credentials: LoginCredentials) => Promise<boolean>;
 
 export interface LoginViewProps {
   busy: boolean;

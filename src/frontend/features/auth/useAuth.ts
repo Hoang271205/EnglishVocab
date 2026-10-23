@@ -1,11 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ApiError,
   API_UNAUTHORIZED_EVENT,
   getErrorMessage,
 } from '../../api/client';
 import { authApi } from './auth.api';
-import type { AuthUser, LoginCredentials } from './auth.types';
+import type {
+  AuthUser,
+  LoginCredentials,
+  RegisterCredentials,
+} from './auth.types';
 
 export function useAuth() {
   const [user, setUser] = useState<AuthUser | null>(null);
@@ -14,6 +18,7 @@ export function useAuth() {
   const [error, setError] = useState<string | null>(null);
 
   const actionLock = useRef(false);
+  const clearError = useCallback(() => setError(null), []);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -56,7 +61,9 @@ export function useAuth() {
     };
   }, []);
 
-  async function login(credentials: LoginCredentials): Promise<boolean> {
+  async function authenticate(
+    action: () => Promise<AuthUser>,
+  ): Promise<boolean> {
     if (actionLock.current) return false;
 
     actionLock.current = true;
@@ -64,7 +71,7 @@ export function useAuth() {
     setError(null);
 
     try {
-      const loggedInUser = await authApi.login(credentials);
+      const loggedInUser = await action();
       setUser(loggedInUser);
       return true;
     } catch (cause) {
@@ -100,7 +107,11 @@ export function useAuth() {
     checking,
     busy,
     error,
-    login,
+    login: (credentials: LoginCredentials) =>
+      authenticate(() => authApi.login(credentials)),
+    register: (credentials: RegisterCredentials) =>
+      authenticate(() => authApi.register(credentials)),
+    clearError,
     logout,
   };
 }

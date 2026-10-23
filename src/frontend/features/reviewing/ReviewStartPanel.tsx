@@ -79,6 +79,7 @@ export default function ReviewStartPanel({
         </label>
 
         <Button
+          icon="review"
           disabled={disabled}
           loading={working}
           onClick={() => void onStart(collection, limit)}

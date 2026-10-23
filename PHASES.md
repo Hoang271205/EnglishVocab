@@ -201,3 +201,15 @@ Không chạy test, build, typecheck hoặc lint; không thực hiện migration
 - [ ] Người dùng build FE, restart API để tạo index known_words, kiểm kê Skip sau reload và kết thúc sớm ở màn câu hỏi/phản hồi/tạm dừng.
 
 Ví dụ: đã gửi đáp án 6/20 từ thì giữ 6 kết quả, 14 từ chưa làm vẫn đến hạn cho lượt ôn sau. Chỉ đang đứng ở câu thứ 6 mà chưa gửi thì mới có 5 kết quả được giữ. Không chạy test/build/typecheck/lint, không trực tiếp ghi dữ liệu MongoDB trong lượt này.
+
+## Đăng ký, khôi phục Gmail và đồng bộ giao diện — 23/10/2026
+
+- [x] Đăng ký tài khoản learner, kiểm tra email trùng, hash mật khẩu, tạo phiên đăng nhập — Implemented / Not tested.
+- [x] Quên/đặt lại mật khẩu qua Gmail SMTP cấu hình bằng biến môi trường; có giới hạn yêu cầu, cooldown gửi lại, token hash 15 phút/một lần, TTL dọn tự động — Implemented / Not tested.
+- [x] Vô hiệu hoá phiên web và token extension cũ sau đổi mật khẩu bằng phiên bản xác thực; token extension bị thu hồi trong transaction đổi mật khẩu — Implemented / Not tested.
+- [x] Tách màn đăng ký/khôi phục, router auth và trường mật khẩu tái sử dụng; liên kết email mở đúng màn đặt lại, kể cả khi đang đăng nhập — Implemented / Not tested.
+- [x] Bộ SVG Icon/Brand dùng chung; nút loading, audio, xoá, đóng, điều hướng; đồng bộ CSS form, dashboard, topic, sổ tay, học/ôn và responsive — Implemented / Not tested.
+- [x] Thêm `.env.example` và hướng dẫn SMTP vào README hiện có; không tạo file evidence — Implemented / Not tested.
+- [ ] Người dùng điền Gmail App Password vào `.env`, build FE, restart API và kiểm kê chức năng/giao diện. Chưa gửi email thật, chưa chạy build/typecheck/lint/test.
+
+Các yêu cầu hiển thị tên dưới logo popup extension và chuyển dữ liệu backup cũ vẫn không nằm trong lượt triển khai này.

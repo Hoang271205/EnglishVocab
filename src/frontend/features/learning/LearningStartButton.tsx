@@ -14,11 +14,10 @@ export default function LearningStartButton({
 
   return (
     <div>
-      <p>
-        Mỗi lượt tối đa {learning.batchSize} từ chưa học.
-      </p>
+      <p>Mỗi lượt tối đa {learning.batchSize} từ chưa học.</p>
 
       <Button
+        icon="learn"
         className="start-topic-button"
         loading={learning.working}
         disabled={
@@ -29,9 +28,7 @@ export default function LearningStartButton({
         }
         onClick={() => void learning.start(topicId)}
       >
-        {learning.working
-          ? 'Đang mở…'
-          : 'Bắt đầu học'}
+        {learning.working ? 'Đang mở…' : 'Bắt đầu học'}
       </Button>
     </div>
   );

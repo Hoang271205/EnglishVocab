@@ -10,6 +10,7 @@ interface ExtensionGrant {
   tokenHash: string;
   expiresAt: Date;
   writes: number;
+  authVersion?: number;
 }
 export const extensionGrants =
   db.collection<ExtensionGrant>('extension_grants');
@@ -30,6 +31,7 @@ export async function issueExtensionGrant(
   sessionId: string,
   deviceId: string,
   sessionExpires: Date | undefined,
+  authVersion = 0,
 ) {
   const token = randomBytes(32).toString('base64url');
   const expiresAt = new Date(
@@ -46,6 +48,7 @@ export async function issueExtensionGrant(
     tokenHash: digest(token),
     expiresAt,
     writes: 0,
+    authVersion,
   };
   await extensionGrants.replaceOne({ _id: grant._id }, grant, { upsert: true });
   return { token, expiresAt: expiresAt.getTime() };
@@ -67,7 +70,7 @@ export async function authenticateExtension(authorization: string | undefined) {
   const [user, session] = await Promise.all([
     users.findOne(
       { _id: grant.userId, active: true },
-      { projection: { _id: 1 } },
+      { projection: { _id: 1, authVersion: 1 } },
     ),
     grant.sessionId === null
       ? Promise.resolve(true)
@@ -79,7 +82,7 @@ export async function authenticateExtension(authorization: string | undefined) {
           { projection: { _id: 1 } },
         ),
   ]);
-  if (!user || !session)
+  if (!user || !session || (grant.authVersion ?? 0) !== (user.authVersion ?? 0))
     throw new ExtensionAccessError(
       'Phiên đăng nhập đã kết thúc. Hãy đăng nhập lại trong extension.',
     );
@@ -110,6 +113,7 @@ export async function revokeSessionExtensions(sessionId: string) {
 export async function issueNativeExtensionGrant(
   userId: string,
   deviceId: string,
+  authVersion = 0,
 ) {
   const token = randomBytes(32).toString('base64url');
 
@@ -123,6 +127,7 @@ export async function issueNativeExtensionGrant(
     tokenHash: digest(token),
     expiresAt,
     writes: 0,
+    authVersion,
   };
 
   // Đăng nhập lại trên cùng extension sẽ thay token cũ.

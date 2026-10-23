@@ -5,15 +5,9 @@ import { z } from 'zod';
 
 import { env } from '../../config/env.js';
 
-import {
-  DUMMY_PASSWORD_HASH,
-  verifyPassword,
-} from '../auth/password.js';
+import { DUMMY_PASSWORD_HASH, verifyPassword } from '../auth/password.js';
 
-import {
-  publicUser,
-  users,
-} from '../auth/users.js';
+import { publicUser, users } from '../auth/users.js';
 
 import {
   authenticateExtension,
@@ -47,9 +41,7 @@ const loginLimiter = rateLimit({
   },
 });
 
-const handle = (
-  handler: RequestHandler,
-): RequestHandler => {
+const handle = (handler: RequestHandler): RequestHandler => {
   return async (request, response, next) => {
     try {
       await handler(request, response, next);
@@ -90,10 +82,7 @@ extensionAuthRouter.post(
 
     const origin = request.get('origin');
 
-    if (
-      origin &&
-      !/^chrome-extension:\/\/[a-p]{32}$/.test(origin)
-    ) {
+    if (origin && !/^chrome-extension:\/\/[a-p]{32}$/.test(origin)) {
       response.status(403).json({
         error: {
           code: 'INVALID_ORIGIN',
@@ -127,6 +116,7 @@ extensionAuthRouter.post(
     const grant = await issueNativeExtensionGrant(
       user._id,
       input.deviceId,
+      user.authVersion ?? 0,
     );
 
     response.json({
@@ -144,9 +134,7 @@ extensionAuthRouter.post(
 extensionAuthRouter.get(
   '/me',
   handle(async (request, response) => {
-    const grant = await authenticateExtension(
-      request.get('authorization'),
-    );
+    const grant = await authenticateExtension(request.get('authorization'));
 
     const user = await users.findOne({
       _id: grant.userId,
@@ -154,9 +142,7 @@ extensionAuthRouter.get(
     });
 
     if (!user) {
-      throw new ExtensionAccessError(
-        'Tài khoản không còn khả dụng.',
-      );
+      throw new ExtensionAccessError('Tài khoản không còn khả dụng.');
     }
 
     response.json({
@@ -169,9 +155,7 @@ extensionAuthRouter.get(
 extensionAuthRouter.post(
   '/logout',
   handle(async (request, response) => {
-    await revokeExtensionGrant(
-      request.get('authorization'),
-    );
+    await revokeExtensionGrant(request.get('authorization'));
 
     response.status(204).end();
   }),

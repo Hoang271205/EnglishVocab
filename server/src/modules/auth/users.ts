@@ -8,6 +8,8 @@ export type User = {
   role: 'admin' | 'learner';
   active: boolean;
   createdAt: Date;
+  authVersion?: number;
+  passwordChangedAt?: Date;
 };
 
 export const users = db.collection<User>('users');

@@ -1,3 +1,4 @@
+import Icon from '../../components/ui/Icon';
 import { useCallback, useRef, useState } from 'react';
 import { WiktionaryDictionary } from '../../../dictionary/wiktionaryDictionary';
 import { useAsyncResource } from '../../hooks/useAsyncResource';
@@ -130,7 +131,7 @@ export default function ReadingLookup({
       <div className="cloud-toolbar">
         <strong>EnglishVocab</strong>
         <Button variant="secondary" onClick={onClose} aria-label="Đóng tra từ">
-          ×
+          <Icon name="close" />
         </Button>
       </div>
       <h2>{word}</h2>

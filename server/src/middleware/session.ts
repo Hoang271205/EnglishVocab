@@ -6,6 +6,7 @@ import { client } from '../database/mongo.js';
 declare module 'express-session' {
   interface SessionData {
     userId?: string;
+    authVersion?: number;
   }
 }
 

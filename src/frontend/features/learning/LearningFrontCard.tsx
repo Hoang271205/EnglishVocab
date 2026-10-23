@@ -26,20 +26,18 @@ export default function LearningFrontCard({
 
       <p className="cefr-label">
         {entry.cefr.level ?? 'Chưa có CEFR'}
-        {entry.cefr.status === 'estimated'
-          ? ' · tham khảo'
-          : ''}
+        {entry.cefr.status === 'estimated' ? ' · tham khảo' : ''}
       </p>
 
       <p className="study-meaning">{entry.meaningVi}</p>
 
       <p className="study-ipa">
-        {entry.pronunciation.ipa ??
-          'Chưa có phiên âm IPA'}
+        {entry.pronunciation.ipa ?? 'Chưa có phiên âm IPA'}
       </p>
 
       <div className="audio-actions">
         <Button
+          icon="volume"
           variant="secondary"
           disabled={busy}
           onClick={() => speech.speak(entry.headword)}
@@ -48,11 +46,10 @@ export default function LearningFrontCard({
         </Button>
 
         <Button
+          icon="slow"
           variant="secondary"
           disabled={busy}
-          onClick={() =>
-            speech.speak(entry.headword, true)
-          }
+          onClick={() => speech.speak(entry.headword, true)}
         >
           Nghe chậm
         </Button>
@@ -67,13 +64,12 @@ export default function LearningFrontCard({
           </p>
 
           <Button
+            icon="volume"
             variant="secondary"
             disabled={busy}
             onClick={() =>
               speech.speak(
-                example.prefix +
-                  example.targetSurface +
-                  example.suffix,
+                example.prefix + example.targetSurface + example.suffix,
               )
             }
           >
@@ -94,15 +90,10 @@ export default function LearningFrontCard({
         {entry.provenance.map((source, index) => (
           <p key={`${source.field}-${index}`}>
             {source.attribution} · {source.license}
-
             {source.url && (
               <>
                 {' · '}
-                <a
-                  href={source.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href={source.url} target="_blank" rel="noreferrer">
                   Xem nguồn
                 </a>
               </>
@@ -111,11 +102,7 @@ export default function LearningFrontCard({
         ))}
       </details>
 
-      <Button
-        className="study-next"
-        loading={busy}
-        onClick={onNext}
-      >
+      <Button className="study-next" loading={busy} onClick={onNext}>
         Next — Viết lại từ
       </Button>
     </div>

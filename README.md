@@ -83,3 +83,34 @@ Khi thêm topic: thay seed, chạy `crawl:bulk` để lọc lại từ bản Kai
 
 Kho raw và archive nằm ngoài Git vì dung lượng lớn. Khi sao lưu hoặc chuyển máy, cần mang theo cả `.crawl-cache/`, `.crawl-archive/` và `content/crawl/`; backup tiến độ trong ứng dụng không bao gồm các kho dữ liệu xây bộ từ này. Dữ liệu chỉ ở ổ máy vẫn có thể mất khi ổ hỏng.
 
+## Đăng ký và khôi phục mật khẩu qua Gmail SMTP
+
+Đã thêm đăng ký tài khoản học viên, quên mật khẩu và đặt lại mật khẩu. Đăng ký thành công sẽ đăng nhập ngay. Các trang dùng fragment `#/login`, `#/register`, `#/forgot-password`, `#/reset-password?token=...`, nên không cần cấu hình thêm đường dẫn SPA trên server.
+
+Giữ nguyên `.env` hiện tại. Chỉ bổ sung các biến SMTP từ `.env.example`, không chép đè MongoDB hoặc SESSION_SECRET đang dùng:
+
+```dotenv
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+SMTP_SECURE=true
+SMTP_USER=your-account@gmail.com
+SMTP_PASSWORD=your-app-password
+SMTP_FROM=EnglishVocab <your-account@gmail.com>
+```
+
+Bật xác minh hai bước cho tài khoản Gmail gửi thư, rồi tạo [Mật khẩu ứng dụng](https://myaccount.google.com/apppasswords). Điền mật khẩu ứng dụng vào SMTP_PASSWORD; không dùng mật khẩu Gmail thường và không commit `.env`. [Hướng dẫn Google](https://support.google.com/accounts/answer/185833). Một số tài khoản trường/công ty không hỗ trợ mật khẩu ứng dụng.
+
+APP_ORIGIN phải đúng địa chỉ web người dùng mở, ví dụ `http://127.0.0.1:3001` khi chạy local hoặc `https://ten-mien-cua-ban` khi deploy. Liên kết trong email lấy từ biến này; triển khai thật phải sử dụng HTTPS. Không gửi SMTP_USER/SMTP_PASSWORD xuống FE hoặc extension.
+
+Người dùng tự chạy sau khi cấu hình:
+
+```sh
+npm run build
+npm run dev:server
+```
+
+Dừng server cũ trước khi khởi động lại. Với bản production, build và khởi động API bằng các lệnh hiện có (`npm run build:server`, `npm run start:server`). Nếu extension đang dùng token cũ sau đổi mật khẩu, cần đăng nhập lại extension.
+
+Token khôi phục chỉ lưu hash, hết hạn sau 15 phút, dùng một lần; MongoDB tự dọn bản ghi bằng TTL. Mỗi tài khoản chỉ giữ một yêu cầu đang chờ, gửi lại cách ít nhất một phút; endpoint có giới hạn tần suất. Đổi mật khẩu làm mất hiệu lực phiên web và token extension trước đó. Yêu cầu quên mật khẩu trả thông báo chung để tránh xác nhận email có tài khoản; gửi thư chạy nền, lỗi SMTP chỉ ghi thông báo cấu hình ở server.
+
+Chưa chạy build/typecheck/lint/test hoặc gửi email thật trong lượt triển khai này. Cần người dùng kiểm kê đăng ký, email trùng, email khôi phục, link hết hạn/đã dùng, đăng nhập bằng mật khẩu mới và giao diện mobile.

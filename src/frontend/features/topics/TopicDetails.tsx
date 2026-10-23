@@ -1,3 +1,4 @@
+import Icon from '../../components/ui/Icon';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
 import { useTopicEntries } from './useTopicEntries';
@@ -72,7 +73,7 @@ export default function TopicDetails({
         aria-label="Đóng thông tin chủ đề"
         onClick={onClose}
       >
-        ×
+        <Icon name="close" />
       </button>
     </div>
   );

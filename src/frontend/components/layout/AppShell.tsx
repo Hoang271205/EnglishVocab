@@ -1,3 +1,4 @@
+import Brand from '../ui/Brand';
 import type { ReactNode } from 'react';
 
 interface AppShellProps {
@@ -17,32 +18,21 @@ export default function AppShell({
         className={[
           'site-header',
           'online-header',
-          navigation
-            ? 'online-header--with-navigation'
-            : '',
+          navigation ? 'online-header--with-navigation' : '',
         ]
           .filter(Boolean)
           .join(' ')}
       >
-        <div className="brand">
-          <span aria-hidden="true">🌱</span>
-          EnglishVocab
-        </div>
+        <Brand />
 
         {navigation}
 
-        <div className="online-account">
-          {account}
-        </div>
+        <div className="online-account">{account}</div>
       </header>
 
-      <main className="page-container">
-        {children}
-      </main>
+      <main className="page-container">{children}</main>
 
-      <footer className="site-footer">
-        Mỗi ngày một chút, nhớ lâu hơn.
-      </footer>
+      <footer className="site-footer">Mỗi ngày một chút, nhớ lâu hơn.</footer>
     </div>
   );
 }

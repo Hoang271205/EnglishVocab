@@ -1,3 +1,4 @@
+import Icon from '../../components/ui/Icon';
 import { Fragment } from 'react';
 import Button from '../../components/ui/Button';
 import EntryDetails from './EntryDetails';
@@ -91,7 +92,7 @@ export default function NotebookStack(props: Props) {
                       aria-label={`Xoá ${row.entry.headword}`}
                       onClick={() => props.onDelete(row)}
                     >
-                      🗑
+                      <Icon name="trash" />
                     </Button>
                   </>
                 )}

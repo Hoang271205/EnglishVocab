@@ -1,3 +1,4 @@
+import Icon from '../../components/ui/Icon';
 import { useCallback } from 'react';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
@@ -55,7 +56,7 @@ export default function EntryDetails({
           onClick={onClose}
           aria-label="Đóng chi tiết"
         >
-          ×
+          <Icon name="close" />
         </Button>
       </div>
       <p>{entry.partOfSpeech || 'Chưa có từ loại'}</p>
@@ -102,12 +103,14 @@ export default function EntryDetails({
       )}
       <div className="cloud-actions">
         <Button
+          icon="volume"
           variant="secondary"
           onClick={() => speech.speak(entry.headword)}
         >
           Nghe từ · Mỹ
         </Button>
         <Button
+          icon="slow"
           variant="secondary"
           onClick={() => speech.speak(entry.headword, true)}
         >
@@ -130,6 +133,7 @@ export default function EntryDetails({
             {example.suffix}
           </p>
           <Button
+            icon="volume"
             variant="secondary"
             onClick={() =>
               speech.speak(

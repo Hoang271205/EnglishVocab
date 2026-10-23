@@ -1,22 +1,15 @@
+import Icon from '../../components/ui/Icon';
 import Button from '../../components/ui/Button';
 import FormField from '../../components/ui/FormField';
 import StatusMessage from '../../components/ui/StatusMessage';
 import type { LoginViewProps } from './auth.types';
 import { useLoginForm } from './useLoginForm';
 
-export default function LoginForm({
-  busy,
-  error,
-  onLogin,
-}: LoginViewProps) {
+export default function LoginForm({ busy, error, onLogin }: LoginViewProps) {
   const form = useLoginForm(onLogin, busy);
 
   return (
-    <form
-      className="login-form"
-      onSubmit={form.submit}
-      aria-busy={busy}
-    >
+    <form className="login-form" onSubmit={form.submit} aria-busy={busy}>
       <FormField
         label="Email"
         name="email"
@@ -25,9 +18,7 @@ export default function LoginForm({
         autoCapitalize="none"
         placeholder="Nhập email tài khoản học"
         value={form.email}
-        onChange={(event) =>
-          form.setEmail(event.target.value)
-        }
+        onChange={(event) => form.setEmail(event.target.value)}
         maxLength={254}
         spellCheck={false}
         disabled={busy}
@@ -41,9 +32,7 @@ export default function LoginForm({
         autoComplete="current-password"
         placeholder="Nhập mật khẩu của bạn"
         value={form.password}
-        onChange={(event) =>
-          form.setPassword(event.target.value)
-        }
+        onChange={(event) => form.setPassword(event.target.value)}
         maxLength={128}
         disabled={busy}
         required
@@ -51,28 +40,21 @@ export default function LoginForm({
           <button
             className="login-password-toggle"
             type="button"
-            aria-label={
-              form.showPassword
-                ? 'Ẩn mật khẩu'
-                : 'Hiện mật khẩu'
-            }
+            aria-label={form.showPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
             aria-pressed={form.showPassword}
             onClick={form.togglePassword}
             disabled={busy}
           >
-            {form.showPassword ? 'Ẩn' : 'Hiện'}
+            <Icon name={form.showPassword ? 'eye-off' : 'eye'} />
           </button>
         }
       />
 
-      {error && (
-        <StatusMessage tone="error">
-          {error}
-        </StatusMessage>
-      )}
+      {error && <StatusMessage tone="error">{error}</StatusMessage>}
 
       <Button
         type="submit"
+        icon="arrow"
         className="login-submit"
         loading={busy}
         disabled={!form.canSubmit}
