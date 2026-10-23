@@ -1,5 +1,6 @@
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
+import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
 import LearningFrontCard from './LearningFrontCard';
 import LearningRecallCard from './LearningRecallCard';
 import { useLearningSession } from './useLearningSession';
@@ -40,7 +41,7 @@ export default function LearningSessionPage({
       )}
 
       {!session ? (
-        !model.error && <StatusMessage>Đang tải phiên học…</StatusMessage>
+        !model.error && <LoadingSkeleton variant="session" label="Đang tải phiên học" />
       ) : (
         <>
           <div className="study-toolbar">

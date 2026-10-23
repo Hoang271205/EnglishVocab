@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
+import { mkdir, readFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import { sample } from '../fixtures';
 
@@ -46,6 +47,13 @@ test(
     });
     t.after(() => browser.close());
     const page = await browser.newPage();
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    const screenshots = new URL('../../.browser-check/', import.meta.url);
+    await mkdir(screenshots, { recursive: true });
+    let releaseAuth!: () => void;
+    const authReady = new Promise<void>((resolve) => {
+      releaseAuth = resolve;
+    });
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
     let now = Date.now();
@@ -76,6 +84,7 @@ test(
         url.pathname === '/api/auth/me' ||
         url.pathname === '/api/auth/login'
       ) {
+        if (url.pathname === '/api/auth/me') await authReady;
         body = {
           user: {
             id: account,
@@ -169,6 +178,54 @@ test(
         .click();
     const word = () => page.locator('.cloud-word-select');
     await page.goto(`http://127.0.0.1:${address.port}`);
+    await t.test(
+      'authentication uses a responsive, accessible skeleton with reduced motion support',
+      async () => {
+        const skeleton = page.locator('.loading-skeleton--auth');
+        await skeleton.waitFor();
+        assert.equal(await skeleton.getAttribute('role'), 'status');
+        assert.equal(await skeleton.getAttribute('aria-busy'), 'true');
+        assert.equal(await page.locator('.ui-message').count(), 0);
+        await page.emulateMedia({ reducedMotion: 'reduce' });
+        assert.equal(
+          await skeleton
+            .locator('.skeleton-block')
+            .first()
+            .evaluate(
+              (element) => getComputedStyle(element, '::after').animationName,
+            ),
+          'none',
+        );
+        await page.screenshot({
+          path: fileURLToPath(
+            new URL('skeleton-auth-desktop.png', screenshots),
+          ),
+          fullPage: true,
+        });
+        await page.setViewportSize({ width: 390, height: 844 });
+        assert.ok(
+          await page.evaluate(
+            () => document.documentElement.scrollWidth <= window.innerWidth,
+          ),
+        );
+        await page.screenshot({
+          path: fileURLToPath(new URL('skeleton-auth-mobile.png', screenshots)),
+          fullPage: true,
+        });
+        await page.setViewportSize({ width: 1440, height: 1000 });
+        await page.emulateMedia({ reducedMotion: 'no-preference' });
+        assert.equal(
+          await skeleton
+            .locator('.skeleton-block')
+            .first()
+            .evaluate(
+              (element) => getComputedStyle(element, '::after').animationName,
+            ),
+          'skeleton-shimmer',
+        );
+      },
+    );
+    releaseAuth();
     await page.getByRole('heading', { name: 'Bắt đầu ôn tập' }).waitFor();
 
     await t.test(
@@ -186,6 +243,13 @@ test(
         await nav('Ôn tập');
         await nav('Sổ tay');
         assert.equal(count('/api/notebook'), 1);
+        await page.locator('.loading-skeleton--list').waitFor();
+        await page.screenshot({
+          path: fileURLToPath(
+            new URL('skeleton-notebook-desktop.png', screenshots),
+          ),
+          fullPage: true,
+        });
         release();
         holdNotebook = null;
         await word().waitFor();
@@ -193,11 +257,7 @@ test(
           const flashes: string[] = [];
           Object.assign(window, { loadingFlashes: flashes });
           new MutationObserver(() => {
-            if (
-              /Đang tải (tiến độ|chủ đề|sổ tay)/.test(
-                document.body.textContent ?? '',
-              )
-            ) {
+            if (document.querySelector('.loading-skeleton')) {
               flashes.push(document.body.textContent ?? '');
             }
           }).observe(document.body, { childList: true, subtree: true });
@@ -279,7 +339,7 @@ test(
         const response = page.waitForResponse('**/api/notebook');
         await nav('Sổ tay');
         await word().waitFor();
-        assert.equal(await page.getByText('Đang tải sổ tay…').count(), 0);
+        assert.equal(await page.locator('.loading-skeleton').count(), 0);
         release();
         holdNotebook = null;
         await response;

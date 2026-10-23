@@ -1,4 +1,4 @@
-import StatusMessage from './components/ui/StatusMessage';
+import LoadingSkeleton from './components/ui/LoadingSkeleton';
 import AuthLayout from './features/auth/AuthLayout';
 import AuthScreen from './features/auth/AuthScreen';
 import { useAuthRoute } from './features/auth/useAuthRoute';
@@ -18,7 +18,7 @@ export default function App() {
   if (auth.checking) {
     return (
       <AuthLayout title="Đăng nhập">
-        <StatusMessage>Đang kiểm tra phiên đăng nhập…</StatusMessage>
+        <LoadingSkeleton variant="auth" label="Đang kiểm tra phiên đăng nhập" />
       </AuthLayout>
     );
   }

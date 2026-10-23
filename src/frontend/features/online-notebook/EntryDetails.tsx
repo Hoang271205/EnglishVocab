@@ -2,6 +2,7 @@ import Icon from '../../components/ui/Icon';
 import { useCallback } from 'react';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
+import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
 import { apiRequest } from '../../api/client';
 import { useAsyncResource } from '../../hooks/useAsyncResource';
 import { useAmericanSpeech } from '../../hooks/useAmericanSpeech';
@@ -160,7 +161,7 @@ export default function EntryDetails({
       </details>
       <details>
         <summary>Nguồn bài đọc đã lưu ({sources.data?.length ?? 0})</summary>
-        {sources.loading && <p>Đang tải nguồn…</p>}
+        {sources.loading && <LoadingSkeleton variant="detail" label="Đang tải nguồn" />}
         {sources.error && (
           <StatusMessage tone="error">{sources.error}</StatusMessage>
         )}

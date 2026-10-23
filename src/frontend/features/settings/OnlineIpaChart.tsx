@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { ipaChartSchema } from '../../../content/ipa';
 import { useAsyncResource } from '../../hooks/useAsyncResource';
 import StatusMessage from '../../components/ui/StatusMessage';
+import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
 import Button from '../../components/ui/Button';
 const groups = [
   ['consonant', 'Phụ âm'],
@@ -21,7 +22,7 @@ export default function OnlineIpaChart() {
   return (
     <section className="cloud-panel ipa-chart">
       <h2>Bảng IPA · Anh-Mỹ</h2>
-      {resource.loading && <StatusMessage>Đang tải bảng IPA…</StatusMessage>}
+      {resource.loading && <LoadingSkeleton variant="chart" label="Đang tải bảng IPA" rows={6} />}
       {resource.error && (
         <>
           <StatusMessage tone="error">{resource.error}</StatusMessage>
