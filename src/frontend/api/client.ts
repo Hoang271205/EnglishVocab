@@ -4,6 +4,7 @@ import {
   getCachedRead,
   readCacheGeneration,
 } from './readCache';
+import { sharePendingRead } from './pendingReads';
 
 export const API_UNAUTHORIZED_EVENT = 'englishvocab:api-unauthorized';
 
@@ -104,6 +105,25 @@ async function sendRequest<T>(
   return payload as T;
 }
 export async function apiRequest<T>(
+  path: string,
+  options: RequestOptions = {},
+): Promise<T> {
+  const isRead = !options.method || options.method === 'GET';
+  if (!isRead) return performRequest<T>(path, options);
+  // A write or authentication change starts a new generation of reads.
+  const key = JSON.stringify([
+    readCacheGeneration(),
+    path,
+    options.cacheTtlMs ?? 0,
+  ]);
+  return sharePendingRead(
+    key,
+    (signal) => performRequest<T>(path, { ...options, signal }),
+    options.signal,
+  );
+}
+
+async function performRequest<T>(
   path: string,
   options: RequestOptions = {},
 ): Promise<T> {
