@@ -1,5 +1,6 @@
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
+import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
 import ReviewFeedbackCard from './ReviewFeedbackCard';
 import ReviewQuestionCard from './ReviewQuestionCard';
 import { useOnlineReviewSession } from './useOnlineReviewSession';
@@ -47,7 +48,7 @@ export default function ReviewSessionPage({
       )}
 
       {!session ? (
-        !model.error && <StatusMessage>Đang tải phiên ôn…</StatusMessage>
+        !model.error && <LoadingSkeleton variant="session" label="Đang tải phiên ôn" />
       ) : (
         <>
           <div className="study-toolbar">

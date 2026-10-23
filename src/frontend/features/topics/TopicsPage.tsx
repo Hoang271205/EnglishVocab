@@ -1,6 +1,7 @@
 import Button from '../../components/ui/Button';
 import FormField from '../../components/ui/FormField';
 import StatusMessage from '../../components/ui/StatusMessage';
+import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
 import CollectionPicker from './CollectionPicker';
 import TopicCard from './TopicCard';
 import { useTopics } from './useTopics';
@@ -43,9 +44,7 @@ export default function TopicsPage() {
       )}
 
       {topics.loading ? (
-        <StatusMessage>
-          Đang tải chủ đề…
-        </StatusMessage>
+        <LoadingSkeleton label="Đang tải chủ đề" rows={5} />
       ) : topics.data ? (
         <>
           <p className="topic-message">

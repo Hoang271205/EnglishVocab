@@ -1,5 +1,6 @@
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
+import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
 import type { AuthUser } from '../auth/auth.types';
 import LevelDistribution from '../../components/charts/LevelDistribution';
 import DashboardStats from './DashboardStats';
@@ -25,9 +26,7 @@ export default function DashboardPage({
       <h1>Chào {user.name}!</h1>
 
       {dashboard.loading && (
-        <StatusMessage>
-          Đang tải tiến độ…
-        </StatusMessage>
+        <LoadingSkeleton variant="dashboard" label="Đang tải tiến độ" />
       )}
 
       {dashboard.error && (

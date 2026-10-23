@@ -1,6 +1,7 @@
 import Icon from '../../components/ui/Icon';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
+import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
 import { useTopicEntries } from './useTopicEntries';
 import LearningStartButton from '../learning/LearningStartButton';
 
@@ -29,7 +30,7 @@ export default function TopicDetails({
       <div className="online-topic-details">
         <strong>{topicName}</strong>
 
-        {resource.loading && <StatusMessage>Đang tải từ vựng…</StatusMessage>}
+        {resource.loading && <LoadingSkeleton label="Đang tải từ vựng" rows={3} />}
 
         {resource.error && (
           <>

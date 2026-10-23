@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import Button from '../../components/ui/Button';
 import ExpandablePanel from '../../components/ui/ExpandablePanel';
 import StatusMessage from '../../components/ui/StatusMessage';
+import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
 import { useAsyncResource } from '../../hooks/useAsyncResource';
 import { useLearning } from '../learning/LearningContext';
 import { settingsApi } from '../settings/settings.api';
@@ -66,7 +67,7 @@ export default function OnlineNotebookPage({
         <StatusMessage tone="error">{model.resource.error}</StatusMessage>
       )}
       {model.resource.loading && (
-        <StatusMessage>Đang tải sổ tay…</StatusMessage>
+        <LoadingSkeleton label="Đang tải sổ tay" />
       )}
       {model.cleanup.length > 0 && (
         <Button

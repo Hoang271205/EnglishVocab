@@ -6,6 +6,7 @@ import { useAsyncAction } from '../../hooks/useAsyncAction';
 import { useAmericanSpeech } from '../../hooks/useAmericanSpeech';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
+import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
 import ReadingSenseForm from './ReadingSenseForm';
 import { syncApi } from '../sync/sync.api';
 import type { LookupResult } from '../../../dictionary/freeDictionary';
@@ -141,7 +142,7 @@ export default function ReadingLookup({
       {speech.error && (
         <StatusMessage tone="error">{speech.error}</StatusMessage>
       )}
-      {resource.loading && <StatusMessage>Đang tra từ…</StatusMessage>}
+      {resource.loading && <LoadingSkeleton variant="detail" label="Đang tra từ" />}
       {resource.error && (
         <>
           <StatusMessage tone="error">{resource.error}</StatusMessage>

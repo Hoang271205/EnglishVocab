@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { useAsyncResource } from '../../hooks/useAsyncResource';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
+import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
 import SettingsForm from './SettingsForm';
 import { settingsApi } from './settings.api';
 export default function SettingsPanel({ onSaved }: { onSaved: () => void }) {
@@ -27,7 +28,7 @@ export default function SettingsPanel({ onSaved }: { onSaved: () => void }) {
         </Button>
       </div>
       {saved && <StatusMessage>Đã lưu cài đặt cho tài khoản.</StatusMessage>}
-      {resource.loading && <StatusMessage>Đang tải cài đặt…</StatusMessage>}
+      {resource.loading && <LoadingSkeleton variant="form" label="Đang tải cài đặt" />}
       {resource.error && (
         <StatusMessage tone="error">{resource.error}</StatusMessage>
       )}
