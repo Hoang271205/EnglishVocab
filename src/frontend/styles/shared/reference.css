@@ -1,0 +1,63 @@
+.study-tools {
+  margin-top: 32px;
+}
+
+.study-tools-content {
+  display: grid;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.voice-settings,
+.ipa-chart {
+  min-width: 0;
+}
+
+.voice-picker {
+  display: grid;
+  gap: 8px;
+  margin: 20px 0;
+  font-weight: 650;
+}
+
+.voice-picker select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+  color: inherit;
+  font: inherit;
+}
+
+.voice-preview {
+  margin: 20px 0;
+  padding: 16px;
+  border-radius: 14px;
+  background: #f5f7f1;
+  line-height: 1.7;
+}
+
+.ipa-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.ipa-item {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: white;
+}
+
+.ipa-item dt {
+  color: var(--green);
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.ipa-item dd {
+  margin: 8px 0 0;
+}

@@ -4,7 +4,7 @@ dist/
 *.tsbuildinfo
 .DS_Store
 dist-extension/
-
+.env
 .dictionary-cache/
 
 .crawl-cache/
@@ -16,3 +16,11 @@ dist-extension/
 content/crawl/*-candidates.json
 content/crawl/*-example-pool.json
 content/crawl/proposals.json
+
+# Compiled MongoDB API output.
+dist-server/
+
+# Local Vercel settings and pulled secrets.
+.vercel/
+.env.*
+!.env.example

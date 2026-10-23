@@ -1,5 +1,5 @@
-import { POLICY, ServiceError } from './types';
-import type { Level, Progress } from './types';
+import { POLICY, ServiceError } from './types.js';
+import type { Level, Progress } from './types.js';
 export { POLICY };
 export const HOUR = 3_600_000;
 function checkTime(now: number) {

@@ -1,0 +1,16 @@
+# Only ship the web application, not local archives or extension packages.
+.env
+.env.*
+.crawl-cache
+.crawl-archive
+.dictionary-cache
+.browser-check
+legacy
+evidence
+docs
+extension
+dist-extension
+dist-server
+tests
+content/crawl
+*.tsbuildinfo

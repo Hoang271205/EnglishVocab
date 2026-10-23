@@ -2,12 +2,13 @@
   "manifest_version": 3,
   "name": "EnglishVocab — lưu từ cá nhân",
   "version": "0.1.0",
-  "description": "Nền tra từ và hàng đợi capture; giao diện bôi đen sẽ được bổ sung sau Gate-BE.",
-  "permissions": [
-    "storage"
-  ],
+  "description": "Bôi đen, tra nghĩa và lưu từ trực tiếp vào tài khoản EnglishVocab.",
+  "permissions": ["storage"],
   "host_permissions": [
-    "https://freedictionaryapi.com/*"
+    "https://freedictionaryapi.com/*",
+    "https://api.mymemory.translated.net/*",
+    "http://127.0.0.1/*",
+    "http://localhost/*"
   ],
   "background": {
     "service_worker": "service-worker.js",
@@ -15,13 +16,19 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "http://localhost/*"
-      ],
-      "js": [
-        "bridge.js"
-      ],
+      "matches": ["http://localhost/*", "http://127.0.0.1/*"],
+      "js": ["bridge.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "exclude_matches": ["http://localhost/*", "http://127.0.0.1/*"],
+      "js": ["content.js"],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "action": {
+    "default_title": "Tài khoản EnglishVocab",
+    "default_popup": "account.html"
+  }
 }

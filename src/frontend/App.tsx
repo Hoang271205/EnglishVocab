@@ -1,136 +1,40 @@
-import { useState } from 'react';
-import type { SessionView } from '../domain/types';
-import LearnPage from './LearnPage';
-import SessionPage from './SessionPage';
-
-type Tab = 'review' | 'learn' | 'notebook';
-
-const navigation: { id: Tab; label: string; icon: string }[] = [
-  { id: 'review', label: 'Ôn tập', icon: '▥' },
-  { id: 'learn', label: 'Học từ mới', icon: '♧' },
-  { id: 'notebook', label: 'Sổ tay', icon: '▤' },
-];
+import StatusMessage from './components/ui/StatusMessage';
+import AuthLayout from './features/auth/AuthLayout';
+import AuthScreen from './features/auth/AuthScreen';
+import { useAuthRoute } from './features/auth/useAuthRoute';
+import { useEffect } from 'react';
+import { useAuth } from './features/auth/useAuth';
+import Workspace from './features/workspace/Workspace';
+import { LearningProvider } from './features/learning/LearningContext';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<Tab>('review');
-  const [activeSession, setActiveSession] =
-    useState<SessionView | null>(null);
+  const auth = useAuth();
+  const route = useAuthRoute();
+  const clearAuthError = auth.clearError;
+  useEffect(() => {
+    clearAuthError();
+  }, [route.page, clearAuthError]);
 
-  function renderPage() {
-    switch (activeTab) {
-      case 'review':
-        return <ReviewPage onLearn={() => setActiveTab('learn')} />;
-
-      case 'learn':
-        return (
-          <LearnPage
-            onNotebook={() => setActiveTab('notebook')}
-            onOpenSession={(session) => setActiveSession(session)}
-          />
-        );
-
-      case 'notebook':
-        return <NotebookPage onLearn={() => setActiveTab('learn')} />;
-    }
-  }
-
-  if (activeSession) {
+  if (auth.checking) {
     return (
-      <div className="app-shell">
-        <main className="page-container">
-          <SessionPage
-            key={activeSession.id}
-            session={activeSession}
-            onExit={() => {
-              setActiveSession(null);
-              setActiveTab('learn');
-            }}
-          />
-        </main>
-      </div>
+      <AuthLayout title="Đăng nhập">
+        <StatusMessage>Đang kiểm tra phiên đăng nhập…</StatusMessage>
+      </AuthLayout>
     );
   }
 
+  if (!auth.user || route.page === 'reset-password') {
+    return <AuthScreen page={route.page} token={route.token} auth={auth} />;
+  }
+
   return (
-    <div className="app-shell">
-      <header className="site-header">
-        <a
-          className="brand"
-          href="#"
-          onClick={(event) => {
-            event.preventDefault();
-            setActiveTab('review');
-          }}
-        >
-          <span aria-hidden="true">🌱</span>
-          <span>EnglishVocab</span>
-        </a>
-
-        <nav className="main-nav" aria-label="Điều hướng chính">
-          {navigation.map((item) => {
-            const isActive = activeTab === item.id;
-
-            return (
-              <button
-                key={item.id}
-                className={`nav-item${isActive ? ' is-active' : ''}`}
-                type="button"
-                aria-current={isActive ? 'page' : undefined}
-                onClick={() => setActiveTab(item.id)}
-              >
-                <span className="nav-icon" aria-hidden="true">
-                  {item.icon}
-                </span>
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </nav>
-
-        <div className="personal-label">Của riêng bạn</div>
-      </header>
-
-      <main className="page-container">{renderPage()}</main>
-
-      <footer className="site-footer">
-        Mỗi ngày một chút, nhớ lâu hơn.
-      </footer>
-    </div>
-  );
-}
-
-function ReviewPage({ onLearn }: { onLearn: () => void }) {
-  return (
-    <section className="empty-state" aria-labelledby="review-title">
-      <div className="empty-illustration" aria-hidden="true">
-        📖
-      </div>
-      <p className="eyebrow">ÔN TẬP MỖI NGÀY</p>
-      <h1 id="review-title">Một chút mỗi ngày, thêm nhiều từ mới</h1>
-      <p className="page-description">
-        Học từ theo chủ đề và quay lại ôn khi đến hạn.
-      </p>
-      <button className="primary-button" type="button" onClick={onLearn}>
-        Học từ mới
-      </button>
-    </section>
-  );
-}
-
-function NotebookPage({ onLearn }: { onLearn: () => void }) {
-  return (
-    <section className="empty-state" aria-labelledby="notebook-title">
-      <div className="empty-illustration" aria-hidden="true">
-        📒
-      </div>
-      <p className="eyebrow">SỔ TAY CỦA BẠN</p>
-      <h1 id="notebook-title">Từ đã học sẽ xuất hiện ở đây</h1>
-      <p className="page-description">
-        Bắt đầu học từ mới để tạo sổ tay từ vựng của riêng bạn.
-      </p>
-      <button className="primary-button" type="button" onClick={onLearn}>
-        Khám phá chủ đề
-      </button>
-    </section>
+    <LearningProvider key={auth.user.id}>
+      <Workspace
+        user={auth.user}
+        busy={auth.busy}
+        authError={auth.error}
+        onLogout={auth.logout}
+      />
+    </LearningProvider>
   );
 }
