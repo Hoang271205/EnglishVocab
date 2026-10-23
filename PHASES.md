@@ -227,3 +227,11 @@ Các yêu cầu hiển thị tên dưới logo popup extension và chuyển dữ
 - [x] Chữ gợi ý là lớp chữ mờ trong ô nhập, không tự điền vào đáp án; có thể gõ đè, xoá để hiện lại gợi ý — Implemented / Not tested.
 - [x] Nhập/paste, lưu nháp và khôi phục áp dụng cho tất cả chữ cái; khoảng trắng/dấu câu giữ nguyên. API chấm cả chữ đã gõ đè, không từ chối chỉ vì khác gợi ý — Implemented / Not tested.
 - [ ] Người dùng build FE, restart API và kiểm kê với từ attendance. Không chạy build/typecheck/lint/test.
+
+## Chuẩn bị Vercel — 23/10/2026
+
+- [x] Thêm Vercel Node function và cấu hình route API/CDN FE chung domain — Implemented / Not tested.
+- [x] Dùng lại MongoDB connection promise, giảm pool trên Vercel; tách lệnh db:prepare tạo index khỏi cold start — Implemented / Not tested.
+- [x] Gửi email nền qua waitUntil, giữ SMTP và luồng học hiện tại — Implemented / Not tested.
+- [x] Build FE production có minify, không tạo source map mới; loại archive/local secrets/extension khỏi gói web; thêm hướng dẫn env và build extension cho domain thật — Implemented / Not tested.
+- [ ] Người dùng chuẩn bị DB, cấu hình Vercel/Atlas, deploy và kiểm kê web + extension. Chưa chạy build/typecheck/lint/test, không ghi dữ liệu cloud hay deploy trong lượt này.

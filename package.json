@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22.14"
+    "node": "22.x"
   },
   "scripts": {
     "dev:server": "tsx watch server/src/index.ts",
@@ -43,9 +43,12 @@
     "format:frontend": "prettier --write \"src/frontend/**/*.{ts,tsx,css}\"",
     "format:frontend:check": "prettier --check \"src/frontend/**/*.{ts,tsx,css}\"",
     "library:seed": "tsx server/src/scripts/seed-library.ts",
-    "test:legacy": "node --import tsx --test legacy/local/tests/*.test.ts"
+    "test:legacy": "node --import tsx --test legacy/local/tests/*.test.ts",
+    "build:vercel": "npm run build:frontend",
+    "db:prepare": "tsx server/src/scripts/prepare-database.ts"
   },
   "dependencies": {
+    "@vercel/functions": "^3.10.3",
     "connect-mongo": "^6.0.0",
     "dexie": "4.4.6",
     "dotenv": "^18.0.8",

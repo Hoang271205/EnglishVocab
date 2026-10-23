@@ -1,3 +1,4 @@
+import { runInBackground } from '../../runtime/background.js';
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
 import { Router } from 'express';
 import { rateLimit } from 'express-rate-limit';
@@ -51,15 +52,12 @@ accountRouter.post('/register', limiter(5), async (request, response) => {
   } catch (error) {
     if (!(error instanceof MongoServerError && error.code === 11000))
       throw error;
-    response
-      .status(409)
-      .json({
-        error: {
-          code: 'EMAIL_EXISTS',
-          message:
-            'Email đã được sử dụng. Hãy đăng nhập hoặc đặt lại mật khẩu.',
-        },
-      });
+    response.status(409).json({
+      error: {
+        code: 'EMAIL_EXISTS',
+        message: 'Email đã được sử dụng. Hãy đăng nhập hoặc đặt lại mật khẩu.',
+      },
+    });
     return;
   }
   await signIn(request, user);
@@ -72,15 +70,13 @@ accountRouter.post(
   async (request, response) => {
     const input = z.object({ email }).strict().parse(request.body);
     if (!mailConfigured()) {
-      response
-        .status(503)
-        .json({
-          error: {
-            code: 'MAIL_UNAVAILABLE',
-            message:
-              'Chưa cấu hình email khôi phục. Vui lòng liên hệ người quản lý.',
-          },
-        });
+      response.status(503).json({
+        error: {
+          code: 'MAIL_UNAVAILABLE',
+          message:
+            'Chưa cấu hình email khôi phục. Vui lòng liên hệ người quản lý.',
+        },
+      });
       return;
     }
     const user = await users.findOne({ email: input.email, active: true });
@@ -111,14 +107,16 @@ accountRouter.post(
       }
       // Do not expose account existence or SMTP timing to the requester.
       if (prepared)
-        void sendResetMail(user.email, token).catch(async () => {
-          console.error(
-            'Không gửi được email khôi phục. Kiểm tra cấu hình SMTP.',
-          );
-          await passwordResets
-            .deleteOne({ _id: user._id, tokenHash })
-            .catch(() => {});
-        });
+        runInBackground(
+          sendResetMail(user.email, token).catch(async () => {
+            console.error(
+              'Không gửi được email khôi phục. Kiểm tra cấu hình SMTP.',
+            );
+            await passwordResets
+              .deleteOne({ _id: user._id, tokenHash })
+              .catch(() => {});
+          }),
+        );
     }
     response.json({
       message:
@@ -161,15 +159,13 @@ accountRouter.post(
       });
     } catch (error) {
       if (!(error instanceof InvalidResetToken)) throw error;
-      response
-        .status(400)
-        .json({
-          error: {
-            code: 'INVALID_RESET_TOKEN',
-            message:
-              'Liên kết không hợp lệ, đã dùng hoặc hết hạn. Hãy yêu cầu liên kết mới.',
-          },
-        });
+      response.status(400).json({
+        error: {
+          code: 'INVALID_RESET_TOKEN',
+          message:
+            'Liên kết không hợp lệ, đã dùng hoặc hết hạn. Hãy yêu cầu liên kết mới.',
+        },
+      });
     } finally {
       await session.endSession();
     }

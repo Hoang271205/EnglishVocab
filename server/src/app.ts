@@ -15,7 +15,9 @@ import { transfersRouter } from './modules/transfers/router.js';
 import { notebookRouter } from './modules/notebook/router.js';
 import { extensionRouter } from './modules/extension/router.js';
 
-export function createApp() {
+export function createApp({
+  serveFrontend = true,
+}: { serveFrontend?: boolean } = {}) {
   const app = express();
 
   app.disable('x-powered-by');
@@ -62,11 +64,11 @@ export function createApp() {
     });
   });
 
-  app.use(
-    express.static(resolve('dist'), {
-      dotfiles: 'deny',
-    }),
-  );
+  // Vercel serves the frontend from dist through its CDN.
+  // The local/standalone server keeps its existing static-file behavior.
+  if (serveFrontend) {
+    app.use(express.static(resolve('dist'), { dotfiles: 'deny' }));
+  }
 
   app.use((_request, response) => {
     response.status(404).json({

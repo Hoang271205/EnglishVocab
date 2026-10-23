@@ -114,3 +114,22 @@ Dừng server cũ trước khi khởi động lại. Với bản production, bui
 Token khôi phục chỉ lưu hash, hết hạn sau 15 phút, dùng một lần; MongoDB tự dọn bản ghi bằng TTL. Mỗi tài khoản chỉ giữ một yêu cầu đang chờ, gửi lại cách ít nhất một phút; endpoint có giới hạn tần suất. Đổi mật khẩu làm mất hiệu lực phiên web và token extension trước đó. Yêu cầu quên mật khẩu trả thông báo chung để tránh xác nhận email có tài khoản; gửi thư chạy nền, lỗi SMTP chỉ ghi thông báo cấu hình ở server.
 
 Chưa chạy build/typecheck/lint/test hoặc gửi email thật trong lượt triển khai này. Cần người dùng kiểm kê đăng ký, email trùng, email khôi phục, link hết hạn/đã dùng, đăng nhập bằng mật khẩu mới và giao diện mobile.
+
+## Chuẩn bị deploy web miễn phí lên Vercel
+
+Cấu hình trong `vercel.json` giữ FE và API chung domain: FE được build vào `dist/` và phục vụ qua CDN, mọi `/api/*` vào `api/index.ts`. Backend không mở cổng hoặc tạo index cho từng cold start. Kết nối/pool MongoDB được dùng lại theo instance, gắn attachDatabasePool để Vercel theo dõi kết nối nhàn rỗi; session vẫn nằm trong MongoDB. Đây là cấu hình triển khai, chưa phải xác nhận đã deploy thành công.
+
+1. Giữ `.env` local hiện có. Chạy `npm run db:prepare` một lần với database Atlas sẽ dùng cho production để tạo index/TTL/bộ đếm, không xoá dữ liệu. Nếu dùng database mới, chạy thêm `npm run library:seed` để nạp thư viện. Không đưa các lệnh này vào build của Vercel.
+2. Push code lên GitHub của bạn và Import repository trong Vercel. Root Directory là thư mục gốc dự án; Framework Preset là **Other**. File `vercel.json` cấu hình Build Command `npm run build:vercel`, Output Directory `dist`. Dùng Node.js 22.x trong Project Settings.
+3. Điền biến môi trường trên Vercel (Production): `MONGODB_URI`, `MONGODB_DB`, `SESSION_SECRET`, `APP_ORIGIN`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`. `NODE_ENV=production`. Dùng session secret riêng và ổn định cho production; không đặt các secret trong biến `VITE_*` hoặc `NEXT_PUBLIC_*`. `APP_ORIGIN` phải là origin HTTPS chính xác của domain production, không kèm đường dẫn.
+4. Atlas Database User cần quyền đọc/ghi và tạo index cho database dùng ở bước chuẩn bị. Network Access cần cho phép kết nối từ môi trường hosting theo hướng dẫn MongoDB Atlas/Vercel; IP máy local không tự bao gồm IP Vercel. Chọn region function gần region Atlas khi cấu hình dự án để giảm độ trễ. Không thay Network Access hay dữ liệu Atlas trong lượt chỉnh code này.
+5. Sau deploy, người dùng tự kiểm tra `/api/health`, đăng ký/đăng nhập, reload giữ phiên, học/ôn/lưu nháp/Skip, sổ tay và email khôi phục. Link email luôn trỏ về `APP_ORIGIN`. Khi thay domain hoặc biến môi trường, redeploy để áp dụng.
+6. Trên máy local, đặt `EXTENSION_APP_ORIGIN=https://your-project.vercel.app` rồi chạy `npm run build:extension`. Nén **nội dung thư mục `dist-extension/`** để gửi cho nhóm dùng thử. Chỉ gửi file build, không gửi source, `.env` hoặc MongoDB credentials. Người nhận giải nén, Load unpacked thư mục có `manifest.json`, đăng nhập extension rồi thử lưu từ; không cần chạy server local.
+
+Email nền được nối với `waitUntil()` để Vercel theo dõi tác vụ sau phản hồi API; vẫn dùng Gmail SMTP hiện tại. Cần kiểm kê việc gửi email trên deployment thật. Không có máy chủ SMTP riêng được tạo trong ứng dụng.
+
+Lưu ý về gói miễn phí: Vercel Hobby dành cho mục đích cá nhân, phi thương mại và có hạn mức sử dụng; việc dự án có 5–10 người không tự đảm bảo đủ điều kiện. Nếu dùng cho hoạt động dạy học thu phí/kinh doanh, cần đối chiếu điều kiện Vercel trước khi chọn gói. Không tự nâng cấp hoặc phát sinh dịch vụ trả phí.
+
+Nguồn: [Vercel Node.js Functions](https://vercel.com/docs/functions/runtimes/node-js), [tác vụ nền](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package), [Hobby](https://vercel.com/docs/plans/hobby).
+
+Lượt này chỉ chỉnh code/cấu hình. Chưa chạy build/typecheck/lint/test, chưa chạy db:prepare/seed, chưa gửi email thật và chưa deploy. Các giới hạn request/rate limit trong RAM hiện tại áp dụng theo từng instance Vercel, không phải quota toàn hệ thống.

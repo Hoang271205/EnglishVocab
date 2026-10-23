@@ -4,32 +4,22 @@
     "module": "ESNext",
     "jsx": "react-jsx",
     "moduleResolution": "Bundler",
-    "lib": [
-      "ES2023",
-      "DOM"
-    ],
+    "lib": ["ES2023", "DOM"],
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "skipLibCheck": true,
     "noEmit": true,
     "verbatimModuleSyntax": true,
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "tests/**/*.ts",
     "extension/**/*.ts",
-    "extension/**/*.tsx"
+    "extension/**/*.tsx",
+    "api/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "dist-extension",
-    "dist-server",
-    "legacy"
-  ]
+  "exclude": ["node_modules", "dist", "dist-extension", "dist-server", "legacy"]
 }
