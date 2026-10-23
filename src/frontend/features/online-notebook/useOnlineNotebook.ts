@@ -37,18 +37,6 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
       /* Cleanup remains available in this tab. */
     }
   }, [cleanup, ownerId]);
-  useEffect(() => {
-    function refreshOnReturn() {
-      if (!action.busy && !editor && document.visibilityState === 'visible')
-        resource.reload();
-    }
-    window.addEventListener('focus', refreshOnReturn);
-    document.addEventListener('visibilitychange', refreshOnReturn);
-    return () => {
-      window.removeEventListener('focus', refreshOnReturn);
-      document.removeEventListener('visibilitychange', refreshOnReturn);
-    };
-  }, [action.busy, editor, resource.reload]);
   function changed() {
     resource.reload();
     onChanged();

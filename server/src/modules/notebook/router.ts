@@ -22,10 +22,17 @@ async function notebook(userId: string) {
     userProgress
       .find({ userId }, { projection: { _id: 0, userId: 0 } })
       .toArray(),
-    reviewPreferences.find({ userId }).toArray(),
-    personalEntries.find({ userId }).sort({ createdAt: -1 }).toArray(),
+    reviewPreferences
+      .find({ userId }, { projection: { _id: 0, entryId: 1, reviewEnabled: 1 } })
+      .toArray(),
+    personalEntries
+      .find({ userId }, { projection: { _id: 0, entry: 1 } })
+      .sort({ createdAt: -1 })
+      .toArray(),
     savedSources.distinct('entryId', { userId }),
-    knownWords.find({ userId }).toArray(),
+    knownWords
+      .find({ userId }, { projection: { _id: 0, entryId: 1 } })
+      .toArray(),
   ]);
   const shared = await sharedEntries
     .find(
@@ -44,13 +51,14 @@ async function notebook(userId: string) {
     )
     .toArray();
   const knownIds = new Set(known.map((item) => item.entryId));
+  const capturedIds = new Set(captured);
   const progressById = new Map(progress.map((item) => [item.entryId, item]));
   const enabledById = new Map(
     preferences.map((item) => [item.entryId, item.reviewEnabled]),
   );
   return [...shared, ...personal.map((item) => item.entry)].map((entry) => ({
     entry,
-    saved: captured.includes(entry.id),
+    saved: capturedIds.has(entry.id),
     known: knownIds.has(entry.id),
     progress: progressById.get(entry.id) ?? null,
     reviewEnabled:
@@ -84,10 +92,13 @@ notebookRouter.get('/export', async (request, response) => {
 
 notebookRouter.get('/extension-ids/:entryId', async (request, response) => {
   const links = await extensionEntryLinks
-    .find({
-      userId: request.session.userId!,
-      entryId: request.params.entryId,
-    })
+    .find(
+      {
+        userId: request.session.userId!,
+        entryId: request.params.entryId,
+      },
+      { projection: { _id: 0, sourceEntryId: 1 } },
+    )
     .toArray();
   response.json({ ids: links.map((item) => item.sourceEntryId) });
 });

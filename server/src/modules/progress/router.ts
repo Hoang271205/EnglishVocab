@@ -59,13 +59,18 @@ progressRouter.get('/summary', async (request, response) => {
   const now = Date.now();
 
   const [progress, disabledPreferences] = await Promise.all([
-    userProgress.find({ userId }).toArray(),
+    userProgress
+      .find(
+        { userId },
+        { projection: { _id: 0, entryId: 1, level: 1, nextReviewAt: 1 } },
+      )
+      .toArray(),
 
     reviewPreferences
-      .find({
-        userId,
-        reviewEnabled: false,
-      })
+      .find(
+        { userId, reviewEnabled: false },
+        { projection: { _id: 0, entryId: 1 } },
+      )
       .toArray(),
   ]);
 
