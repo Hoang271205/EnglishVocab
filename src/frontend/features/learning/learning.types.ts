@@ -8,7 +8,7 @@ export interface LearningSession {
   phase: 'front' | 'recall' | 'complete';
   index: number;
   total: number;
-  knownCount: number;
+  skippedCount: number;
   paused: boolean;
   draftAnswer: string;
   createdAt: number;

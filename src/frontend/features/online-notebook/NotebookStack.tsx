@@ -50,18 +50,16 @@ export default function NotebookStack(props: Props) {
                       : 'Chưa có level'}
                   </span>
                   <span>
-                    {row.known
-                      ? 'Đã biết · không ôn tập'
-                      : row.entry.contentStatus === 'draft'
-                        ? 'Chờ bổ sung'
-                        : row.progress
-                          ? 'Đã học'
-                          : 'Chưa học'}
+                    {row.entry.contentStatus === 'draft'
+                      ? 'Chờ bổ sung'
+                      : row.progress
+                        ? 'Đã học'
+                        : 'Chưa học'}
                   </span>
                 </span>
               </button>
               <div className="cloud-row-actions">
-                {row.entry.contentStatus === 'ready' && !row.known && (
+                {row.entry.contentStatus === 'ready' && (
                   <label className="cloud-check">
                     <input
                       type="checkbox"
@@ -74,17 +72,15 @@ export default function NotebookStack(props: Props) {
                 )}
                 {row.entry.collectionId === 'personal' && (
                   <>
-                    {!row.progress &&
-                      !row.known &&
-                      row.entry.contentStatus === 'ready' && (
-                        <Button
-                          variant="secondary"
-                          disabled={!props.canLearn || props.busy}
-                          onClick={() => props.onLearn(row)}
-                        >
-                          Học từ
-                        </Button>
-                      )}
+                    {!row.progress && row.entry.contentStatus === 'ready' && (
+                      <Button
+                        variant="secondary"
+                        disabled={!props.canLearn || props.busy}
+                        onClick={() => props.onLearn(row)}
+                      >
+                        Học từ
+                      </Button>
+                    )}
                     <Button
                       className="cloud-danger"
                       variant="secondary"

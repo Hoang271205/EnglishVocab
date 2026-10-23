@@ -44,7 +44,7 @@ export default function TopicDetails({
           <>
             <p>
               {resource.data.length} từ sẵn sàng trong chủ đề · {remaining} từ
-              chưa học hoặc chưa đánh dấu đã biết.
+              chưa đi qua trong lượt học mới.
             </p>
             <LearningStartButton
               topicId={topicId}

@@ -19,6 +19,7 @@ content/crawl/proposals.json
 
 # Compiled MongoDB API output.
 dist-server/
+content/crawl/
 
 # Local Vercel settings and pulled secrets.
 .vercel/

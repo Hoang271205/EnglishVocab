@@ -16,7 +16,7 @@ export function filterRows(
     const { entry, progress, reviewEnabled } = row;
     if (
       filters.scope === 'personal'
-        ? entry.collectionId !== 'personal' && !row.saved && !row.known
+        ? entry.collectionId !== 'personal' && !row.saved
         : !progress
     )
       return false;
@@ -37,7 +37,7 @@ export function filterRows(
       case 'draft':
         return entry.contentStatus === 'draft';
       case 'unlearned':
-        return !progress && !row.known && entry.contentStatus === 'ready';
+        return !progress && entry.contentStatus === 'ready';
       case 'reviewing':
         return Boolean(progress && progress.level < 5);
       case 'mastered':

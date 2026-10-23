@@ -125,7 +125,7 @@ test(
               entryIds: [entry.id],
               total: 1,
               learned: 0,
-              known: 0,
+              processed: 0,
             },
           ],
         };
@@ -149,7 +149,6 @@ test(
               entry,
               reviewEnabled,
               saved: true,
-              known: false,
               progress: {
                 entryId: entry.id,
                 level: 1,

@@ -6,8 +6,9 @@ import type { ReviewEvent } from '../../../../src/domain/types.js';
 import { client } from '../../database/mongo.js';
 import { sharedTopics } from '../library/collections.js';
 import { resolveReadyEntries } from '../entries/service.js';
-import { knownWords, userProgress } from '../progress/collections.js';
-import { skipKnownWord } from './skip-known-word.js';
+import { userProgress } from '../progress/collections.js';
+import { skipLearnWord } from './skip-learn-word.js';
+import { topicLearning, recordTopicPosition } from './topic-learning.js';
 import { studyReceipts, studySessions } from './collections.js';
 import type { LearnSession } from './collections.js';
 
@@ -25,7 +26,7 @@ export function sessionView(session: LearnSession) {
     phase: session.phase,
     index: session.index,
     total: session.items.length,
-    knownCount: session.items.filter((item) => item.known).length,
+    skippedCount: session.items.filter((item) => item.skipped).length,
     paused: session.paused,
     draftAnswer: session.draftAnswer,
     createdAt: session.createdAt,
@@ -165,13 +166,16 @@ async function createLearningFromSource(
 
       const byId = new Map(entries.map((entry) => [entry.id, entry]));
 
-      const known = await knownWords
-        .find({ userId, entryId: { $in: ids } }, { session: mongoSession })
-        .toArray();
-      const knownIds = new Set(known.map((item) => item.entryId));
+      const cursor = topicId
+        ? await topicLearning.findOne(
+            { _id: JSON.stringify([userId, topicId]) },
+            { session: mongoSession },
+          )
+        : null;
 
       const selected = ids
-        .filter((id) => !learnedIds.has(id) && !knownIds.has(id))
+        .slice(cursor?.nextIndex ?? 0)
+        .filter((id) => !learnedIds.has(id))
         .flatMap((id) => {
           const entry = byId.get(id);
           return entry ? [entry] : [];
@@ -181,7 +185,7 @@ async function createLearningFromSource(
       if (!selected.length) {
         throw new ServiceError(
           'not-found',
-          'Không còn từ mới chưa biết đủ điều kiện học.',
+          'Chủ đề không còn từ mới đủ điều kiện học.',
         );
       }
 
@@ -220,7 +224,7 @@ export async function changeLearnSession(
   answer: string,
 ) {
   if (action === 'skip') {
-    return sessionView(await skipKnownWord(userId, sessionId, version));
+    return sessionView(await skipLearnWord(userId, sessionId, version));
   }
 
   const session = await requireSession(userId, sessionId);
@@ -385,6 +389,7 @@ export async function submitLearnAnswer(
         { session: mongoSession },
       );
 
+      await recordTopicPosition(session, item.entry.id, mongoSession);
       session.index += 1;
       session.version += 1;
       session.draftAnswer = '';

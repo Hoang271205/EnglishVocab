@@ -1,6 +1,7 @@
 import type { Topic } from '../../../../src/domain/types.js';
 import { sharedTopics } from './collections.js';
-import { knownWords, userProgress } from '../progress/collections.js';
+import { userProgress } from '../progress/collections.js';
+import { topicLearning } from '../study/topic-learning.js';
 
 type Collection = 'ielts' | 'daily';
 const catalogueCache = new Map<
@@ -33,23 +34,26 @@ export async function loadTopicSummaries(
   userId: string,
   collection: Collection,
 ) {
-  const [topics, progress, known] = await Promise.all([
+  const [topics, progress, positions] = await Promise.all([
     loadCatalogue(collection),
     userProgress
       .find({ userId }, { projection: { _id: 0, entryId: 1 } })
       .toArray(),
-    knownWords
-      .find({ userId }, { projection: { _id: 0, entryId: 1 } })
+    topicLearning
+      .find({ userId }, { projection: { _id: 0, topicId: 1, nextIndex: 1 } })
       .toArray(),
   ]);
   const learnedIds = new Set(progress.map((item) => item.entryId));
-  const knownIds = new Set(known.map((item) => item.entryId));
+  const positionsByTopic = new Map(
+    positions.map((item) => [item.topicId, item.nextIndex]),
+  );
   return topics.map((topic) => ({
     ...topic,
     total: topic.entryIds.length,
     learned: topic.entryIds.filter((id) => learnedIds.has(id)).length,
-    known: topic.entryIds.filter(
-      (id) => knownIds.has(id) && !learnedIds.has(id),
+    processed: topic.entryIds.filter(
+      (id, index) =>
+        index < (positionsByTopic.get(topic.id) ?? 0) || learnedIds.has(id),
     ).length,
   }));
 }

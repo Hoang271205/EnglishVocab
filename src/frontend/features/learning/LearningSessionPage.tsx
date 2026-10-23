@@ -41,7 +41,9 @@ export default function LearningSessionPage({
       )}
 
       {!session ? (
-        !model.error && <LoadingSkeleton variant="session" label="Đang tải phiên học" />
+        !model.error && (
+          <LoadingSkeleton variant="session" label="Đang tải phiên học" />
+        )
       ) : (
         <>
           <div className="study-toolbar">
@@ -75,8 +77,8 @@ export default function LearningSessionPage({
 
               <p>
                 Các từ đã viết đúng được lưu vào lịch ôn.{' '}
-                {session.knownCount ?? 0} từ được đánh dấu đã biết, không tạo
-                lịch ôn.
+                {session.skippedCount ?? 0} từ đã bỏ qua, không thêm vào sổ tay
+                hoặc lịch ôn.
               </p>
 
               <Button disabled={blocked} onClick={() => void model.exit()}>
@@ -123,7 +125,7 @@ export default function LearningSessionPage({
               disabled={blocked}
               onClick={() => void model.transition('skip')}
             >
-              Skip — Mình đã biết từ này
+              Skip — Bỏ qua từ này
             </button>
           )}
         </>
