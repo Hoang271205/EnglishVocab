@@ -1,3 +1,4 @@
+import { progressSummary } from './summary.js';
 import { Router } from 'express';
 import { z } from 'zod';
 import { ServiceError } from '../../../../src/domain/types.js';
@@ -5,16 +6,14 @@ import { client } from '../../database/mongo.js';
 import { requireAuth } from '../../middleware/require-auth.js';
 import { requireJsonWrite } from '../../middleware/require-json-write.js';
 import { resolveReadyEntries } from '../entries/service.js';
-import { reviewPreferences, userProgress, } from './collections.js';
+import { reviewPreferences, userProgress } from './collections.js';
 export const progressRouter = Router();
 progressRouter.use(requireAuth);
 progressRouter.use((_request, response, next) => {
     response.setHeader('Cache-Control', 'no-store');
     next();
 });
-const entryIdSchema = z
-    .string()
-    .regex(/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}$/);
+const entryIdSchema = z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}$/);
 const reviewPreferenceSchema = z
     .object({
     reviewEnabled: z.boolean(),
@@ -32,10 +31,7 @@ progressRouter.get('/', async (request, response) => {
             .find({ userId }, { projection: { _id: 0, userId: 0 } })
             .toArray(),
     ]);
-    const preferenceByEntryId = new Map(preferences.map((item) => [
-        item.entryId,
-        item.reviewEnabled,
-    ]));
+    const preferenceByEntryId = new Map(preferences.map((item) => [item.entryId, item.reviewEnabled]));
     response.json({
         progress: progress.map((item) => ({
             ...item,
@@ -45,57 +41,8 @@ progressRouter.get('/', async (request, response) => {
 });
 // Thống kê cho trang Ôn tập.
 progressRouter.get('/summary', async (request, response) => {
-    const userId = request.session.userId;
-    const now = Date.now();
-    const [progress, disabledPreferences] = await Promise.all([
-        userProgress.find({ userId }).toArray(),
-        reviewPreferences
-            .find({
-            userId,
-            reviewEnabled: false,
-        })
-            .toArray(),
-    ]);
-    const disabledIds = new Set(disabledPreferences.map((item) => item.entryId));
-    const levels = {
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 0,
-    };
-    let dueCount = 0;
-    let enabledCount = 0;
-    let masteredCount = 0;
-    let nextReviewAt = null;
-    for (const item of progress) {
-        levels[item.level] += 1;
-        if (item.level === 5) {
-            masteredCount += 1;
-        }
-        if (disabledIds.has(item.entryId)) {
-            continue;
-        }
-        enabledCount += 1;
-        if (item.nextReviewAt <= now) {
-            dueCount += 1;
-        }
-        else if (nextReviewAt === null ||
-            item.nextReviewAt < nextReviewAt) {
-            nextReviewAt = item.nextReviewAt;
-        }
-    }
     response.json({
-        summary: {
-            learnedCount: progress.length,
-            masteredCount,
-            enabledCount,
-            disabledCount: progress.length - enabledCount,
-            dueCount,
-            nextReviewAt,
-            levels,
-            serverTime: now,
-        },
+        summary: await progressSummary(request.session.userId, Date.now()),
     });
 });
 // Bật/tắt ôn tập, không thay đổi level hoặc lịch ôn.
@@ -124,10 +71,7 @@ progressRouter.patch('/:entryId/review-preference', requireJsonWrite, async (req
             updatedAt: Date.now(),
         };
         await reviewPreferences.updateOne({
-            _id: JSON.stringify([
-                userId,
-                parsedId.data,
-            ]),
+            _id: JSON.stringify([userId, parsedId.data]),
         }, { $set: value }, {
             upsert: true,
             session: mongoSession,

@@ -1,13 +1,15 @@
 import Icon from '../../components/ui/Icon';
-import { Fragment } from 'react';
+import { Fragment, lazy } from 'react';
 import Button from '../../components/ui/Button';
-import EntryDetails from './EntryDetails';
-import PersonalEntryEditor from './PersonalEntryEditor';
+import NotebookEntry from './NotebookEntry';
 import type { Entry } from '../../../domain/types';
-import type { NotebookRow } from './notebook.types';
+import type { NotebookRow, NotebookListRow } from './notebook.types';
+
+const PersonalEntryEditor = lazy(() => import('./PersonalEntryEditor'));
 interface Props {
   title: string;
-  rows: NotebookRow[];
+  rows: NotebookListRow[];
+  total: number;
   selectedId: string | null;
   busy: boolean;
   voiceURI: string | null;
@@ -16,19 +18,23 @@ interface Props {
   onEdit: (row: NotebookRow) => void;
   onSave: (entry: Entry) => Promise<void>;
   onCancelEdit: () => void;
-  onDelete: (row: NotebookRow) => void;
-  onReview: (row: NotebookRow, enabled: boolean) => void;
-  onLearn: (row: NotebookRow) => void;
+  onDelete: (row: NotebookListRow) => void;
+  onReview: (row: NotebookListRow, enabled: boolean) => void;
+  onLearn: (row: NotebookListRow) => void;
   canLearn: boolean;
 }
 export default function NotebookStack(props: Props) {
   return (
     <section className="cloud-stack">
       <h2>
-        {props.title} <small>({props.rows.length})</small>
+        {props.title} <small>({props.total})</small>
       </h2>
       {!props.rows.length && (
-        <p className="page-description">Chưa có từ trong nhóm này.</p>
+        <p className="page-description">
+          {props.total > 0
+            ? 'Các từ trong nhóm này nằm ở trang khác.'
+            : 'Chưa có từ trong nhóm này.'}
+        </p>
       )}
       {props.rows.map((row) => {
         const selected = props.selectedId === row.entry.id;
@@ -111,11 +117,11 @@ export default function NotebookStack(props: Props) {
                     onCancel={props.onCancelEdit}
                   />
                 ) : (
-                  <EntryDetails
-                    row={row}
+                  <NotebookEntry
+                    id={row.entry.id}
                     voiceURI={props.voiceURI}
                     onClose={() => props.onSelect(null)}
-                    onEdit={() => props.onEdit(row)}
+                    onEdit={props.onEdit}
                   />
                 ))}
             </div>

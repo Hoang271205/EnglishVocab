@@ -75,8 +75,7 @@ export const reviewApi = {
       },
     );
 
-    // Refresh the view so disabled words in an older session can be skipped.
-    return this.session(result.session.id, signal);
+    return result.session;
   },
 
   submit(

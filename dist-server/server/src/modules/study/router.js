@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { MongoServerError } from 'mongodb';
 import { z } from 'zod';
+import { REVIEW_BATCH_SIZES } from '../../../../src/shared/studyOptions.js';
 import { ServiceError } from '../../../../src/domain/types.js';
 import { requireAuth } from '../../middleware/require-auth.js';
 import { requireJsonWrite } from '../../middleware/require-json-write.js';
@@ -13,29 +14,17 @@ studyRouter.use((_request, response, next) => {
     next();
 });
 const sessionIdSchema = z.uuid();
-const versionSchema = z
-    .number()
-    .int()
-    .min(1)
-    .max(Number.MAX_SAFE_INTEGER);
+const versionSchema = z.number().int().min(1).max(Number.MAX_SAFE_INTEGER);
 const createSchema = z
     .object({
-    topicId: z
-        .string()
-        .regex(/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}$/),
+    topicId: z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}$/),
     limit: z.union([z.literal(5), z.literal(10)]).default(10),
 })
     .strict();
 const actionSchema = z
     .object({
     version: versionSchema,
-    action: z.enum([
-        'recall',
-        'front',
-        'pause',
-        'resume',
-        'draft',
-    ]),
+    action: z.enum(['recall', 'front', 'pause', 'resume', 'draft', 'skip']),
     answer: z.string().max(1000).default(''),
 })
     .strict();
@@ -77,8 +66,7 @@ function handle(handler) {
                 });
                 return;
             }
-            if (error instanceof MongoServerError &&
-                error.code === 11000) {
+            if (error instanceof MongoServerError && error.code === 11000) {
                 response.status(409).json({
                     error: {
                         code: 'CONFLICT',
@@ -120,18 +108,14 @@ studyRouter.post('/learn/:sessionId/answer', requireJsonWrite, handle(async (req
 }));
 const createReviewSchema = z
     .object({
-    limit: z
-        .union([z.literal(10), z.literal(20)])
-        .default(10),
-    collection: z
-        .enum(['ielts', 'daily', 'personal'])
-        .optional(),
+    limit: z.literal(REVIEW_BATCH_SIZES).default(10),
+    collection: z.enum(['ielts', 'daily', 'personal']).optional(),
 })
     .strict();
 const reviewActionSchema = z
     .object({
     version: versionSchema,
-    action: z.enum(['next', 'pause', 'resume', 'draft']),
+    action: z.enum(['next', 'pause', 'resume', 'draft', 'finish']),
     answer: z.string().max(1000).default(''),
 })
     .strict();

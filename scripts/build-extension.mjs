@@ -41,9 +41,11 @@ manifest.action = {
   default_popup: 'account.html',
 };
 await mkdir('dist-extension', { recursive: true });
-await cp('public/images/mascot', 'dist-extension/images/mascot', {
-  recursive: true,
-});
+await mkdir('dist-extension/images/mascot', { recursive: true });
+await cp(
+  'public/images/mascot/englishvocab-mascot-small.webp',
+  'dist-extension/images/mascot/englishvocab-mascot-small.webp',
+);
 await build({
   entryPoints: [
     'extension/service-worker.ts',

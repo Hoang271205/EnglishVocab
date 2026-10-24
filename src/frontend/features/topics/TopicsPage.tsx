@@ -17,7 +17,13 @@ export default function TopicsPage() {
           <p className="eyebrow">MỖI NGÀY MỘT CHÚT</p>
           <h1>Học từ mới</h1>
         </div>
-        <Mascot compact message="Chọn chủ đề, mình cùng học nhé!" />
+        <Mascot
+          compact
+          className="mascot--intro-note"
+          messageLabel="KHÁM PHÁ CÙNG MÌNH"
+          messageTitle="Hôm nay mình học gì nhỉ?"
+          message="Chọn một chủ đề bạn thích bên dưới. Mình cùng khám phá từ mới nhé!"
+        />
       </div>
 
       <CollectionPicker

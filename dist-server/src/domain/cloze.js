@@ -1,30 +1,46 @@
 import { ServiceError } from './types.js';
 export function createMask(surface) {
     const normalized = surface.normalize('NFKC');
-    const letters = Array.from(normalized).filter(c => /\p{L}/u.test(c)).length;
+    const letters = Array.from(normalized).filter((c) => /\p{L}/u.test(c)).length;
     if (!letters)
         throw new ServiceError('validation', 'Target needs a letter');
     const blanks = Math.max(1, Math.ceil(letters / 2));
     let seen = 0;
-    return Array.from(normalized).map(value => {
+    return Array.from(normalized).map((value) => {
         if (!/\p{L}/u.test(value))
             return { kind: 'fixed', value };
         // Evenly distributed deterministic positions, including the final letter.
-        const hide = Math.floor((seen + 1) * blanks / letters) > Math.floor(seen * blanks / letters);
+        const hide = Math.floor(((seen + 1) * blanks) / letters) >
+            Math.floor((seen * blanks) / letters);
         seen++;
         return hide ? { kind: 'blank' } : { kind: 'fixed', value };
     });
 }
-export function assembleAnswer(cells, letters) {
-    if (letters.length !== cells.filter(c => c.kind === 'blank').length || letters.some(c => !/^\p{L}$/u.test(c)))
+export function isClozeLetter(cell) {
+    return cell.kind === 'blank' || /^\p{L}$/u.test(cell.value);
+}
+export function assembleAnswer(cells, letters, editableHints = false) {
+    const editable = (cell) => editableHints ? isClozeLetter(cell) : cell.kind === 'blank';
+    if (letters.length !== cells.filter(editable).length ||
+        letters.some((c) => !/^\p{L}$/u.test(c)))
         throw new ServiceError('validation', 'Fill all missing letters');
     let index = 0;
-    return cells.map(c => c.kind === 'fixed' ? c.value : letters[index++]).join('');
+    return cells
+        .map((c) => editable(c) ? letters[index++] : c.kind === 'fixed' ? c.value : '')
+        .join('');
 }
-export function validateClozeAnswer(answer, cells) {
+export function validateClozeAnswer(answer, cells, editableHints = false) {
     const chars = Array.from(answer.normalize('NFKC'));
-    if (chars.length !== cells.length || chars.some((c, i) => cells[i]?.kind === 'blank' && !/\p{L}/u.test(c)))
+    if (chars.length !== cells.length ||
+        cells.some((cell, index) => {
+            const editable = editableHints
+                ? isClozeLetter(cell)
+                : cell.kind === 'blank';
+            return editable && !/^\p{L}$/u.test(chars[index] ?? '');
+        }))
         throw new ServiceError('validation', 'Fill all missing letters');
-    if (cells.some((c, i) => c.kind === 'fixed' && c.value.toLowerCase() !== chars[i]?.toLowerCase()))
+    if (cells.some((c, i) => c.kind === 'fixed' &&
+        !(editableHints && isClozeLetter(c)) &&
+        c.value.toLowerCase() !== chars[i]?.toLowerCase()))
         throw new ServiceError('validation', 'Fixed letters must stay unchanged');
 }

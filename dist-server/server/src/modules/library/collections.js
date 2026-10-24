@@ -7,6 +7,10 @@ export async function ensureLibraryIndexes() {
         contentStatus: 1,
     });
     await sharedEntries.createIndex({ headword: 1 });
+    await sharedEntries.createIndex({ headword: 1 }, {
+        name: 'shared_headword_lookup',
+        collation: { locale: 'en', strength: 2 },
+    });
     await sharedTopics.createIndex({ collectionId: 1, order: 1 }, {
         unique: true,
         name: 'shared_topics_collection_order',

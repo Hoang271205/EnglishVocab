@@ -1,15 +1,20 @@
+import { signIn } from './sign-in.js';
+import { accountRouter } from './account-router.js';
 import { Router } from 'express';
 import { rateLimit } from 'express-rate-limit';
 import { z } from 'zod';
 import { env } from '../../config/env.js';
 import { SESSION_COOKIE_NAME, sessionCookieOptions, } from '../../middleware/session.js';
-import { DUMMY_PASSWORD_HASH, verifyPassword, } from './password.js';
+import { DUMMY_PASSWORD_HASH, verifyPassword } from './password.js';
 import { publicUser, users } from './users.js';
+import { revokeSessionExtensions } from '../extension/access.js';
 export const authRouter = Router();
-const loginSchema = z.object({
+const loginSchema = z
+    .object({
     email: z.string().trim().toLowerCase().email().max(254),
     password: z.string().min(1).max(128),
-}).strict();
+})
+    .strict();
 const loginLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     limit: 10,
@@ -54,6 +59,7 @@ authRouter.use((request, response, next) => {
     }
     next();
 });
+authRouter.use(accountRouter);
 authRouter.post('/login', loginLimiter, async (request, response) => {
     const parsed = loginSchema.safeParse(request.body);
     if (!parsed.success) {
@@ -76,30 +82,15 @@ authRouter.post('/login', loginLimiter, async (request, response) => {
         });
         return;
     }
-    // Tạo session ID mới sau khi đăng nhập.
-    await new Promise((resolve, reject) => {
-        request.session.regenerate((error) => {
-            if (error)
-                reject(error);
-            else
-                resolve();
-        });
-    });
-    request.session.userId = user._id;
-    await new Promise((resolve, reject) => {
-        request.session.save((error) => {
-            if (error)
-                reject(error);
-            else
-                resolve();
-        });
-    });
+    await signIn(request, user);
     response.json({ user: publicUser(user) });
 });
 authRouter.get('/me', async (request, response) => {
     const userId = request.session.userId;
     const user = userId ? await users.findOne({ _id: userId }) : null;
-    if (!user || !user.active) {
+    if (!user ||
+        !user.active ||
+        (request.session.authVersion ?? 0) !== (user.authVersion ?? 0)) {
         response.status(401).json({
             error: {
                 code: 'UNAUTHENTICATED',
@@ -111,6 +102,7 @@ authRouter.get('/me', async (request, response) => {
     response.json({ user: publicUser(user) });
 });
 authRouter.post('/logout', async (request, response) => {
+    await revokeSessionExtensions(request.sessionID);
     await new Promise((resolve, reject) => {
         request.session.destroy((error) => {
             if (error)

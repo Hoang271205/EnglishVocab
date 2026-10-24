@@ -1,23 +1,10 @@
 import { createServer } from 'node:http';
 import { createApp } from './app.js';
-import { ensureUserIndexes } from './modules/auth/users.js';
 import { env } from './config/env.js';
-import { ensureLibraryIndexes } from './modules/library/collections.js';
-import { ensureProgressIndexes } from './modules/progress/collections.js';
-import { ensureStudyIndexes } from './modules/study/collections.js';
-import { ensurePersonalIndexes } from './modules/personal/collections.js';
-import { ensureTransferIndexes } from './modules/transfers/collections.js';
-import { ensureSnapshotCounter } from './modules/transfers/snapshot-counter.js';
-import { closeMongo, connectMongo, } from './database/mongo.js';
+import { prepareDatabase } from './database/prepare.js';
+import { closeMongo } from './database/mongo.js';
 async function start() {
-    await connectMongo();
-    await ensureUserIndexes();
-    await ensurePersonalIndexes();
-    await ensureLibraryIndexes();
-    await ensureProgressIndexes();
-    await ensureStudyIndexes();
-    await ensureTransferIndexes();
-    await ensureSnapshotCounter();
+    await prepareDatabase();
     const server = createServer(createApp());
     await new Promise((resolve, reject) => {
         server.once('error', reject);

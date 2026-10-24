@@ -24,6 +24,31 @@ export default function DashboardPage({
   preparing,
 }: DashboardPageProps) {
   const dashboard = useDashboard(user.id);
+  const summary = dashboard.summary;
+  const greeting = pending
+    ? {
+        title: 'Mình học tiếp nhé!',
+        text: 'Bài đang dở vẫn chờ bạn. Chọn Tiếp tục để học từ chỗ đã dừng.',
+      }
+    : !summary
+      ? {
+          title: 'Mỗi ngày, nhớ thêm một chút',
+          text: 'Mình cùng xem hôm nay có gì để học nhé!',
+        }
+      : summary.learnedCount === 0
+        ? {
+            title: 'Bắt đầu với những từ đầu tiên',
+            text: 'Chọn Học từ mới để khám phá chủ đề bạn thích nhé!',
+          }
+        : summary.dueCount > 0
+          ? {
+              title: `${summary.dueCount} từ đang chờ bạn ôn`,
+              text: 'Ôn một lượt ngắn để những từ đã học ở lại lâu hơn nhé!',
+            }
+          : {
+              title: 'Bạn đã ôn xong rồi!',
+              text: 'Nghỉ một chút, hoặc học thêm vài từ mới cùng mình nhé!',
+            };
 
   return (
     <section>
@@ -33,15 +58,10 @@ export default function DashboardPage({
           <h1>Chào {user.name}!</h1>
         </div>
         <Mascot
-          message={
-            pending
-              ? 'Mình học tiếp bài đang dở nhé!'
-              : dashboard.summary?.learnedCount === 0
-                ? 'Mình cùng học những từ đầu tiên nhé!'
-                : (dashboard.summary?.dueCount ?? 0) > 0
-                  ? 'Đến lúc củng cố trí nhớ rồi. Mình cùng ôn nhé!'
-                  : 'Mỗi ngày một chút, mình cùng tiến bộ nhé!'
-          }
+          className="mascot--intro-note"
+          messageLabel="BẠN ĐỒNG HÀNH"
+          messageTitle={greeting.title}
+          message={greeting.text}
         />
       </div>
 

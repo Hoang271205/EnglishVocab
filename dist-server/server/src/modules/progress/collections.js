@@ -7,5 +7,11 @@ export async function ensureProgressIndexes() {
         userId: 1,
         nextReviewAt: 1,
     });
+    await userProgress.createIndex({ userId: 1, nextReviewAt: 1, entryId: 1 });
+    await reviewPreferences.createIndex({
+        userId: 1,
+        reviewEnabled: 1,
+        entryId: 1,
+    });
     await reviewPreferences.createIndex({ userId: 1, entryId: 1 }, { unique: true });
 }

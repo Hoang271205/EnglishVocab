@@ -1,6 +1,6 @@
 import Mascot from '../../components/mascot/Mascot';
 import { initialFilters } from './notebook.types';
-import { useCallback } from 'react';
+import { lazy, useCallback } from 'react';
 import Button from '../../components/ui/Button';
 import ExpandablePanel from '../../components/ui/ExpandablePanel';
 import StatusMessage from '../../components/ui/StatusMessage';
@@ -8,15 +8,17 @@ import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
 import { useAsyncResource } from '../../hooks/useAsyncResource';
 import { useLearning } from '../learning/LearningContext';
 import { settingsApi } from '../settings/settings.api';
-import SettingsPanel from '../settings/SettingsPanel';
-import OnlineIpaChart from '../settings/OnlineIpaChart';
-import ExtensionSyncPanel from '../sync/ExtensionSyncPanel';
-import OnlineReadingPanel from '../online-reading/OnlineReadingPanel';
-import PersonalEntryEditor from './PersonalEntryEditor';
 import NotebookFilters from './NotebookFilters';
 import NotebookStack from './NotebookStack';
-import { filterRows } from './filterRows';
 import { useOnlineNotebook } from './useOnlineNotebook';
+
+const SettingsPanel = lazy(() => import('../settings/SettingsPanel'));
+const OnlineIpaChart = lazy(() => import('../settings/OnlineIpaChart'));
+const ExtensionSyncPanel = lazy(() => import('../sync/ExtensionSyncPanel'));
+const OnlineReadingPanel = lazy(
+  () => import('../online-reading/OnlineReadingPanel'),
+);
+const PersonalEntryEditor = lazy(() => import('./PersonalEntryEditor'));
 interface Props {
   onBrowseTopics: () => void;
   ownerId: string;
@@ -39,13 +41,11 @@ export default function OnlineNotebookPage({
     cacheKey: 'settings',
     keepStaleData: false,
   });
-  const rows = model.resource.data ?? [];
-  const filtered = filterRows(rows, model.filters, Date.now());
-  const scopedRows = filterRows(
-    rows,
-    { ...initialFilters, scope: model.filters.scope },
-    Date.now(),
-  );
+  const data = model.resource.data;
+  const rows = data?.rows ?? [];
+  const filtered = rows;
+  const scopeCount = data?.scopeCount ?? 0;
+  const allCount = data?.allCount ?? 0;
   const hasData =
     !model.resource.loading &&
     Boolean(model.resource.data) &&
@@ -65,11 +65,11 @@ export default function OnlineNotebookPage({
       </div>
       <NotebookFilters value={model.filters} onChange={model.setFilters} />
       <div className="cloud-toolbar">
-        <p>{filtered.length} từ phù hợp</p>
+        <p>{data?.total ?? 0} từ phù hợp</p>
         <Button
           variant="secondary"
           disabled={model.busy || model.resource.loading}
-          onClick={model.resource.reload}
+          onClick={model.refresh}
         >
           Làm mới
         </Button>
@@ -97,30 +97,30 @@ export default function OnlineNotebookPage({
           onCancel={() => model.setEditor(null)}
         />
       )}
-      {hasData && filtered.length === 0 && model.editor !== 'new' && (
+      {hasData && data?.total === 0 && model.editor !== 'new' && (
         <div className="context-empty notebook-empty">
           <Mascot mood="thinking" />
           <div>
             <h2>
-              {scopedRows.length > 0
+              {scopeCount > 0
                 ? 'Chưa tìm thấy từ phù hợp'
                 : model.filters.scope === 'personal'
                   ? 'Lưu những từ bạn gặp mỗi ngày'
-                  : rows.length > 0
+                  : allCount > 0
                     ? 'Chưa có từ đã học'
                     : 'Sổ tay đang chờ những từ đầu tiên!'}
             </h2>
             <p>
-              {scopedRows.length > 0
+              {scopeCount > 0
                 ? 'Thử đổi từ khóa hoặc xóa bộ lọc để xem lại các từ của bạn.'
                 : model.filters.scope === 'personal'
                   ? 'Chọn Thêm từ hoặc bôi đen từ khi đọc bằng extension để lưu vào đây.'
-                  : rows.length > 0
+                  : allCount > 0
                     ? 'Bạn đã có từ trong Từ của tôi. Mở từ sẵn sàng rồi chọn Học từ, hoặc khám phá thêm chủ đề mới.'
                     : 'Học từ mới và viết lại từ để xây dựng sổ tay. Bạn cũng có thể tự thêm từ.'}
             </p>
-            {scopedRows.length === 0 &&
-              rows.length > 0 &&
+            {scopeCount === 0 &&
+              allCount > 0 &&
               model.filters.scope === 'learned' &&
               !learning.pending && (
                 <Button
@@ -132,7 +132,7 @@ export default function OnlineNotebookPage({
                   Xem Từ của tôi
                 </Button>
               )}
-            {scopedRows.length > 0 ? (
+            {scopeCount > 0 ? (
               <Button
                 variant="secondary"
                 onClick={() =>
@@ -169,6 +169,9 @@ export default function OnlineNotebookPage({
         [true, false].map((enabled) => (
           <NotebookStack
             key={String(enabled)}
+            total={
+              enabled ? (data?.enabledCount ?? 0) : (data?.disabledCount ?? 0)
+            }
             title={enabled ? 'Bật ôn tập' : 'Không ôn tập'}
             rows={filtered.filter((row) => row.reviewEnabled === enabled)}
             selectedId={model.selectedId}
@@ -193,10 +196,31 @@ export default function OnlineNotebookPage({
             onLearn={(row) => void learning.startPersonal([row.entry.id])}
           />
         ))}
+      {data && data.total > data.pageSize && (
+        <nav className="cloud-actions" aria-label="Phân trang sổ tay">
+          <Button
+            variant="secondary"
+            disabled={model.busy || model.page <= 1}
+            onClick={() => model.setPage(model.page - 1)}
+          >
+            Trang trước
+          </Button>
+          <span aria-live="polite">
+            Trang {model.page} / {Math.ceil(data.total / data.pageSize)}
+          </span>
+          <Button
+            variant="secondary"
+            disabled={model.busy || model.page * data.pageSize >= data.total}
+            onClick={() => model.setPage(model.page + 1)}
+          >
+            Trang sau
+          </Button>
+        </nav>
+      )}
       <ExpandablePanel title="Đọc và lưu từ">
         {preferences.data && (
           <OnlineReadingPanel
-            rows={rows}
+            contentVersion={model.contentVersion}
             onlineEnabled={preferences.data.settings.onlineLookupEnabled}
             voiceURI={learning.voiceURI}
             onSaved={model.changed}

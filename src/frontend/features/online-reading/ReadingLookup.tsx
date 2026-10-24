@@ -1,3 +1,4 @@
+import { notebookApi } from '../online-notebook/notebook.api';
 import Mascot from '../../components/mascot/Mascot';
 import Icon from '../../components/ui/Icon';
 import { useCallback, useRef, useState } from 'react';
@@ -12,11 +13,10 @@ import ReadingSenseForm from './ReadingSenseForm';
 import { syncApi } from '../sync/sync.api';
 import type { LookupResult } from '../../../dictionary/freeDictionary';
 import type { Entry } from '../../../domain/types';
-import type { NotebookRow } from '../online-notebook/notebook.types';
 interface Props {
   word: string;
+  knownWords: string[];
   sourceUrl: string;
-  rows: NotebookRow[];
   onlineEnabled: boolean;
   voiceURI: string | null;
   onSaved: () => void;
@@ -24,8 +24,8 @@ interface Props {
 }
 export default function ReadingLookup({
   word,
+  knownWords,
   sourceUrl,
-  rows,
   onlineEnabled,
   voiceURI,
   onSaved,
@@ -38,17 +38,16 @@ export default function ReadingLookup({
   const [notice, setNotice] = useState<string | null>(null);
   const action = useAsyncAction();
   const speech = useAmericanSpeech(voiceURI);
+  const isSavedWord = knownWords.some(
+    (value) =>
+      value.toLocaleLowerCase('en-US') === word.toLocaleLowerCase('en-US'),
+  );
   const load = useCallback(
     async (
       signal: AbortSignal,
     ): Promise<{ entries: Entry[]; result: LookupResult }> => {
-      const entries = rows
-        .map((row) => row.entry)
-        .filter(
-          (entry) =>
-            entry.headword.toLocaleLowerCase('en-US') ===
-            word.toLocaleLowerCase('en-US'),
-        );
+      // Fetch only the matching full entries, including words on other pages.
+      const entries = isSavedWord ? await notebookApi.lookup(word, signal) : [];
       if (entries.length)
         return {
           entries,
@@ -84,9 +83,11 @@ export default function ReadingLookup({
         result: await new WiktionaryDictionary().lookup(word, signal),
       };
     },
-    [word, rows, onlineEnabled],
+    [word, onlineEnabled, isSavedWord],
   );
-  const resource = useAsyncResource(load);
+  const resource = useAsyncResource(load, {
+    cacheKey: `notebook:lookup:${onlineEnabled}:${isSavedWord}:${word.toLocaleLowerCase('en-US')}`,
+  });
   const data = resource.data;
   const sense = data?.result.senses[senseIndex];
   async function save(entry: Entry) {

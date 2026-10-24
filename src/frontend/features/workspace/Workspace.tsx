@@ -1,5 +1,5 @@
 import GuideDock from '../../components/mascot/GuideDock';
-import { useState } from 'react';
+import { lazy, useState } from 'react';
 import MainNavigation from '../../components/MainNavigation';
 import AppShell from '../../components/layout/AppShell';
 import Button from '../../components/ui/Button';
@@ -8,14 +8,19 @@ import { navigation } from '../../components/navigation';
 import type { Tab } from '../../components/navigation';
 import type { AuthUser } from '../auth/auth.types';
 import DashboardPage from '../dashboard/DashboardPage';
-import TopicsPage from '../topics/TopicsPage';
 import { useLearning } from '../learning/LearningContext';
-import LearningSessionPage from '../learning/LearningSessionPage';
 import PendingLearningBanner from '../learning/PendingLearningBanner';
-import ReviewSessionPage from '../reviewing/ReviewSessionPage';
-import OnlineNotebookPage from '../online-notebook/OnlineNotebookPage';
 import ReviewStartPanel from '../reviewing/ReviewStartPanel';
 import { useReviewWorkspace } from '../reviewing/useReviewWorkspace';
+
+const TopicsPage = lazy(() => import('../topics/TopicsPage'));
+const LearningSessionPage = lazy(
+  () => import('../learning/LearningSessionPage'),
+);
+const ReviewSessionPage = lazy(() => import('../reviewing/ReviewSessionPage'));
+const OnlineNotebookPage = lazy(
+  () => import('../online-notebook/OnlineNotebookPage'),
+);
 
 type OnlineTab = Tab;
 

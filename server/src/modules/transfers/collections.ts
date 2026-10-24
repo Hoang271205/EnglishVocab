@@ -24,6 +24,7 @@ export const extensionEntryLinks = db.collection<EntryLink>(
 );
 
 export async function ensureTransferIndexes() {
+  await importReceipts.createIndex({ userId: 1, deleted: 1, entryId: 1 });
   await importReceipts.createIndex({
     userId: 1,
     entryId: 1,

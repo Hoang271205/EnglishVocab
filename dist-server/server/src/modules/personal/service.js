@@ -2,10 +2,11 @@ import { randomUUID } from 'node:crypto';
 import { entrySchema } from '../../../../src/content/schema.js';
 import { ServiceError } from '../../../../src/domain/types.js';
 import { client } from '../../database/mongo.js';
-import { extensionEntryLinks, importReceipts, savedSources, } from '../transfers/collections.js';
-import { reviewPreferences, userProgress, } from '../progress/collections.js';
-import { studyReceipts, studySessions, } from '../study/collections.js';
+import { extensionEntryLinks, importReceipts, } from '../transfers/collections.js';
+import { reviewPreferences, userProgress } from '../progress/collections.js';
+import { studyReceipts, studySessions } from '../study/collections.js';
 import { personalEntries } from './collections.js';
+import { enrollSavedEntry } from '../transfers/enroll-saved-entry.js';
 function buildEntry(input, id, revision) {
     return entrySchema.parse({
         ...input,
@@ -16,22 +17,14 @@ function buildEntry(input, id, revision) {
 }
 export async function listPersonalEntries(userId) {
     const [documents, progress, preferences] = await Promise.all([
-        personalEntries
-            .find({ userId })
-            .sort({ createdAt: -1, _id: 1 })
-            .toArray(),
+        personalEntries.find({ userId }).sort({ createdAt: -1, _id: 1 }).toArray(),
         userProgress
             .find({ userId }, { projection: { _id: 0, userId: 0 } })
             .toArray(),
-        reviewPreferences
-            .find({ userId })
-            .toArray(),
+        reviewPreferences.find({ userId }).toArray(),
     ]);
     const progressById = new Map(progress.map((item) => [item.entryId, item]));
-    const preferenceById = new Map(preferences.map((item) => [
-        item.entryId,
-        item.reviewEnabled,
-    ]));
+    const preferenceById = new Map(preferences.map((item) => [item.entryId, item.reviewEnabled]));
     return documents.map((document) => ({
         entry: document.entry,
         progress: progressById.get(document.entry.id) ?? null,
@@ -74,26 +67,6 @@ export async function updatePersonalEntry(userId, entryId, expectedRevision, inp
             throw new ServiceError('conflict', 'Từ đã thay đổi. Hãy tải lại trước khi sửa.');
         }
         const candidate = buildEntry(input, old.id, old.revision + 1);
-        const copied = candidate.headword !== old.headword ||
-            (old.meaningVi.trim() !== '' &&
-                candidate.meaningVi !== old.meaningVi) ||
-            (old.partOfSpeech.trim() !== '' &&
-                candidate.partOfSpeech !== old.partOfSpeech);
-        // Đổi từ/nghĩa/từ loại tạo mục riêng,
-        // không ghi đè tiến độ của nghĩa cũ.
-        if (copied) {
-            const id = `personal-${randomUUID()}`;
-            const entry = buildEntry(input, id, 1);
-            const now = Date.now();
-            await personalEntries.insertOne({
-                _id: id,
-                userId,
-                entry,
-                createdAt: now,
-                updatedAt: now,
-            }, { session: mongoSession });
-            return { entry, copied: true };
-        }
         const active = await studySessions.findOne({
             userId,
             active: true,
@@ -118,7 +91,12 @@ export async function updatePersonalEntry(userId, entryId, expectedRevision, inp
         if (result.matchedCount !== 1) {
             throw new ServiceError('conflict', 'Từ vừa thay đổi. Hãy tải lại.');
         }
-        return { entry: candidate, copied: false };
+        if (candidate.contentStatus === 'ready' && !progress) {
+            const captured = await importReceipts.findOne({ userId, entryId, deleted: false }, { session: mongoSession });
+            if (captured)
+                await enrollSavedEntry(userId, candidate, mongoSession);
+        }
+        return { entry: candidate };
     }));
 }
 export async function deletePersonalEntry(userId, entryId, expectedRevision) {
@@ -157,12 +135,13 @@ export async function deletePersonalEntry(userId, entryId, expectedRevision) {
                 session.feedback?.event.entryId === entryId) {
                 session.feedback = null;
             }
-            await studySessions.replaceOne({ _id: session._id, userId }, session, { session: mongoSession });
+            await studySessions.replaceOne({ _id: session._id, userId }, session, {
+                session: mongoSession,
+            });
         }
         await studyReceipts.deleteMany({ userId, 'event.entryId': entryId }, { session: mongoSession });
         await userProgress.deleteMany({ userId, entryId }, { session: mongoSession });
         await reviewPreferences.deleteMany({ userId, entryId }, { session: mongoSession });
-        await savedSources.deleteMany({ userId, entryId }, { session: mongoSession });
         await extensionEntryLinks.deleteMany({ userId, entryId }, { session: mongoSession });
         await importReceipts.updateMany({ userId, entryId }, { $set: { deleted: true } }, { session: mongoSession });
         await personalEntries.deleteOne({

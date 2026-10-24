@@ -11,7 +11,10 @@ await cp('index.html', 'dist/404.html');
 
 await build({
   entryPoints: ['src/frontend/main.tsx'],
-  outfile: 'dist/app.js',
+  outdir: 'dist',
+  entryNames: 'app',
+  chunkNames: 'chunks/[name]-[hash]',
+  splitting: true,
   bundle: true,
   platform: 'browser',
   external: ['/images/*'],

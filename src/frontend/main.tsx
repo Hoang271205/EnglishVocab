@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+import LoadingSkeleton from './components/ui/LoadingSkeleton';
 import { createRoot } from 'react-dom/client';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import App from './App';
@@ -11,7 +13,9 @@ if (!rootElement) {
 
 createRoot(rootElement).render(
   <>
-    <App />
+    <Suspense fallback={<LoadingSkeleton label="Đang tải giao diện" />}>
+      <App />
+    </Suspense>
     <SpeedInsights />
   </>,
 );

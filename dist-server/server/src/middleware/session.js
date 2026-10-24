@@ -14,7 +14,10 @@ export function createSessionMiddleware() {
         clientPromise: Promise.resolve(client),
         dbName: env.MONGODB_DB,
         collectionName: 'auth_sessions',
+        autoRemove: process.env.VERCEL === '1' ? 'disabled' : 'native',
         ttl: 7 * 24 * 60 * 60,
+        // Throttle expiry-only writes; changed session data is still saved immediately.
+        touchAfter: 5 * 60,
     });
     store.on('error', () => {
         console.error('Không truy cập được nơi lưu session.');

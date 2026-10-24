@@ -1,27 +1,60 @@
 import { randomUUID } from 'node:crypto';
+import { finishReview } from './finish-review.js';
 import { createMask, validateClozeAnswer, } from '../../../../src/domain/cloze.js';
 import { gradeAnswer } from '../../../../src/domain/grading.js';
 import { reviewProgress } from '../../../../src/domain/scheduler.js';
-import { POLICY, ServiceError, } from '../../../../src/domain/types.js';
+import { POLICY, ServiceError } from '../../../../src/domain/types.js';
 import { client } from '../../database/mongo.js';
 import { resolveReadyEntries } from '../entries/service.js';
-import { reviewPreferences, userProgress, } from '../progress/collections.js';
-import { studyReceipts, studySessions, } from './collections.js';
-function reviewView(session) {
+import { reviewPreferences, userProgress } from '../progress/collections.js';
+import { studyReceipts, studySessions } from './collections.js';
+async function reviewView(session, mongoSession) {
     const item = session.items[session.index];
+    // Count committed receipts so retries, reloads and ungraded skips stay accurate.
+    const totals = session.phase === 'complete'
+        ? ((await studyReceipts
+            .aggregate([
+            {
+                $match: {
+                    userId: session.userId,
+                    sessionId: session._id,
+                    'event.mode': 'review',
+                },
+            },
+            {
+                $group: {
+                    _id: null,
+                    answered: { $sum: 1 },
+                    correct: { $sum: { $cond: ['$event.correct', 1, 0] } },
+                },
+            },
+        ], mongoSession ? { session: mongoSession } : {})
+            .toArray())[0] ?? { answered: 0, correct: 0 })
+        : null;
+    const preference = item && session.phase === 'question' && !session.paused
+        ? await reviewPreferences.findOne({ userId: session.userId, entryId: item.entry.id }, {
+            projection: { reviewEnabled: 1 },
+            ...(mongoSession ? { session: mongoSession } : {}),
+        })
+        : null;
     return {
+        reviewDisabled: preference?.reviewEnabled === false,
         id: session._id,
         mode: session.mode,
         version: session.version,
         phase: session.phase,
         index: session.index,
         total: session.items.length,
+        endedEarly: session.endedEarly ?? false,
+        reviewedCount: totals?.answered ?? session.reviewedCount ?? null,
+        correctCount: totals?.correct ?? null,
+        incorrectCount: totals ? totals.answered - totals.correct : null,
+        ungradedCount: totals ? session.items.length - totals.answered : null,
+        remainingCount: session.remainingCount ?? null,
         paused: session.paused,
         draftAnswer: session.draftAnswer,
         createdAt: session.createdAt,
-        question: !session.paused &&
-            session.phase === 'question' &&
-            item
+        question: !session.paused && session.phase === 'question' && item
             ? {
                 attemptId: item.attemptId,
                 meaningVi: item.entry.meaningVi,
@@ -55,7 +88,8 @@ async function requireReviewSession(userId, sessionId) {
     return session;
 }
 export async function getReviewSession(userId, sessionId) {
-    return reviewView(await requireReviewSession(userId, sessionId));
+    const session = await requireReviewSession(userId, sessionId);
+    return reviewView(session);
 }
 export async function getActiveReviewSession(userId) {
     const session = await studySessions.findOne({
@@ -63,9 +97,7 @@ export async function getActiveReviewSession(userId) {
         active: true,
         mode: 'review',
     });
-    return session?.mode === 'review'
-        ? reviewView(session)
-        : null;
+    return session?.mode === 'review' ? reviewView(session) : null;
 }
 export async function createReviewSession(userId, limit, collection) {
     return client.withSession(async (mongoSession) => mongoSession.withTransaction(async () => {
@@ -74,39 +106,75 @@ export async function createReviewSession(userId, limit, collection) {
             throw new ServiceError('conflict', 'Bạn còn phiên đang dở. Hãy tiếp tục phiên đó.');
         }
         const now = Date.now();
-        const disabled = await reviewPreferences
-            .find({ userId, reviewEnabled: false }, { session: mongoSession })
-            .toArray();
-        const disabledIds = new Set(disabled.map((item) => item.entryId));
-        const due = await userProgress
-            .find({
-            userId,
-            nextReviewAt: { $lte: now },
-        }, { session: mongoSession })
-            .sort({ nextReviewAt: 1, entryId: 1 })
-            .toArray();
-        const eligible = due.filter((item) => !disabledIds.has(item.entryId));
-        const resolved = await resolveReadyEntries(userId, eligible.map((item) => item.entryId), mongoSession);
-        const entries = collection
-            ? resolved.filter((entry) => entry.collectionId === collection)
-            : resolved;
-        const byId = new Map(entries.map((entry) => [entry.id, entry]));
         const items = [];
-        for (const progress of eligible) {
-            const entry = byId.get(progress.entryId);
-            const example = entry?.examples[0];
-            if (!entry || !example)
-                continue;
-            items.push({
-                attemptId: randomUUID(),
-                entry,
-                expectedVersion: progress.version,
-                example,
-                cells: createMask(example.targetSurface),
-            });
-            if (items.length >= limit)
+        const batchSize = Math.max(50, limit * 2);
+        let after;
+        // Keyset batches bound document hydration even for a large overdue queue.
+        while (items.length < limit) {
+            const due = await userProgress
+                .find({
+                userId,
+                nextReviewAt: { $lte: now },
+                ...(after
+                    ? {
+                        $or: [
+                            { nextReviewAt: { $gt: after.nextReviewAt } },
+                            {
+                                nextReviewAt: after.nextReviewAt,
+                                entryId: { $gt: after.entryId },
+                            },
+                        ],
+                    }
+                    : {}),
+            }, {
+                session: mongoSession,
+                projection: { entryId: 1, version: 1, nextReviewAt: 1 },
+            })
+                .sort({ nextReviewAt: 1, entryId: 1 })
+                .limit(batchSize)
+                .toArray();
+            if (!due.length)
+                break;
+            const disabled = await reviewPreferences
+                .find({
+                userId,
+                reviewEnabled: false,
+                entryId: { $in: due.map((item) => item.entryId) },
+            }, { session: mongoSession, projection: { entryId: 1 } })
+                .toArray();
+            const disabledIds = new Set(disabled.map((item) => item.entryId));
+            const eligible = due.filter((item) => !disabledIds.has(item.entryId));
+            // Resolve without locking every candidate. Only selected personal entries
+            // are locked below to preserve concurrent edit/delete protection.
+            const entries = await resolveReadyEntries(userId, eligible.map((item) => item.entryId), mongoSession, false);
+            const byId = new Map(entries
+                .filter((entry) => !collection || entry.collectionId === collection)
+                .map((entry) => [entry.id, entry]));
+            for (const progress of eligible) {
+                const entry = byId.get(progress.entryId);
+                const example = entry?.examples[0];
+                if (!entry || !example)
+                    continue;
+                items.push({
+                    attemptId: randomUUID(),
+                    entry,
+                    expectedVersion: progress.version,
+                    example,
+                    cells: createMask(example.targetSurface),
+                });
+                if (items.length >= limit)
+                    break;
+            }
+            const last = due[due.length - 1];
+            after = { nextReviewAt: last.nextReviewAt, entryId: last.entryId };
+            if (due.length < batchSize)
                 break;
         }
+        const personalIds = items
+            .filter((item) => item.entry.collectionId === 'personal')
+            .map((item) => item.entry.id);
+        if (personalIds.length)
+            await resolveReadyEntries(userId, personalIds, mongoSession);
         if (!items.length) {
             throw new ServiceError('not-found', 'Không có từ đến hạn phù hợp để ôn tập.');
         }
@@ -132,14 +200,16 @@ export async function createReviewSession(userId, limit, collection) {
     }));
 }
 export async function changeReviewSession(userId, sessionId, version, action, answer) {
+    if (action === 'finish') {
+        return reviewView(await finishReview(userId, sessionId, version));
+    }
     const session = await requireReviewSession(userId, sessionId);
     if (!session.active || session.version !== version) {
         throw new ServiceError('conflict', 'Phiên đã thay đổi. Hãy tải lại.');
     }
     if (action === 'pause') {
         session.paused = true;
-        session.draftAnswer =
-            session.phase === 'question' ? answer : '';
+        session.draftAnswer = session.phase === 'question' ? answer : '';
     }
     else if (action === 'resume') {
         session.paused = false;
@@ -147,8 +217,7 @@ export async function changeReviewSession(userId, sessionId, version, action, an
     else if (session.paused) {
         throw new ServiceError('conflict', 'Hãy tiếp tục phiên trước khi thao tác.');
     }
-    else if (action === 'draft' &&
-        session.phase === 'question') {
+    else if (action === 'draft' && session.phase === 'question') {
         session.draftAnswer = answer;
     }
     else if (action === 'next') {
@@ -173,11 +242,8 @@ export async function changeReviewSession(userId, sessionId, version, action, an
         session.index += 1;
         session.draftAnswer = '';
         session.feedback = null;
-        session.active =
-            session.index < session.items.length;
-        session.phase = session.active
-            ? 'question'
-            : 'complete';
+        session.active = session.index < session.items.length;
+        session.phase = session.active ? 'question' : 'complete';
     }
     else {
         throw new ServiceError('conflict', 'Thao tác không phù hợp.');
@@ -215,7 +281,7 @@ export async function submitReviewAnswer(userId, sessionId, version, attemptId, 
                 kind: 'committed',
                 progress: receipt.progress,
                 event: receipt.event,
-                session: reviewView(session),
+                session: await reviewView(session, mongoSession),
             };
         }
         const item = session.items[session.index];
@@ -249,7 +315,7 @@ export async function submitReviewAnswer(userId, sessionId, version, attemptId, 
             throw new ServiceError('conflict', 'Tiến độ từ đã thay đổi hoặc chưa đến hạn.');
         }
         if (!forgotten) {
-            validateClozeAnswer(answer, item.cells);
+            validateClozeAnswer(answer, item.cells, true);
         }
         const correct = forgotten
             ? false
@@ -287,12 +353,14 @@ export async function submitReviewAnswer(userId, sessionId, version, attemptId, 
         session.version += 1;
         session.draftAnswer = '';
         session.feedback = { progress, event };
-        await studySessions.replaceOne({ _id: sessionId, userId }, session, { session: mongoSession });
+        await studySessions.replaceOne({ _id: sessionId, userId }, session, {
+            session: mongoSession,
+        });
         return {
             kind: 'committed',
             progress,
             event,
-            session: reviewView(session),
+            session: await reviewView(session, mongoSession),
         };
     }));
 }
