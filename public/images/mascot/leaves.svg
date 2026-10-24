@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 680" fill="none">
+  <g opacity=".55">
+    <path
+      d="M-35 660Q145 395 38 70M25 420Q130 310 160 180"
+      stroke="#b8ca9e"
+      stroke-width="3"
+    />
+    <path d="M28 505Q-38 442-12 390Q70 415 28 505Z" fill="#c6d8ad" />
+    <path d="M54 440Q61 332 126 319Q132 389 54 440Z" fill="#adc68c" />
+    <path d="M59 355Q-3 312 6 255Q84 277 59 355Z" fill="#d4dfb9" />
+    <path d="M57 265Q82 171 137 174Q133 240 57 265Z" fill="#bed19f" />
+    <path d="M39 164Q-10 104 12 53Q74 90 39 164Z" fill="#c8d9b0" />
+    <path d="M99 274Q147 275 170 232Q124 215 99 274Z" fill="#d0dda9" />
+    <path d="M142 211Q127 143 169 107Q193 173 142 211Z" fill="#c2d39e" />
+    <path d="M-10 631Q42 520 119 535Q109 607-10 631Z" fill="#a9c18a" />
+    <path d="M9 590Q-30 511-9 469Q49 534 9 590Z" fill="#d4dfb5" />
+  </g>
+  <g fill="#f1d273" opacity=".55">
+    <ellipse cx="176" cy="374" rx="4" ry="8" transform="rotate(25 176 374)" />
+    <ellipse cx="105" cy="86" rx="3" ry="6" transform="rotate(-30 105 86)" />
+    <circle cx="171" cy="514" r="3" />
+  </g>
+</svg>

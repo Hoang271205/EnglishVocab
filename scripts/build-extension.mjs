@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { build } from 'esbuild';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
 const configured = new URL(
   process.env.EXTENSION_APP_ORIGIN ||
     process.env.APP_ORIGIN ||
@@ -41,6 +41,9 @@ manifest.action = {
   default_popup: 'account.html',
 };
 await mkdir('dist-extension', { recursive: true });
+await cp('public/images/mascot', 'dist-extension/images/mascot', {
+  recursive: true,
+});
 await build({
   entryPoints: [
     'extension/service-worker.ts',

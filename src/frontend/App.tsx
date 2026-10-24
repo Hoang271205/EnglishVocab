@@ -1,3 +1,4 @@
+import NotFoundPage from './features/auth/NotFoundPage';
 import LoadingSkeleton from './components/ui/LoadingSkeleton';
 import AuthLayout from './features/auth/AuthLayout';
 import AuthScreen from './features/auth/AuthScreen';
@@ -14,6 +15,8 @@ export default function App() {
   useEffect(() => {
     clearAuthError();
   }, [route.page, clearAuthError]);
+
+  if (route.page === 'not-found') return <NotFoundPage />;
 
   if (auth.checking) {
     return (

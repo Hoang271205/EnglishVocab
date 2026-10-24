@@ -1,3 +1,4 @@
+import type { ClientSession } from 'mongodb';
 import { randomUUID } from 'node:crypto';
 import type { ReviewBatchSize } from '../../../../src/shared/studyOptions.js';
 import { finishReview } from './finish-review.js';
@@ -17,8 +18,38 @@ import type { ReviewSession } from './collections.js';
 
 type ReviewAction = 'next' | 'pause' | 'resume' | 'draft' | 'finish';
 
-function reviewView(session: ReviewSession) {
+async function reviewView(
+  session: ReviewSession,
+  mongoSession?: ClientSession,
+) {
   const item = session.items[session.index];
+  // Count committed receipts so retries, reloads and ungraded skips stay accurate.
+  const totals =
+    session.phase === 'complete'
+      ? ((
+          await studyReceipts
+            .aggregate<{ answered: number; correct: number }>(
+              [
+                {
+                  $match: {
+                    userId: session.userId,
+                    sessionId: session._id,
+                    'event.mode': 'review',
+                  },
+                },
+                {
+                  $group: {
+                    _id: null,
+                    answered: { $sum: 1 },
+                    correct: { $sum: { $cond: ['$event.correct', 1, 0] } },
+                  },
+                },
+              ],
+              mongoSession ? { session: mongoSession } : {},
+            )
+            .toArray()
+        )[0] ?? { answered: 0, correct: 0 })
+      : null;
 
   return {
     id: session._id,
@@ -28,7 +59,10 @@ function reviewView(session: ReviewSession) {
     index: session.index,
     total: session.items.length,
     endedEarly: session.endedEarly ?? false,
-    reviewedCount: session.reviewedCount ?? null,
+    reviewedCount: totals?.answered ?? session.reviewedCount ?? null,
+    correctCount: totals?.correct ?? null,
+    incorrectCount: totals ? totals.answered - totals.correct : null,
+    ungradedCount: totals ? session.items.length - totals.answered : null,
     remainingCount: session.remainingCount ?? null,
     paused: session.paused,
     draftAnswer: session.draftAnswer,
@@ -82,7 +116,7 @@ export async function getReviewSession(userId: string, sessionId: string) {
       ? await reviewPreferences.findOne({ userId, entryId: item.entry.id })
       : null;
   return {
-    ...reviewView(session),
+    ...(await reviewView(session)),
     reviewDisabled: preference?.reviewEnabled === false,
   };
 }
@@ -319,7 +353,7 @@ export async function submitReviewAnswer(
           kind: 'committed' as const,
           progress: receipt.progress,
           event: receipt.event,
-          session: reviewView(session),
+          session: await reviewView(session, mongoSession),
         };
       }
 
@@ -444,7 +478,7 @@ export async function submitReviewAnswer(
         kind: 'committed' as const,
         progress,
         event,
-        session: reviewView(session),
+        session: await reviewView(session, mongoSession),
       };
     }),
   );

@@ -1,3 +1,4 @@
+import Mascot from '../../components/mascot/Mascot';
 import Button from '../../components/ui/Button';
 import FormField from '../../components/ui/FormField';
 import StatusMessage from '../../components/ui/StatusMessage';
@@ -11,8 +12,13 @@ export default function TopicsPage() {
 
   return (
     <section className="learn-page">
-      <p className="eyebrow">MỖI NGÀY MỘT CHÚT</p>
-      <h1>Học từ mới</h1>
+      <div className="page-intro">
+        <div>
+          <p className="eyebrow">MỖI NGÀY MỘT CHÚT</p>
+          <h1>Học từ mới</h1>
+        </div>
+        <Mascot compact message="Chọn chủ đề, mình cùng học nhé!" />
+      </div>
 
       <CollectionPicker
         value={topics.collection}
@@ -25,21 +31,15 @@ export default function TopicsPage() {
           type="search"
           placeholder="Nhập tên tiếng Anh hoặc tiếng Việt…"
           value={topics.search}
-          onChange={(event) =>
-            topics.setSearch(event.target.value)
-          }
+          onChange={(event) => topics.setSearch(event.target.value)}
         />
       </div>
 
       {topics.error && (
         <div className="dashboard-error">
-          <StatusMessage tone="error">
-            {topics.error}
-          </StatusMessage>
+          <StatusMessage tone="error">{topics.error}</StatusMessage>
 
-          <Button onClick={topics.reload}>
-            Thử lại
-          </Button>
+          <Button onClick={topics.reload}>Thử lại</Button>
         </div>
       )}
 
@@ -48,26 +48,20 @@ export default function TopicsPage() {
       ) : topics.data ? (
         <>
           <p className="topic-message">
-            {topics.topicCount} chủ đề ·{' '}
-            {topics.populatedCount} chủ đề đã có nội dung
+            {topics.topicCount} chủ đề · {topics.populatedCount} chủ đề đã có
+            nội dung
           </p>
 
           {topics.visibleTopics.length === 0 ? (
-            <StatusMessage>
-              Không tìm thấy chủ đề phù hợp.
-            </StatusMessage>
+            <StatusMessage>Không tìm thấy chủ đề phù hợp.</StatusMessage>
           ) : (
             <ul className="topic-list">
               {topics.visibleTopics.map((topic) => (
                 <TopicCard
                   key={topic.id}
                   topic={topic}
-                  selected={
-                    topics.selectedId === topic.id
-                  }
-                  onToggle={() =>
-                    topics.toggleTopic(topic.id)
-                  }
+                  selected={topics.selectedId === topic.id}
+                  onToggle={() => topics.toggleTopic(topic.id)}
                   onClose={topics.closeTopic}
                 />
               ))}

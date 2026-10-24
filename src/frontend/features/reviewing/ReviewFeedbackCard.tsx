@@ -1,3 +1,4 @@
+import Mascot from '../../components/mascot/Mascot';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
 import { useAmericanSpeech } from '../../hooks/useAmericanSpeech';
@@ -23,9 +24,22 @@ export default function ReviewFeedbackCard({
 
   return (
     <div className="study-card">
-      <StatusMessage tone={event.correct ? 'info' : 'error'}>
-        {event.correct ? 'Đúng rồi!' : 'Chưa đúng. Hãy xem lại từ này nhé.'}
-      </StatusMessage>
+      <div
+        className={`feedback-banner ${event.correct ? 'is-correct' : 'is-incorrect'}`}
+      >
+        <Mascot
+          compact
+          mood={event.correct ? 'celebrate' : 'encourage'}
+          message={
+            event.correct
+              ? 'Bạn làm tốt lắm!'
+              : 'Không sao, mình cùng nhớ lại nhé!'
+          }
+        />
+        <StatusMessage tone={event.correct ? 'info' : 'error'}>
+          {event.correct ? 'Đúng rồi!' : 'Chưa đúng. Hãy xem lại từ này nhé.'}
+        </StatusMessage>
+      </div>
 
       <h2 className="study-word">{entry.headword}</h2>
       <p className="word-type">{entry.partOfSpeech}</p>

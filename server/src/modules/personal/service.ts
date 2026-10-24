@@ -111,34 +111,6 @@ export async function updatePersonalEntry(
 
       const candidate = buildEntry(input, old.id, old.revision + 1);
 
-      const copied =
-        candidate.headword !== old.headword ||
-        (old.meaningVi.trim() !== '' &&
-          candidate.meaningVi !== old.meaningVi) ||
-        (old.partOfSpeech.trim() !== '' &&
-          candidate.partOfSpeech !== old.partOfSpeech);
-
-      // Đổi từ/nghĩa/từ loại tạo mục riêng,
-      // không ghi đè tiến độ của nghĩa cũ.
-      if (copied) {
-        const id = `personal-${randomUUID()}`;
-        const entry = buildEntry(input, id, 1);
-        const now = Date.now();
-
-        await personalEntries.insertOne(
-          {
-            _id: id,
-            userId,
-            entry,
-            createdAt: now,
-            updatedAt: now,
-          },
-          { session: mongoSession },
-        );
-
-        return { entry, copied: true };
-      }
-
       const active = await studySessions.findOne(
         {
           userId,
@@ -192,7 +164,7 @@ export async function updatePersonalEntry(
         );
         if (captured) await enrollSavedEntry(userId, candidate, mongoSession);
       }
-      return { entry: candidate, copied: false };
+      return { entry: candidate };
     }),
   );
 }

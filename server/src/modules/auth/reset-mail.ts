@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import { env } from '../../config/env.js';
+import { resetMailTemplate } from './reset-mail-template.js';
 
 export function mailConfigured() {
   return Boolean(env.SMTP_USER && env.SMTP_PASSWORD);
@@ -33,6 +34,6 @@ export async function sendResetMail(email: string, token: string) {
     to: email,
     subject: 'Đặt lại mật khẩu EnglishVocab',
     text: `Bạn đã yêu cầu đặt lại mật khẩu EnglishVocab. Mở liên kết sau trong 15 phút: ${url.href}\nLiên kết chỉ dùng được một lần. Nếu không yêu cầu, hãy bỏ qua email này.`,
-    html: `<div style="font-family:Arial,sans-serif;line-height:1.7;color:#283126"><h2>Đặt lại mật khẩu</h2><p>Mở liên kết sau để tạo mật khẩu mới cho EnglishVocab.</p><p><a style="background:#248232;color:white;padding:14px 24px;border-radius:12px;display:inline-block" href="${url.href.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}">Đặt lại mật khẩu</a></p><p>Liên kết hết hạn sau 15 phút và chỉ dùng được một lần.</p><p>Nếu bạn không yêu cầu, hãy bỏ qua email này.</p></div>`,
+    html: resetMailTemplate(url),
   });
 }

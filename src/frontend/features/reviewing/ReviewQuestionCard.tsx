@@ -1,3 +1,4 @@
+import Mascot from '../../components/mascot/Mascot';
 import type { Question } from '../../../domain/types';
 import Button from '../../components/ui/Button';
 import ClozeInputs from '../../components/study/ClozeInputs';
@@ -34,15 +35,17 @@ export default function ReviewQuestionCard({
         }
       }}
     >
+      <Mascot
+        compact
+        className="study-mascot"
+        mood="thinking"
+        message="Thử điền các chữ còn thiếu nhé!"
+      />
       <p className="eyebrow">ĐIỀN CÁC CHỮ CÒN THIẾU</p>
 
-      <p className="study-meaning">
-        {question.meaningVi}
-      </p>
+      <p className="study-meaning">{question.meaningVi}</p>
 
-      <p className="word-type">
-        {question.partOfSpeech}
-      </p>
+      <p className="word-type">{question.partOfSpeech}</p>
 
       <div className="cloze-sentence">
         {question.prefix}
@@ -58,26 +61,15 @@ export default function ReviewQuestionCard({
       </div>
 
       <div className="study-answer-actions">
-        <Button
-          type="submit"
-          disabled={disabled || !canSubmit}
-        >
+        <Button type="submit" disabled={disabled || !canSubmit}>
           Kiểm tra
         </Button>
 
-        <Button
-          variant="secondary"
-          disabled={disabled}
-          onClick={onForgotten}
-        >
+        <Button variant="secondary" disabled={disabled} onClick={onForgotten}>
           Không nhớ
         </Button>
 
-        <Button
-          variant="secondary"
-          disabled={disabled}
-          onClick={onSaveDraft}
-        >
+        <Button variant="secondary" disabled={disabled} onClick={onSaveDraft}>
           Lưu nháp
         </Button>
       </div>

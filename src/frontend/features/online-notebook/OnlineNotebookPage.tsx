@@ -1,3 +1,5 @@
+import Mascot from '../../components/mascot/Mascot';
+import { initialFilters } from './notebook.types';
 import { useCallback } from 'react';
 import Button from '../../components/ui/Button';
 import ExpandablePanel from '../../components/ui/ExpandablePanel';
@@ -16,11 +18,13 @@ import NotebookStack from './NotebookStack';
 import { filterRows } from './filterRows';
 import { useOnlineNotebook } from './useOnlineNotebook';
 interface Props {
+  onBrowseTopics: () => void;
   ownerId: string;
   canLearn: boolean;
   onChanged: () => void;
 }
 export default function OnlineNotebookPage({
+  onBrowseTopics,
   ownerId,
   canLearn,
   onChanged,
@@ -37,6 +41,15 @@ export default function OnlineNotebookPage({
   });
   const rows = model.resource.data ?? [];
   const filtered = filterRows(rows, model.filters, Date.now());
+  const scopedRows = filterRows(
+    rows,
+    { ...initialFilters, scope: model.filters.scope },
+    Date.now(),
+  );
+  const hasData =
+    !model.resource.loading &&
+    Boolean(model.resource.data) &&
+    !model.resource.error;
   function settingsChanged() {
     preferences.reload();
     onChanged();
@@ -84,8 +97,75 @@ export default function OnlineNotebookPage({
           onCancel={() => model.setEditor(null)}
         />
       )}
+      {hasData && filtered.length === 0 && model.editor !== 'new' && (
+        <div className="context-empty notebook-empty">
+          <Mascot mood="thinking" />
+          <div>
+            <h2>
+              {scopedRows.length > 0
+                ? 'Chưa tìm thấy từ phù hợp'
+                : model.filters.scope === 'personal'
+                  ? 'Lưu những từ bạn gặp mỗi ngày'
+                  : rows.length > 0
+                    ? 'Chưa có từ đã học'
+                    : 'Sổ tay đang chờ những từ đầu tiên!'}
+            </h2>
+            <p>
+              {scopedRows.length > 0
+                ? 'Thử đổi từ khóa hoặc xóa bộ lọc để xem lại các từ của bạn.'
+                : model.filters.scope === 'personal'
+                  ? 'Chọn Thêm từ hoặc bôi đen từ khi đọc bằng extension để lưu vào đây.'
+                  : rows.length > 0
+                    ? 'Bạn đã có từ trong Từ của tôi. Mở từ sẵn sàng rồi chọn Học từ, hoặc khám phá thêm chủ đề mới.'
+                    : 'Học từ mới và viết lại từ để xây dựng sổ tay. Bạn cũng có thể tự thêm từ.'}
+            </p>
+            {scopedRows.length === 0 &&
+              rows.length > 0 &&
+              model.filters.scope === 'learned' &&
+              !learning.pending && (
+                <Button
+                  variant="secondary"
+                  onClick={() =>
+                    model.setFilters({ ...initialFilters, scope: 'personal' })
+                  }
+                >
+                  Xem Từ của tôi
+                </Button>
+              )}
+            {scopedRows.length > 0 ? (
+              <Button
+                variant="secondary"
+                onClick={() =>
+                  model.setFilters({
+                    ...initialFilters,
+                    scope: model.filters.scope,
+                  })
+                }
+              >
+                Xóa bộ lọc
+              </Button>
+            ) : learning.pending ? (
+              <Button
+                disabled={!canLearn || learning.working}
+                onClick={() => learning.openPending()}
+              >
+                Tiếp tục học
+              </Button>
+            ) : (
+              <Button
+                icon="learn"
+                disabled={!canLearn || learning.working}
+                onClick={onBrowseTopics}
+              >
+                Học từ mới
+              </Button>
+            )}
+          </div>
+        </div>
+      )}
       {!model.resource.loading &&
         model.resource.data &&
+        filtered.length > 0 &&
         [true, false].map((enabled) => (
           <NotebookStack
             key={String(enabled)}

@@ -15,7 +15,7 @@ export const notebookApi = {
     });
   },
   update(entry: Entry, expectedRevision: number, signal: AbortSignal) {
-    return apiRequest<{ entry: Entry; copied: boolean }>(
+    return apiRequest<{ entry: Entry }>(
       `/api/personal/${encodeURIComponent(entry.id)}`,
       {
         method: 'PUT',

@@ -1,3 +1,5 @@
+import MascotImage from '../MascotImage';
+import { APP_ORIGIN } from '../config';
 import LoginForm from './LoginForm';
 import { useAccount } from './useAccount';
 
@@ -7,8 +9,14 @@ export default function AccountPage() {
   return (
     <main className="account-page">
       <header>
-        <strong>🌱 EnglishVocab</strong>
+        <strong className="extension-brand">
+          <MascotImage /> EnglishVocab
+        </strong>
         <p>Tài khoản extension</p>
+        <div className="account-mascot">
+          <MascotImage />
+          <p>Bôi đen từ → Tra nghĩa → Lưu vào sổ tay</p>
+        </div>
       </header>
 
       {model.loading ? (
@@ -39,6 +47,11 @@ export default function AccountPage() {
         </section>
       )}
 
+      <p className="account-web-link">
+        <a href={APP_ORIGIN} target="_blank" rel="noreferrer">
+          Mở EnglishVocab →
+        </a>
+      </p>
       {model.error && (
         <div className="message" role="alert">
           <p>{model.error}</p>

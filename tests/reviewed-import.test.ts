@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { contentSchema, entrySchema, topicSchema } from '../src/content/schema.ts';
-import type { Entry, Topic } from '../src/domain/types.ts';
-import { runReviewedImport } from '../server/src/scripts/review-import-executor.ts';
-import { buildReviewedImportPlan, type ImportSnapshot, type ReviewedPackage, type StoredEntry, type StoredTopic } from '../server/src/scripts/review-import-plan.ts';
+import { contentSchema, entrySchema, topicSchema } from '../src/content/schema';
+import type { Entry, Topic } from '../src/domain/types';
+import { runReviewedImport } from '../server/src/scripts/review-import-executor';
+import { buildReviewedImportPlan, type ImportSnapshot, type ReviewedPackage, type StoredEntry, type StoredTopic } from '../server/src/scripts/review-import-plan';
 
 const source = (field: 'meaning' | 'example', status: 'authored' | 'unverified') => ({
   field,

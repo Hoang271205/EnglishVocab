@@ -20,6 +20,9 @@ export interface OnlineReviewSession {
   total: number;
   endedEarly?: boolean;
   reviewedCount?: number | null;
+  correctCount?: number | null;
+  incorrectCount?: number | null;
+  ungradedCount?: number | null;
   remainingCount?: number | null;
   paused: boolean;
   draftAnswer: string;

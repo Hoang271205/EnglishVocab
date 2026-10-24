@@ -1,3 +1,4 @@
+import Mascot from '../../components/mascot/Mascot';
 import Icon from '../../components/ui/Icon';
 import { useCallback, useRef, useState } from 'react';
 import { WiktionaryDictionary } from '../../../dictionary/wiktionaryDictionary';
@@ -139,6 +140,15 @@ export default function ReadingLookup({
           <Icon name="close" />
         </Button>
       </div>
+      <Mascot
+        compact
+        mood={saved ? 'celebrate' : 'thinking'}
+        message={
+          saved
+            ? 'Đã lưu rồi! Mình cùng ôn lại sau nhé.'
+            : 'Kiểm tra nghĩa và ví dụ trước khi lưu nhé!'
+        }
+      />
       <h2>{word}</h2>
       <Button variant="secondary" onClick={() => speech.speak(word)}>
         Nghe từ · Mỹ

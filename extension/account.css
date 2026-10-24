@@ -73,3 +73,69 @@ button:disabled {
   outline: 3px solid #3288d2;
   outline-offset: 3px;
 }
+:root {
+  color: #283126;
+  background: #f2f6ec;
+}
+.account-page {
+  padding: 22px;
+}
+.extension-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 22px;
+  color: #246d38;
+}
+.mascot-img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+.account-mascot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #fff8de;
+  border: 1px solid #ecdfa9;
+  border-radius: 18px;
+}
+.account-mascot .mascot-img {
+  width: 90px;
+  height: 88px;
+}
+.account-mascot p {
+  color: #526447;
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 0;
+}
+button {
+  border-radius: 12px;
+  background: #246d38;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid #8db581;
+}
+.account-web-link {
+  margin: 22px 0 0;
+  text-align: center;
+}
+.account-web-link a {
+  color: #246d38;
+  font-weight: 650;
+  text-underline-offset: 4px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .account-mascot .mascot-img {
+    animation: account-breathe 4s ease-in-out infinite;
+  }
+}
+@keyframes account-breathe {
+  50% {
+    transform: translateY(-3px) rotate(-2deg);
+  }
+}

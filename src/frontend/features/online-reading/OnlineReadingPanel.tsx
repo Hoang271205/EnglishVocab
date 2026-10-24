@@ -1,4 +1,3 @@
-import Icon from '../../components/ui/Icon';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { queryKey } from '../../../dictionary/freeDictionary';
@@ -126,7 +125,7 @@ export default function OnlineReadingPanel({
             aria-label={`Tra từ ${selection.word}`}
             onClick={() => setOpened(true)}
           >
-            <Icon name="search" />
+            <img src="/favicon.svg" alt="" width="30" height="30" />
           </button>,
           document.body,
         )}

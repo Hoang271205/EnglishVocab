@@ -46,15 +46,13 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
     const result = await action.run((signal) =>
       current && current !== 'new'
         ? notebookApi.update(entry, current.entry.revision, signal)
-        : notebookApi
-            .create(entry, signal)
-            .then((value) => ({ ...value, copied: false })),
+        : notebookApi.create(entry, signal),
     );
     if (!result) return;
     setNotice(
-      result.copied
-        ? 'Đã tạo mục mới và giữ nguyên mục cũ cùng tiến độ.'
-        : 'Đã lưu từ.',
+      current && current !== 'new'
+        ? 'Đã cập nhật từ; level và lịch ôn được giữ nguyên.'
+        : 'Đã thêm từ.',
     );
     setEditor(null);
     setSelectedId(result.entry.id);
