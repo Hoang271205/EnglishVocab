@@ -16,10 +16,18 @@ const savedSchema = z.object({
   ownerId: z.string(),
   entry: entrySchema,
 });
-export async function initializePrivateStorage() {
-  await chrome.storage.local.setAccessLevel({
-    accessLevel: 'TRUSTED_CONTEXTS',
-  });
+let privateStorageInitialization: Promise<void> | undefined;
+
+// Initialize inside a message event, after Chrome has activated this worker.
+// Share concurrent calls, but allow a later message to retry a failed setup.
+export function initializePrivateStorage(): Promise<void> {
+  privateStorageInitialization ??= chrome.storage.local
+    .setAccessLevel({ accessLevel: 'TRUSTED_CONTEXTS' })
+    .catch((cause: unknown) => {
+      privateStorageInitialization = undefined;
+      throw cause;
+    });
+  return privateStorageInitialization;
 }
 export async function connectionState() {
   const stored = await chrome.storage.local.get('cloudConnection');

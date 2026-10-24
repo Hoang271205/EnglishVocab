@@ -48,7 +48,6 @@ const pending = new Map<string, string[]>();
 
 let cacheGeneration = 0;
 
-const privateStorage = initializePrivateStorage();
 const messageSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('auth-status') }).strict(),
   z.object({ type: z.literal('auth-open') }).strict(),
@@ -175,7 +174,7 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
   const message = parsed.data;
 
   const work = async () => {
-    await privateStorage;
+    await initializePrivateStorage();
     const accountStorage = await chrome.storage.local.get('accountOwner');
     const ownerId =
       typeof accountStorage.accountOwner === 'string'
