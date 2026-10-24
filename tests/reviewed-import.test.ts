@@ -31,7 +31,7 @@ const makeEntry = (id: string, collectionId: 'ielts' | 'daily', headword: string
     contentStatus: 'ready',
   });
 
-function fixture(conflict = false) {
+function fixture(conflict = false, alreadyPublished = false) {
   const catalog: Topic[] = [];
   for (const collectionId of ['ielts', 'daily'] as const) {
     for (let order = 1; order <= 100; order += 1) {
@@ -49,11 +49,13 @@ function fixture(conflict = false) {
   const oldEntry = makeEntry('old-road-word', 'ielts', 'existing');
   const newEntry = makeEntry('new-road-word', 'ielts', 'collision', true);
   const firstId = 'ielts-056';
-  const currentTopics = catalog.map((topic) => topic.id === firstId ? {...topic, entryIds: [oldEntry.id]} : topic);
+  const currentTopics = catalog.map((topic) => topic.id === firstId
+    ? {...topic, entryIds: alreadyPublished ? [oldEntry.id, newEntry.id] : [oldEntry.id]}
+    : topic);
   const currentContent = contentSchema.parse({
     schemaVersion: 1,
     contentVersion: 'published-current',
-    entries: [oldEntry],
+    entries: alreadyPublished ? [oldEntry, newEntry] : [oldEntry],
     topics: currentTopics,
   });
   const topicRows = targets.map((topic) => {
@@ -183,6 +185,20 @@ test('write appends after old links and a rerun adds nothing', async () => {
   assert.equal(store.writes(), 2);
 });
 
+test('package remains importable after the reviewed pack is published locally', async () => {
+  const data = fixture(false, true);
+  const store = harness(data.snapshot);
+  const result = await runReviewedImport({
+    write: false,
+    readSnapshot: store.readSnapshot,
+    buildPlan: (snapshot) => buildReviewedImportPlan({...data, snapshot}),
+    withTransaction: store.withTransaction,
+    apply: store.apply,
+  });
+  assert.equal(result.plan.entriesToInsert.length, 1);
+  assert.equal(result.plan.topicsToAppend.length, 1);
+});
+
 test('same ID with different Mongo content conflicts before the first write', async () => {
   const data = fixture(true);
   const store = harness(data.snapshot);
@@ -195,6 +211,28 @@ test('same ID with different Mongo content conflicts before the first write', as
       apply: store.apply,
     }),
     /Xung đột entry cùng ID trong MongoDB/u,
+  );
+  assert.equal(store.writes(), 0);
+});
+
+test('preflight stops when a topic would exceed ten entries', async () => {
+  const data = fixture();
+  const first = data.snapshot.topics.find((topic) => topic._id === 'ielts-056')!;
+  for (let index = 0; index < 9; index += 1) {
+    const entry = makeEntry(`other-existing-${index}`, 'ielts', `existing-${index}`);
+    first.entryIds.push(entry.id);
+    data.snapshot.entries.push({...entry, _id: entry.id});
+  }
+  const store = harness(data.snapshot);
+  await assert.rejects(
+    runReviewedImport({
+      write: true,
+      readSnapshot: store.readSnapshot,
+      buildPlan: (snapshot) => buildReviewedImportPlan({...data, snapshot}),
+      withTransaction: store.withTransaction,
+      apply: store.apply,
+    }),
+    /sẽ vượt giới hạn 10 từ/u,
   );
   assert.equal(store.writes(), 0);
 });

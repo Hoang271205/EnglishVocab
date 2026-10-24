@@ -18,7 +18,11 @@ const reportSchema = z.object({
     addedCount: z.number().int().nonnegative(),
     totalAfter: z.number().int().nonnegative(),
     currentWords: z.array(z.object({id: z.string()})),
-    proposedAdditions: z.array(z.object({entryId: z.string(), headword: z.string()})),
+    proposedAdditions: z.array(z.object({
+      entryId: z.string(),
+      headword: z.string(),
+      disposition: z.string().optional(),
+    })),
     publishPack: z.string(),
   }).passthrough()).length(135),
 }).passthrough();

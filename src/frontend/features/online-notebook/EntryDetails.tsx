@@ -1,17 +1,8 @@
 import Icon from '../../components/ui/Icon';
-import { useCallback } from 'react';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
-import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
-import { apiRequest } from '../../api/client';
-import { useAsyncResource } from '../../hooks/useAsyncResource';
 import { useAmericanSpeech } from '../../hooks/useAmericanSpeech';
 import type { NotebookRow } from './notebook.types';
-interface SourceLink {
-  captureId: string;
-  sourceUrl: string;
-  capturedAt: number;
-}
 interface Props {
   row: NotebookRow;
   voiceURI: string | null;
@@ -34,19 +25,6 @@ export default function EntryDetails({
 }: Props) {
   const { entry, progress } = row;
   const speech = useAmericanSpeech(voiceURI);
-  const load = useCallback(
-    async (signal: AbortSignal) =>
-      (
-        await apiRequest<{ sources: SourceLink[] }>(
-          `/api/transfers/sources/${encodeURIComponent(entry.id)}`,
-          { signal },
-        )
-      ).sources,
-    [entry.id],
-  );
-  const sources = useAsyncResource(load, {
-    cacheKey: `entry-sources:${entry.id}`,
-  });
   return (
     <section
       className="cloud-entry-details"
@@ -154,27 +132,6 @@ export default function EntryDetails({
                 Xem nguồn
               </a>
             )}
-          </p>
-        ))}
-      </details>
-      <details>
-        <summary>Nguồn bài đọc đã lưu ({sources.data?.length ?? 0})</summary>
-        {sources.loading && (
-          <LoadingSkeleton variant="detail" label="Đang tải nguồn" />
-        )}
-        {sources.error && (
-          <StatusMessage tone="error">{sources.error}</StatusMessage>
-        )}
-        {sources.data?.map((source) => (
-          <p key={source.captureId}>
-            <a
-              href={safeLink(source.sourceUrl)}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {source.sourceUrl}
-            </a>{' '}
-            · {new Date(source.capturedAt).toLocaleDateString('vi-VN')}
           </p>
         ))}
       </details>

@@ -20,7 +20,8 @@ export default function DictionaryForm({ selection }: DictionaryFormProps) {
 
       {model.lookupError && (
         <p className="message" role="status">
-          {model.lookupError} Bạn vẫn có thể nhập và lưu bản nháp.
+          {model.lookupError} Bạn cần bổ sung đủ thông tin bên dưới trước khi
+          lưu.
         </p>
       )}
 
@@ -86,7 +87,7 @@ export default function DictionaryForm({ selection }: DictionaryFormProps) {
             value={model.localEntry?.meaningVi ?? model.meaningVi}
             readOnly={Boolean(model.sense?.entryId)}
             maxLength={10_000}
-            placeholder="Có thể để trống và bổ sung sau."
+            placeholder="Nhập nghĩa tiếng Việt phù hợp với nghĩa đang chọn."
             onChange={(event) => model.setMeaningVi(event.target.value)}
           />
         </label>
@@ -109,11 +110,23 @@ export default function DictionaryForm({ selection }: DictionaryFormProps) {
           </p>
         )}
 
-        {model.sense?.example && (
-          <div>
-            <strong>Ví dụ từ điển</strong>
-            <p className="context">{model.sense.example}</p>
-          </div>
+        {model.localEntry?.examples.map((example) => (
+          <p key={example.id}>
+            {example.prefix}
+            {example.targetSurface}
+            {example.suffix}
+          </p>
+        ))}
+        {!model.localEntry && (
+          <label>
+            Câu ví dụ
+            <textarea
+              value={model.exampleText}
+              maxLength={10_000}
+              placeholder="Nhập câu ví dụ chứa đúng một lần từ đang tra."
+              onChange={(event) => model.setExampleText(event.target.value)}
+            />
+          </label>
         )}
       </fieldset>
 
@@ -137,8 +150,9 @@ export default function DictionaryForm({ selection }: DictionaryFormProps) {
 
       {!model.localEntry && (
         <p className="label">
-          Thiếu nghĩa tiếng Việt, từ loại hoặc ví dụ phù hợp thì lưu thành bản
-          nháp. IPA và CEFR có thể để trống.
+          Cần nghĩa tiếng Việt, từ loại và câu ví dụ chứa đúng một lần từ đang
+          tra. Lưu thành công sẽ thêm vào Từ đã học ở level 1. IPA và CEFR có
+          thể để trống.
         </p>
       )}
 
@@ -158,6 +172,7 @@ export default function DictionaryForm({ selection }: DictionaryFormProps) {
           className="save-word"
           type="submit"
           disabled={
+            (!model.complete && !model.locked) ||
             model.loading ||
             model.translating ||
             model.saving ||

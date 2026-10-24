@@ -3,7 +3,10 @@ import type {
   LookupResult,
   LookupSense,
 } from '../../../dictionary/freeDictionary';
-import { createReadingEntry } from '../../../dictionary/readingEntry';
+import {
+  createReadingEntry,
+  dictionaryExample,
+} from '../../../dictionary/readingEntry';
 import type { Entry } from '../../../domain/types';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
@@ -29,6 +32,17 @@ export default function ReadingSenseForm({
   onSave,
 }: Props) {
   const [meaning, setMeaning] = useState(entry?.meaningVi ?? '');
+  const [partOfSpeech, setPartOfSpeech] = useState(
+    entry?.partOfSpeech ?? sense.partOfSpeech,
+  );
+  const [exampleText, setExampleText] = useState(sense.example ?? '');
+  const complete = entry
+    ? entry.contentStatus === 'ready'
+    : Boolean(
+        meaning.trim() &&
+        partOfSpeech.trim() &&
+        dictionaryExample(exampleText, result.query || word).length,
+      );
   const [translating, setTranslating] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
   const edited = useRef(false);
@@ -50,9 +64,7 @@ export default function ReadingSenseForm({
       })
       .catch(() => {
         if (!controller.signal.aborted)
-          setNotice(
-            'Chưa có bản dịch. Bạn có thể nhập nghĩa Việt và lưu nháp.',
-          );
+          setNotice('Chưa có bản dịch. Hãy nhập nghĩa Việt trước khi lưu.');
       })
       .finally(() => {
         if (!controller.signal.aborted) setTranslating(false);
@@ -60,6 +72,7 @@ export default function ReadingSenseForm({
     return () => controller.abort();
   }, [entry, word, sense]);
   async function saveSelected() {
+    if (!complete) return;
     if (entry) {
       await onSave(entry);
       return;
@@ -70,7 +83,8 @@ export default function ReadingSenseForm({
       result,
       sense,
       meaningVi: meaning,
-      partOfSpeech: sense.partOfSpeech,
+      partOfSpeech,
+      exampleText,
     });
     if (notice?.startsWith('Bản dịch gợi ý') && meaning.trim()) {
       created.provenance = [
@@ -115,7 +129,31 @@ export default function ReadingSenseForm({
       </label>
       {translating && <StatusMessage>Đang dịch nghĩa đang chọn…</StatusMessage>}
       {notice && <StatusMessage>{notice}</StatusMessage>}
-      {sense.example && <blockquote>{sense.example}</blockquote>}
+      {!entry ? (
+        <>
+          <label>
+            Từ loại
+            <input
+              value={partOfSpeech}
+              maxLength={100}
+              disabled={busy || locked}
+              onChange={(event) => setPartOfSpeech(event.target.value)}
+            />
+          </label>
+          <label>
+            Câu ví dụ
+            <textarea
+              value={exampleText}
+              maxLength={10000}
+              disabled={busy || locked}
+              placeholder="Câu ví dụ chứa đúng một lần từ đang tra."
+              onChange={(event) => setExampleText(event.target.value)}
+            />
+          </label>
+        </>
+      ) : (
+        sense.example && <blockquote>{sense.example}</blockquote>
+      )}
       <p>
         CEFR: {entry?.cefr.level ?? 'Chưa có'} · IPA Mỹ:{' '}
         {entry?.pronunciation.ipa ??
@@ -128,11 +166,16 @@ export default function ReadingSenseForm({
           <p key={index}>{license.name}</p>
         ))}
       </details>
-      <Button type="submit" loading={busy} disabled={translating || saved}>
+      <Button
+        type="submit"
+        loading={busy}
+        disabled={translating || saved || !complete}
+      >
         {entry ? 'Đã có trong thư viện' : 'Lưu từ'}
       </Button>
       <p>
-        Thiếu nghĩa hoặc ví dụ thì lưu nháp. Không lưu đoạn văn trong bài đọc.
+        Cần đủ nghĩa, từ loại và ví dụ trước khi lưu. Từ mới được thêm vào Từ đã
+        học ở level 1.
       </p>
     </form>
   );

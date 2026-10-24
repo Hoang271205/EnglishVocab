@@ -63,6 +63,7 @@ type ReadingEntryInput = {
   sense: LookupSense | undefined;
   meaningVi: string;
   partOfSpeech: string;
+  exampleText?: string;
 };
 
 export function createReadingEntry({
@@ -72,9 +73,13 @@ export function createReadingEntry({
   sense,
   meaningVi,
   partOfSpeech,
+  exampleText,
 }: ReadingEntryInput): Entry {
   const headword = result?.query ?? word;
-  const examples = dictionaryExample(sense?.example ?? null, headword);
+  const examples = dictionaryExample(
+    exampleText ?? sense?.example ?? null,
+    headword,
+  );
 
   const sources: Source[] = [];
 
@@ -115,6 +120,21 @@ export function createReadingEntry({
         checkedAt: null,
       });
     }
+  }
+
+  if (exampleText !== undefined && exampleText !== (sense?.example ?? '')) {
+    for (let i = sources.length - 1; i >= 0; i--) {
+      if (sources[i]!.field === 'example') sources.splice(i, 1);
+    }
+    if (examples.length)
+      sources.push({
+        field: 'example',
+        attribution: 'Câu ví dụ do người dùng nhập hoặc chỉnh sửa',
+        license: 'Nội dung cá nhân',
+        url: null,
+        status: 'authored',
+        checkedAt: null,
+      });
   }
 
   if (meaningVi.trim()) {

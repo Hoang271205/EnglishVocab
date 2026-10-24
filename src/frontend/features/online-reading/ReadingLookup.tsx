@@ -90,6 +90,10 @@ export default function ReadingLookup({
   const sense = data?.result.senses[senseIndex];
   async function save(entry: Entry) {
     if (saved || action.busy) return;
+    if (entry.contentStatus !== 'ready') {
+      setNotice('Hãy bổ sung đủ nghĩa, từ loại và câu ví dụ trước khi lưu.');
+      return;
+    }
     if (!transfer.current) {
       transfer.current = {
         protocol: 1,
@@ -117,7 +121,7 @@ export default function ReadingLookup({
     if (result) {
       setSaved(true);
       setNotice(
-        'Đã lưu từ vào tài khoản; tiến độ của từ đã tồn tại được giữ nguyên.',
+        'Đã lưu vào Từ đã học. Từ mới ở level 1; tiến độ đã có được giữ nguyên.',
       );
       onSaved();
     }
@@ -142,7 +146,9 @@ export default function ReadingLookup({
       {speech.error && (
         <StatusMessage tone="error">{speech.error}</StatusMessage>
       )}
-      {resource.loading && <LoadingSkeleton variant="detail" label="Đang tra từ" />}
+      {resource.loading && (
+        <LoadingSkeleton variant="detail" label="Đang tra từ" />
+      )}
       {resource.error && (
         <>
           <StatusMessage tone="error">{resource.error}</StatusMessage>

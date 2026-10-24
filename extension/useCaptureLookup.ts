@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Entry } from '../src/domain/types';
 import type { LookupResult } from '../src/dictionary/freeDictionary';
-import { createReadingEntry, remoteIpa } from '../src/dictionary/readingEntry';
+import {
+  createReadingEntry,
+  dictionaryExample,
+  remoteIpa,
+} from '../src/dictionary/readingEntry';
 import type { SelectedWord } from './SelectionPopup';
 import type { CaptureItem } from './queue';
 import { requestWorker } from './client';
@@ -22,6 +26,7 @@ export function useCaptureLookup(selection: SelectedWord) {
   const [senseIndex, setSenseIndex] = useState(0);
   const [meaningVi, setMeaningVi] = useState('');
   const [partOfSpeech, setPartOfSpeech] = useState('');
+  const [exampleText, setExampleText] = useState('');
 
   const [loading, setLoading] = useState(true);
   const [lookupError, setLookupError] = useState<string | null>(null);
@@ -44,6 +49,18 @@ export function useCaptureLookup(selection: SelectedWord) {
   const localEntry = sense?.entryId
     ? result?.entries?.find((entry) => entry.id === sense.entryId)
     : undefined;
+
+  useEffect(() => {
+    setExampleText(sense?.example ?? '');
+  }, [sense]);
+
+  const complete = localEntry
+    ? localEntry.contentStatus === 'ready'
+    : Boolean(
+        meaningVi.trim() &&
+        partOfSpeech.trim() &&
+        dictionaryExample(exampleText, result?.query ?? selection.word).length,
+      );
 
   const ipa =
     result?.source === 'local'
@@ -191,6 +208,10 @@ export function useCaptureLookup(selection: SelectedWord) {
 
     try {
       if (!pendingItem.current) {
+        if (!complete)
+          throw new Error(
+            'Bổ sung nghĩa tiếng Việt, từ loại và câu ví dụ chứa đúng một lần từ đang tra trước khi lưu.',
+          );
         const entry =
           localEntry ??
           createReadingEntry({
@@ -200,6 +221,7 @@ export function useCaptureLookup(selection: SelectedWord) {
             sense,
             meaningVi,
             partOfSpeech,
+            exampleText,
           });
 
         if (!localEntry && translationSuggested && meaningVi.trim()) {
@@ -248,11 +270,7 @@ export function useCaptureLookup(selection: SelectedWord) {
       }
 
       setSaved(
-        localEntry
-          ? 'Đã lưu. Tiến độ của từ hiện có được giữ nguyên.'
-          : acknowledgment.contentStatus === 'ready'
-            ? 'Đã lưu. Mở Sổ tay để học từ này.'
-            : 'Đã lưu bản nháp. Mở Sổ tay → Chờ bổ sung để chỉnh sửa.',
+        'Đã lưu vào Từ đã học. Từ mới bắt đầu ở level 1; tiến độ đã có được giữ nguyên.',
       );
     } catch (cause: unknown) {
       setSaveError(errorMessage(cause));
@@ -270,6 +288,9 @@ export function useCaptureLookup(selection: SelectedWord) {
     ipa,
     meaningVi,
     partOfSpeech,
+    exampleText,
+    setExampleText,
+    complete,
     loading,
     lookupError,
     saveError,

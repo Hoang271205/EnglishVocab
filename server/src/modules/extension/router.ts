@@ -140,7 +140,7 @@ extensionRouter.post(
     const entry =
       personal?.entry ??
       (await sharedEntries.findOne(
-        { id: receipt.entryId },
+        { _id: receipt.entryId },
         { projection: { _id: 0 } },
       ));
     if (!entry) {

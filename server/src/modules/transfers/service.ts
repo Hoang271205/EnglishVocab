@@ -1,14 +1,15 @@
 import { createHash, randomUUID } from 'node:crypto';
 import type { ClientSession } from 'mongodb';
+import type { Entry } from '../../../../src/domain/types.js';
+import {
+  enrollSavedEntry,
+  requireSavedEntryReady,
+} from './enroll-saved-entry.js';
 import { ServiceError } from '../../../../src/domain/types.js';
 import { client } from '../../database/mongo.js';
 import { sharedEntries } from '../library/collections.js';
 import { personalEntries } from '../personal/collections.js';
-import {
-  extensionEntryLinks,
-  importReceipts,
-  savedSources,
-} from './collections.js';
+import { extensionEntryLinks, importReceipts } from './collections.js';
 import type { CaptureTransfer } from './schema.js';
 
 function hash(value: unknown) {
@@ -67,7 +68,9 @@ export async function receiveTransfer(
           continue;
         }
 
+        requireSavedEntryReady(item.entry);
         let entryId: string;
+        let savedEntry: Entry;
 
         if (item.entry.collectionId === 'personal') {
           const linkId = JSON.stringify([userId, item.entry.id]);
@@ -94,6 +97,7 @@ export async function receiveTransfer(
               { session: mongoSession },
             );
             entryId = canonical.entry.id;
+            savedEntry = canonical.entry;
           } else if (link) {
             if (link.identityHash !== identityHash(item.entry)) {
               throw new ServiceError(
@@ -102,16 +106,13 @@ export async function receiveTransfer(
               );
             }
 
-            const existing = await personalEntries.updateOne(
-              {
-                _id: link.entryId,
-                userId,
-              },
+            const existing = await personalEntries.findOneAndUpdate(
+              { _id: link.entryId, userId },
               { $inc: { studyUseVersion: 1 } },
-              { session: mongoSession },
+              { session: mongoSession, returnDocument: 'after' },
             );
 
-            if (existing.matchedCount !== 1) {
+            if (!existing) {
               throw new ServiceError(
                 'conflict',
                 'Từ cá nhân đã thay đổi. Hãy tải lại.',
@@ -120,6 +121,7 @@ export async function receiveTransfer(
 
             // Không ghi đè nội dung người dùng đã sửa trên web.
             entryId = link.entryId;
+            savedEntry = existing.entry;
           } else {
             const deleted = await importReceipts.findOne(
               { userId, entryId: item.entry.id, deleted: true },
@@ -161,6 +163,12 @@ export async function receiveTransfer(
               { session: mongoSession },
             );
 
+            savedEntry = {
+              ...item.entry,
+              id: entryId,
+              revision: 1,
+              collectionId: 'personal',
+            };
             createdEntries += 1;
           }
         } else {
@@ -182,20 +190,10 @@ export async function receiveTransfer(
 
           // Dữ liệu thư viện chung không bị ghi đè bởi extension.
           entryId = shared.id;
+          savedEntry = shared;
         }
 
-        await savedSources.insertOne(
-          {
-            _id: receiptId,
-            userId,
-            entryId,
-            captureId: item.capture.id,
-            selectedText: item.capture.selectedText,
-            sourceUrl: item.capture.sourceUrl,
-            capturedAt: item.capture.capturedAt,
-          },
-          { session: mongoSession },
-        );
+        await enrollSavedEntry(userId, savedEntry, mongoSession);
 
         await importReceipts.insertOne(
           {

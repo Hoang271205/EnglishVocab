@@ -2,11 +2,11 @@ import { Router } from 'express';
 import { requireAuth } from '../../middleware/require-auth.js';
 import { sharedEntries } from '../library/collections.js';
 import { personalEntries } from '../personal/collections.js';
+import { userProgress, reviewPreferences } from '../progress/collections.js';
 import {
-  userProgress,
-  reviewPreferences,
-} from '../progress/collections.js';
-import { savedSources, extensionEntryLinks } from '../transfers/collections.js';
+  importReceipts,
+  extensionEntryLinks,
+} from '../transfers/collections.js';
 import { getUserSettings } from '../settings/service.js';
 
 export const notebookRouter = Router();
@@ -22,23 +22,23 @@ async function notebook(userId: string) {
       .find({ userId }, { projection: { _id: 0, userId: 0 } })
       .toArray(),
     reviewPreferences
-      .find({ userId }, { projection: { _id: 0, entryId: 1, reviewEnabled: 1 } })
+      .find(
+        { userId },
+        { projection: { _id: 0, entryId: 1, reviewEnabled: 1 } },
+      )
       .toArray(),
     personalEntries
       .find({ userId }, { projection: { _id: 0, entry: 1 } })
       .sort({ createdAt: -1 })
       .toArray(),
-    savedSources.distinct('entryId', { userId }),
+    importReceipts.distinct('entryId', { userId, deleted: false }),
   ]);
   const shared = await sharedEntries
     .find(
       {
         _id: {
           $in: [
-            ...new Set([
-              ...progress.map((item) => item.entryId),
-              ...captured,
-            ]),
+            ...new Set([...progress.map((item) => item.entryId), ...captured]),
           ],
         },
       },
@@ -65,12 +65,9 @@ notebookRouter.get('/', async (request, response) => {
 // Export only the authenticated learner's data, never credentials or sessions.
 notebookRouter.get('/export', async (request, response) => {
   const userId = request.session.userId!;
-  const [rows, settings, sources] = await Promise.all([
+  const [rows, settings] = await Promise.all([
     notebook(userId),
     getUserSettings(userId),
-    savedSources
-      .find({ userId }, { projection: { _id: 0, userId: 0 } })
-      .toArray(),
   ]);
   response.json({
     format: 'englishvocab-account-export',
@@ -78,7 +75,6 @@ notebookRouter.get('/export', async (request, response) => {
     exportedAt: Date.now(),
     rows,
     settings,
-    sources,
   });
 });
 

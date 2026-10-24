@@ -162,8 +162,6 @@ test(
             },
           ],
         };
-      } else if (url.pathname.startsWith('/api/transfers/sources/')) {
-        body = { sources: [] };
       } else {
         throw new Error(`Unexpected API request: ${key}`);
       }
@@ -298,7 +296,7 @@ test(
         await page.getByRole('button', { name: 'Đóng chi tiết' }).click();
         await word().click();
         await page.getByRole('heading', { name: 'Chi tiết từ' }).waitFor();
-        assert.equal(count(`/api/transfers/sources/${entry.id}`), 1);
+        assert.equal(count(`/api/transfers/sources/${entry.id}`), 0);
         await nav('Học từ mới');
         await page.getByRole('button', { name: /ielts topic/ }).click();
         await page
