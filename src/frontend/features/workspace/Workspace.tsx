@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import GuideDock from '../../components/mascot/GuideDock';
+import { lazy, useState } from 'react';
 import MainNavigation from '../../components/MainNavigation';
 import AppShell from '../../components/layout/AppShell';
 import Button from '../../components/ui/Button';
@@ -7,14 +8,19 @@ import { navigation } from '../../components/navigation';
 import type { Tab } from '../../components/navigation';
 import type { AuthUser } from '../auth/auth.types';
 import DashboardPage from '../dashboard/DashboardPage';
-import TopicsPage from '../topics/TopicsPage';
 import { useLearning } from '../learning/LearningContext';
-import LearningSessionPage from '../learning/LearningSessionPage';
 import PendingLearningBanner from '../learning/PendingLearningBanner';
-import ReviewSessionPage from '../reviewing/ReviewSessionPage';
-import OnlineNotebookPage from '../online-notebook/OnlineNotebookPage';
 import ReviewStartPanel from '../reviewing/ReviewStartPanel';
 import { useReviewWorkspace } from '../reviewing/useReviewWorkspace';
+
+const TopicsPage = lazy(() => import('../topics/TopicsPage'));
+const LearningSessionPage = lazy(
+  () => import('../learning/LearningSessionPage'),
+);
+const ReviewSessionPage = lazy(() => import('../reviewing/ReviewSessionPage'));
+const OnlineNotebookPage = lazy(
+  () => import('../online-notebook/OnlineNotebookPage'),
+);
 
 type OnlineTab = Tab;
 
@@ -92,6 +98,10 @@ export default function Workspace({
           sessionId={review.sessionId}
           voiceURI={learning.voiceURI}
           onExit={closeReview}
+          onOpenNotebook={() => {
+            closeReview();
+            setActiveTab('notebook');
+          }}
         />
       </AppShell>
     );
@@ -111,6 +121,34 @@ export default function Workspace({
   }
 
   const pendingReview = review.pending;
+  const guideSteps = [
+    {
+      title:
+        learning.pending || pendingReview
+          ? 'Tiếp tục bài đang dở'
+          : activeTab === 'learn'
+            ? 'Chọn một chủ đề'
+            : activeTab === 'notebook'
+              ? 'Khám phá sổ tay'
+              : 'Góc học tập của bạn',
+      text:
+        learning.pending || pendingReview
+          ? 'Chọn Tiếp tục trong thông báo phía trên. Hoàn tất phiên đang dở trước khi mở lượt học hoặc ôn mới.'
+          : activeTab === 'learn'
+            ? 'Chọn IELTS hoặc Giao tiếp, tìm chủ đề rồi mở chủ đề để bắt đầu học.'
+            : activeTab === 'notebook'
+              ? 'Từ đã học là những từ bạn đã luyện. Từ của tôi chứa từ bạn tự thêm hoặc lưu khi đọc.'
+              : 'Các thẻ cho biết số từ đã học, đến hạn và thành thạo. Chưa có từ đến hạn? Bạn có thể học thêm từ mới.',
+    },
+    {
+      title: 'Học và ghi nhớ',
+      text: 'Nghe phát âm, đọc nghĩa và câu ví dụ. Sau đó viết lại từ. Từ viết đúng được lưu vào sổ tay và lịch ôn; từ bỏ qua không được thêm vào lịch ôn.',
+    },
+    {
+      title: 'Ôn đúng thời điểm',
+      text: 'Khi có từ đến hạn, chọn bộ từ và số từ mỗi lượt rồi bắt đầu ôn. Bạn có thể lưu nháp, tạm dừng và tiếp tục sau. Kết thúc phiên sẽ có tổng kết đúng và sai.',
+    },
+  ];
 
   return (
     <AppShell
@@ -164,7 +202,13 @@ export default function Workspace({
       )}
 
       {activeTab === 'review' ? (
-        <DashboardPage key={contentVersion} user={user}>
+        <DashboardPage
+          key={contentVersion}
+          user={user}
+          onLearn={() => navigate('learn')}
+          pending={Boolean(learning.pending || review.pending)}
+          preparing={preparing || learning.loading || review.loading}
+        >
           <ReviewStartPanel
             defaultBatchSize={review.batchSize}
             working={preparing}
@@ -181,6 +225,7 @@ export default function Workspace({
         </DashboardPage>
       ) : activeTab === 'notebook' ? (
         <OnlineNotebookPage
+          onBrowseTopics={() => navigate('learn')}
           ownerId={user.id}
           canLearn={
             !review.pending && !review.loading && !review.error && !preparing
@@ -200,6 +245,7 @@ export default function Workspace({
           <TopicsPage />
         </fieldset>
       )}
+      <GuideDock key={activeTab} steps={guideSteps} />
     </AppShell>
   );
 }

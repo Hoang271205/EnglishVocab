@@ -1,3 +1,4 @@
+import Mascot from '../../components/mascot/Mascot';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
 import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
@@ -73,7 +74,31 @@ export default function LearningSessionPage({
 
           {session.phase === 'complete' ? (
             <div className="session-summary">
+              <Mascot
+                mood={
+                  session.total > (session.skippedCount ?? 0)
+                    ? 'celebrate'
+                    : 'encourage'
+                }
+                message="Mình cùng tiếp tục hành trình học nhé!"
+              />
               <h1>Hoàn thành lượt học!</h1>
+              <div className="result-metrics">
+                <div>
+                  <strong>{session.total}</strong>
+                  <span>Từ trong lượt</span>
+                </div>
+                <div className="result-correct">
+                  <strong>
+                    {Math.max(0, session.total - (session.skippedCount ?? 0))}
+                  </strong>
+                  <span>Từ đã học</span>
+                </div>
+                <div>
+                  <strong>{session.skippedCount ?? 0}</strong>
+                  <span>Từ đã bỏ qua</span>
+                </div>
+              </div>
 
               <p>
                 Các từ đã viết đúng được lưu vào lịch ôn.{' '}
@@ -87,6 +112,10 @@ export default function LearningSessionPage({
             </div>
           ) : session.paused ? (
             <div className="session-summary">
+              <Mascot
+                mood="rest"
+                message="Nghỉ một chút, rồi mình học tiếp nhé!"
+              />
               <h1>Phiên học đang tạm dừng</h1>
 
               <Button

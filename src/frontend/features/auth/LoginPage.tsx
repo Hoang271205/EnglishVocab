@@ -5,9 +5,11 @@ import type { LoginViewProps } from './auth.types';
 export default function LoginPage(props: LoginViewProps) {
   return (
     <AuthLayout title="Đăng nhập">
-      <h2>Đăng nhập tài khoản học của bạn</h2>
+      <h2>Chào mừng bạn trở lại!</h2>
 
-      <p className="login-description">Mỗi ngày một chút, nhớ lâu hơn.</p>
+      <p className="login-description">
+        Mình cùng tiếp tục hành trình học từ vựng nhé.
+      </p>
 
       <LoginForm {...props} />
 

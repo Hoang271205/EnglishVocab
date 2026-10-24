@@ -3,7 +3,6 @@ import { MongoServerError } from 'mongodb';
 import { z } from 'zod';
 import { requireAuth } from '../../middleware/require-auth.js';
 import { requireJsonWrite } from '../../middleware/require-json-write.js';
-import { savedSources } from './collections.js';
 import { transferSchema } from './schema.js';
 import { receiveTransfer } from './service.js';
 import { exportExtensionSnapshot } from './snapshot-service.js';
@@ -20,8 +19,7 @@ transfersRouter.post('/receive', requireJsonWrite, async (request, response, nex
         response.json(result);
     }
     catch (error) {
-        if (error instanceof MongoServerError &&
-            error.code === 11000) {
+        if (error instanceof MongoServerError && error.code === 11000) {
             response.status(409).json({
                 error: {
                     code: 'CONCURRENT_IMPORT',
@@ -32,25 +30,6 @@ transfersRouter.post('/receive', requireJsonWrite, async (request, response, nex
         }
         next(error);
     }
-});
-transfersRouter.get('/sources/:entryId', async (request, response) => {
-    const entryId = z
-        .string()
-        .regex(/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}$/)
-        .parse(request.params.entryId);
-    const sources = await savedSources
-        .find({
-        userId: request.session.userId,
-        entryId,
-    }, {
-        projection: {
-            _id: 0,
-            userId: 0,
-        },
-    })
-        .sort({ capturedAt: -1 })
-        .toArray();
-    response.json({ sources });
 });
 transfersRouter.post('/snapshot', requireJsonWrite, async (request, response) => {
     z.object({}).strict().parse(request.body);

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
+import LoadingSkeleton from './LoadingSkeleton';
 import type { ReactNode } from 'react';
 export default function ExpandablePanel({
   title,
@@ -14,7 +15,11 @@ export default function ExpandablePanel({
       onToggle={(event) => setOpen(event.currentTarget.open)}
     >
       <summary>{title}</summary>
-      {open && children}
+      {open && (
+        <Suspense fallback={<LoadingSkeleton label="Đang tải công cụ" />}>
+          {children}
+        </Suspense>
+      )}
     </details>
   );
 }

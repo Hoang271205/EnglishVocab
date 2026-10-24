@@ -61,6 +61,9 @@ export default function LoginForm({ busy, error, onLogin }: LoginViewProps) {
       >
         {busy ? 'Đang đăng nhập…' : 'Đăng nhập'}
       </Button>
+      {!form.canSubmit && !busy && (
+        <p className="login-form-hint">Nhập email và mật khẩu để tiếp tục.</p>
+      )}
     </form>
   );
 }

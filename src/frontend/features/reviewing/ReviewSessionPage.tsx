@@ -1,3 +1,4 @@
+import Mascot from '../../components/mascot/Mascot';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
 import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
@@ -9,12 +10,14 @@ interface ReviewSessionPageProps {
   sessionId: string;
   voiceURI: string | null;
   onExit: () => void;
+  onOpenNotebook: () => void;
 }
 
 export default function ReviewSessionPage({
   sessionId,
   voiceURI,
   onExit,
+  onOpenNotebook,
 }: ReviewSessionPageProps) {
   const model = useOnlineReviewSession(sessionId, onExit);
 
@@ -48,7 +51,9 @@ export default function ReviewSessionPage({
       )}
 
       {!session ? (
-        !model.error && <LoadingSkeleton variant="session" label="Đang tải phiên ôn" />
+        !model.error && (
+          <LoadingSkeleton variant="session" label="Đang tải phiên ôn" />
+        )
       ) : (
         <>
           <div className="study-toolbar">
@@ -77,29 +82,71 @@ export default function ReviewSessionPage({
           {model.notice && <StatusMessage>{model.notice}</StatusMessage>}
 
           {session.phase === 'complete' ? (
-            <div className="session-summary">
+            <div className="session-summary review-summary">
+              <span className="completion-pill">Đã hoàn tất</span>
+              <Mascot mood={answered > 0 ? 'celebrate' : 'encourage'} />
               <h1>
                 {session.endedEarly
-                  ? 'Đã kết thúc lượt ôn'
-                  : 'Hoàn thành lượt ôn!'}
+                  ? 'Đã kết thúc phiên ôn'
+                  : 'Hoàn thành phiên ôn!'}
               </h1>
-              {session.endedEarly && (
-                <p>
-                  Đã lưu kết quả {answered}/{session.total} từ.{' '}
-                  {session.remainingCount ?? 0} từ chưa làm vẫn giữ nguyên lịch
+              <p>
+                {answered > 0
+                  ? 'Mỗi lần ôn, mình lại nhớ thêm một chút!'
+                  : 'Bạn chưa gửi câu trả lời nào. Mình cùng thử lại khi sẵn sàng nhé!'}
+              </p>
+              <div className="result-metrics" aria-label="Kết quả phiên ôn">
+                <div>
+                  <strong>{answered}</strong>
+                  <span>Câu đã trả lời</span>
+                </div>
+                <div className="result-correct">
+                  <strong>{session.correctCount ?? '—'}</strong>
+                  <span>Câu đúng</span>
+                </div>
+                <div className="result-incorrect">
+                  <strong>{session.incorrectCount ?? '—'}</strong>
+                  <span>Câu sai</span>
+                </div>
+              </div>
+              {answered > 0 && session.correctCount != null && (
+                <p className="result-rate">
+                  Tỷ lệ đúng:{' '}
+                  <strong>
+                    {Math.round((session.correctCount / answered) * 100)}%
+                  </strong>
+                </p>
+              )}
+              {(session.ungradedCount ?? 0) > 0 && (
+                <p className="result-note">
+                  {session.ungradedCount} câu chưa trả lời hoặc đã bỏ qua do tắt
+                  ôn tập, không tính là câu sai. Những từ chưa làm vẫn giữ lịch
                   ôn.
                 </p>
               )}
-
-              <Button
-                disabled={model.blocked}
-                onClick={() => void model.exit()}
-              >
-                Về trang ôn tập
-              </Button>
+              <div className="summary-actions">
+                <Button
+                  disabled={model.blocked}
+                  onClick={() => void model.exit()}
+                >
+                  Về trang ôn tập
+                </Button>
+                <Button
+                  variant="secondary"
+                  icon="notebook"
+                  disabled={model.blocked}
+                  onClick={onOpenNotebook}
+                >
+                  Mở sổ tay
+                </Button>
+              </div>
             </div>
           ) : session.paused ? (
             <div className="session-summary">
+              <Mascot
+                mood="rest"
+                message="Nghỉ một chút, rồi mình ôn tiếp nhé!"
+              />
               <h1>Phiên ôn đang tạm dừng</h1>
 
               <Button

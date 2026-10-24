@@ -1,18 +1,23 @@
 import express from 'express';
+import { resolve } from 'node:path';
+import { z } from 'zod';
 import { db } from './database/mongo.js';
 import { createSessionMiddleware } from './middleware/session.js';
 import { authRouter } from './modules/auth/router.js';
 import { libraryRouter } from './modules/library/router.js';
 import { progressRouter } from './modules/progress/router.js';
 import { studyRouter } from './modules/study/router.js';
-import { z } from 'zod';
 import { ServiceError } from '../../src/domain/types.js';
 import { personalRouter } from './modules/personal/router.js';
 import { settingsRouter } from './modules/settings/router.js';
 import { transfersRouter } from './modules/transfers/router.js';
-export function createApp() {
+import { notebookRouter } from './modules/notebook/router.js';
+import { extensionRouter } from './modules/extension/router.js';
+export function createApp({ serveFrontend = true, } = {}) {
     const app = express();
     app.disable('x-powered-by');
+    if (process.env.NODE_ENV === 'production')
+        app.set('trust proxy', 1);
     app.use('/api/transfers', express.json({ limit: '2mb' }));
     app.use(express.json({ limit: '1mb' }));
     app.get('/api/health', async (_request, response) => {
@@ -32,7 +37,8 @@ export function createApp() {
             });
         }
     });
-    app.use(createSessionMiddleware());
+    // Static assets do not need to read or touch authentication sessions.
+    app.use('/api', createSessionMiddleware());
     app.use('/api/auth', authRouter);
     app.use('/api/personal', personalRouter);
     app.use('/api/library', libraryRouter);
@@ -40,6 +46,21 @@ export function createApp() {
     app.use('/api/study', studyRouter);
     app.use('/api/settings', settingsRouter);
     app.use('/api/transfers', transfersRouter);
+    app.use('/api/notebook', notebookRouter);
+    app.use('/api/extension', extensionRouter);
+    app.use('/api', (_request, response) => {
+        response.status(404).json({
+            error: {
+                code: 'NOT_FOUND',
+                message: 'API không tồn tại.',
+            },
+        });
+    });
+    // Vercel serves the frontend from dist through its CDN.
+    // The local/standalone server keeps its existing static-file behavior.
+    if (serveFrontend) {
+        app.use(express.static(resolve('dist'), { dotfiles: 'deny' }));
+    }
     app.use((_request, response) => {
         response.status(404).json({
             error: {

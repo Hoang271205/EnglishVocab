@@ -3,6 +3,7 @@ import {
   clearReadCache,
   getCachedRead,
   readCacheGeneration,
+  invalidateReadScopes,
 } from './readCache';
 import { sharePendingRead } from './pendingReads';
 
@@ -112,7 +113,7 @@ export async function apiRequest<T>(
   if (!isRead) return performRequest<T>(path, options);
   // A write or authentication change starts a new generation of reads.
   const key = JSON.stringify([
-    readCacheGeneration(),
+    readCacheGeneration(path),
     path,
     options.cacheTtlMs ?? 0,
   ]);
@@ -135,8 +136,8 @@ async function performRequest<T>(
     if (cached !== undefined) return cached;
   }
   // Writes invalidate before dispatch, so overlapping reads cannot refill old data.
-  if (!isRead) clearReadCache();
-  const generation = readCacheGeneration();
+  if (!isRead) invalidateWrite(path, options.body);
+  const generation = readCacheGeneration(path);
   const timeout = isRead ? AbortSignal.timeout(20000) : null;
   const signal = timeout
     ? options.signal
@@ -148,11 +149,11 @@ async function performRequest<T>(
       ...options,
       ...(signal ? { signal } : {}),
     });
-    if (!isRead) clearReadCache();
+    if (!isRead) invalidateWrite(path, options.body);
     else if (ttlMs > 0) cacheRead(path, result, ttlMs, generation);
     return result;
   } catch (error) {
-    if (!isRead) clearReadCache();
+    if (!isRead) invalidateWrite(path, options.body);
     if (timeout?.aborted && !options.signal?.aborted) {
       throw new ApiError(
         504,
@@ -160,5 +161,41 @@ async function performRequest<T>(
       );
     }
     throw error;
+  }
+}
+
+// Session state changes must not evict unrelated catalogue/settings data.
+function invalidateWrite(path: string, body: unknown) {
+  const action =
+    body && typeof body === 'object' && 'action' in body ? body.action : null;
+  if (path === '/api/transfers/snapshot' || path === '/api/extension/connect')
+    return;
+  if (path.startsWith('/api/study/')) {
+    const scopes = ['study'];
+    if (path.endsWith('/answer')) {
+      scopes.push('dashboard', 'notebook', 'progress');
+      if (!path.includes('/review/')) scopes.push('topics');
+    }
+    // Creating/skipping a learning session may advance the topic cursor.
+    if (
+      !path.includes('/review') &&
+      action !== 'draft' &&
+      action !== 'pause' &&
+      action !== 'resume'
+    )
+      scopes.push('topics');
+    invalidateReadScopes(scopes);
+  } else if (path.startsWith('/api/settings')) {
+    invalidateReadScopes(['settings']);
+  } else if (path.startsWith('/api/progress/')) {
+    invalidateReadScopes(['dashboard', 'notebook', 'progress']);
+  } else if (
+    path.startsWith('/api/personal') ||
+    path.startsWith('/api/transfers')
+  ) {
+    invalidateReadScopes(['notebook', 'dashboard', 'topics', 'progress']);
+  } else {
+    // Authentication changes and unknown mutations use conservative invalidation.
+    clearReadCache();
   }
 }

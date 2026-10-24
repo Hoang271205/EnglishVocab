@@ -1,21 +1,12 @@
 import { z } from 'zod';
+import { REVIEW_BATCH_SIZES } from '../../../../src/shared/studyOptions.js';
 export const appSettingsSchema = z
     .object({
     voiceURI: z.string().max(500).nullable(),
     onlineLookupEnabled: z.boolean(),
-    learnBatchSize: z.union([
-        z.literal(5),
-        z.literal(10),
-    ]),
-    reviewBatchSize: z.union([
-        z.literal(10),
-        z.literal(20),
-    ]),
-    dailyNewWordTarget: z
-        .number()
-        .int()
-        .min(1)
-        .max(1000),
+    learnBatchSize: z.union([z.literal(5), z.literal(10)]),
+    reviewBatchSize: z.literal(REVIEW_BATCH_SIZES),
+    dailyNewWordTarget: z.number().int().min(1).max(1000),
 })
     .strict();
 export const defaultSettings = {

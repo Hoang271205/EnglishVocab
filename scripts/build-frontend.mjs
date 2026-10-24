@@ -7,12 +7,17 @@ const production =
 await mkdir('dist', { recursive: true });
 await cp('public', 'dist', { recursive: true });
 await cp('index.html', 'dist/index.html');
+await cp('index.html', 'dist/404.html');
 
 await build({
   entryPoints: ['src/frontend/main.tsx'],
-  outfile: 'dist/app.js',
+  outdir: 'dist',
+  entryNames: 'app',
+  chunkNames: 'chunks/[name]-[hash]',
+  splitting: true,
   bundle: true,
   platform: 'browser',
+  external: ['/images/*'],
   format: 'esm',
   target: ['es2023'],
   jsx: 'automatic',

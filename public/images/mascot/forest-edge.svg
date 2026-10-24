@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 1100" fill="none">
+  <defs>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#c7dcb2" />
+      <stop offset="1" stop-color="#9fbe8c" />
+    </linearGradient>
+    <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#e3edc9" />
+      <stop offset="1" stop-color="#c8dcae" />
+    </linearGradient>
+    <path id="blade" d="M0 0C-32-30-35-66-12-92C17-65 24-30 0 0Z" />
+    <g id="flower">
+      <g fill="#fffdf0">
+        <ellipse cy="-8" rx="6" ry="9" />
+        <ellipse cy="8" rx="6" ry="9" />
+        <ellipse cx="-8" rx="9" ry="6" />
+        <ellipse cx="8" rx="9" ry="6" />
+      </g>
+      <circle r="5" fill="#ecd17c" />
+    </g>
+  </defs>
+  <path d="M0 115Q115 60 272 0H0Z" fill="#e3efc6" opacity=".7" />
+  <path d="M0 620Q136 557 255 658Q122 698 0 773Z" fill="#e7efd6" opacity=".6" />
+  <path
+    d="M0 748Q95 647 201 733Q132 889 300 969V1100H0Z"
+    fill="url(#hill)"
+    opacity=".8"
+  />
+  <path
+    d="M0 938Q100 849 180 921Q230 1033 300 1053V1100H0Z"
+    fill="#bed3a0"
+    opacity=".7"
+  />
+  <g stroke="#afca99" stroke-width="3" opacity=".65">
+    <path
+      d="M-25 725Q158 462 78 268M-20 571Q90 397 181 368M14 1012Q171 765 118 633M0 412Q65 270 171 215"
+    />
+  </g>
+  <g fill="url(#leaf)" opacity=".66">
+    <use href="#blade" transform="translate(53 606) rotate(-54) scale(1.15)" />
+    <use href="#blade" transform="translate(92 519) rotate(42) scale(.95)" />
+    <use href="#blade" transform="translate(101 429) rotate(-42) scale(.9)" />
+    <use href="#blade" transform="translate(91 350) rotate(8) scale(.8)" />
+    <use href="#blade" transform="translate(47 482) rotate(-70) scale(.9)" />
+    <use href="#blade" transform="translate(130 399) rotate(65) scale(.8)" />
+    <use href="#blade" transform="translate(15 373) rotate(-44) scale(.8)" />
+    <use href="#blade" transform="translate(78 293) rotate(47) scale(.72)" />
+    <use href="#blade" transform="translate(137 244) rotate(72) scale(.7)" />
+    <use href="#blade" transform="translate(49 927) rotate(-45) scale(1.18)" />
+    <use href="#blade" transform="translate(110 832) rotate(46) scale(1.04)" />
+    <use href="#blade" transform="translate(130 755) rotate(-37) scale(.94)" />
+    <use href="#blade" transform="translate(137 682) rotate(10) scale(.72)" />
+  </g>
+  <g fill="#adc58c" opacity=".7">
+    <use href="#blade" transform="translate(5 1092) rotate(-9) scale(1.9)" />
+    <use href="#blade" transform="translate(35 1087) rotate(49) scale(1.65)" />
+    <use href="#blade" transform="translate(62 1100) rotate(-33) scale(1.38)" />
+    <use href="#blade" transform="translate(87 1083) rotate(30) scale(1.4)" />
+    <use href="#blade" transform="translate(21 943) rotate(-49) scale(1.7)" />
+  </g>
+  <g fill="#d6e3b9" opacity=".9">
+    <use href="#blade" transform="translate(0 1070) rotate(-27) scale(1.24)" />
+    <use href="#blade" transform="translate(121 1100) rotate(48) scale(1.2)" />
+    <use href="#blade" transform="translate(154 1102) rotate(-19) scale(.95)" />
+    <use href="#blade" transform="translate(75 976) rotate(44) scale(.88)" />
+  </g>
+  <g fill="#f3d579" opacity=".8">
+    <ellipse cx="204" cy="425" rx="5" ry="12" transform="rotate(40 204 425)" />
+    <ellipse cx="168" cy="595" rx="4" ry="10" transform="rotate(-30 168 595)" />
+    <circle cx="201" cy="756" r="4" />
+    <ellipse cx="107" cy="174" rx="4" ry="9" transform="rotate(35 107 174)" />
+  </g>
+  <use href="#flower" transform="translate(65 1000) scale(1.05)" />
+  <use href="#flower" transform="translate(128 1060) scale(.7)" />
+  <use href="#flower" transform="translate(42 851) scale(.75)" />
+</svg>

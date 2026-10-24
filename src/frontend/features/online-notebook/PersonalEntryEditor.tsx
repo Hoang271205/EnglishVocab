@@ -38,8 +38,9 @@ export default function PersonalEntryEditor({
     <section className="cloud-panel">
       <h2>{entry ? 'Chỉnh sửa từ cá nhân' : 'Thêm từ cá nhân'}</h2>
       <p>
-        Đổi từ, nghĩa hoặc từ loại đã có sẽ tạo mục mới và giữ tiến độ của mục
-        cũ.
+        {entry
+          ? 'Chỉnh sửa trực tiếp từ này; level ghi nhớ và lịch ôn được giữ nguyên.'
+          : 'Nhập thông tin cho từ cá nhân mới.'}
       </p>
       <form onSubmit={(event) => void submit(event)}>
         <fieldset disabled={busy} className="cloud-form">

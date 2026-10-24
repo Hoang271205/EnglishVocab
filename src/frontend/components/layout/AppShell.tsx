@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+import LoadingSkeleton from '../ui/LoadingSkeleton';
 import Brand from '../ui/Brand';
 import type { ReactNode } from 'react';
 
@@ -30,7 +32,11 @@ export default function AppShell({
         <div className="online-account">{account}</div>
       </header>
 
-      <main className="page-container">{children}</main>
+      <main className="page-container">
+        <Suspense fallback={<LoadingSkeleton label="Đang tải trang" />}>
+          {children}
+        </Suspense>
+      </main>
 
       <footer className="site-footer">Mỗi ngày một chút, nhớ lâu hơn.</footer>
     </div>

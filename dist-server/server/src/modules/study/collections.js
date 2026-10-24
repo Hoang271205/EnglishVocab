@@ -1,7 +1,9 @@
 import { db } from '../../database/mongo.js';
+import { topicLearning } from './topic-learning.js';
 export const studySessions = db.collection('study_sessions');
 export const studyReceipts = db.collection('study_receipts');
 export async function ensureStudyIndexes() {
+    await topicLearning.createIndex({ userId: 1, topicId: 1 }, { unique: true });
     await studySessions.createIndex({ userId: 1 }, {
         unique: true,
         partialFilterExpression: { active: true },

@@ -1,7 +1,40 @@
 import { apiRequest } from '../../api/client';
 import type { Entry } from '../../../domain/types';
-import type { NotebookRow } from './notebook.types';
+import type {
+  NotebookRow,
+  NotebookFilters,
+  NotebookPage,
+} from './notebook.types';
 export const notebookApi = {
+  async words(signal: AbortSignal) {
+    return (
+      await apiRequest<{ words: string[] }>('/api/notebook/words', { signal })
+    ).words;
+  },
+  page(filters: NotebookFilters, page: number, signal: AbortSignal) {
+    const query = new URLSearchParams({
+      ...filters,
+      dueOnly: String(filters.dueOnly),
+      page: String(page),
+    });
+    return apiRequest<NotebookPage>(`/api/notebook/list?${query}`, { signal });
+  },
+  async detail(id: string, signal: AbortSignal) {
+    return (
+      await apiRequest<{ row: NotebookRow }>(
+        `/api/notebook/entries/${encodeURIComponent(id)}`,
+        { signal },
+      )
+    ).row;
+  },
+  async lookup(word: string, signal: AbortSignal) {
+    return (
+      await apiRequest<{ entries: Entry[] }>(
+        `/api/notebook/lookup?${new URLSearchParams({ word })}`,
+        { signal },
+      )
+    ).entries;
+  },
   async list(signal: AbortSignal) {
     return (
       await apiRequest<{ rows: NotebookRow[] }>('/api/notebook', { signal })
@@ -15,7 +48,7 @@ export const notebookApi = {
     });
   },
   update(entry: Entry, expectedRevision: number, signal: AbortSignal) {
-    return apiRequest<{ entry: Entry; copied: boolean }>(
+    return apiRequest<{ entry: Entry }>(
       `/api/personal/${encodeURIComponent(entry.id)}`,
       {
         method: 'PUT',
@@ -24,7 +57,7 @@ export const notebookApi = {
       },
     );
   },
-  remove(entry: Entry, signal: AbortSignal) {
+  remove(entry: Pick<Entry, 'id' | 'revision'>, signal: AbortSignal) {
     return apiRequest<void>(`/api/personal/${encodeURIComponent(entry.id)}`, {
       method: 'DELETE',
       body: { expectedRevision: entry.revision },

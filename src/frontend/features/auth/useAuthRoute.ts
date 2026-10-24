@@ -1,15 +1,22 @@
 import { useEffect, useState } from 'react';
 export type AuthRoute =
-  'login' | 'register' | 'forgot-password' | 'reset-password';
+  'login' | 'register' | 'forgot-password' | 'reset-password' | 'not-found';
 function readRoute() {
-  const [path, query] = window.location.hash.slice(1).split('?');
+  const route = window.location.hash
+    ? window.location.hash.slice(1)
+    : window.location.pathname === '/index.html'
+      ? '/'
+      : window.location.pathname;
+  const [path, query] = route.split('?');
   const name = path?.replace(/^\//, '');
   const page: AuthRoute =
     name === 'register' ||
     name === 'forgot-password' ||
     name === 'reset-password'
       ? name
-      : 'login';
+      : !name || name === 'login'
+        ? 'login'
+        : 'not-found';
   return { page, token: new URLSearchParams(query).get('token') ?? '' };
 }
 export function useAuthRoute() {

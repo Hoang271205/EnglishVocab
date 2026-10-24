@@ -1,20 +1,55 @@
+import { invalidateReadScopes } from '../../api/readCache';
 import { useCallback, useEffect, useState } from 'react';
 import { useAsyncAction } from '../../hooks/useAsyncAction';
 import { useAsyncResource } from '../../hooks/useAsyncResource';
 import { notebookApi } from './notebook.api';
 import { initialFilters } from './notebook.types';
-import type { NotebookRow } from './notebook.types';
+import type { NotebookRow, NotebookListRow } from './notebook.types';
 import type { Entry } from '../../../domain/types';
 import { cleanExtensionWord } from '../sync/extensionBridge';
 import type { ExtensionCleanup } from '../sync/extensionBridge';
 export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
+  const [filters, setFilterState] = useState(initialFilters);
+  const [contentVersion, setContentVersion] = useState(0);
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState('');
+  useEffect(() => {
+    if (filters.search === search) return;
+    const timer = setTimeout(() => {
+      setSearch(filters.search);
+      setPage(1);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [filters.search, search]);
+  const queryKey = JSON.stringify({ ...filters, search });
   const load = useCallback(
-    (signal: AbortSignal) => notebookApi.list(signal),
-    [],
+    (signal: AbortSignal) =>
+      notebookApi.page(JSON.parse(queryKey), page, signal),
+    [queryKey, page],
   );
-  const resource = useAsyncResource(load, { cacheKey: `notebook:${ownerId}` });
+  const resource = useAsyncResource(load, {
+    cacheKey: `notebook:${ownerId}:${page}:${queryKey}`,
+    keepStaleData: false,
+  });
+  useEffect(() => {
+    if (!resource.data) return;
+    const last = Math.max(
+      1,
+      Math.ceil(resource.data.total / resource.data.pageSize),
+    );
+    if (page > last) setPage(last);
+  }, [page, resource.data]);
   const action = useAsyncAction();
-  const [filters, setFilters] = useState(initialFilters);
+  function setFilters(
+    next:
+      | typeof initialFilters
+      | ((current: typeof initialFilters) => typeof initialFilters),
+  ) {
+    const updated = typeof next === 'function' ? next(filters) : next;
+    setFilterState(updated);
+    if (updated.search === filters.search) setPage(1);
+    setSelectedId(null);
+  }
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [editor, setEditor] = useState<NotebookRow | 'new' | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -37,8 +72,13 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
       /* Cleanup remains available in this tab. */
     }
   }, [cleanup, ownerId]);
-  function changed() {
+  function refresh() {
+    invalidateReadScopes(['notebook']);
+    setContentVersion((value) => value + 1);
     resource.reload();
+  }
+  function changed() {
+    refresh();
     onChanged();
   }
   async function save(entry: Entry) {
@@ -46,22 +86,20 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
     const result = await action.run((signal) =>
       current && current !== 'new'
         ? notebookApi.update(entry, current.entry.revision, signal)
-        : notebookApi
-            .create(entry, signal)
-            .then((value) => ({ ...value, copied: false })),
+        : notebookApi.create(entry, signal),
     );
     if (!result) return;
     setNotice(
-      result.copied
-        ? 'Đã tạo mục mới và giữ nguyên mục cũ cùng tiến độ.'
-        : 'Đã lưu từ.',
+      current && current !== 'new'
+        ? 'Đã cập nhật từ; level và lịch ôn được giữ nguyên.'
+        : 'Đã thêm từ.',
     );
     setEditor(null);
-    setSelectedId(result.entry.id);
     setFilters((value) => ({ ...value, scope: 'personal' }));
+    setSelectedId(result.entry.id);
     changed();
   }
-  async function toggle(row: NotebookRow, enabled: boolean) {
+  async function toggle(row: NotebookListRow, enabled: boolean) {
     const result = await action.run(async (signal) => {
       await notebookApi.setReview(row.entry.id, enabled, signal);
       return true;
@@ -75,7 +113,7 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
       changed();
     }
   }
-  async function remove(row: NotebookRow) {
+  async function remove(row: NotebookListRow) {
     if (
       !window.confirm(
         `Xoá “${row.entry.headword}”, tiến độ và nguồn đã lưu của từ này?`,
@@ -89,6 +127,7 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
     });
     if (!result) return;
     setSelectedId(null);
+    if (resource.data?.rows.length === 1 && page > 1) setPage(page - 1);
     setNotice('Đã xoá dữ liệu trên server. Đang dọn cache extension…');
     changed();
     setCleanup((items) => [
@@ -122,6 +161,10 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
   }
   return {
     resource,
+    refresh,
+    contentVersion,
+    page,
+    setPage,
     busy: action.busy || resource.refreshing,
     error: action.error?.message,
     filters,

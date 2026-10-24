@@ -35,8 +35,8 @@ export default function RegisterPage({ busy, error, onRegister }: Props) {
       window.location.hash = '/login';
   }
   return (
-    <AuthLayout title="Tạo tài khoản">
-      <h2>Bắt đầu hành trình của bạn</h2>
+    <AuthLayout title="Đăng ký">
+      <h2>Tạo tài khoản của bạn</h2>
       <p className="login-description">Lưu từ mới và tiến bộ mỗi ngày.</p>
       <form className="login-form" onSubmit={submit} aria-busy={busy}>
         <FormField
@@ -64,6 +64,7 @@ export default function RegisterPage({ busy, error, onRegister }: Props) {
           placeholder="you@gmail.com"
         />
         <PasswordField
+          label="Mật khẩu"
           value={password}
           onChange={setPassword}
           disabled={busy}

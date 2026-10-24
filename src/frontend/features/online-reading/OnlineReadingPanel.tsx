@@ -1,13 +1,15 @@
-import Icon from '../../components/ui/Icon';
+import { useAsyncResource } from '../../hooks/useAsyncResource';
+import { notebookApi } from '../online-notebook/notebook.api';
+import LoadingSkeleton from '../../components/ui/LoadingSkeleton';
+import StatusMessage from '../../components/ui/StatusMessage';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { queryKey } from '../../../dictionary/freeDictionary';
 import Button from '../../components/ui/Button';
 import FormField from '../../components/ui/FormField';
 import ReadingLookup from './ReadingLookup';
-import type { NotebookRow } from '../online-notebook/notebook.types';
 interface Props {
-  rows: NotebookRow[];
+  contentVersion: number;
   onlineEnabled: boolean;
   voiceURI: string | null;
   onSaved: () => void;
@@ -18,11 +20,20 @@ interface Selection {
   top: number;
 }
 export default function OnlineReadingPanel({
-  rows,
+  contentVersion,
   onlineEnabled,
   voiceURI,
   onSaved,
 }: Props) {
+  const words = useAsyncResource(notebookApi.words, {
+    cacheKey: 'notebook:words',
+  });
+  const seenVersion = useRef(contentVersion);
+  useEffect(() => {
+    if (seenVersion.current === contentVersion) return;
+    seenVersion.current = contentVersion;
+    words.reload();
+  }, [contentVersion, words.reload]);
   const [text, setText] = useState('');
   const [sourceUrl, setSourceUrl] = useState('');
   const [selection, setSelection] = useState<Selection | null>(null);
@@ -87,6 +98,15 @@ export default function OnlineReadingPanel({
         Dán bài đọc, bôi đen một từ rồi bấm icon tra cứu. Chỉ lưu từ và URL
         nguồn; không lưu đoạn văn.
       </p>
+      {words.loading && (
+        <LoadingSkeleton label="Đang tải danh sách từ đã lưu" rows={1} />
+      )}
+      {words.error && (
+        <>
+          <StatusMessage tone="error">{words.error}</StatusMessage>
+          <Button onClick={words.reload}>Thử lại</Button>
+        </>
+      )}
       <FormField
         label="URL bài đọc (tuỳ chọn)"
         type="url"
@@ -115,7 +135,8 @@ export default function OnlineReadingPanel({
       >
         {text || 'Nội dung bài đọc sẽ hiển thị ở đây.'}
       </div>
-      {selection &&
+      {words.data &&
+        selection &&
         !opened &&
         createPortal(
           <button
@@ -126,7 +147,7 @@ export default function OnlineReadingPanel({
             aria-label={`Tra từ ${selection.word}`}
             onClick={() => setOpened(true)}
           >
-            <Icon name="search" />
+            <img src="/favicon.svg" alt="" width="30" height="30" />
           </button>,
           document.body,
         )}
@@ -141,8 +162,8 @@ export default function OnlineReadingPanel({
               <ReadingLookup
                 key={selection.word}
                 word={selection.word}
+                knownWords={words.data ?? []}
                 sourceUrl={sourceUrl}
-                rows={rows}
                 onlineEnabled={onlineEnabled}
                 voiceURI={voiceURI}
                 onSaved={onSaved}

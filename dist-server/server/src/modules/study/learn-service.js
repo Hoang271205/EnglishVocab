@@ -1,12 +1,14 @@
 import { randomUUID } from 'node:crypto';
 import { gradeAnswer } from '../../../../src/domain/grading.js';
 import { initialProgress } from '../../../../src/domain/scheduler.js';
-import { POLICY, ServiceError, } from '../../../../src/domain/types.js';
+import { POLICY, ServiceError } from '../../../../src/domain/types.js';
 import { client } from '../../database/mongo.js';
 import { sharedTopics } from '../library/collections.js';
 import { resolveReadyEntries } from '../entries/service.js';
 import { userProgress } from '../progress/collections.js';
-import { studyReceipts, studySessions, } from './collections.js';
+import { skipLearnWord } from './skip-learn-word.js';
+import { topicLearning, recordTopicPosition } from './topic-learning.js';
+import { studyReceipts, studySessions } from './collections.js';
 export function sessionView(session) {
     const item = session.items[session.index];
     const visible = !session.paused && Boolean(item);
@@ -18,13 +20,12 @@ export function sessionView(session) {
         phase: session.phase,
         index: session.index,
         total: session.items.length,
+        skippedCount: session.items.filter((item) => item.skipped).length,
         paused: session.paused,
         draftAnswer: session.draftAnswer,
         createdAt: session.createdAt,
         attemptId: item?.attemptId ?? null,
-        front: visible && session.phase === 'front'
-            ? item.entry
-            : null,
+        front: visible && session.phase === 'front' ? item.entry : null,
         hint: visible && session.phase === 'recall'
             ? {
                 meaningVi: item.entry.meaningVi,
@@ -52,9 +53,7 @@ export async function getActiveLearnSession(userId) {
         active: true,
         mode: 'learn',
     });
-    return session?.mode === 'learn'
-        ? sessionView(session)
-        : null;
+    return session?.mode === 'learn' ? sessionView(session) : null;
 }
 export async function createLearnSession(userId, topicId, limit) {
     return createLearningFromSource(userId, { kind: 'topic', topicId }, limit);
@@ -95,7 +94,11 @@ async function createLearningFromSource(userId, source, limit) {
             .toArray();
         const learnedIds = new Set(progress.map((item) => item.entryId));
         const byId = new Map(entries.map((entry) => [entry.id, entry]));
+        const cursor = topicId
+            ? await topicLearning.findOne({ _id: JSON.stringify([userId, topicId]) }, { session: mongoSession })
+            : null;
         const selected = ids
+            .slice(cursor?.nextIndex ?? 0)
             .filter((id) => !learnedIds.has(id))
             .flatMap((id) => {
             const entry = byId.get(id);
@@ -103,7 +106,7 @@ async function createLearningFromSource(userId, source, limit) {
         })
             .slice(0, limit);
         if (!selected.length) {
-            throw new ServiceError('not-found', 'Không còn từ mới đủ điều kiện học.');
+            throw new ServiceError('not-found', 'Chủ đề không còn từ mới đủ điều kiện học.');
         }
         const session = {
             _id: randomUUID(),
@@ -129,6 +132,9 @@ async function createLearningFromSource(userId, source, limit) {
     }));
 }
 export async function changeLearnSession(userId, sessionId, version, action, answer) {
+    if (action === 'skip') {
+        return sessionView(await skipLearnWord(userId, sessionId, version));
+    }
     const session = await requireSession(userId, sessionId);
     if (!session.active || session.version !== version) {
         throw new ServiceError('conflict', 'Phiên đã thay đổi. Hãy tải lại phiên.');
@@ -143,18 +149,15 @@ export async function changeLearnSession(userId, sessionId, version, action, ans
     else if (session.paused) {
         throw new ServiceError('conflict', 'Hãy tiếp tục phiên trước khi thao tác.');
     }
-    else if (action === 'recall' &&
-        session.phase === 'front') {
+    else if (action === 'recall' && session.phase === 'front') {
         session.phase = 'recall';
         session.draftAnswer = '';
     }
-    else if (action === 'front' &&
-        session.phase === 'recall') {
+    else if (action === 'front' && session.phase === 'recall') {
         session.phase = 'front';
         session.draftAnswer = '';
     }
-    else if (action === 'draft' &&
-        session.phase === 'recall') {
+    else if (action === 'draft' && session.phase === 'recall') {
         session.draftAnswer = answer;
     }
     else {
@@ -239,13 +242,16 @@ export async function submitLearnAnswer(userId, sessionId, version, attemptId, a
             progress,
             event,
         }, { session: mongoSession });
+        await recordTopicPosition(session, item.entry.id, mongoSession);
         session.index += 1;
         session.version += 1;
         session.draftAnswer = '';
         const complete = session.index >= session.items.length;
         session.phase = complete ? 'complete' : 'front';
         session.active = !complete;
-        await studySessions.replaceOne({ _id: sessionId, userId }, session, { session: mongoSession });
+        await studySessions.replaceOne({ _id: sessionId, userId }, session, {
+            session: mongoSession,
+        });
         return {
             kind: 'committed',
             progress,

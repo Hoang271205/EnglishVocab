@@ -1,13 +1,11 @@
 import { ServiceError } from '../../../../src/domain/types.js';
 import { sharedEntries } from '../library/collections.js';
 import { personalEntries } from '../personal/collections.js';
-export async function resolveReadyEntries(userId, entryIds, mongoSession) {
+export async function resolveReadyEntries(userId, entryIds, mongoSession, lockPersonal = true) {
     const ids = [...new Set(entryIds)];
     if (!ids.length)
         return [];
-    const sessionOptions = mongoSession
-        ? { session: mongoSession }
-        : {};
+    const sessionOptions = mongoSession ? { session: mongoSession } : {};
     const shared = await sharedEntries
         .find({
         _id: { $in: ids },
@@ -27,7 +25,7 @@ export async function resolveReadyEntries(userId, entryIds, mongoSession) {
         .toArray();
     // Khi chạy trong transaction tạo phiên, ghi vào cùng
     // document từ để phát hiện sửa/xoá đồng thời.
-    if (mongoSession) {
+    if (mongoSession && lockPersonal) {
         for (const document of personal) {
             const result = await personalEntries.updateOne({
                 _id: document._id,
@@ -40,8 +38,5 @@ export async function resolveReadyEntries(userId, entryIds, mongoSession) {
             }
         }
     }
-    return [
-        ...shared,
-        ...personal.map((document) => document.entry),
-    ];
+    return [...shared, ...personal.map((document) => document.entry)];
 }

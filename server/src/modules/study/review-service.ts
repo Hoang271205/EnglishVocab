@@ -1,3 +1,4 @@
+import type { ClientSession } from 'mongodb';
 import { randomUUID } from 'node:crypto';
 import type { ReviewBatchSize } from '../../../../src/shared/studyOptions.js';
 import { finishReview } from './finish-review.js';
@@ -17,10 +18,51 @@ import type { ReviewSession } from './collections.js';
 
 type ReviewAction = 'next' | 'pause' | 'resume' | 'draft' | 'finish';
 
-function reviewView(session: ReviewSession) {
+async function reviewView(
+  session: ReviewSession,
+  mongoSession?: ClientSession,
+) {
   const item = session.items[session.index];
+  // Count committed receipts so retries, reloads and ungraded skips stay accurate.
+  const totals =
+    session.phase === 'complete'
+      ? ((
+          await studyReceipts
+            .aggregate<{ answered: number; correct: number }>(
+              [
+                {
+                  $match: {
+                    userId: session.userId,
+                    sessionId: session._id,
+                    'event.mode': 'review',
+                  },
+                },
+                {
+                  $group: {
+                    _id: null,
+                    answered: { $sum: 1 },
+                    correct: { $sum: { $cond: ['$event.correct', 1, 0] } },
+                  },
+                },
+              ],
+              mongoSession ? { session: mongoSession } : {},
+            )
+            .toArray()
+        )[0] ?? { answered: 0, correct: 0 })
+      : null;
 
+  const preference =
+    item && session.phase === 'question' && !session.paused
+      ? await reviewPreferences.findOne(
+          { userId: session.userId, entryId: item.entry.id },
+          {
+            projection: { reviewEnabled: 1 },
+            ...(mongoSession ? { session: mongoSession } : {}),
+          },
+        )
+      : null;
   return {
+    reviewDisabled: preference?.reviewEnabled === false,
     id: session._id,
     mode: session.mode,
     version: session.version,
@@ -28,7 +70,10 @@ function reviewView(session: ReviewSession) {
     index: session.index,
     total: session.items.length,
     endedEarly: session.endedEarly ?? false,
-    reviewedCount: session.reviewedCount ?? null,
+    reviewedCount: totals?.answered ?? session.reviewedCount ?? null,
+    correctCount: totals?.correct ?? null,
+    incorrectCount: totals ? totals.answered - totals.correct : null,
+    ungradedCount: totals ? session.items.length - totals.answered : null,
     remainingCount: session.remainingCount ?? null,
     paused: session.paused,
     draftAnswer: session.draftAnswer,
@@ -76,15 +121,7 @@ async function requireReviewSession(userId: string, sessionId: string) {
 
 export async function getReviewSession(userId: string, sessionId: string) {
   const session = await requireReviewSession(userId, sessionId);
-  const item = session.items[session.index];
-  const preference =
-    item && session.phase === 'question'
-      ? await reviewPreferences.findOne({ userId, entryId: item.entry.id })
-      : null;
-  return {
-    ...reviewView(session),
-    reviewDisabled: preference?.reviewEnabled === false,
-  };
+  return reviewView(session);
 }
 
 export async function getActiveReviewSession(userId: string) {
@@ -118,55 +155,84 @@ export async function createReviewSession(
 
       const now = Date.now();
 
-      const disabled = await reviewPreferences
-        .find({ userId, reviewEnabled: false }, { session: mongoSession })
-        .toArray();
-
-      const disabledIds = new Set(disabled.map((item) => item.entryId));
-
-      const due = await userProgress
-        .find(
-          {
-            userId,
-            nextReviewAt: { $lte: now },
-          },
-          { session: mongoSession },
-        )
-        .sort({ nextReviewAt: 1, entryId: 1 })
-        .toArray();
-
-      const eligible = due.filter((item) => !disabledIds.has(item.entryId));
-
-      const resolved = await resolveReadyEntries(
-        userId,
-        eligible.map((item) => item.entryId),
-        mongoSession,
-      );
-
-      const entries = collection
-        ? resolved.filter((entry) => entry.collectionId === collection)
-        : resolved;
-
-      const byId = new Map(entries.map((entry) => [entry.id, entry]));
-
       const items: ReviewSession['items'] = [];
-
-      for (const progress of eligible) {
-        const entry = byId.get(progress.entryId);
-        const example = entry?.examples[0];
-
-        if (!entry || !example) continue;
-
-        items.push({
-          attemptId: randomUUID(),
-          entry,
-          expectedVersion: progress.version,
-          example,
-          cells: createMask(example.targetSurface),
-        });
-
-        if (items.length >= limit) break;
+      const batchSize = Math.max(50, limit * 2);
+      let after: { nextReviewAt: number; entryId: string } | undefined;
+      // Keyset batches bound document hydration even for a large overdue queue.
+      while (items.length < limit) {
+        const due = await userProgress
+          .find(
+            {
+              userId,
+              nextReviewAt: { $lte: now },
+              ...(after
+                ? {
+                    $or: [
+                      { nextReviewAt: { $gt: after.nextReviewAt } },
+                      {
+                        nextReviewAt: after.nextReviewAt,
+                        entryId: { $gt: after.entryId },
+                      },
+                    ],
+                  }
+                : {}),
+            },
+            {
+              session: mongoSession,
+              projection: { entryId: 1, version: 1, nextReviewAt: 1 },
+            },
+          )
+          .sort({ nextReviewAt: 1, entryId: 1 })
+          .limit(batchSize)
+          .toArray();
+        if (!due.length) break;
+        const disabled = await reviewPreferences
+          .find(
+            {
+              userId,
+              reviewEnabled: false,
+              entryId: { $in: due.map((item) => item.entryId) },
+            },
+            { session: mongoSession, projection: { entryId: 1 } },
+          )
+          .toArray();
+        const disabledIds = new Set(disabled.map((item) => item.entryId));
+        const eligible = due.filter((item) => !disabledIds.has(item.entryId));
+        // Resolve without locking every candidate. Only selected personal entries
+        // are locked below to preserve concurrent edit/delete protection.
+        const entries = await resolveReadyEntries(
+          userId,
+          eligible.map((item) => item.entryId),
+          mongoSession,
+          false,
+        );
+        const byId = new Map(
+          entries
+            .filter((entry) => !collection || entry.collectionId === collection)
+            .map((entry) => [entry.id, entry]),
+        );
+        for (const progress of eligible) {
+          const entry = byId.get(progress.entryId);
+          const example = entry?.examples[0];
+          if (!entry || !example) continue;
+          items.push({
+            attemptId: randomUUID(),
+            entry,
+            expectedVersion: progress.version,
+            example,
+            cells: createMask(example.targetSurface),
+          });
+          if (items.length >= limit) break;
+        }
+        const last = due[due.length - 1]!;
+        after = { nextReviewAt: last.nextReviewAt, entryId: last.entryId };
+        if (due.length < batchSize) break;
       }
+      const personalIds = items
+        .filter((item) => item.entry.collectionId === 'personal')
+        .map((item) => item.entry.id);
+      if (personalIds.length)
+        await resolveReadyEntries(userId, personalIds, mongoSession);
 
       if (!items.length) {
         throw new ServiceError(
@@ -319,7 +385,7 @@ export async function submitReviewAnswer(
           kind: 'committed' as const,
           progress: receipt.progress,
           event: receipt.event,
-          session: reviewView(session),
+          session: await reviewView(session, mongoSession),
         };
       }
 
@@ -444,7 +510,7 @@ export async function submitReviewAnswer(
         kind: 'committed' as const,
         progress,
         event,
-        session: reviewView(session),
+        session: await reviewView(session, mongoSession),
       };
     }),
   );

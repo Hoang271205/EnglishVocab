@@ -1,3 +1,4 @@
+export type { NotebookListRow, NotebookPage } from '../../../shared/notebook';
 import type { Entry, Progress } from '../../../domain/types';
 export interface NotebookRow {
   entry: Entry;

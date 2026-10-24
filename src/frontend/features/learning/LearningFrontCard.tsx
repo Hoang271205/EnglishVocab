@@ -1,3 +1,4 @@
+import Mascot from '../../components/mascot/Mascot';
 import type { Entry } from '../../../domain/types';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
@@ -21,6 +22,11 @@ export default function LearningFrontCard({
 
   return (
     <div className="study-card">
+      <Mascot
+        compact
+        className="study-mascot"
+        message="Nghe phát âm, đọc nghĩa rồi thử viết lại nhé!"
+      />
       <p className="word-type">{entry.partOfSpeech}</p>
       <h2 className="study-word">{entry.headword}</h2>
 
@@ -103,7 +109,7 @@ export default function LearningFrontCard({
       </details>
 
       <Button className="study-next" loading={busy} onClick={onNext}>
-        Next — Viết lại từ
+        Tiếp theo — Viết lại từ
       </Button>
     </div>
   );

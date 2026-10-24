@@ -8,14 +8,13 @@ export async function resolveReadyEntries(
   userId: string,
   entryIds: string[],
   mongoSession?: ClientSession,
+  lockPersonal = true,
 ): Promise<Entry[]> {
   const ids = [...new Set(entryIds)];
 
   if (!ids.length) return [];
 
-  const sessionOptions = mongoSession
-    ? { session: mongoSession }
-    : {};
+  const sessionOptions = mongoSession ? { session: mongoSession } : {};
 
   const shared = await sharedEntries
     .find(
@@ -44,7 +43,7 @@ export async function resolveReadyEntries(
 
   // Khi chạy trong transaction tạo phiên, ghi vào cùng
   // document từ để phát hiện sửa/xoá đồng thời.
-  if (mongoSession) {
+  if (mongoSession && lockPersonal) {
     for (const document of personal) {
       const result = await personalEntries.updateOne(
         {
@@ -66,8 +65,5 @@ export async function resolveReadyEntries(
     }
   }
 
-  return [
-    ...shared,
-    ...personal.map((document) => document.entry),
-  ];
+  return [...shared, ...personal.map((document) => document.entry)];
 }

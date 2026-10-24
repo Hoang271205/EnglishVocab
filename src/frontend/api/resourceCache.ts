@@ -1,33 +1,37 @@
 import { readCacheGeneration } from './readCache';
 
 interface CachedResource {
+  generation: number;
   data: unknown;
   freshUntil: number;
   retainUntil: number;
 }
 
 interface PendingResource {
+  generation: number;
   controller: AbortController;
   promise: Promise<unknown>;
 }
 
 const resources = new Map<string, CachedResource>();
 const pendingResources = new Map<string, PendingResource>();
-let generation = readCacheGeneration();
 const freshnessMs = 30_000;
 const retentionMs = 5 * 60_000;
 const maxResources = 24;
 
 function prune() {
-  const currentGeneration = readCacheGeneration();
-  if (generation !== currentGeneration) {
-    resources.clear();
-    for (const pending of pendingResources.values()) pending.controller.abort();
-    pendingResources.clear();
-    generation = currentGeneration;
+  for (const [key, pending] of pendingResources) {
+    if (pending.generation !== readCacheGeneration(key)) {
+      pending.controller.abort();
+      pendingResources.delete(key);
+    }
   }
   for (const [key, resource] of resources) {
-    if (resource.retainUntil <= Date.now()) resources.delete(key);
+    if (
+      resource.retainUntil <= Date.now() ||
+      resource.generation !== readCacheGeneration(key)
+    )
+      resources.delete(key);
   }
 }
 
@@ -44,13 +48,14 @@ export function loadResource<T>(
     pendingResources.get(oldestKey)!.controller.abort();
     pendingResources.delete(oldestKey);
   }
-  const expectedGeneration = generation;
+  const expectedGeneration = readCacheGeneration(key);
   const controller = new AbortController();
   const signal = AbortSignal.any([
     controller.signal,
     AbortSignal.timeout(30_000),
   ]);
   const request: PendingResource = {
+    generation: expectedGeneration,
     controller,
     promise: Promise.resolve()
       .then(() => {
@@ -94,12 +99,13 @@ export function cacheResource<T>(
   expectedGeneration: number,
 ) {
   prune();
-  if (expectedGeneration !== generation) return;
+  if (expectedGeneration !== readCacheGeneration(key)) return;
   resources.delete(key);
   if (resources.size >= maxResources) {
     resources.delete(resources.keys().next().value!);
   }
   resources.set(key, {
+    generation: expectedGeneration,
     data,
     freshUntil: Date.now() + freshnessMs,
     retainUntil: Date.now() + retentionMs,

@@ -1,4 +1,5 @@
-import { useLayoutEffect, useState } from 'react';
+import MascotImage from './MascotImage';
+import { useLayoutEffect, useRef, useState } from 'react';
 import DictionaryForm from './DictionaryForm';
 
 export type SelectedWord = {
@@ -17,27 +18,22 @@ export default function SelectionPopup({
   onClose,
 }: SelectionPopupProps) {
   const [open, setOpen] = useState(false);
+  const closeButton = useRef<HTMLButtonElement>(null);
   const [position, setPosition] = useState({ left: 8, top: 8 });
 
   useLayoutEffect(() => {
     function updatePosition() {
       const rect = selection.range.getBoundingClientRect();
-      const width = open
-        ? Math.min(340, window.innerWidth - 16)
-        : 36;
+      const width = open ? Math.min(400, window.innerWidth - 16) : 128;
 
       setPosition({
-        left: Math.max(
-          8,
-          Math.min(rect.left, window.innerWidth - width - 8),
-        ),
-        top: open
-          ? 8
-          : Math.max(8, rect.top - 44),
+        left: Math.max(8, Math.min(rect.left, window.innerWidth - width - 8)),
+        top: open ? 8 : Math.max(8, rect.top - 52),
       });
     }
 
     updatePosition();
+    if (open) closeButton.current?.focus({ preventScroll: true });
 
     window.addEventListener('resize', updatePosition);
     window.addEventListener('scroll', updatePosition, true);
@@ -63,7 +59,8 @@ export default function SelectionPopup({
         }}
         onClick={() => setOpen(true)}
       >
-        🔍
+        <MascotImage />
+        <span>Tra từ</span>
       </button>
     );
   }
@@ -76,10 +73,13 @@ export default function SelectionPopup({
       aria-label={`Tra từ ${selection.word}`}
     >
       <header>
-        <strong>EnglishVocab</strong>
+        <strong className="extension-brand">
+          <MascotImage /> EnglishVocab
+        </strong>
 
         <button
           type="button"
+          ref={closeButton}
           className="close-button"
           aria-label="Đóng popup"
           onClick={onClose}
@@ -89,10 +89,7 @@ export default function SelectionPopup({
       </header>
 
       <h2>{selection.word}</h2>
-      <DictionaryForm selection={selection} />
-      
-
-      
+      <DictionaryForm selection={selection} onClose={onClose} />
     </section>
   );
 }

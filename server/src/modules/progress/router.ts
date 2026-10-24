@@ -1,3 +1,4 @@
+import { progressSummary } from './summary.js';
 import { Router } from 'express';
 import { z } from 'zod';
 import { ServiceError } from '../../../../src/domain/types.js';
@@ -53,71 +54,8 @@ progressRouter.get('/', async (request, response) => {
 
 // Thống kê cho trang Ôn tập.
 progressRouter.get('/summary', async (request, response) => {
-  const userId = request.session.userId!;
-  const now = Date.now();
-
-  const [progress, disabledPreferences] = await Promise.all([
-    userProgress
-      .find(
-        { userId },
-        { projection: { _id: 0, entryId: 1, level: 1, nextReviewAt: 1 } },
-      )
-      .toArray(),
-
-    reviewPreferences
-      .find(
-        { userId, reviewEnabled: false },
-        { projection: { _id: 0, entryId: 1 } },
-      )
-      .toArray(),
-  ]);
-
-  const disabledIds = new Set(disabledPreferences.map((item) => item.entryId));
-
-  const levels: Record<1 | 2 | 3 | 4 | 5, number> = {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-  };
-
-  let dueCount = 0;
-  let enabledCount = 0;
-  let masteredCount = 0;
-  let nextReviewAt: number | null = null;
-
-  for (const item of progress) {
-    levels[item.level] += 1;
-
-    if (item.level === 5) {
-      masteredCount += 1;
-    }
-
-    if (disabledIds.has(item.entryId)) {
-      continue;
-    }
-
-    enabledCount += 1;
-
-    if (item.nextReviewAt <= now) {
-      dueCount += 1;
-    } else if (nextReviewAt === null || item.nextReviewAt < nextReviewAt) {
-      nextReviewAt = item.nextReviewAt;
-    }
-  }
-
   response.json({
-    summary: {
-      learnedCount: progress.length,
-      masteredCount,
-      enabledCount,
-      disabledCount: progress.length - enabledCount,
-      dueCount,
-      nextReviewAt,
-      levels,
-      serverTime: now,
-    },
+    summary: await progressSummary(request.session.userId!, Date.now()),
   });
 });
 
