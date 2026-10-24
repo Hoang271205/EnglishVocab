@@ -48,7 +48,8 @@
     "test:legacy": "node --import tsx --test legacy/local/tests/*.test.ts",
     "build:vercel": "npm run build:frontend",
     "db:prepare": "tsx server/src/scripts/prepare-database.ts",
-    "db:migrate:topics": "tsx server/src/scripts/migrate-topic-learning.ts"
+    "db:migrate:topics": "tsx server/src/scripts/migrate-topic-learning.ts",
+    "db:migrate:saved": "tsx server/src/scripts/migrate-saved-sources.ts"
   },
   "dependencies": {
     "@vercel/functions": "^3.10.3",

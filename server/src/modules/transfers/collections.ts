@@ -17,24 +17,11 @@ interface EntryLink {
   identityHash: string;
 }
 
-interface SavedSource {
-  _id: string;
-  userId: string;
-  entryId: string;
-  captureId: string;
-  selectedText: string;
-  sourceUrl: string;
-  capturedAt: number;
-}
+export const importReceipts = db.collection<ImportReceipt>('import_receipts');
 
-export const importReceipts =
-  db.collection<ImportReceipt>('import_receipts');
-
-export const extensionEntryLinks =
-  db.collection<EntryLink>('extension_entry_links');
-
-export const savedSources =
-  db.collection<SavedSource>('saved_sources');
+export const extensionEntryLinks = db.collection<EntryLink>(
+  'extension_entry_links',
+);
 
 export async function ensureTransferIndexes() {
   await importReceipts.createIndex({
@@ -45,11 +32,5 @@ export async function ensureTransferIndexes() {
   await extensionEntryLinks.createIndex({
     userId: 1,
     entryId: 1,
-  });
-
-  await savedSources.createIndex({
-    userId: 1,
-    entryId: 1,
-    capturedAt: -1,
   });
 }

@@ -5,6 +5,7 @@ import type { Entry, Topic } from '../../../src/domain/types.js';
 export interface ReviewAddition {
   entryId: string;
   headword: string;
+  disposition?: string;
 }
 
 export interface ReviewTopicRow {
@@ -177,20 +178,32 @@ export function buildReviewedImportPlan(input: {
     }
 
     const currentIds = row.currentWords.map((entry) => entry.id);
+    const proposedIds = row.proposedAdditions.map((entry) => entry.entryId);
+    const packageIds = [...currentIds, ...proposedIds];
     if (
       row.currentCount !== currentIds.length ||
-      !isDeepStrictEqual(publicTopic.entryIds, currentIds)
+      (!isDeepStrictEqual(publicTopic.entryIds, currentIds) && !isDeepStrictEqual(publicTopic.entryIds, packageIds))
     ) {
-      throw new Error(`Danh sách từ đang có trong báo cáo khác public content: ${topicId}.`);
+      throw new Error(`Public topic ${topicId} không còn ở trạng thái gốc hoặc đã publish đúng gói rà soát.`);
     }
     for (const currentId of currentIds) {
       const publicEntry = currentEntries.get(currentId);
       const packedEntry = reviewed.entriesById.get(currentId);
-      if (!publicEntry || !packedEntry || !isDeepStrictEqual(publicEntry, packedEntry)) {
+      if (
+        !publicEntry ||
+        !packedEntry ||
+        publicEntry.collectionId !== canonicalTopic.collectionId ||
+        !isDeepStrictEqual(publicEntry, packedEntry)
+      ) {
         throw new Error(`Pack đã thay đổi hoặc thiếu mục từ cũ ${currentId} ở ${topicId}.`);
       }
     }
-    const proposedIds = row.proposedAdditions.map((entry) => entry.entryId);
+    for (const publicEntryId of publicTopic.entryIds) {
+      const publicEntry = currentEntries.get(publicEntryId);
+      if (!publicEntry || publicEntry.collectionId !== canonicalTopic.collectionId) {
+        throw new Error(`Public topic ${topicId} đang tham chiếu entry sai collection: ${publicEntryId}.`);
+      }
+    }
     if (
       row.addedCount !== proposedIds.length ||
       row.totalAfter !== currentIds.length + proposedIds.length ||
@@ -222,15 +235,19 @@ export function buildReviewedImportPlan(input: {
       }
       if (
         normalized(entry.headword) !== normalized(proposed.headword) ||
-        entry.collectionId !== canonicalTopic.collectionId
+        entry.collectionId !== canonicalTopic.collectionId ||
+        entry.contentStatus !== 'ready'
       ) {
-        throw new Error(`Headword/collectionId không khớp ở ${topicId}: ${proposed.entryId}.`);
+        throw new Error(`Headword/collectionId/contentStatus không khớp ở ${topicId}: ${proposed.entryId}.`);
       }
       const baseline = currentEntries.get(entry.id);
       if (baseline && !isDeepStrictEqual(baseline, entry)) {
         throw new Error(`Entry ${entry.id} trong gói khác public content hiện hành.`);
       }
-      if (!baseline) assertEntrySourceQuality(entry);
+      if (proposed.disposition === 'reused-existing-entry' && !baseline) {
+        throw new Error(`Entry ${entry.id} được ghi là dùng lại nhưng chưa có trong public content.`);
+      }
+      if (proposed.disposition !== 'reused-existing-entry') assertEntrySourceQuality(entry);
       const previous = incomingEntries.get(entry.id);
       if (previous && !isDeepStrictEqual(previous, entry)) {
         throw new Error(`Hai topic đưa nội dung khác nhau cho cùng entry ID ${entry.id}.`);

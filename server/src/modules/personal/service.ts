@@ -6,14 +6,11 @@ import { client } from '../../database/mongo.js';
 import {
   extensionEntryLinks,
   importReceipts,
-  savedSources,
 } from '../transfers/collections.js';
-import {
-  reviewPreferences,
-  userProgress,
-} from '../progress/collections.js';
+import { reviewPreferences, userProgress } from '../progress/collections.js';
 import { studyReceipts, studySessions } from '../study/collections.js';
 import { personalEntries } from './collections.js';
+import { enrollSavedEntry } from '../transfers/enroll-saved-entry.js';
 
 function buildEntry(
   input: Record<string, unknown>,
@@ -188,6 +185,13 @@ export async function updatePersonalEntry(
         throw new ServiceError('conflict', 'Từ vừa thay đổi. Hãy tải lại.');
       }
 
+      if (candidate.contentStatus === 'ready' && !progress) {
+        const captured = await importReceipts.findOne(
+          { userId, entryId, deleted: false },
+          { session: mongoSession },
+        );
+        if (captured) await enrollSavedEntry(userId, candidate, mongoSession);
+      }
       return { entry: candidate, copied: false };
     }),
   );
@@ -278,10 +282,6 @@ export async function deletePersonalEntry(
       );
 
       await reviewPreferences.deleteMany(
-        { userId, entryId },
-        { session: mongoSession },
-      );
-      await savedSources.deleteMany(
         { userId, entryId },
         { session: mongoSession },
       );
