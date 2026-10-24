@@ -2,6 +2,8 @@ import Icon from '../../components/ui/Icon';
 import { Fragment } from 'react';
 import Button from '../../components/ui/Button';
 import EntryDetails from './EntryDetails';
+import PersonalEntryEditor from './PersonalEntryEditor';
+import type { Entry } from '../../../domain/types';
 import type { NotebookRow } from './notebook.types';
 interface Props {
   title: string;
@@ -10,7 +12,10 @@ interface Props {
   busy: boolean;
   voiceURI: string | null;
   onSelect: (id: string | null) => void;
+  editor: NotebookRow | null;
   onEdit: (row: NotebookRow) => void;
+  onSave: (entry: Entry) => Promise<void>;
+  onCancelEdit: () => void;
   onDelete: (row: NotebookRow) => void;
   onReview: (row: NotebookRow, enabled: boolean) => void;
   onLearn: (row: NotebookRow) => void;
@@ -95,14 +100,24 @@ export default function NotebookStack(props: Props) {
               </div>
             </div>
             <div id={`entry-${row.entry.id}`} hidden={!selected}>
-              {selected && (
-                <EntryDetails
-                  row={row}
-                  voiceURI={props.voiceURI}
-                  onClose={() => props.onSelect(null)}
-                  onEdit={() => props.onEdit(row)}
-                />
-              )}
+              {selected &&
+                (props.editor?.entry.id === row.entry.id ? (
+                  <PersonalEntryEditor
+                    key={props.editor.entry.id}
+                    entry={props.editor.entry}
+                    learned={Boolean(props.editor.progress)}
+                    busy={props.busy}
+                    onSave={props.onSave}
+                    onCancel={props.onCancelEdit}
+                  />
+                ) : (
+                  <EntryDetails
+                    row={row}
+                    voiceURI={props.voiceURI}
+                    onClose={() => props.onSelect(null)}
+                    onEdit={() => props.onEdit(row)}
+                  />
+                ))}
             </div>
           </Fragment>
         );

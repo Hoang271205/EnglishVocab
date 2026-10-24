@@ -66,9 +66,7 @@ export default function OnlineNotebookPage({
       {model.resource.error && (
         <StatusMessage tone="error">{model.resource.error}</StatusMessage>
       )}
-      {model.resource.loading && (
-        <LoadingSkeleton label="Đang tải sổ tay" />
-      )}
+      {model.resource.loading && <LoadingSkeleton label="Đang tải sổ tay" />}
       {model.cleanup.length > 0 && (
         <Button
           variant="secondary"
@@ -78,15 +76,9 @@ export default function OnlineNotebookPage({
           Dọn cache còn lại ({model.cleanup.length})
         </Button>
       )}
-      {model.editor && (
+      {model.editor === 'new' && (
         <PersonalEntryEditor
-          key={model.editor === 'new' ? 'new' : model.editor.entry.id}
-          {...(model.editor === 'new'
-            ? {}
-            : {
-                entry: model.editor.entry,
-                learned: Boolean(model.editor.progress),
-              })}
+          key="new"
           busy={model.busy}
           onSave={model.save}
           onCancel={() => model.setEditor(null)}
@@ -103,7 +95,13 @@ export default function OnlineNotebookPage({
             busy={model.busy}
             voiceURI={learning.voiceURI}
             onSelect={model.setSelectedId}
-            onEdit={model.setEditor}
+            editor={model.editor === 'new' ? null : model.editor}
+            onEdit={(row) => {
+              model.setSelectedId(row.entry.id);
+              model.setEditor(row);
+            }}
+            onSave={model.save}
+            onCancelEdit={() => model.setEditor(null)}
             onDelete={(row) => void model.remove(row)}
             onReview={(row, value) => void model.toggle(row, value)}
             canLearn={
