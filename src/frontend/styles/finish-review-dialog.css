@@ -1,0 +1,176 @@
+.finish-review-dialog {
+  width: min(430px, calc(100vw - 32px));
+  max-height: calc(100dvh - 40px);
+  padding: 0;
+  overflow-y: auto;
+  border: 1px solid #e0e8d6;
+  border-radius: 26px;
+  background: #fffffa;
+  color: #35523a;
+  box-shadow: 0 24px 85px #1f3b2840;
+}
+.finish-review-dialog[open] {
+  animation: finish-review-enter 200ms ease-out both;
+}
+.finish-review-dialog::backdrop {
+  background: #20372766;
+  backdrop-filter: blur(4px);
+}
+.finish-review-dialog-content {
+  position: relative;
+  padding: 24px 28px 28px;
+  text-align: center;
+}
+.finish-review-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #e6ecdf;
+  border-radius: 50%;
+  background: #f5f8ef;
+  color: #789067;
+}
+.finish-review-close:hover:not(:disabled) {
+  background: #eaf1df;
+}
+.finish-review-close svg {
+  width: 16px;
+  height: 16px;
+}
+.finish-review-scene {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 150px;
+  height: 139px;
+  margin: 2px auto 10px;
+  isolation: isolate;
+}
+.finish-review-scene > span {
+  position: absolute;
+  inset: 22px 6px 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 35%, #f6f8de, #e9f1dc);
+  z-index: -1;
+}
+.finish-review-scene .mascot-figure {
+  width: 132px;
+}
+.finish-review-scene .mascot-ground {
+  height: 7px;
+}
+.finish-review-eyebrow {
+  margin: 0 0 10px;
+  color: #7b8f65;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  line-height: 1.5;
+}
+.finish-review-dialog h2 {
+  margin: 0;
+  color: #2b4b32;
+  font-size: 23px;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+.finish-review-description {
+  margin: 13px 0 17px;
+  color: #728166;
+  font-size: 13px;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+.finish-review-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 13px 14px;
+  border: 1px solid #e5ebd8;
+  border-radius: 13px;
+  background: #f2f6e9;
+  text-align: left;
+}
+.finish-review-note > svg {
+  flex: 0 0 17px;
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+  color: #82a260;
+}
+.finish-review-note p {
+  margin: 0;
+  color: #677d53;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.finish-review-buttons {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 11px;
+  margin-top: 23px;
+}
+.finish-review-buttons .ui-button {
+  min-height: 45px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.finish-review-buttons .ui-button > svg {
+  width: 16px;
+  height: 16px;
+}
+.finish-review-buttons .ui-button--secondary {
+  background: #fffef9;
+  border-color: #dce6d0;
+  color: #62794f;
+}
+.finish-review-dialog button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+@keyframes finish-review-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+[data-motion='reduced'] .finish-review-dialog,
+[data-motion='reduced'] .finish-review-dialog * {
+  animation: none !important;
+  transition: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .finish-review-dialog,
+  .finish-review-dialog * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media (max-width: 480px) {
+  .finish-review-dialog-content {
+    padding: 22px;
+  }
+  .finish-review-dialog h2 {
+    font-size: 21px;
+  }
+  .finish-review-buttons {
+    grid-template-columns: 1fr;
+  }
+  .finish-review-buttons .ui-button {
+    min-height: 46px;
+    font-size: 13px;
+  }
+}

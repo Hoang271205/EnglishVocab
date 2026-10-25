@@ -71,6 +71,9 @@ export default function AuthLayout({
         <div className="auth-main">
           <header className="login-topbar">
             <h1 id="auth-title">{title}</h1>
+            <a className="auth-home-link" href="#/">
+              <Icon name="arrow" /> Về trang giới thiệu
+            </a>
           </header>
           <div className="login-content">{children}</div>
         </div>

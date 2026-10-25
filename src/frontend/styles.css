@@ -23,3 +23,10 @@
 @import './styles/review-feedback.css';
 
 @import './styles/mascot-notes.css';
+
+@import './styles/welcome.css';
+@import './styles/experience.css';
+
+@import './styles/finish-review-dialog.css';
+
+@import './styles/notebook-controls.css';
