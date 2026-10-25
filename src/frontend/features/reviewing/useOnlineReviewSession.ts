@@ -1,3 +1,4 @@
+import { announceFeedback } from '../../audio/experience';
 import { useCallback, useEffect, useState } from 'react';
 import { assembleAnswer } from '../../../domain/cloze';
 import { ApiError } from '../../api/client';
@@ -12,6 +13,7 @@ export function useOnlineReviewSession(sessionId: string, onExit: () => void) {
 
   const [letters, setLetters] = useState<string[]>([]);
   const [notice, setNotice] = useState<string | null>(null);
+  const [finishConfirmationOpen, setFinishConfirmationOpen] = useState(false);
 
   const action = useAsyncAction();
 
@@ -69,6 +71,8 @@ export function useOnlineReviewSession(sessionId: string, onExit: () => void) {
 
     if (next) {
       apply(next);
+      if (next.phase === 'complete' && (next.reviewedCount ?? 0) > 0)
+        announceFeedback('complete', `review-complete:${next.id}`);
 
       if (type === 'draft') {
         setNotice('Bản nháp đã lưu.');
@@ -91,18 +95,35 @@ export function useOnlineReviewSession(sessionId: string, onExit: () => void) {
       reviewApi.submit(session, answer, forgotten, signal),
     );
 
-    if (result) apply(result.session);
+    if (result) {
+      apply(result.session);
+      announceFeedback(
+        result.event.correct ? 'correct' : 'retry',
+        `review-answer:${result.event.id}`,
+      );
+    }
+  }
+
+  function requestFinish() {
+    if (!session || blocked || session.phase === 'complete') return;
+    setFinishConfirmationOpen(true);
+  }
+
+  function cancelFinish() {
+    if (!busy) setFinishConfirmationOpen(false);
   }
 
   async function finish() {
-    if (!session || blocked || session.phase === 'complete') return;
     if (
-      !window.confirm(
-        'Kết thúc lượt ôn? Kết quả đã gửi được giữ lại. Câu chưa gửi sẽ không được chấm; các từ chưa làm vẫn chờ ôn lần sau.',
-      )
+      !finishConfirmationOpen ||
+      !session ||
+      blocked ||
+      session.phase === 'complete'
     )
       return;
     await transition('finish');
+    // On errors, expose the existing reload/retry UI rather than hiding it behind the dialog.
+    setFinishConfirmationOpen(false);
   }
 
   async function exit() {
@@ -139,6 +160,9 @@ export function useOnlineReviewSession(sessionId: string, onExit: () => void) {
     transition,
     submit,
     finish,
+    requestFinish,
+    cancelFinish,
+    finishConfirmationOpen,
     exit,
     reload,
   };

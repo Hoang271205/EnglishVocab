@@ -59,7 +59,12 @@ export default function OnlineNotebookPage({
       <p className="eyebrow">SỔ TAY CỦA BẠN</p>
       <div className="cloud-toolbar">
         <h1>Sổ tay</h1>
-        <Button disabled={model.busy} onClick={() => model.setEditor('new')}>
+        <Button
+          className="notebook-add-button"
+          icon="plus"
+          disabled={model.busy}
+          onClick={() => model.setEditor('new')}
+        >
           Thêm từ
         </Button>
       </div>
@@ -68,6 +73,9 @@ export default function OnlineNotebookPage({
         <p>{data?.total ?? 0} từ phù hợp</p>
         <Button
           variant="secondary"
+          className="notebook-refresh-button"
+          icon="refresh"
+          loading={model.resource.refreshing}
           disabled={model.busy || model.resource.loading}
           onClick={model.refresh}
         >

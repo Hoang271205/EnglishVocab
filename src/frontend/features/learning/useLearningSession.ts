@@ -1,3 +1,4 @@
+import { announceFeedback } from '../../audio/experience';
 import { useCallback, useEffect, useState } from 'react';
 import { ApiError } from '../../api/client';
 import { useAsyncAction } from '../../hooks/useAsyncAction';
@@ -51,6 +52,8 @@ export function useLearningSession(sessionId: string, onExit: () => void) {
 
     if (next) {
       apply(next);
+      if (next.phase === 'complete' && next.total > next.skippedCount)
+        announceFeedback('complete', `learn-complete:${next.id}`);
 
       if (type === 'draft') {
         setNotice('Bản nháp đã lưu.');
@@ -76,11 +79,19 @@ export function useLearningSession(sessionId: string, onExit: () => void) {
     if (!result) return;
 
     if (result.kind === 'retry') {
+      announceFeedback(
+        'retry',
+        `learn-retry:${session.attemptId}:${Date.now()}`,
+      );
       setNotice('Chưa đúng. Bạn thử viết lại nhé.');
       return;
     }
 
     apply(result.session);
+    announceFeedback(
+      result.session.phase === 'complete' ? 'complete' : 'correct',
+      `learn-answer:${result.event.id}`,
+    );
 
     const nextReview = new Date(result.progress.nextReviewAt).toLocaleString(
       'vi-VN',

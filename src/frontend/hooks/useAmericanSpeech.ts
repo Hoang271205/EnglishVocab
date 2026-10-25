@@ -1,11 +1,10 @@
+import { duckMusic } from '../audio/experience';
 import { useEffect, useRef, useState } from 'react';
 import { AmericanSpeech } from '../../audio/controller';
 import type { VoiceOption } from '../../audio/controller';
 import { getErrorMessage } from '../api/client';
 
-export function useAmericanSpeech(
-  preferredVoiceURI: string | null,
-) {
+export function useAmericanSpeech(preferredVoiceURI: string | null) {
   const engine = useRef<AmericanSpeech | null>(null);
   const [voices, setVoices] = useState<VoiceOption[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -13,9 +12,7 @@ export function useAmericanSpeech(
   useEffect(() => {
     if (!('speechSynthesis' in window)) return;
 
-    const speech = new AmericanSpeech(
-      window.speechSynthesis,
-    );
+    const speech = new AmericanSpeech(window.speechSynthesis);
 
     engine.current = speech;
 
@@ -45,14 +42,15 @@ export function useAmericanSpeech(
       const available = speech.voices();
 
       speech.select(
-        available.some(
-          (voice) => voice.id === preferredVoiceURI,
-        )
+        available.some((voice) => voice.id === preferredVoiceURI)
           ? preferredVoiceURI
           : null,
       );
 
       speech.speak(text, slow);
+      duckMusic(
+        Math.min(20000, Math.max(2200, (text.length / (slow ? 8 : 12)) * 1000)),
+      );
       setError(null);
     } catch (cause) {
       setError(getErrorMessage(cause));

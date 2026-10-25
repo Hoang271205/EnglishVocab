@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 export type AuthRoute =
-  'login' | 'register' | 'forgot-password' | 'reset-password' | 'not-found';
+  | 'welcome'
+  | 'login'
+  | 'register'
+  | 'forgot-password'
+  | 'reset-password'
+  | 'not-found';
 function readRoute() {
   const route = window.location.hash
     ? window.location.hash.slice(1)
@@ -14,9 +19,11 @@ function readRoute() {
     name === 'forgot-password' ||
     name === 'reset-password'
       ? name
-      : !name || name === 'login'
-        ? 'login'
-        : 'not-found';
+      : !name
+        ? 'welcome'
+        : name === 'login'
+          ? 'login'
+          : 'not-found';
   return { page, token: new URLSearchParams(query).get('token') ?? '' };
 }
 export function useAuthRoute() {

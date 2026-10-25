@@ -1,3 +1,5 @@
+import ExperienceControls from './audio/ExperienceControls';
+import FeedbackEffects from './audio/FeedbackEffects';
 import { Suspense } from 'react';
 import LoadingSkeleton from './components/ui/LoadingSkeleton';
 import { createRoot } from 'react-dom/client';
@@ -16,6 +18,8 @@ createRoot(rootElement).render(
     <Suspense fallback={<LoadingSkeleton label="Đang tải giao diện" />}>
       <App />
     </Suspense>
+    <ExperienceControls />
+    <FeedbackEffects />
     <SpeedInsights />
   </>,
 );

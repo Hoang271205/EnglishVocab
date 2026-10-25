@@ -1,3 +1,4 @@
+import FinishReviewDialog from './FinishReviewDialog';
 import Mascot from '../../components/mascot/Mascot';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
@@ -33,6 +34,13 @@ export default function ReviewSessionPage({
 
   return (
     <section className="session-page">
+      {model.finishConfirmationOpen && (
+        <FinishReviewDialog
+          busy={model.busy}
+          onCancel={model.cancelFinish}
+          onConfirm={() => void model.finish()}
+        />
+      )}
       {model.error && (
         <div className="dashboard-error">
           <StatusMessage tone="error">
@@ -195,7 +203,7 @@ export default function ReviewSessionPage({
               <Button
                 variant="secondary"
                 disabled={model.blocked}
-                onClick={() => void model.finish()}
+                onClick={model.requestFinish}
               >
                 Kết thúc lượt ôn
               </Button>

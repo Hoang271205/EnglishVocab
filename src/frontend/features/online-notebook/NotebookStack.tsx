@@ -71,14 +71,16 @@ export default function NotebookStack(props: Props) {
               </button>
               <div className="cloud-row-actions">
                 {row.entry.contentStatus === 'ready' && (
-                  <label className="cloud-check">
+                  <label className="cloud-check notebook-review-toggle">
                     <input
                       type="checkbox"
+                      role="switch"
+                      aria-label={`Ôn tập từ ${row.entry.headword}`}
                       checked={row.reviewEnabled}
                       disabled={props.busy}
                       onChange={(e) => props.onReview(row, e.target.checked)}
                     />
-                    Ôn tập
+                    <span>{row.reviewEnabled ? 'Đang ôn' : 'Tạm tắt'}</span>
                   </label>
                 )}
                 {row.entry.collectionId === 'personal' && (
