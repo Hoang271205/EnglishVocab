@@ -1057,12 +1057,35 @@
 }
 @media (max-width: 760px) {
   .welcome-header {
-    min-height: 80px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'brand navigation' 'account account';
+    min-height: 0;
     width: calc(100% - 36px);
-    gap: 12px;
+    gap: 12px 10px;
+    padding: 17px 0 18px;
+  }
+  .welcome-header > a {
+    grid-area: brand;
+    min-width: 0;
+    justify-self: start;
   }
   .welcome-header nav {
-    display: none;
+    grid-area: navigation;
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+    margin: 0;
+  }
+  .welcome-header nav button {
+    min-height: 40px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .welcome-header nav button:hover {
+    background: #eaf1df;
   }
   .welcome-header .brand {
     font-size: 17px;
@@ -1074,11 +1097,40 @@
     border-radius: 10px;
   }
   .welcome-header-actions {
-    gap: 14px;
+    grid-area: account;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
     font-size: 12px;
   }
+  .welcome-header-actions > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 44px;
+    padding: 11px 12px;
+    border: 1px solid #d7e3c8;
+    border-radius: 12px;
+    color: #47663c;
+    background: #f4f7ec;
+    text-align: center;
+  }
+  .welcome-header-actions > a:first-child:hover {
+    background: #eaf2df;
+    border-color: #bdd0a7;
+  }
   .welcome-header-actions .welcome-button--small {
-    display: none;
+    display: inline-flex;
+    min-height: 44px;
+    padding: 11px 12px;
+    color: #fff;
+    font-size: 12px;
+    gap: 8px;
+  }
+  .welcome-header-actions .welcome-button--small svg {
+    width: 16px;
+    height: 16px;
   }
   .welcome-hero {
     width: calc(100% - 40px);

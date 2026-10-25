@@ -1,135 +1,192 @@
-# EnglishVocab
+<p align="center">
+  <img src="docs/assets/readme-cover.svg" alt="EnglishVocab — Gieo một từ mới. Mở thêm thế giới." width="100%" />
+</p>
 
-Ứng dụng học và ôn từ vựng: React/TypeScript, API Express và MongoDB. Dữ liệu cá nhân thuộc tài khoản; extension đăng nhập riêng và lưu từ trực tiếp qua API.
+<div align="center">
+  <img src="public/images/mascot/englishvocab-mascot.webp" alt="Linh thú EnglishVocab màu xanh lá, người bạn đồng hành trên hành trình học từ vựng" width="170" />
+  <h3>Mỗi ngày một chút, nhớ lâu hơn.</h3>
+  <p>Học từ mới · Ôn đúng lúc · Giữ những từ bạn yêu thích</p>
+  <p>
+    <a href="https://englishvocab-ten.vercel.app"><strong>Mở website ↗</strong></a>
+    &nbsp; · &nbsp;
+    <a href="#trải-nghiệm">Khám phá</a>
+    &nbsp; · &nbsp;
+    <a href="#bắt-đầu-tại-máy-của-bạn">Cài đặt</a>
+    &nbsp; · &nbsp;
+    <a href="#extension--gặp-từ-hay-lưu-lại-ngay">Extension</a>
+    &nbsp; · &nbsp;
+    <a href="#dành-cho-người-phát-triển">Tài liệu</a>
+  </p>
+</div>
 
-## Cấu trúc hiện tại
+---
 
-```text
-src/
-  frontend/       Giao diện online, component, hook và API client
-  domain/         Kiểu dữ liệu và quy tắc học/ôn dùng chung
-  shared/schemas/ Giao thức capture và snapshot dùng bởi extension
-  audio/          Giọng đọc của trình duyệt
-  dictionary/     Adapter tra từ và chuyển kết quả thành từ vựng
-  content/        Schema nội dung, IPA và helper biên soạn
-server/           API, đăng nhập, nghiệp vụ và MongoDB
-extension/        Tra từ, đăng nhập và lưu trực tiếp
-scripts/          Build, seed và công cụ dữ liệu
-tests/            Các bài test dùng chung còn áp dụng
-legacy/local/     Source, test và công cụ của bản IndexedDB cũ
-docs/mockups/     Hai HTML mẫu thiết kế ban đầu
-content/          Dữ liệu biên soạn, nguồn và kết quả lọc
-public/           Nội dung tĩnh dùng khi build/seed
-```
+## Một góc học có người bạn đồng hành
 
-CSS nền và CSS dùng chung nằm trong `src/frontend/styles/` và `styles/shared/`; thứ tự import giữ nguyên để bảo toàn giao diện. Component biểu đồ nằm trong `components/charts/`, ô nhập cloze trong `components/study/`.
+**EnglishVocab** là ứng dụng học và ôn từ vựng tiếng Anh với sổ tay cá nhân, lịch ôn và một linh thú nhỏ luôn ở bên. Giao diện mang tông xanh rừng, kem và vàng ấm; các tương tác nhẹ nhàng giúp mỗi lượt học bớt khô khan.
 
-## Chạy phiên bản MongoDB
+Bạn có thể bắt đầu bằng một từ, lưu những điều mình gặp khi đọc và quay lại để nhớ thêm từng chút. Tiến độ được lưu theo tài khoản trong MongoDB; web và Chrome extension cùng làm việc qua API.
 
-Giữ cấu hình `.env` đang dùng; không đưa thông tin kết nối MongoDB hoặc secret vào frontend/extension. Node.js từ 22.14.
+## Trải nghiệm
+
+### 🌱 Học theo nhịp của bạn
+
+- Khám phá các chủ đề **IELTS** và **giao tiếp hằng ngày**, trình bày dạng danh sách dễ theo dõi.
+- Nghe phát âm Anh–Mỹ, xem nghĩa và ví dụ, rồi thử viết lại từ vừa học.
+- Từ viết đúng được thêm vào sổ tay và lịch ôn. Từ bỏ qua không được thêm vào lịch ôn.
+- Có thể lưu nháp, tạm dừng và tiếp tục phiên đang dở.
+
+### 📖 Một cuốn sổ tay của riêng mình
+
+- Quản lý **Từ đã học** và **Từ của tôi**; tự thêm hoặc chỉnh sửa từ cá nhân.
+- Tìm bằng từ tiếng Anh hoặc nghĩa tiếng Việt; lọc CEFR, mức ghi nhớ, trạng thái và từ đến hạn.
+- Bật/tắt ôn tập cho từng từ; mở chi tiết khi cần xem ví dụ, phát âm và nguồn dữ liệu.
+- Danh sách phân trang, có công cụ đọc văn bản và lưu từ khi đọc.
+
+### ✨ Quay lại, ghi nhớ, tiến bộ
+
+- Ôn các từ đến hạn bằng bài điền chữ còn thiếu.
+- Xem phản hồi đúng/sai, mức ghi nhớ và lần ôn tiếp theo.
+- Kết thúc phiên có tổng kết; các câu chưa gửi không tự bị tính là sai.
+- Linh thú hướng dẫn theo tình trạng người học, đồng hành cả ở các trang tài khoản và trang 404.
+
+> **Level ghi nhớ 1–5** phản ánh tiến độ ôn tập. **CEFR A1–C2** mô tả mức độ ngôn ngữ của từ — đây là hai thông tin riêng biệt.
+
+**Lịch chờ khi học/ôn đúng:** level 1 — 2 giờ; level 2 — 8 giờ; level 3 — 24 giờ; level 4 — 48 giờ; level 5 — ôn duy trì mỗi 5 ngày.
+
+Khi trả lời sai: **level 1 giữ nguyên; level 2–3 về level 1; level 4 về level 3; level 5 về level 4**. Lượt ôn tiếp theo được đặt sau 2 giờ.
+
+### 🎵 Dễ thương, nhưng vẫn để bạn tập trung
+
+Trang giới thiệu có **lượt học thử**, chưa cần tài khoản và không lưu tiến độ. Khi sẵn sàng, chọn **Tạo tài khoản** hoặc **Đăng nhập** để bắt đầu hành trình riêng.
+
+Nút **Không gian học** cho phép bật/tắt hiệu ứng âm thanh, chọn nhạc nền, chỉnh âm lượng và giảm chuyển động. Nhạc nền mặc định tắt, cần thao tác của người dùng để phát, tự dừng khi rời tab và nhỏ xuống khi nghe phát âm. Các tuỳ chọn trải nghiệm được nhớ trên trình duyệt đang dùng.
+
+<details>
+<summary><strong>Mình sẽ học như thế nào?</strong></summary>
+
+1. **Chọn một chủ đề.** Bắt đầu từ những từ bạn cần hoặc thấy hứng thú.
+2. **Nghe, hiểu và viết lại.** Từ đã học được giữ trong sổ tay cùng tiến độ cá nhân.
+3. **Gặp lại từ khi đến hạn.** Mỗi lần ôn là một cơ hội củng cố trí nhớ.
+
+Linh thú sẽ gợi ý bước tiếp theo: học những từ đầu tiên, tiếp tục bài đang dở hoặc quay lại ôn những từ đang chờ.
+
+</details>
+
+## Bắt đầu tại máy của bạn
+
+Cần **Node.js 22.x**, npm và **MongoDB hỗ trợ transaction** — ví dụ MongoDB Atlas hoặc replica set.
+
+### 1. Cài dependencies và cấu hình môi trường
 
 ```sh
 npm ci
+```
+
+Nếu chưa có `.env`, tạo từ [.env.example](.env.example) rồi điền cấu hình của bạn. Nếu đã có, giữ lại cấu hình hiện tại.
+
+Các biến chính: `MONGODB_URI`, `MONGODB_DB`, `SESSION_SECRET`, `APP_ORIGIN`, `HOST` và `PORT`. `SESSION_SECRET` cần ít nhất 32 ký tự; `APP_ORIGIN` phải khớp origin bạn mở trên trình duyệt.
+
+### 2. Chuẩn bị database khi thiết lập lần đầu
+
+```sh
+npm run db:prepare
+npm run library:seed
+```
+
+Các lệnh này **ghi vào database được cấu hình**: chuẩn bị index/TTL/bộ đếm và nạp thư viện. Với database đang dùng, xem [hướng dẫn phát triển](docs/DEVELOPMENT.md) trước khi chạy lại seed hoặc migration.
+
+### 3. Build và mở server local
+
+```sh
 npm run build
 npm run dev:server
 ```
 
-Mở origin đã cấu hình trên server (môi trường local hiện dùng `http://127.0.0.1:3001`). API cũng phục vụ giao diện đã build từ `dist/`.
+Mở **http://127.0.0.1:3001** nếu dùng cấu hình mẫu. Express phục vụ cả giao diện đã build và API trên cùng origin.
+
+Trang giới thiệu ở `/` hoặc `#/`. Các trang tài khoản: `#/login`, `#/register`, `#/forgot-password` và `#/reset-password?token=...`.
+
+<details>
+<summary><strong>Chỉ build, chưa chạy ứng dụng</strong></summary>
 
 ```sh
-npm run user:create
-npm run library:seed
+NODE_ENV=production npm run build
+npm run build:server
+npm run build:extension
 ```
 
-Hai lệnh trên dùng khi cần tạo tài khoản và nhập thư viện vào database đã cấu hình. `npm start` vẫn là trình phục vụ file tĩnh cổng 5173; để dùng đăng nhập/API cùng origin, chạy server MongoDB như trên.
+`build` kiểm tra TypeScript và build FE. `build:server` biên dịch API. `build:extension` tạo gói extension cho origin đang cấu hình. Các lệnh này không khởi động web hoặc chạy bộ test.
 
-## Extension
+</details>
+
+## Extension — gặp từ hay, lưu lại ngay
+
+**Bôi đen → Tra nghĩa → Kiểm tra nội dung → Lưu vào tài khoản.**
 
 ```sh
 npm run build:extension
 ```
 
-Load unpacked folder `dist-extension/`, mở icon extension để đăng nhập. Tài khoản extension độc lập với phiên web. Bôi đen → icon → chọn nghĩa/kiểm tra bản dịch → Lưu từ → API → MongoDB. Chỉ báo thành công khi server xác nhận; lượt lưu mới không ghi hàng đợi offline.
+1. Mở `chrome://extensions`, bật **Developer mode**.
+2. Chọn **Load unpacked** và mở thư mục `dist-extension/`.
+3. Bấm icon EnglishVocab, đăng nhập rồi thử bôi đen một từ trên trang đang đọc.
 
-`APP_ORIGIN` hoặc `EXTENSION_APP_ORIGIN` quyết định origin lúc build. Khi deploy, cấu hình domain HTTPS và build/reload extension cho domain đó. Không đóng gói `.env` trong extension.
+Extension đăng nhập riêng với phiên web. Lượt lưu mới gửi trực tiếp qua API và chỉ báo thành công khi server xác nhận. Khi build cho website đã deploy, đặt `EXTENSION_APP_ORIGIN` thành origin HTTPS của website rồi build/reload extension.
 
-Sổ tay → Extension chỉ nhận hàng đợi cũ hoặc đồng bộ thư viện khi hai bên cùng tài khoản. Giữ `extension/queue.ts` để chuyển dữ liệu tồn từ phiên bản cũ; đây không phải đường lưu từ mới.
+Xem thêm về đồng bộ, hàng đợi cũ và cấu hình domain trong [tài liệu phát triển](docs/DEVELOPMENT.md#extension-và-đồng-bộ).
 
-## Code local cũ và kiểm kê
+## Dành cho người phát triển
 
-`legacy/local/` giữ source cũ cùng test và công cụ lịch sử, đã được đưa ra ngoài phạm vi build/lint mặc định. Các import đến phần dùng chung đã được cập nhật. Không chạy các browser harness cũ để kết luận chất lượng phiên bản MongoDB.
+**React + TypeScript** ở frontend, **Express + MongoDB** ở backend, build bằng **esbuild**. Các quy tắc chấm đáp án và lịch ôn nằm trong domain dùng chung; kết quả học được server xác nhận trước khi cập nhật tiến độ.
+
+```text
+src/
+  frontend/       Giao diện, trang giới thiệu, mascot và API client
+    audio/        Nhạc nền, hiệu ứng và cài đặt trải nghiệm
+  domain/         Quy tắc chấm đáp án, lịch ôn và kiểu dữ liệu
+  shared/         Kiểu dùng chung, schema capture và snapshot
+  audio/          Giọng đọc từ vựng của trình duyệt
+  dictionary/     Tra từ và chuyển kết quả thành nội dung học
+  content/        Schema nội dung và công cụ biên soạn
+server/           API, tài khoản, phiên học và MongoDB
+extension/        Tra và lưu từ khi đọc trên Chrome
+public/           Mascot, favicon và tài nguyên tĩnh
+docs/             Hướng dẫn kỹ thuật và ghi chú thiết kế
+scripts/          Build, chuẩn bị database và công cụ dữ liệu
+tests/            Các bộ kiểm tra hiện tại
+legacy/local/     Phiên bản IndexedDB cũ, giữ để tham khảo
+```
+
+- [Cài đặt, SMTP, triển khai và dữ liệu](docs/DEVELOPMENT.md)
+- [Trang giới thiệu, âm thanh và chuyển động](docs/frontend-experience.md)
+- [Cache, phân trang và tối ưu tải](docs/performance-improvements.md)
+- [Thiết kế frontend](FRONTEND.md) · [Thiết kế hệ thống](DESIGN.md)
+- [Tiến độ dự án](PHASES.md) · [Kế hoạch ban đầu](BUILD_PLAN.md)
+
+<details>
+<summary><strong>Các lệnh kiểm tra có sẵn</strong></summary>
 
 ```sh
-npm run check
+npm run typecheck
 npm run typecheck:server
-npm run test:legacy
+npm run lint
+npm test
 ```
 
-`check` chỉ chạy các bài test còn trong `tests/`; `test:legacy` dành riêng cho backend IndexedDB cũ. Các lệnh browser test cũ không còn nằm trong scripts mặc định. Sau đợt dọn này chưa chạy build/typecheck/lint/test; người dùng tự kiểm kê.
+`npm run check` gộp typecheck, lint và các test hiện tại. `npm run test:legacy` dành cho phiên bản IndexedDB cũ. Danh sách lệnh không có nghĩa mọi kiểm tra đều đã chạy hoặc đang pass; xem kết quả thực tế ở lần chạy/CI tương ứng.
 
-- [Tiến độ](PHASES.md)
-- [Kế hoạch ban đầu](BUILD_PLAN.md) · [Thiết kế](DESIGN.md) · [Thiết kế FE](FRONTEND.md)
-- [HTML mẫu](docs/mockups/english-vocab-frontend.html) · [Popup mẫu](docs/mockups/english-vocab-lookup-popup.html)
+</details>
 
-Các tài liệu kế hoạch/contract local cũ được giữ làm lịch sử; mã đang chạy lấy từ `src/frontend/main.tsx` và `server/src/index.ts`.
+## Dữ liệu và nguồn
 
-## Kho dữ liệu crawl để tái sử dụng
+Nội dung từ vựng giữ thông tin nguồn và giấy phép ở từng mục. CEFR có thể là ước lượng khi chưa có nguồn xác thực. Các gói crawl cần được rà soát trước khi xuất bản hoặc nhập database.
 
-Giữ toàn bộ dữ liệu gốc tại `.crawl-cache/`: bản nén Kaikki đầy đủ (không chỉ những từ đã lọc), bộ câu Anh–Việt `vie-eng.zip` và phản hồi API gốc trong `api/`. Đây là kho nguồn lâu dài; không tự dọn sau khi lọc hoặc nhập thư viện. `content/crawl/` giữ seed topic, ứng viên, lựa chọn và nguồn/giấy phép. Các file ứng viên là kết quả lọc có thể tạo lại; chúng không thay thế kho nguồn.
+Các kho `.crawl-cache/`, `.crawl-archive/` và dữ liệu staging nằm ngoài Git; cần sao lưu riêng khi chuyển máy. Xem [quy trình dữ liệu](docs/DEVELOPMENT.md#dữ-liệu-crawl-và-sao-lưu) trước khi lọc, xuất bản hoặc nhập nội dung.
 
-`npm run crawl:archive` lưu thêm snapshot toàn bộ kho nguồn và kết quả lọc vào `.crawl-archive/`, gồm manifest và các đối tượng theo SHA-256. Snapshot cũ không bị ghi đè, nội dung giống nhau không sao chép lặp. `npm run crawl:archive:verify` kiểm tra checksum tất cả snapshot. Không có tác vụ tự xóa kho hoặc snapshot. Chạy archive sau mỗi lô crawl/lọc trước khi thay seed; snapshot lưu cả seed và lựa chọn để truy lại.
+---
 
-Khi thêm topic: thay seed, chạy `crawl:bulk` để lọc lại từ bản Kaikki đang lưu; `crawl:api` dùng lại phản hồi đã có (đặt `CRAWL_MAX_REQUESTS=0` để bảo đảm không gọi mạng); `crawl:sentences` ghép từ bộ câu đang lưu. Rà soát ứng viên rồi chạy `crawl:publish` xem trước, thêm `--write` mới ghi gói học. Chỉ tải bổ sung khi nguồn local thiếu; CEFR vẫn là ước lượng nếu chưa có nguồn xác thực.
-
-Kho raw và archive nằm ngoài Git vì dung lượng lớn. Khi sao lưu hoặc chuyển máy, cần mang theo cả `.crawl-cache/`, `.crawl-archive/` và `content/crawl/`; backup tiến độ trong ứng dụng không bao gồm các kho dữ liệu xây bộ từ này. Dữ liệu chỉ ở ổ máy vẫn có thể mất khi ổ hỏng.
-
-## Đăng ký và khôi phục mật khẩu qua Gmail SMTP
-
-Đã thêm đăng ký tài khoản học viên, quên mật khẩu và đặt lại mật khẩu. Đăng ký thành công sẽ đăng nhập ngay. Các trang dùng fragment `#/login`, `#/register`, `#/forgot-password`, `#/reset-password?token=...`, nên không cần cấu hình thêm đường dẫn SPA trên server.
-
-Giữ nguyên `.env` hiện tại. Chỉ bổ sung các biến SMTP từ `.env.example`, không chép đè MongoDB hoặc SESSION_SECRET đang dùng:
-
-```dotenv
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=465
-SMTP_SECURE=true
-SMTP_USER=your-account@gmail.com
-SMTP_PASSWORD=your-app-password
-SMTP_FROM=EnglishVocab <your-account@gmail.com>
-```
-
-Bật xác minh hai bước cho tài khoản Gmail gửi thư, rồi tạo [Mật khẩu ứng dụng](https://myaccount.google.com/apppasswords). Điền mật khẩu ứng dụng vào SMTP_PASSWORD; không dùng mật khẩu Gmail thường và không commit `.env`. [Hướng dẫn Google](https://support.google.com/accounts/answer/185833). Một số tài khoản trường/công ty không hỗ trợ mật khẩu ứng dụng.
-
-APP_ORIGIN phải đúng địa chỉ web người dùng mở, ví dụ `http://127.0.0.1:3001` khi chạy local hoặc `https://ten-mien-cua-ban` khi deploy. Liên kết trong email lấy từ biến này; triển khai thật phải sử dụng HTTPS. Không gửi SMTP_USER/SMTP_PASSWORD xuống FE hoặc extension.
-
-Người dùng tự chạy sau khi cấu hình:
-
-```sh
-npm run build
-npm run dev:server
-```
-
-Dừng server cũ trước khi khởi động lại. Với bản production, build và khởi động API bằng các lệnh hiện có (`npm run build:server`, `npm run start:server`). Nếu extension đang dùng token cũ sau đổi mật khẩu, cần đăng nhập lại extension.
-
-Token khôi phục chỉ lưu hash, hết hạn sau 15 phút, dùng một lần; MongoDB tự dọn bản ghi bằng TTL. Mỗi tài khoản chỉ giữ một yêu cầu đang chờ, gửi lại cách ít nhất một phút; endpoint có giới hạn tần suất. Đổi mật khẩu làm mất hiệu lực phiên web và token extension trước đó. Yêu cầu quên mật khẩu trả thông báo chung để tránh xác nhận email có tài khoản; gửi thư chạy nền, lỗi SMTP chỉ ghi thông báo cấu hình ở server.
-
-Chưa chạy build/typecheck/lint/test hoặc gửi email thật trong lượt triển khai này. Cần người dùng kiểm kê đăng ký, email trùng, email khôi phục, link hết hạn/đã dùng, đăng nhập bằng mật khẩu mới và giao diện mobile.
-
-## Chuẩn bị deploy web miễn phí lên Vercel
-
-Cấu hình trong `vercel.json` giữ FE và API chung domain: FE được build vào `dist/` và phục vụ qua CDN, mọi `/api/*` vào `api/index.ts`. Backend không mở cổng hoặc tạo index cho từng cold start. Kết nối/pool MongoDB được dùng lại theo instance, gắn attachDatabasePool để Vercel theo dõi kết nối nhàn rỗi; session vẫn nằm trong MongoDB. Đây là cấu hình triển khai, chưa phải xác nhận đã deploy thành công.
-
-1. Giữ `.env` local hiện có. Chạy `npm run db:prepare` một lần với database Atlas sẽ dùng cho production để tạo index/TTL/bộ đếm, không xoá dữ liệu. Nếu dùng database mới, chạy thêm `npm run library:seed` để nạp thư viện. Không đưa các lệnh này vào build của Vercel.
-2. Push code lên GitHub của bạn và Import repository trong Vercel. Root Directory là thư mục gốc dự án; Framework Preset là **Other**. File `vercel.json` cấu hình Build Command `npm run build:vercel`, Output Directory `dist`. Dùng Node.js 22.x trong Project Settings.
-3. Điền biến môi trường trên Vercel (Production): `MONGODB_URI`, `MONGODB_DB`, `SESSION_SECRET`, `APP_ORIGIN`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`. `NODE_ENV=production`. Dùng session secret riêng và ổn định cho production; không đặt các secret trong biến `VITE_*` hoặc `NEXT_PUBLIC_*`. `APP_ORIGIN` phải là origin HTTPS chính xác của domain production, không kèm đường dẫn.
-4. Atlas Database User cần quyền đọc/ghi và tạo index cho database dùng ở bước chuẩn bị. Network Access cần cho phép kết nối từ môi trường hosting theo hướng dẫn MongoDB Atlas/Vercel; IP máy local không tự bao gồm IP Vercel. Chọn region function gần region Atlas khi cấu hình dự án để giảm độ trễ. Không thay Network Access hay dữ liệu Atlas trong lượt chỉnh code này.
-5. Sau deploy, người dùng tự kiểm tra `/api/health`, đăng ký/đăng nhập, reload giữ phiên, học/ôn/lưu nháp/Skip, sổ tay và email khôi phục. Link email luôn trỏ về `APP_ORIGIN`. Khi thay domain hoặc biến môi trường, redeploy để áp dụng.
-6. Trên máy local, đặt `EXTENSION_APP_ORIGIN=https://your-project.vercel.app` rồi chạy `npm run build:extension`. Nén **nội dung thư mục `dist-extension/`** để gửi cho nhóm dùng thử. Chỉ gửi file build, không gửi source, `.env` hoặc MongoDB credentials. Người nhận giải nén, Load unpacked thư mục có `manifest.json`, đăng nhập extension rồi thử lưu từ; không cần chạy server local.
-
-Email nền được nối với `waitUntil()` để Vercel theo dõi tác vụ sau phản hồi API; vẫn dùng Gmail SMTP hiện tại. Cần kiểm kê việc gửi email trên deployment thật. Không có máy chủ SMTP riêng được tạo trong ứng dụng.
-
-Lưu ý về gói miễn phí: Vercel Hobby dành cho mục đích cá nhân, phi thương mại và có hạn mức sử dụng; việc dự án có 5–10 người không tự đảm bảo đủ điều kiện. Nếu dùng cho hoạt động dạy học thu phí/kinh doanh, cần đối chiếu điều kiện Vercel trước khi chọn gói. Không tự nâng cấp hoặc phát sinh dịch vụ trả phí.
-
-Nguồn: [Vercel Node.js Functions](https://vercel.com/docs/functions/runtimes/node-js), [tác vụ nền](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package), [Hobby](https://vercel.com/docs/plans/hobby).
-
-Lượt này chỉ chỉnh code/cấu hình. Chưa chạy build/typecheck/lint/test, chưa chạy db:prepare/seed, chưa gửi email thật và chưa deploy. Các giới hạn request/rate limit trong RAM hiện tại áp dụng theo từng instance Vercel, không phải quota toàn hệ thống.
+<div align="center">
+  <img src="public/images/mascot/englishvocab-mascot-small.webp" alt="Linh thú EnglishVocab" width="65" />
+  <p><strong>Một từ hôm nay. Một bước tiến ngày mai.</strong><br /><sub>EnglishVocab · Learn a little. Grow every day.</sub></p>
+</div>

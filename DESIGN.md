@@ -1,6 +1,6 @@
 # EnglishVocab — thiết kế ứng dụng học cá nhân
 
-Ngày cập nhật: 20/10/2026. Phiên bản thiết kế: 5 — FE 3 tab, tra local/API và kế hoạch build BE hoàn tất trước FE qua Gate-BE. Trạng thái: BE đã đạt kiểm tra kỹ thuật với 677 mục, đang dừng chờ người dùng nghiệm thu; hoàn thiện bộ 2.000 từ là task nội dung riêng, chưa có FE sản phẩm. Tiến độ thực tế ở PHASES.md. Quy mô được người dùng chốt: 100 topic IELTS (từ B1–C2) và 100 topic giao tiếp (từ A1–B2); tối đa 10 mục/topic. Lịch duy trì level 5 được chốt là mỗi 5 ngày, sai về level 1.
+Ngày cập nhật: 20/10/2026. Phiên bản thiết kế: 5 — FE 3 tab, tra local/API và kế hoạch build BE hoàn tất trước FE qua Gate-BE. Trạng thái: BE đã đạt kiểm tra kỹ thuật với 677 mục, đang dừng chờ người dùng nghiệm thu; hoàn thiện bộ 2.000 từ là task nội dung riêng, chưa có FE sản phẩm. Tiến độ thực tế ở PHASES.md. Quy mô được người dùng chốt: 100 topic IELTS (từ B1–C2) và 100 topic giao tiếp (từ A1–B2); tối đa 10 mục/topic. Lịch duy trì level 5 được chốt là mỗi 5 ngày. Quy tắc sai cập nhật ngày 25/10/2026: level 1–3 về level 1, level 4–5 giảm một level; ôn lại sau 2 giờ.
 
 ## 1. Quyết định tổng thể
 
@@ -128,7 +128,7 @@ Tất cả khoảng cách tính từ **thời điểm trả lời thực tế**,
 - Đúng khi ở level 3 → level 4 → sau 48 giờ.
 - Đúng khi ở level 4 → level 5, được tính thành thạo → ôn lại sau 5 ngày (120 giờ).
 - Đúng khi ở level 5 → giữ level 5 → tiếp tục ôn lại sau 5 ngày (120 giờ), lặp lại không giới hạn.
-- Sai ở mọi lượt ôn có chấm điểm, kể cả ôn duy trì level 5 → level 1 → sau 2 giờ.
+- Sai khi ở level 1–3 → level 1 → sau 2 giờ; sai ở level 4 → level 3 → sau 2 giờ; sai ở level 5 → level 4 → sau 2 giờ.
 
 **Quy tắc người dùng đã chốt:** level 5 hiển thị “Thành thạo · ôn mỗi 5 ngày”. Không có trạng thái hoàn tất lịch hay dừng ôn tự động. Mỗi hạn mới tính từ lúc trả lời thực tế. “5 ngày” ở đây là khoảng cách 120 giờ.
 
@@ -273,7 +273,7 @@ Các mục dưới đây là điều kiện cần kiểm thử khi triển khai,
 
 - Viết sai ở bước học không tạo progress; viết đúng tạo đúng một progress level 1, hạn +2 giờ.
 - Đủ chuỗi đúng cho các hạn +2/+10/+34/+82/+202/+322 giờ khi trả lời đúng hạn; level 5 tiếp tục hẹn sau 120 giờ ở mỗi lần đúng, không có hạn null.
-- Sai ở từng level, kể cả level 5 duy trì, về level 1 và hạn +2 giờ.
+- Sai ở level 1–3 về level 1; sai ở level 4 về level 3; sai ở level 5 về level 4. Mọi trường hợp sai đều có hạn +2 giờ.
 - Ôn trễ chỉ tăng một level; hạn mới tính từ giờ trả lời. Từ chưa đến hạn không vào lượt chấm.
 - CEFR không thay đổi khi chuyển level; mục dùng chung topic không bị tính thành hai từ toàn cục.
 - Bấm hai lần hoặc hai tab nộp cùng câu không nâng level hai lần; refresh sau khi chấm không chấm lại.
@@ -307,7 +307,7 @@ Giữ link Wiktionary gốc và giấy phép CC BY-SA 4.0 từ phản hồi cho 
 6. Người dùng bổ sung/chỉnh nghĩa Việt, kiểm tra dạng gốc, chọn câu dùng để ôn và có thể thêm ghi chú. CEFR không có thì để trống; không phải trường bắt buộc để lưu hoặc học mục cá nhân.
 7. Bấm **Lưu từ**. Nếu thông tin đủ để học thì vào **Từ của tôi → Chưa học**; thiếu trường bắt buộc thì vào **Chờ bổ sung**. Popup báo rõ nơi đã lưu; thao tác tra đơn thuần không tạo mục cá nhân.
 8. Mở Từ của tôi, hoàn thiện nháp nếu cần, rồi học theo cùng luồng xem từ → ẩn từ → viết lại.
-9. Chỉ khi viết lại đúng và lưu thành công mới tạo progress level 1, hạn +2 giờ. Sau đó dùng chung lịch ôn L1–L5, level 5 mỗi 5 ngày và sai ở mọi level về L1 +2 giờ.
+9. Chỉ khi viết lại đúng và lưu thành công mới tạo progress level 1, hạn +2 giờ. Sau đó dùng chung lịch ôn L1–L5, level 5 mỗi 5 ngày và khi sai: L1–L3 về L1, L4 về L3, L5 về L4; hạn đều +2 giờ.
 
 ```mermaid
 flowchart TD

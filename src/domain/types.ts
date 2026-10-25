@@ -1,4 +1,6 @@
-export const POLICY = 'fixed-5day-v2' as const;
+export const POLICY = 'fixed-5day-v3' as const;
+// Committed historical receipts retain the policy under which they were graded.
+export type ReviewPolicy = typeof POLICY | 'fixed-5day-v2';
 export type Level = 1 | 2 | 3 | 4 | 5;
 export type CollectionId = 'ielts' | 'daily' | 'personal';
 export type CefrLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
@@ -34,7 +36,7 @@ export interface Session {
 export interface ReviewEvent {
  id: string; sessionId: string; entryId: string; mode: 'learn' | 'review'; correct: boolean;
  reviewedAt: number; beforeLevel: Level | null; afterLevel: Level;
- nextReviewAt: number; entryRevision: number; policy: typeof POLICY;
+ nextReviewAt: number; entryRevision: number; policy: ReviewPolicy;
 }
 export interface Capture { id: string; entryId: string; selectedText: string; originalSentence: string; sourceUrl: string; capturedAt: number }
 export interface Setting { key: string; value: unknown }

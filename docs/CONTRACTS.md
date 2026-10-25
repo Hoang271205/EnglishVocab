@@ -6,7 +6,7 @@ Scope: TypeScript domain and services execute inside the browser. Dexie is the o
 
 Executable types: `src/domain/types.ts`; runtime content validation: `src/content/schema.ts`. An entry ID identifies one headword + POS + sense. Never merge senses by spelling or API response index. Stable IDs survive content revisions and backup. Catalog IDs `ielts-001..100`, `daily-001..100` follow TOPICS.md. There are currently 200 topic shells and zero production vocabulary entries.
 
-Progress is absent before the first successful rewrite. `learnedAt` is always set then; `lastReviewedAt` starts null. Timestamp is UTC milliseconds, read from injected trusted Clock inside services. Policy `fixed-5day-v2`: new +2h, correct L1 +8h/L2 +24h/L3 +48h/L4,L5 +120h; wrong at every level L1 +2h. CEFR is independent and may be unknown for a personal entry.
+Progress is absent before the first successful rewrite. `learnedAt` is always set then; `lastReviewedAt` starts null. Timestamp is UTC milliseconds, read from injected trusted Clock inside services. Policy `fixed-5day-v3`: new +2h, correct L1 +8h/L2 +24h/L3 +48h/L4,L5 +120h; wrong at L1–L3 returns to L1, wrong at L4 drops to L3 and wrong at L5 drops to L4; every wrong answer schedules +2h. Historical `fixed-5day-v2` receipts retain their original policy and results. CEFR is independent and may be unknown for a personal entry.
 
 ## StudyService
 

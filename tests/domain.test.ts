@@ -12,8 +12,8 @@ test('exact review schedule, including unlimited level 5 maintenance',()=>{
   assert.equal(p.nextReviewAt,due!*HOUR);p=reviewProgress(p,true,p.nextReviewAt);assert.equal(p.level,level);assert.equal(p.nextReviewAt,next!*HOUR);
  }
 });
-test('wrong at every level resets to L1; late reviews schedule from actual answer',()=>{
- for(const level of [1,2,3,4,5] as const){const p=reviewProgress({...initialProgress('x',0),level},false,200*HOUR);assert.equal(p.level,1);assert.equal(p.nextReviewAt,202*HOUR);}
+test('wrong at L1-L3 returns to L1 and L4-L5 drops one level; late reviews use actual answer',()=>{
+ for(const [level,expected] of [[1,1],[2,1],[3,1],[4,3],[5,4]] as const){const p=reviewProgress({...initialProgress('x',0),level},false,200*HOUR);assert.equal(p.level,expected);assert.equal(p.nextReviewAt,202*HOUR);}
  const p=initialProgress('x',0);assert.equal(isDue(p,2*HOUR),true);assert.equal(isDue(p,2*HOUR-1),false);assert.equal(reviewProgress(p,true,100*HOUR).nextReviewAt,108*HOUR);
  assert.throws(()=>initialProgress('x',NaN));assert.throws(()=>initialProgress('x',-1));
 });
