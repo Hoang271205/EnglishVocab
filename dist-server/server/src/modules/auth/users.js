@@ -9,5 +9,7 @@ export function publicUser(user) {
         email: user.email,
         name: user.name,
         role: user.role,
+        avatarUrl: user.avatarUrl ?? null,
+        profileRevision: user.profileRevision ?? 0,
     };
 }

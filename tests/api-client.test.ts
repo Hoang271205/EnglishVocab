@@ -13,17 +13,22 @@ function setup(t: TestContext) {
     signal: AbortSignal;
     respond: (value: unknown, status?: number) => void;
   }[] = [];
-  t.mock.method(globalThis, 'fetch', (_path: string, options: RequestInit) =>
-    new Promise<Response>((resolve, reject) => {
-      const signal = options.signal ?? new AbortController().signal;
-      signal.throwIfAborted();
-      signal.addEventListener('abort', () => reject(signal.reason), { once: true });
-      requests.push({
-        signal,
-        respond: (value, status = 200) =>
-          resolve(new Response(JSON.stringify(value), { status })),
-      });
-    }),
+  t.mock.method(
+    globalThis,
+    'fetch',
+    (_path: string, options: RequestInit) =>
+      new Promise<Response>((resolve, reject) => {
+        const signal = options.signal ?? new AbortController().signal;
+        signal.throwIfAborted();
+        signal.addEventListener('abort', () => reject(signal.reason), {
+          once: true,
+        });
+        requests.push({
+          signal,
+          respond: (value, status = 200) =>
+            resolve(new Response(JSON.stringify(value), { status })),
+        });
+      }),
   );
   return requests;
 }
@@ -77,7 +82,8 @@ test('cancelling all consumers aborts fetch and allows an immediate replacement'
   assert.equal(requests.length, 2);
   requests[1]!.respond({ revision: 3 });
   assert.deepEqual(await Promise.all([replacement, joined]), [
-    { revision: 3 }, { revision: 3 },
+    { revision: 3 },
+    { revision: 3 },
   ]);
 });
 
@@ -139,7 +145,8 @@ test('writes are never merged', async (t) => {
   requests[0]!.respond({ id: 'first' });
   requests[1]!.respond({ id: 'second' });
   assert.deepEqual(await Promise.all([first, second]), [
-    { id: 'first' }, { id: 'second' },
+    { id: 'first' },
+    { id: 'second' },
   ]);
 });
 
@@ -152,4 +159,26 @@ test('an already cancelled caller does not start a request', async (t) => {
     { name: 'AbortError' },
   );
   assert.equal(requests.length, 0);
+});
+
+test('uncertain writes time out without retrying, and allow a server-state reload', async (t) => {
+  const requests = setup(t);
+  const timeout = new AbortController();
+  t.mock.method(AbortSignal, 'timeout', (duration: number) => {
+    assert.equal(duration, 30000);
+    return timeout.signal;
+  });
+  const write = apiRequest('/api/study/learn/session/answer', {
+    method: 'POST',
+    body: { attemptId: 'same-attempt' },
+  });
+  const failure = assert.rejects(write, (error: unknown) => {
+    assert.ok(error instanceof Error);
+    assert.match(error.message, /có thể đã được xử lý/);
+    return true;
+  });
+  timeout.abort(new DOMException('Timeout', 'TimeoutError'));
+  await failure;
+  assert.equal(requests.length, 1);
+  assert.equal(requests[0]!.signal.aborted, true);
 });

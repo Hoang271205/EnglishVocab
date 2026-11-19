@@ -1,18 +1,14 @@
 import { z } from 'zod';
 import { APP_ORIGIN } from './config';
 import {
+  clearAccountSession,
   connectionSchema,
   connectionState,
-  installConnection,
+  extensionUserSchema,
+  rememberConnection,
 } from './cloud';
-
-const userSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  email: z.string(),
-});
-
-export type ExtensionUser = z.infer<typeof userSchema>;
+import type { ExtensionUser } from './cloud';
+export type { ExtensionUser } from './cloud';
 
 export interface ExtensionCredentials {
   email: string;
@@ -36,44 +32,31 @@ async function accountRequest(
   let response: Response;
 
   try {
-    response = await fetch(
-      `${APP_ORIGIN}/api/extension/auth${path}`,
-      {
-        method: body === undefined ? 'GET' : 'POST',
-        credentials: 'omit',
-        cache: 'no-store',
-        redirect: 'error',
+    response = await fetch(`${APP_ORIGIN}/api/extension/auth${path}`, {
+      method: body === undefined ? 'GET' : 'POST',
+      credentials: 'omit',
+      cache: 'no-store',
+      redirect: 'error',
 
-        headers: {
-          Accept: 'application/json',
-          ...(body === undefined
-            ? {}
-            : { 'Content-Type': 'application/json' }),
-          ...(token
-            ? { Authorization: `Bearer ${token}` }
-            : {}),
-        },
-
-        ...(body === undefined
-          ? {}
-          : { body: JSON.stringify(body) }),
-
-        signal: AbortSignal.timeout(12000),
+      headers: {
+        Accept: 'application/json',
+        ...(body === undefined ? {} : { 'Content-Type': 'application/json' }),
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
-    );
+
+      ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+
+      signal: AbortSignal.timeout(12000),
+    });
   } catch {
-    throw new Error(
-      `Không kết nối được server ${APP_ORIGIN}.`,
-    );
+    throw new Error(`Không kết nối được server ${APP_ORIGIN}.`);
   }
 
   if (response.status === 204) {
     return null;
   }
 
-  const payload: unknown = await response
-    .json()
-    .catch(() => null);
+  const payload: unknown = await response.json().catch(() => null);
 
   if (!response.ok) {
     const parsed = z
@@ -96,13 +79,9 @@ async function accountRequest(
 }
 
 async function getDeviceId() {
-  const stored = await chrome.storage.local.get(
-    'extensionDeviceId',
-  );
+  const stored = await chrome.storage.local.get('extensionDeviceId');
 
-  const parsed = z
-    .uuid()
-    .safeParse(stored.extensionDeviceId);
+  const parsed = z.uuid().safeParse(stored.extensionDeviceId);
 
   if (parsed.success) {
     return parsed.data;
@@ -131,54 +110,38 @@ export async function loginExtension(
   const result = z
     .object({
       connection: connectionSchema,
-      user: userSchema,
+      user: extensionUserSchema,
     })
     .parse(payload);
 
-  if (result.connection.ownerId !== result.user.id) {
-    throw new Error('Thông tin tài khoản không khớp.');
-  }
-
-  await installConnection(result.connection);
+  await rememberConnection(result.connection, result.user);
 
   return result.user;
 }
 
-export async function currentExtensionUser():
-  Promise<ExtensionUser | null> {
+export async function currentExtensionUser(): Promise<ExtensionUser | null> {
   const connection = await connectionState();
 
   if (!connection) {
     return null;
   }
 
+  if (connection.user?.id === connection.ownerId) return connection.user;
+
   try {
-    const payload = await accountRequest(
-      '/me',
-      undefined,
-      connection.token,
-    );
+    const payload = await accountRequest('/me', undefined, connection.token);
 
     const result = z
       .object({
-        user: userSchema,
+        user: extensionUserSchema,
       })
       .parse(payload);
 
-    if (result.user.id !== connection.ownerId) {
-      throw new Error('Thông tin tài khoản không khớp.');
-    }
-
+    // Upgrade an existing connection that was stored before we cached the profile.
+    await rememberConnection(connection, result.user);
     return result.user;
   } catch (error) {
-    if (
-      error instanceof AccountApiError &&
-      error.status === 401
-    ) {
-      await chrome.storage.local.set({
-        cloudConnection: null,
-      });
-
+    if (error instanceof AccountApiError && error.status === 401) {
       return null;
     }
 
@@ -192,30 +155,16 @@ export async function logoutExtension() {
 
   try {
     if (connection) {
-      await accountRequest(
-        '/logout',
-        {},
-        connection.token,
-      );
+      await accountRequest('/logout', {}, connection.token);
     }
   } catch (error) {
-    if (
-      !(
-        error instanceof AccountApiError &&
-        error.status === 401
-      )
-    ) {
+    if (!(error instanceof AccountApiError && error.status === 401)) {
       warning =
         'Đã đăng xuất trên thiết bị. Chưa liên hệ được ' +
         'server để thu hồi token; token sẽ tự hết hạn.';
     }
   } finally {
-    await chrome.storage.local.set({
-      cloudConnection: null,
-      accountOwner: null,
-      snapshot: null,
-      lookupCache: [],
-    });
+    await clearAccountSession();
   }
 
   return { warning };

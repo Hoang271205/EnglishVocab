@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Entry } from '../src/domain/types';
 import type { LookupResult } from '../src/dictionary/freeDictionary';
+import type { LoadExampleSuggestion } from '../src/dictionary/exampleSuggestion';
+import { useSenseExample } from '../src/dictionary/useSenseExample';
 import {
   createReadingEntry,
   dictionaryExample,
-  remoteIpa,
+  lookupIpa,
 } from '../src/dictionary/readingEntry';
-import type { SelectedWord } from './SelectionPopup';
 import type { CaptureItem } from './queue';
 import { requestWorker } from './client';
 
@@ -15,18 +16,28 @@ type ExtensionLookup = LookupResult & {
   ownerId?: string | null;
 };
 
+export type LookupSelection = { word: string; sourceUrl: string };
+
+const loadExampleSuggestion: LoadExampleSuggestion = async (input) => {
+  const response = await requestWorker<{ sentence: string | null }>({
+    type: 'suggest-example',
+    input,
+  });
+  return response.sentence;
+};
+
 function errorMessage(cause: unknown): string {
   return cause instanceof Error
     ? cause.message
     : 'Không thực hiện được thao tác.';
 }
 
-export function useCaptureLookup(selection: SelectedWord) {
+export function useCaptureLookup(selection: LookupSelection) {
   const [result, setResult] = useState<ExtensionLookup | null>(null);
   const [senseIndex, setSenseIndex] = useState(0);
   const [meaningVi, setMeaningVi] = useState('');
   const [partOfSpeech, setPartOfSpeech] = useState('');
-  const [exampleText, setExampleText] = useState('');
+  const [exampleOverride, setExampleText] = useState<string | null>(null);
 
   const [loading, setLoading] = useState(true);
   const [lookupError, setLookupError] = useState<string | null>(null);
@@ -45,29 +56,32 @@ export function useCaptureLookup(selection: SelectedWord) {
   const translationRequest = useRef(0);
 
   const sense = result?.senses[senseIndex];
+  const { exampleSense, pending: suggestingExample, suggested } = useSenseExample(
+    result?.query ?? selection.word,
+    sense,
+    loadExampleSuggestion,
+  );
+  const exampleText = exampleOverride ?? exampleSense?.example ?? '';
 
   const localEntry = sense?.entryId
     ? result?.entries?.find((entry) => entry.id === sense.entryId)
     : undefined;
-
-  useEffect(() => {
-    setExampleText(sense?.example ?? '');
-  }, [sense]);
 
   const complete = localEntry
     ? localEntry.contentStatus === 'ready'
     : Boolean(
         meaningVi.trim() &&
         partOfSpeech.trim() &&
-        dictionaryExample(exampleText, result?.query ?? selection.word).length,
+        dictionaryExample(
+          exampleText,
+          result?.query ?? selection.word,
+          sense?.exampleForms,
+        ).length,
       );
 
-  const ipa =
-    result?.source === 'local'
-      ? localEntry?.pronunciation.accent === 'en-US'
-        ? localEntry.pronunciation.ipa
-        : null
-      : (remoteIpa(result, sense)?.text ?? null);
+  const onlineIpa = localEntry ? null : lookupIpa(result, sense);
+  const ipa = localEntry?.pronunciation.ipa ?? onlineIpa?.text ?? null;
+  const ipaAccent = localEntry?.pronunciation.accent ?? onlineIpa?.accent;
 
   useEffect(() => {
     let cancelled = false;
@@ -183,6 +197,7 @@ export function useCaptureLookup(selection: SelectedWord) {
     meaningEdited.current = false;
 
     setSenseIndex(index);
+    setExampleText(null);
     setMeaningVi('');
     setTranslationError(null);
     setTranslationSuggested(false);
@@ -210,7 +225,7 @@ export function useCaptureLookup(selection: SelectedWord) {
       if (!pendingItem.current) {
         if (!complete)
           throw new Error(
-            'Bổ sung nghĩa tiếng Việt, từ loại và câu ví dụ chứa đúng một lần từ đang tra trước khi lưu.',
+            'Bổ sung nghĩa tiếng Việt, từ loại và câu ví dụ chứa đúng một lần từ đang tra hoặc dạng chia của từ.',
           );
         const entry =
           localEntry ??
@@ -218,7 +233,7 @@ export function useCaptureLookup(selection: SelectedWord) {
             entryId: 'personal-' + crypto.randomUUID(),
             word: selection.word,
             result,
-            sense,
+            sense: exampleSense,
             meaningVi,
             partOfSpeech,
             exampleText,
@@ -282,13 +297,16 @@ export function useCaptureLookup(selection: SelectedWord) {
 
   return {
     result,
-    sense,
+    sense: exampleSense,
     senseIndex,
     localEntry,
     ipa,
+    ipaLabel: ipaAccent === 'en-US' ? 'IPA Mỹ' : 'IPA',
     meaningVi,
     partOfSpeech,
     exampleText,
+    suggestingExample,
+    suggestedExample: suggested && exampleOverride === null,
     setExampleText,
     complete,
     loading,

@@ -1,4 +1,6 @@
+import AccountMenu from '../../components/AccountMenu';
 import GuideDock from '../../components/mascot/GuideDock';
+import { useWorkspaceTab } from './useWorkspaceTab';
 import { lazy, useState } from 'react';
 import MainNavigation from '../../components/MainNavigation';
 import AppShell from '../../components/layout/AppShell';
@@ -13,6 +15,7 @@ import PendingLearningBanner from '../learning/PendingLearningBanner';
 import ReviewStartPanel from '../reviewing/ReviewStartPanel';
 import { useReviewWorkspace } from '../reviewing/useReviewWorkspace';
 
+const SettingsPage = lazy(() => import('../settings/SettingsPage'));
 const TopicsPage = lazy(() => import('../topics/TopicsPage'));
 const LearningSessionPage = lazy(
   () => import('../learning/LearningSessionPage'),
@@ -22,10 +25,9 @@ const OnlineNotebookPage = lazy(
   () => import('../online-notebook/OnlineNotebookPage'),
 );
 
-type OnlineTab = Tab;
-
 interface WorkspaceProps {
   user: AuthUser;
+  onUserChanged: (user: AuthUser) => void;
   busy: boolean;
   authError: string | null;
   onLogout: () => Promise<void>;
@@ -35,12 +37,13 @@ const onlineNavigation = navigation;
 
 export default function Workspace({
   user,
+  onUserChanged,
   busy,
   authError,
   onLogout,
 }: WorkspaceProps) {
   const [contentVersion, setContentVersion] = useState(0);
-  const [activeTab, setActiveTab] = useState<OnlineTab>('review');
+  const [activeTab, setActiveTab] = useWorkspaceTab();
 
   const learning = useLearning();
 
@@ -70,39 +73,45 @@ export default function Workspace({
   }
 
   const account = (
+    <AccountMenu
+      user={user}
+      busy={busy}
+      disabled={preparing}
+      onSettings={() => navigate('settings')}
+      onLogout={onLogout}
+    />
+  );
+  const personalSettings = (
     <>
-      <span className="account-name">
-        <span className="account-avatar" aria-hidden="true">
-          {user.name.trim().charAt(0).toUpperCase()}
-        </span>
-        {user.name}
-      </span>
-
-      <Button
-        icon="logout"
-        variant="secondary"
-        loading={busy}
-        disabled={preparing}
-        onClick={() => void onLogout()}
-      >
-        {busy ? 'Đang đăng xuất…' : 'Đăng xuất'}
-      </Button>
+      {(review.sessionId || learning.sessionId) && (
+        <Button
+          variant="secondary"
+          onClick={() => navigate(review.sessionId ? 'review' : 'learn')}
+        >
+          Trở lại bài đang học
+        </Button>
+      )}
+      <SettingsPage user={user} onUserChanged={onUserChanged} />
     </>
   );
 
   if (review.sessionId) {
     return (
       <AppShell account={account}>
-        <ReviewSessionPage
-          key={review.sessionId}
-          sessionId={review.sessionId}
-          voiceURI={learning.voiceURI}
-          onExit={closeReview}
-          onOpenNotebook={() => {
-            closeReview();
-            setActiveTab('notebook');
-          }}
-        />
+        {activeTab === 'settings' && personalSettings}
+        <div hidden={activeTab === 'settings'}>
+          <ReviewSessionPage
+            key={review.sessionId}
+            ownerId={user.id}
+            sessionId={review.sessionId}
+            voiceURI={learning.voiceURI}
+            onExit={closeReview}
+            onOpenNotebook={() => {
+              closeReview();
+              setActiveTab('notebook');
+            }}
+          />
+        </div>
       </AppShell>
     );
   }
@@ -110,12 +119,16 @@ export default function Workspace({
   if (learning.sessionId) {
     return (
       <AppShell account={account}>
-        <LearningSessionPage
-          key={learning.sessionId}
-          sessionId={learning.sessionId}
-          voiceURI={learning.voiceURI}
-          onExit={closeLearning}
-        />
+        {activeTab === 'settings' && personalSettings}
+        <div hidden={activeTab === 'settings'}>
+          <LearningSessionPage
+            key={learning.sessionId}
+            ownerId={user.id}
+            sessionId={learning.sessionId}
+            voiceURI={learning.voiceURI}
+            onExit={closeLearning}
+          />
+        </div>
       </AppShell>
     );
   }
@@ -126,19 +139,23 @@ export default function Workspace({
       title:
         learning.pending || pendingReview
           ? 'Tiếp tục bài đang dở'
-          : activeTab === 'learn'
-            ? 'Chọn một chủ đề'
-            : activeTab === 'notebook'
-              ? 'Khám phá sổ tay'
-              : 'Góc học tập của bạn',
+          : activeTab === 'settings'
+            ? 'Cài đặt của bạn'
+            : activeTab === 'learn'
+              ? 'Chọn một chủ đề'
+              : activeTab === 'notebook'
+                ? 'Khám phá sổ tay'
+                : 'Góc học tập của bạn',
       text:
         learning.pending || pendingReview
           ? 'Chọn Tiếp tục trong thông báo phía trên. Hoàn tất phiên đang dở trước khi mở lượt học hoặc ôn mới.'
-          : activeTab === 'learn'
-            ? 'Chọn IELTS hoặc Giao tiếp, tìm chủ đề rồi mở chủ đề để bắt đầu học.'
-            : activeTab === 'notebook'
-              ? 'Từ đã học là những từ bạn đã luyện. Từ của tôi chứa từ bạn tự thêm hoặc lưu khi đọc.'
-              : 'Các thẻ cho biết số từ đã học, đến hạn và thành thạo. Chưa có từ đến hạn? Bạn có thể học thêm từ mới.',
+          : activeTab === 'settings'
+            ? 'Cập nhật tên hiển thị và mật khẩu của tài khoản.'
+            : activeTab === 'learn'
+              ? 'Chọn IELTS hoặc Giao tiếp, tìm chủ đề rồi mở chủ đề để bắt đầu học.'
+              : activeTab === 'notebook'
+                ? 'Từ đã học là những từ bạn đã luyện. Từ của tôi chứa từ bạn tự thêm hoặc lưu khi đọc.'
+                : 'Các thẻ cho biết số từ đã học, đến hạn và thành thạo. Chưa có từ đến hạn? Bạn có thể học thêm từ mới.',
     },
     {
       title: 'Học và ghi nhớ',
@@ -201,7 +218,9 @@ export default function Workspace({
         </div>
       )}
 
-      {activeTab === 'review' ? (
+      {activeTab === 'settings' ? (
+        personalSettings
+      ) : activeTab === 'review' ? (
         <DashboardPage
           key={contentVersion}
           user={user}
@@ -245,7 +264,9 @@ export default function Workspace({
           <TopicsPage />
         </fieldset>
       )}
-      <GuideDock key={activeTab} steps={guideSteps} />
+      {activeTab !== 'settings' && (
+        <GuideDock key={activeTab} steps={guideSteps} />
+      )}
     </AppShell>
   );
 }

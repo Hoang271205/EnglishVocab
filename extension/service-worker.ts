@@ -5,15 +5,19 @@ import {
 } from './accountApi';
 import { trustedAppOrigins } from './config';
 import {
+  clearAccountSession,
+  CloudRequestError,
   connectionSchema,
   connectionState,
   initializePrivateStorage,
   saveToCloud,
+  suggestExampleFromCloud,
 } from './cloud';
 import { z } from 'zod';
 import { snapshotSchema } from '../src/shared/schemas/snapshot';
 import { normalizeAnswer } from '../src/domain/grading';
 import { WiktionaryDictionary } from '../src/dictionary/wiktionaryDictionary';
+import { exampleSuggestionInput } from '../src/dictionary/exampleSuggestion';
 import { CaptureQueue } from './queue';
 import {
   forgetTranslations,
@@ -44,6 +48,7 @@ function serialMutation<T>(work: () => Promise<T>): Promise<T> {
 }
 
 const provider = new WiktionaryDictionary();
+const exampleSelectionVersion = 5;
 const pending = new Map<string, string[]>();
 
 let cacheGeneration = 0;
@@ -100,6 +105,10 @@ const messageSchema = z.discriminatedUnion('type', [
       input: translationInputSchema,
     })
     .strict(),
+  z.object({
+    type: z.literal('suggest-example'),
+    input: exampleSuggestionInput,
+  }).strict(),
 
   z
     .object({
@@ -196,11 +205,15 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
 
     if (message.type === 'auth-status') {
       const user = await currentExtensionUser();
-      if (!user || ownerId !== user.id) {
+      if (!user) {
+        cacheGeneration++;
+        pending.clear();
+        await clearAccountSession();
+      } else if (ownerId !== user.id) {
         cacheGeneration++;
         pending.clear();
         await chrome.storage.local.set({
-          accountOwner: user?.id ?? null,
+          accountOwner: user.id,
           snapshot: null,
           lookupCache: [],
         });
@@ -251,7 +264,16 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
           'Từ này đã bị xoá. Hãy đóng popup và tra lại để tạo lượt lưu mới.',
         );
       }
-      const result = await saveToCloud(message.item, message.ownerId);
+      const result = await saveToCloud(message.item, message.ownerId).catch(
+        async (error: unknown) => {
+          if (error instanceof CloudRequestError && error.status === 401) {
+            cacheGeneration++;
+            pending.clear();
+            await clearAccountSession();
+          }
+          throw error;
+        },
+      );
       try {
         const storage = await chrome.storage.local.get('snapshot');
         const snapshot = snapshotSchema.safeParse(storage.snapshot);
@@ -286,6 +308,10 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
 
     if (message.type === 'translate-sense') {
       return translateSense(message.input);
+    }
+
+    if (message.type === 'suggest-example') {
+      return suggestExampleFromCloud(message.input);
     }
 
     if (message.type === 'lookup') {
@@ -345,11 +371,12 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
             (item) =>
               item &&
               typeof item === 'object' &&
-              typeof item.query === 'string',
+              typeof item.query === 'string' &&
+              item.exampleSelectionVersion === exampleSelectionVersion,
           )
         : [];
 
-      const found = cached.find((item) => item.query === key);
+      const found = cached.find((item) => normalizeAnswer(item.query) === key);
 
       if (found && !message.forceOnline) {
         return { ...found, source: 'cache', ownerId };
@@ -361,8 +388,8 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
         if (generation === cacheGeneration) {
           await chrome.storage.local.set({
             lookupCache: [
-              ...cached.filter((item) => item.query !== result.query),
-              result,
+              ...cached.filter((item) => normalizeAnswer(item.query) !== key),
+              { ...result, exampleSelectionVersion },
             ].slice(-500),
           });
 
@@ -444,12 +471,7 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
       if (ownerId === message.ownerId) {
         cacheGeneration++;
         pending.clear();
-        await chrome.storage.local.set({
-          accountOwner: null,
-          cloudConnection: null,
-          snapshot: null,
-          lookupCache: [],
-        });
+        await clearAccountSession();
       }
       return { released: true };
     }
@@ -586,7 +608,8 @@ chrome.runtime.onMessage.addListener((raw, sender, respond) => {
     return result;
   };
   const operation =
-    message.type === 'lookup' || message.type === 'translate-sense'
+    message.type === 'lookup' || message.type === 'translate-sense' ||
+    message.type === 'suggest-example'
       ? work()
       : serialMutation(work);
   void operation.then(

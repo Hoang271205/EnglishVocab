@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { APP_ORIGIN } from './config';
 import { entrySchema } from '../src/content/schema';
+import { exampleSuggestionOutput } from '../src/dictionary/exampleSuggestion';
+import type { ExampleSuggestionInput } from '../src/dictionary/exampleSuggestion';
 export const connectionSchema = z
   .object({
     ownerId: z.string().min(1).max(128),
@@ -10,6 +12,24 @@ export const connectionSchema = z
   })
   .strict();
 export type CloudConnection = z.infer<typeof connectionSchema>;
+export const extensionUserSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  email: z.string(),
+});
+export type ExtensionUser = z.infer<typeof extensionUserSchema>;
+const storedConnectionSchema = connectionSchema.extend({
+  user: extensionUserSchema.optional(),
+});
+
+export class CloudRequestError extends Error {
+  constructor(
+    public readonly status: number,
+    message: string,
+  ) {
+    super(message);
+  }
+}
 const savedSchema = z.object({
   saved: z.literal(true),
   duplicate: z.boolean(),
@@ -31,31 +51,45 @@ export function initializePrivateStorage(): Promise<void> {
 }
 export async function connectionState() {
   const stored = await chrome.storage.local.get('cloudConnection');
-  const result = connectionSchema.safeParse(stored.cloudConnection);
+  const result = storedConnectionSchema.safeParse(stored.cloudConnection);
   return result.success &&
     result.data.apiOrigin === APP_ORIGIN &&
     result.data.expiresAt > Date.now()
     ? result.data
     : null;
 }
-async function callCloud(
-  connection: CloudConnection,
-  path: '/api/extension/me' | '/api/extension/captures',
-  item?: unknown,
-) {
+
+export async function suggestExampleFromCloud(input: ExampleSuggestionInput) {
+  const connection = await connectionState();
+  if (!connection) return { sentence: null };
+  const response = await fetch(`${APP_ORIGIN}/api/dictionary/example`, {
+    method: 'POST',
+    credentials: 'omit',
+    redirect: 'error',
+    headers: {
+      Authorization: `Bearer ${connection.token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(input),
+    signal: AbortSignal.timeout(12_000),
+  });
+  if (!response.ok) return { sentence: null };
+  return exampleSuggestionOutput.parse(await response.json());
+}
+async function callCloud(connection: CloudConnection, item: unknown) {
   let response: Response;
   try {
-    response = await fetch(`${APP_ORIGIN}${path}`, {
-      method: item === undefined ? 'GET' : 'POST',
+    response = await fetch(`${APP_ORIGIN}/api/extension/captures`, {
+      method: 'POST',
       credentials: 'omit',
       cache: 'no-store',
       redirect: 'error',
       headers: {
         Authorization: `Bearer ${connection.token}`,
         Accept: 'application/json',
-        ...(item === undefined ? {} : { 'Content-Type': 'application/json' }),
+        'Content-Type': 'application/json',
       },
-      ...(item === undefined ? {} : { body: JSON.stringify({ item }) }),
+      body: JSON.stringify({ item }),
       signal: AbortSignal.timeout(15000),
     });
   } catch {
@@ -68,7 +102,8 @@ async function callCloud(
     const error = z
       .object({ error: z.object({ message: z.string() }) })
       .safeParse(body);
-    throw new Error(
+    throw new CloudRequestError(
+      response.status,
       error.success
         ? error.data.error.message
         : 'Server chưa xác nhận lưu từ. Hãy thử lại.',
@@ -76,19 +111,28 @@ async function callCloud(
   }
   return body;
 }
-export async function installConnection(input: unknown) {
-  const connection = connectionSchema.parse(input);
+export async function rememberConnection(
+  connection: CloudConnection,
+  user: ExtensionUser,
+) {
   if (connection.apiOrigin !== APP_ORIGIN)
     throw new Error(
       `Extension đang được build cho ${APP_ORIGIN}. Hãy build lại theo domain web đang dùng.`,
     );
-  const verified = z
-    .object({ ownerId: z.string(), expiresAt: z.number() })
-    .parse(await callCloud(connection, '/api/extension/me'));
-  if (verified.ownerId !== connection.ownerId)
+  if (user.id !== connection.ownerId)
     throw new Error('Tài khoản kết nối không khớp.');
-  await chrome.storage.local.set({ cloudConnection: connection });
-  return connection;
+  if (connection.expiresAt <= Date.now())
+    throw new Error('Phiên đăng nhập extension đã hết hạn.');
+  await chrome.storage.local.set({ cloudConnection: { ...connection, user } });
+}
+
+export async function clearAccountSession() {
+  await chrome.storage.local.set({
+    cloudConnection: null,
+    accountOwner: null,
+    snapshot: null,
+    lookupCache: [],
+  });
 }
 export async function saveToCloud(
   item: unknown,
@@ -103,9 +147,7 @@ export async function saveToCloud(
     throw new Error(
       'Tài khoản đã thay đổi. Hãy đóng popup và tra lại trước khi lưu.',
     );
-  const result = savedSchema.parse(
-    await callCloud(connection, '/api/extension/captures', item),
-  );
+  const result = savedSchema.parse(await callCloud(connection, item));
   if (result.ownerId !== connection.ownerId)
     throw new Error('Phản hồi lưu không khớp tài khoản.');
   return result;

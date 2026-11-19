@@ -10,6 +10,7 @@ export type User = {
   createdAt: Date;
   authVersion?: number;
   passwordChangedAt?: Date;
+  profileRevision?: number;
 };
 
 export const users = db.collection<User>('users');
@@ -27,5 +28,6 @@ export function publicUser(user: User) {
     email: user.email,
     name: user.name,
     role: user.role,
+    profileRevision: user.profileRevision ?? 0,
   };
 }

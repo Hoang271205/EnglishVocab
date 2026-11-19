@@ -1,3 +1,8 @@
+import {
+  clearStudyDraft,
+  restoreStudyDraft,
+  saveStudyDraft,
+} from '../studyDraft';
 import { announceFeedback } from '../../audio/experience';
 import { useCallback, useEffect, useState } from 'react';
 import { ApiError } from '../../api/client';
@@ -6,7 +11,11 @@ import { useAsyncResource } from '../../hooks/useAsyncResource';
 import { learningApi } from './learning.api';
 import type { LearningAction, LearningSession } from './learning.types';
 
-export function useLearningSession(sessionId: string, onExit: () => void) {
+export function useLearningSession(
+  sessionId: string,
+  onExit: () => void,
+  ownerId: string,
+) {
   const [session, setSession] = useState<LearningSession | null>(null);
 
   const [answer, setAnswer] = useState('');
@@ -21,7 +30,23 @@ export function useLearningSession(sessionId: string, onExit: () => void) {
 
   const resource = useAsyncResource(load);
 
+  function identity(next: LearningSession) {
+    return {
+      ownerId,
+      sessionId: next.id,
+      attemptId: next.attemptId ?? '',
+      version: next.version,
+      phase: next.phase,
+    };
+  }
+
+  function changeAnswer(value: string) {
+    setAnswer(value);
+    if (session?.phase === 'recall') saveStudyDraft(identity(session), value);
+  }
+
   function apply(next: LearningSession) {
+    clearStudyDraft(identity(next));
     setSession(next);
     setAnswer(next.draftAnswer);
   }
@@ -29,9 +54,21 @@ export function useLearningSession(sessionId: string, onExit: () => void) {
   useEffect(() => {
     if (resource.data) {
       setSession(resource.data);
-      setAnswer(resource.data.draftAnswer);
+      const saved =
+        resource.data.phase === 'recall'
+          ? restoreStudyDraft({
+              ownerId,
+              sessionId: resource.data.id,
+              attemptId: resource.data.attemptId ?? '',
+              version: resource.data.version,
+              phase: resource.data.phase,
+            })
+          : null;
+      setAnswer(saved ?? resource.data.draftAnswer);
+      if (saved !== null)
+        setNotice('Đã khôi phục câu trả lời trên thiết bị này.');
     }
-  }, [resource.data]);
+  }, [resource.data, ownerId]);
 
   const needsReload =
     action.error instanceof ApiError &&
@@ -128,9 +165,10 @@ export function useLearningSession(sessionId: string, onExit: () => void) {
     answer,
     notice,
     busy,
+    slow: action.slow,
     needsReload,
     error: action.error?.message ?? resource.error,
-    setAnswer,
+    setAnswer: changeAnswer,
     transition,
     submit,
     exit,

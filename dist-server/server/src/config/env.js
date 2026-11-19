@@ -10,6 +10,8 @@ const envSchema = z.object({
     SMTP_USER: z.string().trim().default(''),
     SMTP_PASSWORD: z.string().default(''),
     SMTP_FROM: z.string().trim().default(''),
+    OPENAI_API_KEY: z.string().trim().default(''),
+    EXAMPLE_AI_MODEL: z.string().trim().min(1).default('gpt-4.1-mini'),
     NODE_ENV: z
         .enum(['development', 'test', 'production'])
         .default('development'),

@@ -48,6 +48,7 @@
     "test:legacy": "node --import tsx --test legacy/local/tests/*.test.ts",
     "build:vercel": "npm run build:frontend",
     "db:prepare": "tsx server/src/scripts/prepare-database.ts",
+    "db:backup": "node scripts/backup-mongodb.mjs",
     "db:migrate:topics": "tsx server/src/scripts/migrate-topic-learning.ts",
     "db:migrate:saved": "tsx server/src/scripts/migrate-saved-sources.ts"
   },

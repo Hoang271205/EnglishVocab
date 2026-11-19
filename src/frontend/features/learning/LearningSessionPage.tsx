@@ -7,23 +7,30 @@ import LearningRecallCard from './LearningRecallCard';
 import { useLearningSession } from './useLearningSession';
 
 interface LearningSessionPageProps {
+  ownerId: string;
   sessionId: string;
   voiceURI: string | null;
   onExit: () => void;
 }
 
 export default function LearningSessionPage({
+  ownerId,
   sessionId,
   voiceURI,
   onExit,
 }: LearningSessionPageProps) {
-  const model = useLearningSession(sessionId, onExit);
+  const model = useLearningSession(sessionId, onExit, ownerId);
   const session = model.session;
 
   const blocked = model.busy || model.needsReload || Boolean(model.error);
 
   return (
     <section className="session-page">
+      {model.slow && (
+        <StatusMessage>
+          Kết nối đang chậm. Đang chờ xác nhận từ server…
+        </StatusMessage>
+      )}
       {model.error && (
         <div className="dashboard-error">
           <StatusMessage tone="error">

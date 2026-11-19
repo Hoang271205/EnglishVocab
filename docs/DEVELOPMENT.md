@@ -38,6 +38,33 @@ Seed kiểm tra dữ liệu trước khi ghi, thêm nội dung chưa tồn tại
 
 Có thể đăng ký qua giao diện hoặc dùng `npm run user:create` khi cần công cụ tạo tài khoản. Các lệnh `db:migrate:topics` và `db:migrate:saved` dành cho migration cụ thể; đọc script và xác nhận database đích trước khi chạy.
 
+## Sao lưu và khôi phục MongoDB
+
+Cài [MongoDB Database Tools](https://www.mongodb.com/docs/database-tools/) và bảo đảm `mongodump` có trong `PATH`. Từ thư mục dự án, chạy:
+
+```sh
+npm run db:backup
+```
+
+Lệnh đọc database `MONGODB_DB` (mặc định là `englishvocab`) qua `MONGODB_URI` trong `.env`. Có thể đặt `MONGODB_BACKUP_URI` để dùng tài khoản có quyền đọc riêng. Lệnh giữ dữ liệu ứng dụng, gồm tài khoản, nội dung, tiến độ và phiên học; nó bỏ qua phiên đăng nhập, mã đặt lại mật khẩu và token extension. Sau khi phục hồi, người dùng đăng nhập lại và kết nối lại extension.
+
+Mỗi lần chạy thành công tạo một file `.archive.gz` mới trong `.mongodb-backups/`, bỏ qua khi commit và deploy Vercel. Có thể đặt `MONGODB_BACKUP_DIR` thành đường dẫn tuyệt đối tới thư mục riêng có quyền `700`. File nén vẫn chứa dữ liệu nhạy cảm và chưa được mã hóa; lưu bản sao được mã hóa ngoài máy, không đưa vào Git hoặc thư mục public.
+
+Để tự động hóa, lên lịch chạy lệnh mỗi ngày trong giờ ít người dùng, trên máy hoặc runner có thể kết nối Atlas. Cấu hình đường dẫn tới Node.js và `mongodump` cho scheduler, theo dõi lỗi và kiểm tra ngày của bản sao mới nhất. Giữ nhiều phiên bản, ví dụ 14 bản hằng ngày; script không tự xóa bản cũ. Với backup qua `mongodump` không dùng oplog, tránh chạy cùng lúc với import hoặc migration lớn; đây không phải snapshot tại một thời điểm khi ứng dụng vẫn đang ghi.
+
+Kiểm tra khôi phục bằng một MongoDB local riêng, sử dụng phiên bản tương thích với nguồn. Ví dụ dưới đây giả định MongoDB local dùng cổng riêng `27028` và database nguồn là `englishvocab`:
+
+```sh
+mongorestore --host=127.0.0.1 --port=27028 \
+  --gzip --archive='/duong-dan/den/backup.archive.gz' \
+  --nsInclude='englishvocab.*' --nsFrom='englishvocab.*' \
+  --nsTo='englishvocab_restore_check.*' --stopOnError
+```
+
+Dùng database đích mới, chưa có dữ liệu; kiểm tra tổng số document khôi phục và đối chiếu các collection `users`, `shared_entries`, `shared_topics`, `personal_entries` và `user_progress` có trong bản sao. Không dùng URI production hoặc `--drop` để kiểm thử.
+
+Nếu chuyển ứng dụng sang một database đã khôi phục, chạy `npm run db:prepare` với cấu hình trỏ đúng database mới trước khi đưa vào sử dụng, để tạo lại index cho các collection tạm không có trong bản sao.
+
 ## Build và kiểm tra
 
 Chỉ build:
@@ -85,7 +112,11 @@ Load unpacked thư mục `dist-extension/` trong Chrome và đăng nhập từ i
 Bôi đen → Tra từ → Chọn nghĩa / kiểm tra nội dung → Lưu → API → MongoDB
 ```
 
+Popup dùng hồ sơ tài khoản trong `chrome.storage.local` khi phiên còn hạn. Phiên cũ chưa có hồ sơ gọi `/api/extension/auth/me` một lần để bổ sung. Mở lại popup không gọi `/me` nếu đã có hồ sơ khớp với phiên. Đăng xuất, hết hạn phiên hoặc API lưu trả `401` sẽ xóa trạng thái tại máy. Xóa cache duyệt web thông thường không xóa bộ nhớ riêng của extension.
+
 Chỉ báo thành công khi server xác nhận. Lượt lưu mới không được đưa vào hàng đợi offline. `extension/queue.ts` vẫn phục vụ việc chuyển hàng đợi tồn từ phiên bản cũ.
+
+Popup bôi đen có chế độ **Dịch câu** cho đoạn tiếng Anh tối đa 3.000 ký tự. Bản dịch tiếng Việt dùng [Chrome Translator API](https://developer.chrome.com/docs/ai/translator-api) trên Chrome máy tính; Chrome có thể tải gói ngôn ngữ lần đầu. Đoạn được chọn không gửi đến API EnglishVocab và kết quả chỉ được giữ trong RAM của trang hiện tại. Nếu trang hoặc trình duyệt không hỗ trợ dịch trên máy, popup hiện thông báo; tra từ vẫn dùng luồng hiện có.
 
 Sổ tay → Extension có công cụ nhận dữ liệu cũ hoặc gửi snapshot thư viện khi hai bên cùng tài khoản. Khi phân phối bản dùng thử, gửi nội dung build trong `dist-extension/`, không gửi `.env` hay MongoDB credentials.
 

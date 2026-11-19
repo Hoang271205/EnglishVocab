@@ -104,6 +104,7 @@ export function useAuth() {
 
   return {
     user,
+    updateUser: setUser,
     checking,
     busy,
     error,

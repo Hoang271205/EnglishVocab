@@ -57,6 +57,7 @@ export default function App() {
     <LearningProvider key={auth.user.id}>
       <Workspace
         user={auth.user}
+        onUserChanged={auth.updateUser}
         busy={auth.busy}
         authError={auth.error}
         onLogout={auth.logout}

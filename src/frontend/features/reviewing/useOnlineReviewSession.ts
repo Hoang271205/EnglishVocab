@@ -1,3 +1,8 @@
+import {
+  clearStudyDraft,
+  restoreStudyDraft,
+  saveStudyDraft,
+} from '../studyDraft';
 import { announceFeedback } from '../../audio/experience';
 import { useCallback, useEffect, useState } from 'react';
 import { assembleAnswer } from '../../../domain/cloze';
@@ -8,7 +13,11 @@ import { reviewApi } from './review.api';
 import { createDraft, isComplete, restoreLetters } from './reviewAnswers';
 import type { OnlineReviewSession, ReviewAction } from './review.types';
 
-export function useOnlineReviewSession(sessionId: string, onExit: () => void) {
+export function useOnlineReviewSession(
+  sessionId: string,
+  onExit: () => void,
+  ownerId: string,
+) {
   const [session, setSession] = useState<OnlineReviewSession | null>(null);
 
   const [letters, setLetters] = useState<string[]>([]);
@@ -24,7 +33,28 @@ export function useOnlineReviewSession(sessionId: string, onExit: () => void) {
 
   const resource = useAsyncResource(load);
 
+  function identity(next: OnlineReviewSession) {
+    return {
+      ownerId,
+      sessionId: next.id,
+      attemptId: next.question?.attemptId ?? '',
+      version: next.version,
+      phase: next.phase,
+    };
+  }
+
+  function changeLetters(value: string[]) {
+    setLetters(value);
+    if (session?.phase === 'question' && session.question) {
+      saveStudyDraft(
+        identity(session),
+        createDraft(session.question.cells, value),
+      );
+    }
+  }
+
   function apply(next: OnlineReviewSession) {
+    clearStudyDraft(identity(next));
     setSession(next);
     setLetters(
       next.question
@@ -35,9 +65,27 @@ export function useOnlineReviewSession(sessionId: string, onExit: () => void) {
 
   useEffect(() => {
     if (resource.data) {
-      apply(resource.data);
+      const next = resource.data;
+      const saved =
+        next.phase === 'question'
+          ? restoreStudyDraft({
+              ownerId,
+              sessionId: next.id,
+              attemptId: next.question?.attemptId ?? '',
+              version: next.version,
+              phase: next.phase,
+            })
+          : null;
+      setSession(next);
+      setLetters(
+        next.question
+          ? restoreLetters(next.question.cells, saved ?? next.draftAnswer)
+          : [],
+      );
+      if (saved !== null)
+        setNotice('Đã khôi phục câu trả lời trên thiết bị này.');
     }
-  }, [resource.data]);
+  }, [resource.data, ownerId]);
 
   const needsReload =
     action.error instanceof ApiError &&
@@ -152,11 +200,12 @@ export function useOnlineReviewSession(sessionId: string, onExit: () => void) {
     letters,
     notice,
     busy,
+    slow: action.slow,
     blocked,
     canSubmit,
     needsReload,
     error: action.error?.message ?? resource.error,
-    setLetters,
+    setLetters: changeLetters,
     transition,
     submit,
     finish,

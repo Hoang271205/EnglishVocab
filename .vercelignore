@@ -5,6 +5,7 @@
 # Chỉ loại các thư mục ở gốc dự án
 /.crawl-cache/
 /.crawl-archive/
+/.mongodb-backups/
 /.dictionary-cache/
 /.browser-check/
 /legacy/

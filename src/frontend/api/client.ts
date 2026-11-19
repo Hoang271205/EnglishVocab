@@ -138,7 +138,7 @@ async function performRequest<T>(
   // Writes invalidate before dispatch, so overlapping reads cannot refill old data.
   if (!isRead) invalidateWrite(path, options.body);
   const generation = readCacheGeneration(path);
-  const timeout = isRead ? AbortSignal.timeout(20000) : null;
+  const timeout = AbortSignal.timeout(isRead ? 20000 : 30000);
   const signal = timeout
     ? options.signal
       ? AbortSignal.any([options.signal, timeout])
@@ -157,7 +157,9 @@ async function performRequest<T>(
     if (timeout?.aborted && !options.signal?.aborted) {
       throw new ApiError(
         504,
-        'Tải dữ liệu quá lâu. Hãy kiểm tra kết nối và bấm Thử lại.',
+        isRead
+          ? 'Tải dữ liệu quá lâu. Hãy kiểm tra kết nối và bấm Thử lại.'
+          : 'Chưa xác nhận được kết quả lưu. Yêu cầu có thể đã được xử lý. Hãy tải lại dữ liệu để kiểm tra trước khi gửi lại.',
       );
     }
     throw error;

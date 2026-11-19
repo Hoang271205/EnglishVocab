@@ -8,6 +8,7 @@ import type { ReviewedPackage, ReviewTopicRow } from './review-import-plan.js';
 
 const reportSchema = z.object({
   schemaVersion: z.literal(1),
+  requireFullTopics: z.boolean().optional(),
   topics: z.array(z.object({
     topicId: z.string(),
     collectionId: z.enum(['ielts', 'daily']),
@@ -69,7 +70,7 @@ export async function loadReviewedPackage(packageDirectory: string): Promise<Rev
     throw new Error('Pack phải nằm trong các thư mục collection/topic như report đã khai báo.');
   }
 
-  return {topicRows, packsByTopic, entriesById};
+  return {topicRows, packsByTopic, entriesById, requireFullTopics: report.requireFullTopics ?? false};
 }
 
 export function validateReviewedPackageAgainstCatalog(
@@ -108,6 +109,7 @@ export function validateReviewedPackageAgainstCatalog(
       row.addedCount !== row.proposedAdditions.length ||
       row.totalAfter !== expectedIds.length ||
       row.totalAfter > 10 ||
+      (reviewed.requireFullTopics && row.totalAfter !== 10) ||
       !isDeepStrictEqual(packTopic.entryIds, expectedIds)
       || !isDeepStrictEqual(pack.entries.map((entry) => entry.id), expectedIds)
     ) {

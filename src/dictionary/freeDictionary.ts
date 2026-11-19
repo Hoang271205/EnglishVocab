@@ -1,5 +1,6 @@
 import {z} from 'zod';
-export interface LookupSense {partOfSpeech:string;definition:string;example:string|null;entryId?:string;phonetics?:LookupResult['phonetics'];sourceUrls:string[];licenses:{name:string;url:string|null}[]}
+import type {Source} from '../domain/types.js';
+export interface LookupSense {partOfSpeech:string;definition:string;example:string|null;exampleForms?:string[];exampleSource?:Source;entryId?:string;phonetics?:LookupResult['phonetics'];sourceUrls:string[];licenses:{name:string;url:string|null}[]}
 export interface LookupProvider {lookup(value:string,signal?:AbortSignal):Promise<LookupResult>}
 export interface LookupResult {provider?:{name:string;url:string};query:string;source:'local'|'cache'|'api';senses:LookupSense[];phonetics:{text:string|null;audio:string|null;accent:'en-US'|null;sourceUrl:string|null;license:{name:string;url:string|null}|null}[]}
 export class LookupError extends Error {

@@ -1,5 +1,6 @@
 export interface AuthUser {
   id: string;
+  profileRevision?: number;
   email: string;
   name: string;
   role: 'admin' | 'learner';
