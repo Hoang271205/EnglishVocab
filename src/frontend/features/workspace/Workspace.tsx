@@ -262,6 +262,12 @@ export default function Workspace({
           }
         >
           <TopicsPage />
+          {review.pending && (
+            <p className="action-explanation">
+              Bạn có phiên ôn đang dở. Chọn “Tiếp tục ôn” ở đầu trang để hoàn
+              thành trước khi bắt đầu bài mới.
+            </p>
+          )}
         </fieldset>
       )}
       {activeTab !== 'settings' && (

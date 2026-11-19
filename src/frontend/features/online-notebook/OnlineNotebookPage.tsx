@@ -168,6 +168,12 @@ export default function OnlineNotebookPage({
                 Học từ mới
               </Button>
             )}
+            {!canLearn && !learning.working && (
+              <p className="action-explanation" role="status">
+                Hãy tiếp tục phiên đang dở ở đầu trang. Nếu phiên chưa tải được,
+                hãy tải lại trước khi học từ mới.
+              </p>
+            )}
           </div>
         </div>
       )}

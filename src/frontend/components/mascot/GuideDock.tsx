@@ -1,4 +1,4 @@
-import { useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import Mascot from './Mascot';
 import Icon from '../ui/Icon';
 
@@ -11,10 +11,28 @@ export default function GuideDock({ steps }: { steps: GuideStep[] }) {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(0);
   const id = useId();
+  const trigger = useRef<HTMLButtonElement>(null);
+  const closeButton = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (open) closeButton.current?.focus();
+  }, [open]);
+  function close() {
+    setOpen(false);
+    trigger.current?.focus();
+  }
   const current = steps[Math.min(step, steps.length - 1)];
   if (!current) return null;
   return (
-    <aside className="guide-dock" aria-label="Hướng dẫn sử dụng">
+    <aside
+      className="guide-dock"
+      aria-label="Hướng dẫn sử dụng"
+      onKeyDown={(event) => {
+        if (event.key === 'Escape' && open) {
+          event.preventDefault();
+          close();
+        }
+      }}
+    >
       {open && (
         <section
           className="guide-popover"
@@ -22,10 +40,11 @@ export default function GuideDock({ steps }: { steps: GuideStep[] }) {
           aria-labelledby={`${id}-title`}
         >
           <button
+            ref={closeButton}
             className="guide-close"
             type="button"
             aria-label="Đóng hướng dẫn"
-            onClick={() => setOpen(false)}
+            onClick={close}
           >
             <Icon name="close" />
           </button>
@@ -47,7 +66,7 @@ export default function GuideDock({ steps }: { steps: GuideStep[] }) {
               onClick={() => {
                 if (step + 1 < steps.length) setStep(step + 1);
                 else {
-                  setOpen(false);
+                  close();
                   setStep(0);
                 }
               }}
@@ -58,6 +77,7 @@ export default function GuideDock({ steps }: { steps: GuideStep[] }) {
         </section>
       )}
       <button
+        ref={trigger}
         className="guide-toggle"
         type="button"
         aria-expanded={open}

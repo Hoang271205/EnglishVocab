@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import LoadingSkeleton from '../ui/LoadingSkeleton';
 import Brand from '../ui/Brand';
 import type { ReactNode } from 'react';
@@ -14,8 +14,24 @@ export default function AppShell({
   account,
   navigation,
 }: AppShellProps) {
+  const main = useRef<HTMLElement>(null);
+  const previousNavigation = useRef(navigation);
+  useEffect(() => {
+    if (
+      previousNavigation.current !== navigation &&
+      main.current?.contains(document.activeElement) === false
+    ) {
+      const active = document.activeElement;
+      if (active instanceof HTMLElement && active.closest('.main-nav'))
+        main.current.focus();
+    }
+    previousNavigation.current = navigation;
+  }, [navigation]);
   return (
     <div className="app-shell">
+      <a className="workspace-skip" href="#workspace-content">
+        Đến nội dung chính
+      </a>
       <header
         className={[
           'site-header',
@@ -25,14 +41,21 @@ export default function AppShell({
           .filter(Boolean)
           .join(' ')}
       >
-        <Brand />
+        <div className="site-header-inner">
+          <Brand />
 
-        {navigation}
+          {navigation}
 
-        <div className="online-account">{account}</div>
+          <div className="online-account">{account}</div>
+        </div>
       </header>
 
-      <main className="page-container">
+      <main
+        className="page-container"
+        id="workspace-content"
+        ref={main}
+        tabIndex={-1}
+      >
         <Suspense fallback={<LoadingSkeleton label="Đang tải trang" />}>
           {children}
         </Suspense>
