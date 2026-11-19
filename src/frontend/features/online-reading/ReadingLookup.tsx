@@ -186,6 +186,7 @@ export default function ReadingLookup({
               {data.result.senses.map((item, index) => (
                 <option value={index} key={index}>
                   {item.partOfSpeech} — {item.definition}
+                  {item.example ? ' · Có ví dụ' : ''}
                 </option>
               ))}
             </select>

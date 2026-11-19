@@ -2,6 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {WiktionaryDictionary} from '../src/dictionary/wiktionaryDictionary';
 import {LookupError} from '../src/dictionary/freeDictionary';
+import {createReadingEntry} from '../src/dictionary/readingEntry';
 const source={url:'https://en.wiktionary.org/wiki/read',license:{name:'CC BY-SA 4.0',url:'https://creativecommons.org/licenses/by-sa/4.0/'}};
 const body={word:'read',source,entries:[{language:{code:'en'},partOfSpeech:'verb',pronunciations:[
  {type:'ipa',text:'/riːd/',tags:['Received Pronunciation']},{type:'ipa',text:'/rid/',tags:['General American']},
@@ -51,4 +52,48 @@ test('homographs retain pronunciation per selected part of speech',async()=>{
 test('native fetch retains the global receiver in browser-style providers',async()=>{
  const request:typeof fetch=async function(this:unknown){assert.equal(this,globalThis);return Response.json(body);};
  await new WiktionaryDictionary(request).lookup('read');
+});
+
+test('each sense gets its own usable example or quote and missing senses stay distinct', async () => {
+  const senses = [
+    {
+      definition: 'Facts used to support an assertion.',
+      examples: ['Evidence is still evidence.', 'The records gave us new evidence.'],
+    },
+    {
+      definition: 'A sign of a past event.',
+      quotes: [
+        {text: 'a trace of evidence', reference: 'Fragment'},
+        {text: 'We examined the site. The marks left evidence of a fire.', reference: 'Field report'},
+      ],
+    },
+    {definition: 'One who bears witness.'},
+    {definition: 'A different sense with no suitable example.', examples: ['They evidenced it.']},
+  ];
+  const result = await new WiktionaryDictionary(async () =>
+    Response.json({
+      ...body,
+      word: 'evidence',
+      source: {...source, url: 'https://en.wiktionary.org/wiki/evidence'},
+      entries: [{language: {code: 'en'}, partOfSpeech: 'noun', senses}],
+    }),
+  ).lookup('evidence');
+
+  assert.deepEqual(result.senses.map((sense) => sense.example), [
+    'The records gave us new evidence.',
+    'The marks left evidence of a fire.',
+    null,
+    null,
+  ]);
+  assert.match(result.senses[1]?.exampleSource?.attribution ?? '', /Field report/u);
+  const entry = createReadingEntry({
+    entryId: 'test-evidence-sign',
+    word: result.query,
+    result,
+    sense: result.senses[1],
+    meaningVi: 'dấu hiệu',
+    partOfSpeech: 'noun',
+  });
+  assert.equal(entry.examples[0]?.targetSurface, 'evidence');
+  assert.match(entry.provenance.find((item) => item.field === 'example')?.attribution ?? '', /Field report/u);
 });

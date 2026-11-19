@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "EnglishVocab — lưu từ cá nhân",
   "version": "0.1.0",
-  "description": "Bôi đen, tra nghĩa và lưu từ trực tiếp vào tài khoản EnglishVocab.",
+  "description": "Bôi đen để tra từ, lưu vào sổ tay hoặc dịch câu Anh–Việt trên máy.",
   "permissions": ["storage"],
   "host_permissions": [
     "https://freedictionaryapi.com/*",

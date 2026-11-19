@@ -27,6 +27,7 @@ function parseArgs(args: string[]) {
   let packageDirectory = defaultPackage;
   let write = false;
   let dryRun = false;
+  let approveAuthored = false;
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === '--package') {
@@ -38,15 +39,18 @@ function parseArgs(args: string[]) {
       write = true;
     } else if (arg === '--dry-run') {
       dryRun = true;
+    } else if (arg === '--approve-authored') {
+      approveAuthored = true;
     } else if (arg === '--help' || arg === '-h') {
-      console.log('Dùng: npm run library:import-reviewed -- [--package <thư-mục>] [--dry-run | --write]');
+      console.log('Dùng: npm run library:import-reviewed -- [--package <thư-mục>] [--dry-run | --write [--approve-authored]]');
       process.exit(0);
     } else {
       throw new Error(`Tham số không nhận diện: ${arg}`);
     }
   }
   if (write && dryRun) throw new Error('Chọn --dry-run hoặc --write, không dùng đồng thời.');
-  return {packageDirectory, write};
+  if (approveAuthored && !write) throw new Error('--approve-authored chỉ dùng cùng --write.');
+  return {packageDirectory, write, approveAuthored};
 }
 
 async function loadCatalog(): Promise<Topic[]> {
@@ -76,7 +80,7 @@ async function readSnapshot(
 }
 
 async function main() {
-  const {packageDirectory, write} = parseArgs(process.argv.slice(2));
+  const {packageDirectory, write, approveAuthored} = parseArgs(process.argv.slice(2));
   const catalog = await loadCatalog();
   const currentContent = contentSchema.parse(await loadSharedContent());
   const reviewed = await loadReviewedPackage(packageDirectory);
@@ -105,6 +109,9 @@ async function main() {
       }
     },
     apply: async (session, plan) => {
+      if (plan.authoredDraftEntryIds && !approveAuthored) {
+        throw new Error('Gói có bản nháp biên tập. Duyệt nội dung rồi thêm --approve-authored để ghi.');
+      }
       // Preflight finishes before the first write. Inserts are new-only; topic arrays only append.
       if (plan.entriesToInsert.length) {
         await sharedEntries.insertMany(
@@ -140,6 +147,8 @@ async function main() {
     unchangedTopics: plan.unchangedTopics,
     resultingTopicLinks: plan.resultingTopicLinks,
     maxTopicSize: plan.maximumTopicSize,
+    targetTopicsAtTen: plan.fullTargetTopics,
+    authoredDraftEntriesPlannedAsReady: plan.authoredDraftEntryIds,
     note: operation.applied ? 'Import đã hoàn tất trong transaction.' : 'Chỉ đọc; chưa ghi database. Chạy lại với --write chỉ sau khi duyệt kế hoạch.',
   }, null, 2));
 }

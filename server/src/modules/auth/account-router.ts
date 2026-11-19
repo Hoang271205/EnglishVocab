@@ -13,6 +13,14 @@ import { signIn } from './sign-in.js';
 import { passwordResets } from './reset-store.js';
 import { mailConfigured, sendResetMail } from './reset-mail.js';
 
+import { requireAuth } from '../../middleware/require-auth.js';
+import {
+  changePassword,
+  changePasswordSchema,
+  profileSchema,
+  updateProfile,
+} from './profile-service.js';
+
 export const accountRouter = Router();
 const email = z.string().trim().toLowerCase().email().max(254);
 const password = z.string().min(12, 'Mật khẩu cần ít nhất 12 ký tự.').max(128);
@@ -169,5 +177,22 @@ accountRouter.post(
     } finally {
       await session.endSession();
     }
+  },
+);
+
+accountRouter.patch('/profile', requireAuth, async (request, response) => {
+  const input = profileSchema.parse(request.body);
+  response.json({ user: await updateProfile(request.session.userId!, input) });
+});
+
+accountRouter.post(
+  '/change-password',
+  limiter(5),
+  requireAuth,
+  async (request, response) => {
+    const input = changePasswordSchema.parse(request.body);
+    const user = await changePassword(request.session.userId!, input);
+    await signIn(request, user);
+    response.json({ user: publicUser(user) });
   },
 );

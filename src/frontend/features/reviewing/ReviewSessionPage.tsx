@@ -8,6 +8,7 @@ import ReviewQuestionCard from './ReviewQuestionCard';
 import { useOnlineReviewSession } from './useOnlineReviewSession';
 
 interface ReviewSessionPageProps {
+  ownerId: string;
   sessionId: string;
   voiceURI: string | null;
   onExit: () => void;
@@ -15,12 +16,13 @@ interface ReviewSessionPageProps {
 }
 
 export default function ReviewSessionPage({
+  ownerId,
   sessionId,
   voiceURI,
   onExit,
   onOpenNotebook,
 }: ReviewSessionPageProps) {
-  const model = useOnlineReviewSession(sessionId, onExit);
+  const model = useOnlineReviewSession(sessionId, onExit, ownerId);
 
   const session = model.session;
 
@@ -34,6 +36,11 @@ export default function ReviewSessionPage({
 
   return (
     <section className="session-page">
+      {model.slow && (
+        <StatusMessage>
+          Kết nối đang chậm. Đang chờ xác nhận từ server…
+        </StatusMessage>
+      )}
       {model.finishConfirmationOpen && (
         <FinishReviewDialog
           busy={model.busy}

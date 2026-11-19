@@ -3,14 +3,29 @@ import type {
   LookupResult,
   LookupSense,
 } from '../../../dictionary/freeDictionary';
+import { exampleSuggestionOutput } from '../../../dictionary/exampleSuggestion';
+import type { LoadExampleSuggestion } from '../../../dictionary/exampleSuggestion';
+import { useSenseExample } from '../../../dictionary/useSenseExample';
 import {
   createReadingEntry,
   dictionaryExample,
+  lookupIpa,
 } from '../../../dictionary/readingEntry';
 import type { Entry } from '../../../domain/types';
+import { apiRequest } from '../../api/client';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
 import { translateDefinition } from './translateSense';
+
+const loadExampleSuggestion: LoadExampleSuggestion = async (input, signal) => {
+  const body = await apiRequest<unknown>('/api/dictionary/example', {
+    method: 'POST',
+    body: input,
+    signal,
+  });
+  return exampleSuggestionOutput.parse(body).sentence;
+};
+
 interface Props {
   word: string;
   result: LookupResult;
@@ -35,13 +50,23 @@ export default function ReadingSenseForm({
   const [partOfSpeech, setPartOfSpeech] = useState(
     entry?.partOfSpeech ?? sense.partOfSpeech,
   );
-  const [exampleText, setExampleText] = useState(sense.example ?? '');
+  const [exampleOverride, setExampleText] = useState<string | null>(null);
+  const { exampleSense, pending, suggested } = useSenseExample(
+    result.query || word,
+    sense,
+    loadExampleSuggestion,
+  );
+  const exampleText = exampleOverride ?? exampleSense?.example ?? '';
+  const onlineIpa = entry ? null : lookupIpa(result, sense);
+  const ipa = entry?.pronunciation.ipa ?? onlineIpa?.text;
+  const ipaAccent = entry?.pronunciation.accent ?? onlineIpa?.accent;
   const complete = entry
     ? entry.contentStatus === 'ready'
     : Boolean(
         meaning.trim() &&
         partOfSpeech.trim() &&
-        dictionaryExample(exampleText, result.query || word).length,
+        dictionaryExample(exampleText, result.query || word, sense.exampleForms)
+          .length,
       );
   const [translating, setTranslating] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
@@ -81,7 +106,7 @@ export default function ReadingSenseForm({
       entryId: `personal-${crypto.randomUUID()}`,
       word,
       result,
-      sense,
+      sense: exampleSense,
       meaningVi: meaning,
       partOfSpeech,
       exampleText,
@@ -146,25 +171,32 @@ export default function ReadingSenseForm({
               value={exampleText}
               maxLength={10000}
               disabled={busy || locked}
-              placeholder="Câu ví dụ chứa đúng một lần từ đang tra."
+              placeholder={
+                exampleSense?.example
+                  ? 'Câu chứa đúng một lần từ đang tra hoặc dạng chia của từ.'
+                  : 'Nghĩa này chưa có ví dụ. Bạn có thể nhập câu riêng.'
+              }
               onChange={(event) => setExampleText(event.target.value)}
             />
           </label>
+          {pending && !exampleText && (
+            <StatusMessage>Đang tìm câu ví dụ cho nghĩa này…</StatusMessage>
+          )}
+          {suggested && exampleOverride === null && <p>Câu ví dụ do AI gợi ý.</p>}
         </>
       ) : (
         sense.example && <blockquote>{sense.example}</blockquote>
       )}
       <p>
-        CEFR: {entry?.cefr.level ?? 'Chưa có'} · IPA Mỹ:{' '}
-        {entry?.pronunciation.ipa ??
-          sense.phonetics?.find((sound) => sound.accent === 'en-US')?.text ??
-          'Chưa có'}
+        CEFR: {entry?.cefr.level ?? 'Chưa có'} ·{' '}
+        {ipaAccent === 'en-US' ? 'IPA Mỹ' : 'IPA'}: {ipa ?? 'Chưa có'}
       </p>
       <details>
         <summary>Nguồn và giấy phép</summary>
         {sense.licenses.map((license, index) => (
           <p key={index}>{license.name}</p>
         ))}
+        {exampleSense?.exampleSource && <p>{exampleSense.exampleSource.attribution}</p>}
       </details>
       <Button
         type="submit"

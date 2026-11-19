@@ -59,6 +59,8 @@ function fixture(t: TestContext, disabled: string[] = []) {
     inserted.push(session);
     return { acknowledged: true, insertedId: session._id };
   });
+  t.mock.method(reviewPreferences, 'findOne', async (filter: { entryId: string }) =>
+    disabled.includes(filter.entryId) ? { entryId: filter.entryId, reviewEnabled: false } : null);
   t.mock.method(reviewPreferences, 'find', () => ({
     toArray: async () =>
       disabled.map((entryId) => ({ entryId, reviewEnabled: false })),
@@ -76,18 +78,21 @@ function fixture(t: TestContext, disabled: string[] = []) {
         sort: (order: unknown) => {
           assert.deepEqual(order, { nextReviewAt: 1, entryId: 1 });
           return {
-            toArray: async () =>
-              progress
-                .filter(
-                  (item) =>
-                    item.userId === filter.userId &&
-                    item.nextReviewAt <= filter.nextReviewAt.$lte,
-                )
-                .sort(
-                  (a, b) =>
-                    a.nextReviewAt - b.nextReviewAt ||
-                    a.entryId.localeCompare(b.entryId),
-                ),
+            limit: (batchSize: number) => ({
+              toArray: async () =>
+                progress
+                  .filter(
+                    (item) =>
+                      item.userId === filter.userId &&
+                      item.nextReviewAt <= filter.nextReviewAt.$lte,
+                  )
+                  .sort(
+                    (a, b) =>
+                      a.nextReviewAt - b.nextReviewAt ||
+                      a.entryId.localeCompare(b.entryId),
+                  )
+                  .slice(0, batchSize),
+            }),
           };
         },
       };

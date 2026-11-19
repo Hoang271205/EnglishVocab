@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client';
-import { queryKey } from '../src/dictionary/freeDictionary';
 import SelectionPopup from './SelectionPopup';
 import type { SelectedWord } from './SelectionPopup';
+import { maxTranslationLength, selectionModes } from './selectedText';
 import { selectionStyles } from './selectionStyles';
 
 const hostId = 'englishvocab-selection-root';
@@ -44,11 +44,9 @@ function startSelectionPopup() {
 
     const range = selected.getRangeAt(0);
 
-    const startElement =
-      range.startContainer.parentElement;
+    const startElement = range.startContainer.parentElement;
 
-    const endElement =
-      range.endContainer.parentElement;
+    const endElement = range.endContainer.parentElement;
 
     const excluded =
       'input, textarea, select, ' +
@@ -64,27 +62,28 @@ function startSelectionPopup() {
       return;
     }
 
-    const word = range.toString().trim();
+    const word = range
+      .toString()
+      .trim()
+      .slice(0, maxTranslationLength + 1);
 
-    try {
-      queryKey(word);
-    } catch {
+    const modes = selectionModes(word);
+    if (!modes) {
       closePopup();
       return;
     }
 
-     
-
     const selection: SelectedWord = {
-  word,
-  sourceUrl: window.location.href,
-  range: range.cloneRange(),
-};
+      word,
+      sourceUrl: window.location.href,
+      range: range.cloneRange(),
+    };
 
     root.render(
       <SelectionPopup
         key={crypto.randomUUID()}
         selection={selection}
+        modes={modes}
         onClose={closePopup}
       />,
     );
@@ -105,8 +104,9 @@ function startSelectionPopup() {
     }
 
     if (
-      ['Shift', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown']
-        .includes(event.key)
+      ['Shift', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(
+        event.key,
+      )
     ) {
       captureSelection();
     }

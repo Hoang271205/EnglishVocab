@@ -1,0 +1,89 @@
+.account-menu {
+  position: relative;
+}
+.account-menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+}
+.account-menu-trigger:hover,
+.account-menu-trigger[aria-expanded='true'] {
+  background: #f3f6ee;
+  border-color: var(--border);
+}
+.account-menu-trigger:focus-visible,
+.account-menu-panel button:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+.account-menu-trigger > .ui-icon {
+  width: 16px;
+  height: 16px;
+}
+.account-menu-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 100;
+  width: 220px;
+  max-width: calc(100vw - 28px);
+  padding: 7px;
+  background: #fffef8;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+}
+.account-menu-panel button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  padding: 12px;
+  text-align: left;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: inherit;
+  background: transparent;
+  border-radius: 9px;
+  cursor: pointer;
+}
+.account-menu-panel button:hover,
+.account-menu-panel button:focus-visible {
+  background: #edf3e7;
+}
+.account-menu-panel .account-menu-logout {
+  color: #94472f;
+  border-top: 1px solid var(--border);
+  border-radius: 0 0 9px 9px;
+}
+.account-menu button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+@media (max-width: 480px) {
+  .account-menu-trigger {
+    padding: 4px;
+    gap: 6px;
+    font-size: 12px;
+  }
+  .account-menu .account-avatar {
+    display: grid;
+    width: 30px;
+    height: 30px;
+  }
+  .account-menu .account-display-name {
+    max-width: 72px;
+  }
+}

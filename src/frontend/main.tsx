@@ -1,3 +1,4 @@
+import ErrorBoundary from './components/ui/ErrorBoundary';
 import ExperienceControls from './audio/ExperienceControls';
 import FeedbackEffects from './audio/FeedbackEffects';
 import { Suspense } from 'react';
@@ -14,12 +15,12 @@ if (!rootElement) {
 }
 
 createRoot(rootElement).render(
-  <>
+  <ErrorBoundary>
     <Suspense fallback={<LoadingSkeleton label="Đang tải giao diện" />}>
       <App />
     </Suspense>
     <ExperienceControls />
     <FeedbackEffects />
     <SpeedInsights />
-  </>,
+  </ErrorBoundary>,
 );

@@ -1,10 +1,23 @@
 import MascotImage from '../MascotImage';
 import { APP_ORIGIN } from '../config';
 import LoginForm from './LoginForm';
+import QuickLookup from './QuickLookup';
 import { useAccount } from './useAccount';
 
 export default function AccountPage() {
   const model = useAccount();
+
+  if (!model.loading && model.user) {
+    return (
+      <QuickLookup
+        key={model.user.id}
+        user={model.user}
+        busy={model.busy}
+        error={model.error}
+        onLogout={model.logout}
+      />
+    );
+  }
 
   return (
     <main className="account-page">
@@ -21,22 +34,6 @@ export default function AccountPage() {
 
       {model.loading ? (
         <p role="status">Đang kiểm tra tài khoản…</p>
-      ) : model.user ? (
-        <section>
-          <h1>Chào {model.user.name}!</h1>
-
-          <p>{model.user.email}</p>
-
-          <p>Các từ bạn lưu sẽ được gửi trực tiếp lên tài khoản này.</p>
-
-          <button
-            type="button"
-            disabled={model.busy}
-            onClick={() => void model.logout()}
-          >
-            {model.busy ? 'Đang xử lý…' : 'Đăng xuất'}
-          </button>
-        </section>
       ) : (
         <section>
           <h1>Đăng nhập</h1>

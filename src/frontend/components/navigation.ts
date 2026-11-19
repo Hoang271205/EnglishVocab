@@ -1,5 +1,5 @@
 import type { IconName } from './ui/Icon';
-export type Tab = 'review' | 'learn' | 'notebook';
+export type Tab = 'review' | 'learn' | 'notebook' | 'settings';
 
 export const navigation: { id: Tab; label: string; icon: IconName }[] = [
   { id: 'review', label: 'Ôn tập', icon: 'review' },

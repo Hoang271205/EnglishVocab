@@ -25,3 +25,5 @@ content/crawl/
 .vercel/
 .env.*
 !.env.example
+
+/.mongodb-backups/

@@ -134,6 +134,14 @@ npm run build:extension
 
 Extension đăng nhập riêng với phiên web. Lượt lưu mới gửi trực tiếp qua API và chỉ báo thành công khi server xác nhận. Khi build cho website đã deploy, đặt `EXTENSION_APP_ORIGIN` thành origin HTTPS của website rồi build/reload extension.
 
+Với website EnglishVocab hiện tại:
+
+```sh
+EXTENSION_APP_ORIGIN=https://englishvocab-ten.vercel.app npm run build:extension
+```
+
+Để các lần build tiếp theo vẫn dùng website này, thêm `EXTENSION_APP_ORIGIN=https://englishvocab-ten.vercel.app` vào `.env`. Sau khi build, mở `chrome://extensions`, bấm **Tải lại** ở EnglishVocab rồi tải lại các tab đang dùng extension. Nếu popup báo không kết nối được `127.0.0.1:3001` khi bạn đang dùng Vercel, extension đang là bản build cho server local; thực hiện lại các bước trên.
+
 Xem thêm về đồng bộ, hàng đợi cũ và cấu hình domain trong [tài liệu phát triển](docs/DEVELOPMENT.md#extension-và-đồng-bộ).
 
 ## Dành cho người phát triển

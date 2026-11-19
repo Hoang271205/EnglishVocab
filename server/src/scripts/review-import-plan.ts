@@ -26,6 +26,7 @@ export interface ReviewedPackage {
   topicRows: ReviewTopicRow[];
   packsByTopic: Map<string, ReturnType<typeof contentSchema.parse>>;
   entriesById: Map<string, Entry>;
+  requireFullTopics?: boolean;
 }
 
 export interface StoredEntry extends Entry {
@@ -59,6 +60,8 @@ export interface ReviewedImportPlan {
   resultingEntries: number;
   resultingTopicLinks: number;
   maximumTopicSize: number;
+  fullTargetTopics: number;
+  authoredDraftEntryIds: number;
 }
 
 const normalized = (value: string) =>
@@ -82,7 +85,7 @@ function topicFromStored(document: StoredTopic): Topic {
   return topicSchema.parse(topic);
 }
 
-function assertEntrySourceQuality(entry: Entry) {
+function assertEntrySourceQuality(entry: Entry, authoredDraft: boolean) {
   const meaningSource = entry.provenance.find((source) => source.field === 'meaning');
   const exampleSource = entry.provenance.find((source) => source.field === 'example');
   if (!meaningSource || !exampleSource) {
@@ -95,8 +98,14 @@ function assertEntrySourceQuality(entry: Entry) {
     if (source.status === 'verified') {
       throw new Error(`Entry ${entry.id} bị đánh dấu verified nhưng gói crawl chưa có bằng chứng xác minh.`);
     }
+    if (authoredDraft && source.status !== 'authored') {
+      throw new Error(`Entry biên tập ${entry.id} thiếu nguồn authored cho nghĩa hoặc ví dụ.`);
+    }
   }
-  if (entry.cefr.level !== null || entry.cefr.status !== 'unknown') {
+  const unknownLevel = entry.cefr.level === null && entry.cefr.status === 'unknown';
+  const authoredEstimate = authoredDraft && entry.cefr.level !== null && entry.cefr.status === 'estimated'
+    && entry.provenance.some((source) => source.field === 'cefr' && source.status === 'authored');
+  if (!unknownLevel && !authoredEstimate) {
     throw new Error(`Entry crawl mới ${entry.id} có CEFR chưa được nguồn cung cấp.`);
   }
   if (entry.pronunciation.ipa && !entry.provenance.some((source) => source.field === 'ipa')) {
@@ -148,6 +157,7 @@ export function buildReviewedImportPlan(input: {
 
   const additionsByTopic = new Map<string, string[]>();
   const incomingEntries = new Map<string, Entry>();
+  const authoredDraftIds = new Set<string>();
   let additionReferences = 0;
   for (const topicId of targetIds) {
     const row = rowsById.get(topicId)!;
@@ -229,17 +239,21 @@ export function buildReviewedImportPlan(input: {
     const additions: string[] = [];
     for (const proposed of row.proposedAdditions) {
       additionReferences += 1;
-      const entry = reviewed.entriesById.get(proposed.entryId);
-      if (!entry || !pack.entries.some((candidate) => candidate.id === proposed.entryId)) {
+      const packedEntry = reviewed.entriesById.get(proposed.entryId);
+      if (!packedEntry || !pack.entries.some((candidate) => candidate.id === proposed.entryId)) {
         throw new Error(`Gói thiếu entry được báo cáo ${proposed.entryId} (${topicId}).`);
       }
+      const authoredDraft = proposed.disposition === 'authored-draft'
+        && packedEntry.contentStatus === 'draft' && reviewed.requireFullTopics === true;
       if (
-        normalized(entry.headword) !== normalized(proposed.headword) ||
-        entry.collectionId !== canonicalTopic.collectionId ||
-        entry.contentStatus !== 'ready'
+        normalized(packedEntry.headword) !== normalized(proposed.headword) ||
+        packedEntry.collectionId !== canonicalTopic.collectionId ||
+        (!authoredDraft && (packedEntry.contentStatus !== 'ready' || proposed.disposition === 'authored-draft'))
       ) {
         throw new Error(`Headword/collectionId/contentStatus không khớp ở ${topicId}: ${proposed.entryId}.`);
       }
+      if (authoredDraft) authoredDraftIds.add(packedEntry.id);
+      const entry = authoredDraft ? entrySchema.parse({...packedEntry, contentStatus: 'ready'}) : packedEntry;
       const baseline = currentEntries.get(entry.id);
       if (baseline && !isDeepStrictEqual(baseline, entry)) {
         throw new Error(`Entry ${entry.id} trong gói khác public content hiện hành.`);
@@ -247,7 +261,7 @@ export function buildReviewedImportPlan(input: {
       if (proposed.disposition === 'reused-existing-entry' && !baseline) {
         throw new Error(`Entry ${entry.id} được ghi là dùng lại nhưng chưa có trong public content.`);
       }
-      if (proposed.disposition !== 'reused-existing-entry') assertEntrySourceQuality(entry);
+      if (proposed.disposition !== 'reused-existing-entry') assertEntrySourceQuality(entry, authoredDraft);
       const previous = incomingEntries.get(entry.id);
       if (previous && !isDeepStrictEqual(previous, entry)) {
         throw new Error(`Hai topic đưa nội dung khác nhau cho cùng entry ID ${entry.id}.`);
@@ -278,12 +292,20 @@ export function buildReviewedImportPlan(input: {
 
   const topicsToAppend: TopicAppend[] = [];
   let unchangedTopics = 0;
+  let fullTargetTopics = 0;
   for (const topicId of targetIds) {
     const existing = databaseTopics.get(topicId)!;
     const entryIdsToAdd = (additionsByTopic.get(topicId) ?? []).filter((id) => !existing.entryIds.includes(id));
     const entryIdsAfter = [...existing.entryIds, ...entryIdsToAdd];
     if (entryIdsAfter.length > 10) {
       throw new Error(`Topic ${topicId} sẽ vượt giới hạn 10 từ (${entryIdsAfter.length}); chưa ghi gì.`);
+    }
+    if (entryIdsAfter.length === 10) fullTargetTopics += 1;
+    if (reviewed.requireFullTopics) {
+      const expectedIds = new Set(reviewed.packsByTopic.get(topicId)!.topics[0]!.entryIds);
+      if (expectedIds.size !== 10 || entryIdsAfter.length !== 10 || entryIdsAfter.some((id) => !expectedIds.has(id))) {
+        throw new Error(`Topic ${topicId} không thể đạt đúng danh sách 10 từ bằng thao tác chỉ bổ sung.`);
+      }
     }
     if (entryIdsToAdd.length) {
       topicsToAppend.push({topicId, entryIdsBefore: [...existing.entryIds], entryIdsToAdd, entryIdsAfter});
@@ -322,5 +344,7 @@ export function buildReviewedImportPlan(input: {
     resultingEntries: allEntries.size,
     resultingTopicLinks: finalTopics.reduce((sum, topic) => sum + topic.entryIds.length, 0),
     maximumTopicSize: Math.max(...finalTopics.map((topic) => topic.entryIds.length)),
+    fullTargetTopics,
+    authoredDraftEntryIds: authoredDraftIds.size,
   };
 }

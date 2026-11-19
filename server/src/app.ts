@@ -1,4 +1,5 @@
 import express from 'express';
+import { observeRequests } from './middleware/request-observation.js';
 import type { ErrorRequestHandler } from 'express';
 import { resolve } from 'node:path';
 import { z } from 'zod';
@@ -14,6 +15,7 @@ import { settingsRouter } from './modules/settings/router.js';
 import { transfersRouter } from './modules/transfers/router.js';
 import { notebookRouter } from './modules/notebook/router.js';
 import { extensionRouter } from './modules/extension/router.js';
+import { dictionaryRouter } from './modules/dictionary/router.js';
 
 export function createApp({
   serveFrontend = true,
@@ -21,6 +23,7 @@ export function createApp({
   const app = express();
 
   app.disable('x-powered-by');
+  app.use('/api', observeRequests());
   if (process.env.NODE_ENV === 'production') app.set('trust proxy', 1);
   app.use('/api/transfers', express.json({ limit: '2mb' }));
   app.use(express.json({ limit: '1mb' }));
@@ -54,6 +57,7 @@ export function createApp({
   app.use('/api/transfers', transfersRouter);
   app.use('/api/notebook', notebookRouter);
   app.use('/api/extension', extensionRouter);
+  app.use('/api/dictionary', dictionaryRouter);
 
   app.use('/api', (_request, response) => {
     response.status(404).json({
@@ -138,6 +142,10 @@ export function createApp({
         },
       });
       return;
+    }
+
+    if (!invalidJson) {
+      console.error(JSON.stringify({ event: 'api_error', requestId: response.locals.requestId, code: 'SERVER_ERROR' }));
     }
 
     response.status(invalidJson ? 400 : 500).json({

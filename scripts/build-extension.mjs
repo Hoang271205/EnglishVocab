@@ -37,7 +37,7 @@ manifest.host_permissions = [
 manifest.content_scripts[0].matches = appMatches;
 manifest.content_scripts[1].exclude_matches = appMatches;
 manifest.action = {
-  default_title: 'Tài khoản EnglishVocab',
+  default_title: 'EnglishVocab — Tra từ nhanh',
   default_popup: 'account.html',
 };
 await mkdir('dist-extension', { recursive: true });
