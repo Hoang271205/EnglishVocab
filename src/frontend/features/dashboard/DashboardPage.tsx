@@ -80,12 +80,7 @@ export default function DashboardPage({
       {dashboard.summary && (
         <>
           <DashboardStats summary={dashboard.summary} />
-          {pending ? (
-            <div className="context-message">
-              <strong>Bạn có một phiên đang dở</strong>
-              <p>Chọn Tiếp tục ở phía trên để học tiếp từ chỗ đã dừng nhé.</p>
-            </div>
-          ) : dashboard.summary.dueCount > 0 ? (
+          {pending ? null : dashboard.summary.dueCount > 0 ? (
             <>
               <p className="context-caption">
                 Có {dashboard.summary.dueCount} từ đến hạn. Chọn bộ từ, số lượng
