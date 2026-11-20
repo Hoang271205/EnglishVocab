@@ -17,7 +17,7 @@ export interface Entry {
  pronunciation: { ipa: string | null; accent: 'en-US' | null };
  examples: Example[]; provenance: Source[]; contentStatus: 'draft' | 'ready';
 }
-export interface Topic { id: string; collectionId: 'ielts' | 'daily'; nameEn: string; nameVi: string; order: number; entryIds: string[] }
+export interface Topic { id: string; collectionId: 'ielts' | 'daily'; nameEn: string; nameVi: string; order: number; entryIds: string[]; part?: 2 | undefined; parentTopicId?: string | undefined }
 export interface Progress {
  entryId: string; level: Level; learnedAt: number; lastReviewedAt: number | null;
  nextReviewAt: number; correctCount: number; wrongCount: number; version: number;

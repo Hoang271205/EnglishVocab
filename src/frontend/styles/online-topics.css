@@ -10,6 +10,32 @@
   margin: 28px 0;
 }
 
+.topic-part-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.topic-part-filters button {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--green);
+  font: inherit;
+  cursor: pointer;
+}
+
+.topic-part-filters button[aria-pressed='true'] {
+  background: var(--green);
+  color: #fff;
+}
+
+.topic-row--part-two .topic-number {
+  border: 1px solid var(--border);
+}
+
 .online-topic-details {
   display: grid;
   flex: 1;

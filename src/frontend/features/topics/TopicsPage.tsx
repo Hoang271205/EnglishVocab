@@ -41,6 +41,27 @@ export default function TopicsPage() {
         />
       </div>
 
+      {topics.extensionCount > 0 && (
+        <div className="topic-part-filters" aria-label="Lọc phần học">
+          {(
+            [
+              { value: 'all', label: 'Tất cả' },
+              { value: '1', label: 'Part 1' },
+              { value: '2', label: 'Part 2' },
+            ] as const
+          ).map((filter) => (
+            <button
+              key={filter.value}
+              type="button"
+              aria-pressed={topics.partFilter === filter.value}
+              onClick={() => topics.setPartFilter(filter.value)}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       {topics.error && (
         <div className="dashboard-error">
           <StatusMessage tone="error">{topics.error}</StatusMessage>
@@ -54,8 +75,9 @@ export default function TopicsPage() {
       ) : topics.data ? (
         <>
           <p className="topic-message">
-            {topics.topicCount} chủ đề · {topics.populatedCount} chủ đề đã có
-            nội dung
+            {topics.extensionCount > 0
+              ? `${topics.originalTopicCount} chủ đề · ${topics.topicCount} phần học · ${topics.populatedCount} phần đã có nội dung`
+              : `${topics.topicCount} chủ đề · ${topics.populatedCount} chủ đề đã có nội dung`}
           </p>
 
           {topics.visibleTopics.length === 0 ? (
@@ -66,6 +88,9 @@ export default function TopicsPage() {
                 <TopicCard
                   key={topic.id}
                   topic={topic}
+                  displayNumber={
+                    topics.displayNumbers.get(topic.id) ?? topic.order
+                  }
                   selected={topics.selectedId === topic.id}
                   onToggle={() => topics.toggleTopic(topic.id)}
                   onClose={topics.closeTopic}

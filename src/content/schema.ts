@@ -19,10 +19,36 @@ export const entrySchema = z.object({
  if (e.contentStatus === 'ready' && (!e.meaningVi.trim() || !e.partOfSpeech.trim() || !e.acceptedLearnAnswers.length || !e.examples.length)) issue('Ready entry is incomplete');
  if (e.contentStatus === 'ready' && e.provenance.length === 0) issue('Ready entry needs provenance');
 });
-export const topicSchema = z.object({id,collectionId:z.enum(['ielts','daily']),nameEn:text,nameVi:text,order:z.number().int().min(1).max(100),entryIds:z.array(id).max(10)}).strict().refine(t=>new Set(t.entryIds).size===t.entryIds.length,'Duplicate entry in topic');
+export const topicSchema = z
+  .object({
+    id,
+    collectionId: z.enum(['ielts', 'daily']),
+    nameEn: text,
+    nameVi: text,
+    order: z.number().int().min(1).max(200),
+    entryIds: z.array(id).max(10),
+    part: z.literal(2).optional(),
+    parentTopicId: id.optional(),
+  })
+  .strict()
+  .superRefine((t, ctx) => {
+    const issue = (message: string) =>
+      ctx.addIssue({ code: 'custom', message });
+    if (new Set(t.entryIds).size !== t.entryIds.length)
+      issue('Duplicate entry in topic');
+    if (t.part === 2) {
+      if (
+        !t.parentTopicId ||
+        t.id !== `${t.parentTopicId}-part-2` ||
+        t.order <= 100
+      )
+        issue('Part 2 needs a stable parent ID and order 101–200');
+    } else if (t.parentTopicId || t.order > 100)
+      issue('Original topics must retain order 1–100 and have no parent');
+  });
 export function parseEntry(value: unknown): Entry { return entrySchema.parse(value); }
 export function parseTopic(value: unknown): Topic { return topicSchema.parse(value); }
-export const contentSchema = z.object({schemaVersion:z.literal(1),contentVersion:text,entries:z.array(entrySchema).max(20_000),topics:z.array(topicSchema).max(200)}).strict().superRefine((p,ctx)=>{
+export const contentSchema = z.object({schemaVersion:z.literal(1),contentVersion:text,entries:z.array(entrySchema).max(20_000),topics:z.array(topicSchema).max(400)}).strict().superRefine((p,ctx)=>{
  const ids = new Set(p.entries.map(e=>e.id));
  if(ids.size !== p.entries.length)ctx.addIssue({code:'custom',message:'Duplicate entry ID'});
  if(new Set(p.topics.map(t=>t.id)).size !== p.topics.length)ctx.addIssue({code:'custom',message:'Duplicate topic ID'});
