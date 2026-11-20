@@ -1,4 +1,5 @@
 import type { Topic } from '../../../../src/domain/types.js';
+import { compareTopics } from '../../../../src/domain/topic-order.js';
 import { sharedTopics } from './collections.js';
 import { userProgress } from '../progress/collections.js';
 import { topicLearning } from '../study/topic-learning.js';
@@ -22,7 +23,7 @@ async function loadCatalogue(collection: Collection): Promise<Topic[]> {
     .toArray();
   catalogueRequests.set(collection, request);
   try {
-    const topics = await request;
+    const topics = (await request).sort(compareTopics);
     catalogueCache.set(collection, { topics, expiresAt: Date.now() + 30000 });
     return topics;
   } finally {

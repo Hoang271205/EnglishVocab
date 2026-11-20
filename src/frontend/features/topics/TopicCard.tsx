@@ -6,6 +6,7 @@ interface TopicCardProps {
   selected: boolean;
   onToggle: () => void;
   onClose: () => void;
+  displayNumber?: number;
 }
 
 export default function TopicCard({
@@ -13,13 +14,14 @@ export default function TopicCard({
   selected,
   onToggle,
   onClose,
+  displayNumber,
 }: TopicCardProps) {
   const hasContent = topic.total > 0;
 
   return (
     <li>
       <button
-        className={`topic-row${selected ? ' is-selected' : ''}`}
+        className={`topic-row${selected ? ' is-selected' : ''}${topic.part === 2 ? ' topic-row--part-two' : ''}`}
         type="button"
         disabled={!hasContent}
         aria-expanded={selected}
@@ -27,7 +29,7 @@ export default function TopicCard({
         onClick={onToggle}
       >
         <span className="topic-number" aria-hidden="true">
-          {String(topic.order).padStart(2, '0')}
+          {String(displayNumber ?? topic.order).padStart(2, '0')}
         </span>
 
         <span className="topic-info">

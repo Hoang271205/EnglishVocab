@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { requireAuth } from '../../middleware/require-auth.js';
 
 import { sharedEntries, sharedTopics } from './collections.js';
+import { compareTopics } from '../../../../src/domain/topic-order.js';
 
 export const libraryRouter = Router();
 
@@ -49,12 +50,14 @@ libraryRouter.get('/topics', async (request, response) => {
 
   const search = parsed.data.search.normalize('NFKC').toLowerCase();
 
-  const visible = topics.filter((topic) =>
-    `${topic.nameEn} ${topic.nameVi}`
-      .normalize('NFKC')
-      .toLowerCase()
-      .includes(search),
-  );
+  const visible = topics
+    .sort(compareTopics)
+    .filter((topic) =>
+      `${topic.nameEn} ${topic.nameVi}`
+        .normalize('NFKC')
+        .toLowerCase()
+        .includes(search),
+    );
 
   response.json({ topics: visible });
 });
