@@ -2,7 +2,8 @@ export const POLICY = 'fixed-5day-v3' as const;
 // Committed historical receipts retain the policy under which they were graded.
 export type ReviewPolicy = typeof POLICY | 'fixed-5day-v2';
 export type Level = 1 | 2 | 3 | 4 | 5;
-export type CollectionId = 'ielts' | 'daily' | 'personal';
+export type CollectionId = 'ielts' | 'daily' | 'idioms' | 'personal';
+export type SharedCollectionId = Exclude<CollectionId, 'personal'>;
 export type CefrLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
 export interface Source {
  field: 'meaning' | 'ipa' | 'cefr' | 'example' | 'audio' | 'definition';
@@ -17,7 +18,7 @@ export interface Entry {
  pronunciation: { ipa: string | null; accent: 'en-US' | null };
  examples: Example[]; provenance: Source[]; contentStatus: 'draft' | 'ready';
 }
-export interface Topic { id: string; collectionId: 'ielts' | 'daily'; nameEn: string; nameVi: string; order: number; entryIds: string[]; part?: 2 | undefined; parentTopicId?: string | undefined }
+export interface Topic { id: string; collectionId: SharedCollectionId; nameEn: string; nameVi: string; order: number; entryIds: string[]; part?: 2 | undefined; parentTopicId?: string | undefined }
 export interface Progress {
  entryId: string; level: Level; learnedAt: number; lastReviewedAt: number | null;
  nextReviewAt: number; correctCount: number; wrongCount: number; version: number;

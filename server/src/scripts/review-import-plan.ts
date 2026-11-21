@@ -10,7 +10,7 @@ export interface ReviewAddition {
 
 export interface ReviewTopicRow {
   topicId: string;
-  collectionId: 'ielts' | 'daily';
+  collectionId: Topic['collectionId'];
   order: number;
   nameEn: string;
   nameVi: string;
@@ -68,7 +68,7 @@ const normalized = (value: string) =>
   value.normalize('NFKC').trim().toLocaleLowerCase().replace(/\s+/gu, ' ');
 
 function inScope(topic: Topic) {
-  return topic.collectionId === 'ielts' ? topic.order >= 56 : topic.order >= 11;
+  return topic.collectionId === 'ielts' ? topic.order >= 56 : topic.collectionId === 'daily' && topic.order >= 11;
 }
 
 function expectedTopicIds(catalog: Topic[]) {

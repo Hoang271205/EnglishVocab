@@ -8,6 +8,7 @@ import LearningStartButton from '../learning/LearningStartButton';
 interface TopicDetailsProps {
   topicId: string;
   topicName: string;
+  entryLabel?: string;
   remaining: number;
   onClose: () => void;
 }
@@ -15,6 +16,7 @@ interface TopicDetailsProps {
 export default function TopicDetails({
   topicId,
   topicName,
+  entryLabel = 'từ',
   remaining,
   onClose,
 }: TopicDetailsProps) {
@@ -25,7 +27,7 @@ export default function TopicDetails({
       id={`online-topic-${topicId}`}
       className="selected-topic topic-dropdown"
       role="region"
-      aria-label={`Từ trong chủ đề ${topicName}`}
+      aria-label={`Nội dung chủ đề ${topicName}`}
     >
       <div className="online-topic-details">
         <strong>{topicName}</strong>
@@ -43,7 +45,7 @@ export default function TopicDetails({
         {resource.data && (
           <>
             <p>
-              {resource.data.length} từ sẵn sàng trong chủ đề · {remaining} từ
+              {resource.data.length} {entryLabel} sẵn sàng trong chủ đề · {remaining} {entryLabel}
               chưa đi qua trong lượt học mới.
             </p>
             <LearningStartButton
@@ -52,7 +54,7 @@ export default function TopicDetails({
             />
 
             {resource.data.length === 0 ? (
-              <p>Chủ đề chưa có từ đủ điều kiện học.</p>
+              <p>Chủ đề chưa có {entryLabel} đủ điều kiện học.</p>
             ) : (
               <ul className="online-topic-words">
                 {resource.data.map((entry) => (

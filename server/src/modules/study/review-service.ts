@@ -137,7 +137,7 @@ export async function getActiveReviewSession(userId: string) {
 export async function createReviewSession(
   userId: string,
   limit: ReviewBatchSize,
-  collection?: 'ielts' | 'daily' | 'personal',
+  collection?: 'ielts' | 'daily' | 'idioms' | 'personal',
 ) {
   return client.withSession(async (mongoSession) =>
     mongoSession.withTransaction(async () => {

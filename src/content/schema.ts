@@ -5,7 +5,7 @@ const id = z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}$/);
 const source = z.object({field:z.enum(['meaning','ipa','cefr','example','audio','definition']),attribution:text,license:text,url:z.url().refine(s=>['https:','http:'].includes(new URL(s).protocol)).nullable(),status:z.enum(['authored','verified','unverified']),checkedAt:z.number().int().nonnegative().nullable()}).strict();
 const example = z.object({id, prefix:z.string().max(10_000),targetSurface:text,suffix:z.string().max(10_000),acceptedAnswers:z.array(text).min(1).max(20)}).strict();
 export const entrySchema = z.object({
- id,revision:z.number().int().positive(),collectionId:z.enum(['ielts','daily','personal']),headword:text,partOfSpeech:z.string().max(100),senseKey:text,meaningVi:z.string().max(10_000),acceptedLearnAnswers:z.array(text).max(20),
+ id,revision:z.number().int().positive(),collectionId:z.enum(['ielts','daily','idioms','personal']),headword:text,partOfSpeech:z.string().max(100),senseKey:text,meaningVi:z.string().max(10_000),acceptedLearnAnswers:z.array(text).max(20),
  cefr:z.object({level:z.enum(['A1','A2','B1','B2','C1','C2']).nullable(),status:z.enum(['estimated','verified','unknown']),note:z.string().max(10_000)}).strict(),
  pronunciation:z.object({ipa:z.string().max(500).nullable(),accent:z.literal('en-US').nullable()}).strict(),
  examples:z.array(example).max(100),provenance:z.array(source).max(100),contentStatus:z.enum(['draft','ready'])
@@ -22,7 +22,7 @@ export const entrySchema = z.object({
 export const topicSchema = z
   .object({
     id,
-    collectionId: z.enum(['ielts', 'daily']),
+    collectionId: z.enum(['ielts', 'daily', 'idioms']),
     nameEn: text,
     nameVi: text,
     order: z.number().int().min(1).max(200),
@@ -36,6 +36,8 @@ export const topicSchema = z
       ctx.addIssue({ code: 'custom', message });
     if (new Set(t.entryIds).size !== t.entryIds.length)
       issue('Duplicate entry in topic');
+    if (t.collectionId === 'idioms' && (t.part || t.parentTopicId || t.order > 100 || t.entryIds.length > 5 || !/^idioms-\d{3}$/.test(t.id)))
+      issue('Idioms requires its own topic ID, order 1–100, no parent, and at most five entries');
     if (t.part === 2) {
       if (
         !t.parentTopicId ||
@@ -48,13 +50,14 @@ export const topicSchema = z
   });
 export function parseEntry(value: unknown): Entry { return entrySchema.parse(value); }
 export function parseTopic(value: unknown): Topic { return topicSchema.parse(value); }
-export const contentSchema = z.object({schemaVersion:z.literal(1),contentVersion:text,entries:z.array(entrySchema).max(20_000),topics:z.array(topicSchema).max(400)}).strict().superRefine((p,ctx)=>{
+export const contentSchema = z.object({schemaVersion:z.literal(1),contentVersion:text,entries:z.array(entrySchema).max(20_000),topics:z.array(topicSchema).max(500)}).strict().superRefine((p,ctx)=>{
  const ids = new Set(p.entries.map(e=>e.id));
  if(ids.size !== p.entries.length)ctx.addIssue({code:'custom',message:'Duplicate entry ID'});
  if(new Set(p.topics.map(t=>t.id)).size !== p.topics.length)ctx.addIssue({code:'custom',message:'Duplicate topic ID'});
  for(const topic of p.topics) for(const entryId of topic.entryIds) {
   const entry=p.entries.find(e=>e.id===entryId);
   if(!entry)ctx.addIssue({code:'custom',message:`Missing entry ${entryId}`});
+  else if((topic.collectionId==='idioms') !== (entry.collectionId==='idioms'))ctx.addIssue({code:'custom',message:`Invalid Idioms collection membership ${entryId}`});
   else if(entry.collectionId==='personal' || (topic.collectionId==='ielts' && entry.cefr.level && ['A1','A2'].includes(entry.cefr.level)) || (topic.collectionId==='daily' && entry.cefr.level && ['C1','C2'].includes(entry.cefr.level)))ctx.addIssue({code:'custom',message:`Invalid collection membership ${entryId}`});
  }
 });

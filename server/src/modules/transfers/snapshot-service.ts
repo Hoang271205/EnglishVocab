@@ -43,7 +43,7 @@ export async function exportExtensionSnapshot(
           .find(
             {
               collectionId: {
-                $in: ['ielts', 'daily'],
+                $in: ['ielts', 'daily', 'idioms'],
               },
               contentStatus: 'ready',
             },

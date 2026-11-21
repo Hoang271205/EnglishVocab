@@ -17,6 +17,7 @@ export default function TopicCard({
   displayNumber,
 }: TopicCardProps) {
   const hasContent = topic.total > 0;
+  const noun = topic.collectionId === 'idioms' ? 'thành ngữ' : 'từ';
 
   return (
     <li>
@@ -39,7 +40,7 @@ export default function TopicCard({
 
           <span className="topic-progress-text">
             {hasContent
-              ? `${topic.learned}/${topic.total} từ đã học`
+              ? `${topic.learned}/${topic.total} ${noun} đã học`
               : 'Chưa có nội dung'}
             {topic.processed >= topic.total && hasContent && ' · Đã hoàn thành'}
           </span>
@@ -55,7 +56,7 @@ export default function TopicCard({
         </span>
 
         <span className="topic-action">
-          {hasContent ? 'Xem từ' : 'Chưa có từ'}
+          {hasContent ? `Xem ${noun}` : `Chưa có ${noun}`}
         </span>
       </button>
 
@@ -64,6 +65,7 @@ export default function TopicCard({
           key={topic.id}
           topicId={topic.id}
           topicName={topic.nameVi}
+          entryLabel={noun}
           remaining={Math.max(0, topic.total - topic.processed)}
           onClose={onClose}
         />
