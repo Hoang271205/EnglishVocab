@@ -96,7 +96,7 @@ export default function NotebookStack(props: Props) {
                     )}
                     <Button
                       className="cloud-danger"
-                      variant="secondary"
+                      variant="danger"
                       disabled={props.busy}
                       aria-label={`Xoá ${row.entry.headword}`}
                       onClick={() => props.onDelete(row)}

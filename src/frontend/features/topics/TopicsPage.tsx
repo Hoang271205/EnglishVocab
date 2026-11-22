@@ -39,6 +39,29 @@ export default function TopicsPage() {
           value={topics.search}
           onChange={(event) => topics.setSearch(event.target.value)}
         />
+        <div
+          className="topic-status-filters"
+          role="group"
+          aria-label="Lọc tiến độ chủ đề"
+        >
+          {(
+            [
+              { value: 'all', label: 'Mọi trạng thái' },
+              { value: 'new', label: 'Chưa bắt đầu' },
+              { value: 'started', label: 'Đang học' },
+              { value: 'finished', label: 'Đã xem hết' },
+            ] as const
+          ).map((filter) => (
+            <button
+              key={filter.value}
+              type="button"
+              aria-pressed={topics.statusFilter === filter.value}
+              onClick={() => topics.setStatusFilter(filter.value)}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {topics.extensionCount > 0 && (
@@ -66,7 +89,9 @@ export default function TopicsPage() {
         <div className="dashboard-error">
           <StatusMessage tone="error">{topics.error}</StatusMessage>
 
-          <Button onClick={topics.reload}>Thử lại</Button>
+          <Button variant="secondary" onClick={topics.reload}>
+            Thử lại
+          </Button>
         </div>
       )}
 
@@ -79,9 +104,24 @@ export default function TopicsPage() {
               ? `${topics.originalTopicCount} chủ đề · ${topics.topicCount} phần học · ${topics.populatedCount} phần đã có nội dung`
               : `${topics.topicCount} chủ đề · ${topics.populatedCount} chủ đề đã có nội dung`}
           </p>
+          <p className="topic-results" role="status">
+            {(topics.search ||
+              topics.statusFilter !== 'all' ||
+              topics.partFilter !== 'all') &&
+              `Hiển thị ${topics.visibleTopics.length}/${topics.topicCount} phần học phù hợp.`}
+          </p>
 
           {topics.visibleTopics.length === 0 ? (
-            <StatusMessage>Không tìm thấy chủ đề phù hợp.</StatusMessage>
+            <div className="topic-search-empty">
+              <h2>Chưa tìm thấy chủ đề phù hợp</h2>
+              <p>
+                Thử tên tiếng Anh, tiếng Việt hoặc bỏ bộ lọc để xem lại các chủ
+                đề.
+              </p>
+              <Button variant="secondary" onClick={topics.resetFilters}>
+                Xóa tìm kiếm và bộ lọc
+              </Button>
+            </div>
           ) : (
             <ul className="topic-list">
               {topics.visibleTopics.map((topic) => (

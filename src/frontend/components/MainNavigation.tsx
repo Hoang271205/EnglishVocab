@@ -6,12 +6,14 @@ interface MainNavigationProps {
   activeTab: Tab;
   onNavigate: (tab: Tab) => void;
   items?: ReadonlyArray<(typeof navigation)[number]>;
+  disabled?: boolean;
 }
 
 export default function MainNavigation({
   activeTab,
   onNavigate,
   items = navigation,
+  disabled = false,
 }: MainNavigationProps) {
   return (
     <nav className="main-nav" aria-label="Điều hướng chính">
@@ -23,6 +25,7 @@ export default function MainNavigation({
             key={item.id}
             className={`nav-item${active ? ' is-active' : ''}`}
             type="button"
+            disabled={disabled}
             aria-current={active ? 'page' : undefined}
             onClick={() => onNavigate(item.id)}
           >

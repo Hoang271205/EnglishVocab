@@ -78,6 +78,9 @@ export default function LearningSessionPage({
           />
 
           {model.notice && <StatusMessage>{model.notice}</StatusMessage>}
+          {model.busy && (
+            <StatusMessage>Đang xử lý thao tác của bạn…</StatusMessage>
+          )}
 
           {session.phase === 'complete' ? (
             <div className="session-summary">
@@ -147,6 +150,7 @@ export default function LearningSessionPage({
               partOfSpeech={session.hint.partOfSpeech}
               answer={model.answer}
               busy={blocked}
+              working={model.busy}
               onChange={model.setAnswer}
               onSubmit={() => void model.submit()}
               onShowFront={() => void model.transition('front')}

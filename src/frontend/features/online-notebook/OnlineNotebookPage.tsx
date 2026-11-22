@@ -72,7 +72,7 @@ export default function OnlineNotebookPage({
       <div className="cloud-toolbar">
         <p>{data?.total ?? 0} từ phù hợp</p>
         <Button
-          variant="secondary"
+          variant="ghost"
           className="notebook-refresh-button"
           icon="refresh"
           loading={model.resource.refreshing}

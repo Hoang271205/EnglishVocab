@@ -73,24 +73,28 @@ export default function DashboardPage({
         <div className="dashboard-error">
           <StatusMessage tone="error">{dashboard.error}</StatusMessage>
 
-          <Button onClick={dashboard.reload}>Thử lại</Button>
+          <Button variant="secondary" onClick={dashboard.reload}>
+            Thử lại
+          </Button>
         </div>
       )}
 
       {dashboard.summary && (
         <>
-          <DashboardStats summary={dashboard.summary} />
           {pending ? null : dashboard.summary.dueCount > 0 ? (
-            <>
-              <p className="context-caption">
-                Có {dashboard.summary.dueCount} từ đến hạn. Chọn bộ từ, số lượng
-                rồi bắt đầu ôn nhé!
-              </p>
+            <section className="today-work" aria-label="Việc học hôm nay">
+              <div className="today-work-heading">
+                <p className="eyebrow">ƯU TIÊN HÔM NAY</p>
+                <span className="learning-status">
+                  {dashboard.summary.dueCount} từ đến hạn
+                </span>
+              </div>
               {children}
-            </>
+            </section>
           ) : (
-            <div className="context-empty">
+            <div className="context-empty today-work">
               <div>
+                <p className="eyebrow">BƯỚC TIẾP THEO</p>
                 <h2>
                   {dashboard.summary.learnedCount === 0
                     ? 'Mình cùng học những từ đầu tiên nhé!'
@@ -115,6 +119,11 @@ export default function DashboardPage({
               </div>
             </div>
           )}
+          <div className="progress-section-heading">
+            <h2>Hành trình của bạn</h2>
+            <p>Tiến độ tích lũy qua các lần học và ôn.</p>
+          </div>
+          <DashboardStats summary={dashboard.summary} />
           <LevelDistribution counts={dashboard.summary.levels} />
         </>
       )}
