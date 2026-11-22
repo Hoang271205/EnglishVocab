@@ -1,6 +1,6 @@
-import type { Progress, Topic } from '../../../domain/types';
+import type { Progress, Topic, SharedCollectionId } from '../../../domain/types';
 
-export type VocabularyCollection = 'ielts' | 'daily';
+export type VocabularyCollection = SharedCollectionId;
 
 export interface TopicSummary extends Topic {
   total: number;

@@ -20,7 +20,7 @@ export async function resolveReadyEntries(
     .find(
       {
         _id: { $in: ids },
-        collectionId: { $in: ['ielts', 'daily'] },
+        collectionId: { $in: ['ielts', 'daily', 'idioms'] },
         contentStatus: 'ready',
       },
       {

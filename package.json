@@ -46,6 +46,7 @@
     "library:seed": "tsx server/src/scripts/seed-library.ts",
     "library:import-reviewed": "tsx server/src/scripts/import-reviewed-content.ts",
     "library:import-part2": "node --import tsx server/src/scripts/import-part2.ts",
+    "library:import-idioms": "node --import tsx server/src/scripts/import-idioms.ts",
     "test:legacy": "node --import tsx --test legacy/local/tests/*.test.ts",
     "build:vercel": "npm run build:frontend",
     "db:prepare": "tsx server/src/scripts/prepare-database.ts",

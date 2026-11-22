@@ -20,6 +20,7 @@ const collections: {
   { value: 'all', label: 'Tất cả' },
   { value: 'ielts', label: 'IELTS' },
   { value: 'daily', label: 'Giao tiếp' },
+  { value: 'idioms', label: 'Thành ngữ' },
   { value: 'personal', label: 'Từ của tôi' },
 ];
 

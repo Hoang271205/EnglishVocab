@@ -11,7 +11,7 @@ export const libraryRouter = Router();
 libraryRouter.use(requireAuth);
 
 const topicQuerySchema = z.object({
-  collection: z.enum(['ielts', 'daily']).optional(),
+  collection: z.enum(['ielts', 'daily', 'idioms']).optional(),
   search: z.string().trim().max(100).default(''),
 });
 
@@ -19,7 +19,7 @@ const idSchema = z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}$/);
 
 libraryRouter.get('/topic-summaries', async (request, response) => {
   const { collection } = z
-    .object({ collection: z.enum(['ielts', 'daily']) })
+    .object({ collection: z.enum(['ielts', 'daily', 'idioms']) })
     .parse(request.query);
   response.setHeader('Cache-Control', 'private, no-store');
   const topics = await loadTopicSummaries(request.session.userId!, collection);

@@ -1,10 +1,10 @@
-import type { Topic } from '../../../../src/domain/types.js';
+import type { Topic, SharedCollectionId } from '../../../../src/domain/types.js';
 import { compareTopics } from '../../../../src/domain/topic-order.js';
 import { sharedTopics } from './collections.js';
 import { userProgress } from '../progress/collections.js';
 import { topicLearning } from '../study/topic-learning.js';
 
-type Collection = 'ielts' | 'daily';
+type Collection = SharedCollectionId;
 const catalogueCache = new Map<
   Collection,
   { topics: Topic[]; expiresAt: number }

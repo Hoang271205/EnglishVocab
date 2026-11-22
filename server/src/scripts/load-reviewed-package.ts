@@ -32,7 +32,7 @@ const normalized = (value: string) =>
   value.normalize('NFKC').trim().toLocaleLowerCase().replace(/\s+/gu, ' ');
 
 function inScope(topic: Topic) {
-  return topic.collectionId === 'ielts' ? topic.order >= 56 : topic.order >= 11;
+  return topic.collectionId === 'ielts' ? topic.order >= 56 : topic.collectionId === 'daily' && topic.order >= 11;
 }
 
 export async function loadReviewedPackage(packageDirectory: string): Promise<ReviewedPackage> {

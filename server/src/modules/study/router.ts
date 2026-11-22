@@ -187,7 +187,7 @@ studyRouter.post(
 const createReviewSchema = z
   .object({
     limit: z.literal(REVIEW_BATCH_SIZES).default(10),
-    collection: z.enum(['ielts', 'daily', 'personal']).optional(),
+    collection: z.enum(['ielts', 'daily', 'idioms', 'personal']).optional(),
   })
   .strict();
 

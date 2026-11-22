@@ -16,6 +16,11 @@ const collections = [
     label: 'Giao tiếp hằng ngày',
     banner: 'GIAO TIẾP HẰNG NGÀY · A1–B2',
   },
+  {
+    id: 'idioms',
+    label: 'IDIOMS · Thành ngữ',
+    banner: 'IDIOMS · THÀNH NGỮ TIẾNG ANH',
+  },
 ] as const;
 
 export default function CollectionPicker({
