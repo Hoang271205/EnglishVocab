@@ -174,6 +174,7 @@ export default function Workspace({
         <MainNavigation
           items={onlineNavigation}
           activeTab={activeTab}
+          disabled={preparing}
           onNavigate={navigate}
         />
       }

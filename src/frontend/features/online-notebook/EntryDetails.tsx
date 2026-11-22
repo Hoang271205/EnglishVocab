@@ -32,11 +32,7 @@ export default function EntryDetails({
     >
       <div className="cloud-toolbar">
         <h3>Chi tiết từ</h3>
-        <Button
-          variant="secondary"
-          onClick={onClose}
-          aria-label="Đóng chi tiết"
-        >
+        <Button variant="ghost" onClick={onClose} aria-label="Đóng chi tiết">
           <Icon name="close" />
         </Button>
       </div>

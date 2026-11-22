@@ -42,7 +42,11 @@ export default function TopicCard({
             {hasContent
               ? `${topic.learned}/${topic.total} ${noun} đã học`
               : 'Chưa có nội dung'}
-            {topic.processed >= topic.total && hasContent && ' · Đã hoàn thành'}
+            {topic.processed >= topic.total &&
+              hasContent &&
+              (topic.learned >= topic.total
+                ? ' · Đã học đủ'
+                : ' · Đã xem hết lượt')}
           </span>
 
           {hasContent && (
@@ -50,13 +54,18 @@ export default function TopicCard({
               className="topic-progress"
               max={topic.total}
               value={Math.min(topic.processed, topic.total)}
-              aria-label={`Tiến độ ${topic.nameVi}`}
+              aria-label={`Tiến độ lượt học ${topic.nameVi}`}
+              aria-valuetext={`Đã đi qua ${Math.min(topic.processed, topic.total)} trên ${topic.total} ${noun}; đã học ${topic.learned} ${noun}`}
             />
           )}
         </span>
 
         <span className="topic-action">
-          {hasContent ? `Xem ${noun}` : `Chưa có ${noun}`}
+          {selected
+            ? 'Đang mở'
+            : hasContent
+              ? `Xem ${noun}`
+              : `Chưa có ${noun}`}
         </span>
       </button>
 

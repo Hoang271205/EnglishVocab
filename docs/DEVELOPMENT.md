@@ -205,7 +205,7 @@ Khi chuyển máy hoặc sao lưu, mang theo `.crawl-cache/`, `.crawl-archive/` 
 - Ô nhập cloze: `src/frontend/components/study/`.
 - [Giới thiệu, âm thanh và chuyển động](frontend-experience.md).
 - [Cache và tối ưu tải](performance-improvements.md).
-- [Thiết kế FE](../FRONTEND.md), [thiết kế hệ thống](../DESIGN.md), [tiến độ](../PHASES.md).
+- Kiểu dữ liệu hiện hành: `src/domain/types.ts`; schema nội dung: `src/content/schema.ts`; API: `server/src/modules/`.
 - [HTML mẫu ban đầu](mockups/english-vocab-frontend.html), [popup mẫu](mockups/english-vocab-lookup-popup.html).
 
 `legacy/local/` giữ source/test/công cụ của phiên bản IndexedDB cũ để tham khảo, nằm ngoài phạm vi build/lint mặc định của bản online.

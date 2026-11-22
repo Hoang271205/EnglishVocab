@@ -7,6 +7,7 @@ interface LearningRecallCardProps {
   partOfSpeech: string;
   answer: string;
   busy: boolean;
+  working?: boolean;
   onChange: (value: string) => void;
   onSubmit: () => void;
   onShowFront: () => void;
@@ -18,6 +19,7 @@ export default function LearningRecallCard({
   partOfSpeech,
   answer,
   busy,
+  working = false,
   onChange,
   onSubmit,
   onShowFront,
@@ -26,6 +28,7 @@ export default function LearningRecallCard({
   return (
     <form
       className="study-card"
+      aria-busy={working || undefined}
       onSubmit={(event) => {
         event.preventDefault();
 
@@ -59,11 +62,15 @@ export default function LearningRecallCard({
       />
 
       <div className="study-answer-actions">
-        <Button type="submit" loading={busy} disabled={!answer.trim()}>
-          Kiểm tra
+        <Button
+          type="submit"
+          loading={working}
+          disabled={busy || !answer.trim()}
+        >
+          {working ? 'Đang xử lý…' : 'Kiểm tra'}
         </Button>
 
-        <Button variant="secondary" disabled={busy} onClick={onSaveDraft}>
+        <Button variant="ghost" disabled={busy} onClick={onSaveDraft}>
           Lưu nháp
         </Button>
 

@@ -24,7 +24,10 @@ export default function ReviewFeedbackCard({
   const sentence = example.prefix + example.targetSurface + example.suffix;
 
   return (
-    <div className="study-card review-feedback-card">
+    <div
+      className="study-card review-feedback-card"
+      data-result={event.correct ? 'correct' : 'incorrect'}
+    >
       <div
         className={`feedback-banner ${event.correct ? 'is-correct' : 'is-incorrect'}`}
       >
@@ -77,7 +80,7 @@ export default function ReviewFeedbackCard({
           disabled={disabled}
           onClick={() => speech.speak(entry.headword)}
         >
-          Nghe từ · Mỹ
+          Nghe từ
         </Button>
 
         <Button

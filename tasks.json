@@ -24,8 +24,8 @@
       "branch": "codex/ev-00",
       "timebox": "Một phiên 2–3 giờ; tách follow-up nếu phát sinh thay đổi sản phẩm.",
       "files": [
-        "docs/CONTRACTS.md",
-        "docs/FILE_OWNERSHIP.md",
+        "docs/DEVELOPMENT.md",
+        "docs/DEVELOPMENT.md",
         "docs/gates/"
       ],
       "scope": "Đọc các thiết kế đã có; xác định kiểu dữ liệu, chữ ký service, lỗi trả về, version và thông điệp capture/ACK. Giữ repo Git hiện có; không tạo lại thiết kế hoặc repo.",
@@ -722,7 +722,7 @@
         "src/styles/",
         "vite.config.*"
       ],
-      "scope": "Dựng React/Vite và giao diện sáng theo FRONTEND.md và ba ảnh tham khảo trong assets/: Ôn tập/Học từ mới/Sổ tay, nền xám, nội dung trắng, vàng cho topic và xanh cho hành động.",
+      "scope": "Dựng React/Vite và giao diện sáng theo docs/DEVELOPMENT.md và ba ảnh tham khảo trong assets/: Ôn tập/Học từ mới/Sổ tay, nền xám, nội dung trắng, vàng cho topic và xanh cho hành động.",
       "acceptanceCriteria": [
         "Không có tab dashboard/reading riêng; utility mở trong Sổ tay/menu.",
         "Bố cục desktop/mobile từ 320px, keyboard/focus và vùng bấm phù hợp; không sao chép tài sản thương hiệu của app tham khảo.",
@@ -946,7 +946,7 @@
       "files": [
         "docs/gates/gate-fe.json"
       ],
-      "scope": "Kiểm tra bản build dùng dịch vụ thật, DB thật, extension thật và bộ nội dung hoàn chỉnh; đối chiếu FRONTEND.md và thiết kế đã duyệt.",
+      "scope": "Kiểm tra bản build dùng dịch vụ thật, DB thật, extension thật và bộ nội dung hoàn chỉnh; đối chiếu docs/DEVELOPMENT.md và thiết kế đã duyệt.",
       "acceptanceCriteria": [
         "Typecheck/lint/build và kiểm tra core cần thiết đều đạt; không có lỗi chặn/mất dữ liệu/chấm sai.",
         "Chạy học → đóng → mở sau 2h giả lập → ôn → L5 → đúng/sai; capture → chọn nghĩa → lưu draft/ready → học; hai tab và backup round-trip.",

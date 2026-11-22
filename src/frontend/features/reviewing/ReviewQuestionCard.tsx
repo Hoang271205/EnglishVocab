@@ -7,6 +7,7 @@ interface ReviewQuestionCardProps {
   question: Question;
   letters: string[];
   disabled: boolean;
+  working?: boolean;
   canSubmit: boolean;
   onChange: (letters: string[]) => void;
   onSubmit: () => void;
@@ -18,6 +19,7 @@ export default function ReviewQuestionCard({
   question,
   letters,
   disabled,
+  working = false,
   canSubmit,
   onChange,
   onSubmit,
@@ -27,6 +29,7 @@ export default function ReviewQuestionCard({
   return (
     <form
       className="study-card"
+      aria-busy={working || undefined}
       onSubmit={(event) => {
         event.preventDefault();
 
@@ -61,15 +64,19 @@ export default function ReviewQuestionCard({
       </div>
 
       <div className="study-answer-actions">
-        <Button type="submit" disabled={disabled || !canSubmit}>
-          Kiểm tra
+        <Button
+          type="submit"
+          disabled={disabled || !canSubmit}
+          loading={working}
+        >
+          {working ? 'Đang xử lý…' : 'Kiểm tra'}
         </Button>
 
         <Button variant="secondary" disabled={disabled} onClick={onForgotten}>
           Không nhớ
         </Button>
 
-        <Button variant="secondary" disabled={disabled} onClick={onSaveDraft}>
+        <Button variant="ghost" disabled={disabled} onClick={onSaveDraft}>
           Lưu nháp
         </Button>
       </div>

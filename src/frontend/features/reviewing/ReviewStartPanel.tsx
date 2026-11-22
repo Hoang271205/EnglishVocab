@@ -42,43 +42,59 @@ export default function ReviewStartPanel({
     <section className="online-review-start">
       <h2>Bắt đầu ôn tập</h2>
 
-      <p>Chọn bộ từ cho lượt ôn này.</p>
+      <p>Gặp lại những từ đến hạn, bắt đầu bằng một lượt ngắn.</p>
 
-      <div className="collection-picker">
-        {collections.map((item) => (
-          <button
-            key={item.value}
-            className={`collection-chip${
-              collection === item.value ? ' is-selected' : ''
-            }`}
-            type="button"
-            disabled={working}
-            aria-pressed={collection === item.value}
-            onClick={() => setCollection(item.value)}
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
+      <p className="review-selection" role="status">
+        {collections.find((item) => item.value === collection)?.label} · Tối đa{' '}
+        {limit} từ
+      </p>
 
-      <div className="study-answer-actions">
-        <label className="review-batch-picker">
-          Số từ mỗi lượt
-          <select
-            value={limit}
-            disabled={working}
-            onChange={(event) =>
-              setSelectedLimit(Number(event.target.value) as ReviewBatchSize)
-            }
+      <details className="review-options">
+        <summary>Tùy chỉnh lượt ôn</summary>
+        <div className="review-options-body">
+          <p>Chọn bộ từ</p>
+
+          <div
+            className="collection-picker"
+            role="group"
+            aria-label="Bộ từ cho lượt ôn"
           >
-            {REVIEW_BATCH_SIZES.map((size) => (
-              <option key={size} value={size}>
-                {size} từ
-              </option>
+            {collections.map((item) => (
+              <button
+                key={item.value}
+                className={`collection-chip${
+                  collection === item.value ? ' is-selected' : ''
+                }`}
+                type="button"
+                disabled={working}
+                aria-pressed={collection === item.value}
+                onClick={() => setCollection(item.value)}
+              >
+                {item.label}
+              </button>
             ))}
-          </select>
-        </label>
+          </div>
 
+          <label className="review-batch-picker">
+            Số từ mỗi lượt
+            <select
+              value={limit}
+              disabled={working}
+              onChange={(event) =>
+                setSelectedLimit(Number(event.target.value) as ReviewBatchSize)
+              }
+            >
+              {REVIEW_BATCH_SIZES.map((size) => (
+                <option key={size} value={size}>
+                  {size} từ
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+      </details>
+
+      <div className="review-launch">
         <Button
           icon="review"
           disabled={disabled}
@@ -87,6 +103,7 @@ export default function ReviewStartPanel({
         >
           {working ? 'Đang mở…' : 'Bắt đầu ôn tập'}
         </Button>
+        <p>Chỉ lấy từ đã đến hạn. Bạn có thể tạm dừng và học tiếp sau.</p>
       </div>
     </section>
   );

@@ -32,20 +32,25 @@ export default function TopicDetails({
       <div className="online-topic-details">
         <strong>{topicName}</strong>
 
-        {resource.loading && <LoadingSkeleton label="Đang tải từ vựng" rows={3} />}
+        {resource.loading && (
+          <LoadingSkeleton label="Đang tải từ vựng" rows={3} />
+        )}
 
         {resource.error && (
           <>
             <StatusMessage tone="error">{resource.error}</StatusMessage>
 
-            <Button onClick={resource.reload}>Thử lại</Button>
+            <Button variant="secondary" onClick={resource.reload}>
+              Thử lại
+            </Button>
           </>
         )}
 
         {resource.data && (
           <>
             <p>
-              {resource.data.length} {entryLabel} sẵn sàng trong chủ đề · {remaining} {entryLabel}
+              {resource.data.length} {entryLabel} sẵn sàng trong chủ đề ·{' '}
+              {remaining} {entryLabel}
               chưa đi qua trong lượt học mới.
             </p>
             <LearningStartButton

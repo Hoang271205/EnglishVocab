@@ -1,0 +1,293 @@
+{
+  "date": "2026-11-22",
+  "inventoryFilesExcludingGitAndDependencies": 4853,
+  "deleted": [
+    {
+      "path": "BUILD_PLAN.md",
+      "bytes": 15314,
+      "sha256": "deb2fb21ee7c223008e8f0a788c3a3650d5349b05a50e88cd3267b5e00bdea42",
+      "reason": "Obsolete local/IndexedDB architecture or initial pre-FE planning; superseded by current development guide and executable schemas. Tracked Git history preserves previous version."
+    },
+    {
+      "path": "DESIGN.md",
+      "bytes": 49531,
+      "sha256": "6826ee3c704989c35699290a3e6ac2ec4aeaf48a20d3b562beb7349ded1ae7b2",
+      "reason": "Obsolete local/IndexedDB architecture or initial pre-FE planning; superseded by current development guide and executable schemas. Tracked Git history preserves previous version."
+    },
+    {
+      "path": "FRONTEND.md",
+      "bytes": 12703,
+      "sha256": "70ca8964d62ab4106dafee621efb4152f8a2b817283706bff40bb0f46d13b94c",
+      "reason": "Obsolete local/IndexedDB architecture or initial pre-FE planning; superseded by current development guide and executable schemas. Tracked Git history preserves previous version."
+    },
+    {
+      "path": "TASKS.md",
+      "bytes": 31217,
+      "sha256": "952577f9f01409282f56461a938058c61aacaa100e0fa1f97d34d6adcc59d6b9",
+      "reason": "Obsolete local/IndexedDB architecture or initial pre-FE planning; superseded by current development guide and executable schemas. Tracked Git history preserves previous version."
+    },
+    {
+      "path": "docs/CONTRACTS.md",
+      "bytes": 6058,
+      "sha256": "8d7747d55402dfce313c963878e605ec8d2f0202cd3da67a4d22c05535c35dca",
+      "reason": "Obsolete local/IndexedDB architecture or initial pre-FE planning; superseded by current development guide and executable schemas. Tracked Git history preserves previous version."
+    },
+    {
+      "path": "docs/FILE_OWNERSHIP.md",
+      "bytes": 1303,
+      "sha256": "f3d60bfc565b1fa1f2800f6deed685300fba6a7526824ba70b8772fe6d4c3cf0",
+      "reason": "Obsolete local/IndexedDB architecture or initial pre-FE planning; superseded by current development guide and executable schemas. Tracked Git history preserves previous version."
+    },
+    {
+      "path": ".browser-check/unit-tests.log",
+      "bytes": 5390,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/ui-capture.mjs",
+      "bytes": 3980,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/skeleton-notebook-desktop.png",
+      "bytes": 82070,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/skeleton-auth-mobile.png",
+      "bytes": 17120,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/skeleton-auth-desktop.png",
+      "bytes": 75437,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/settings-password-desktop.png",
+      "bytes": 145633,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/settings-mobile.png",
+      "bytes": 61978,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/settings-desktop.png",
+      "bytes": 136790,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/product-canvas-tsconfig.json",
+      "bytes": 550,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/pending-refresh-390.png",
+      "bytes": 128895,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/pending-refresh-1440.png",
+      "bytes": 296963,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/pending-capture.mjs",
+      "bytes": 2742,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/part2-mobile.png",
+      "bytes": 70818,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/part2-desktop.png",
+      "bytes": 297288,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/login-header-fixed.png",
+      "bytes": 75520,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/interaction-fixture.tsx",
+      "bytes": 403,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/interaction-fixture.js",
+      "bytes": 1245316,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/hci-measurements.json",
+      "bytes": 69854,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/hci-interactions.mjs",
+      "bytes": 3179,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/hci-canvas-check.js",
+      "bytes": 27139,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/hci-audit.mjs",
+      "bytes": 4788,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/harness.js",
+      "bytes": 1136953,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/entry-audio.js",
+      "bytes": 1117385,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/corners-check.mjs",
+      "bytes": 2810,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/corner-controls-390.png",
+      "bytes": 83624,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/corner-controls-1440.png",
+      "bytes": 300780,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/canvas-tsconfig.json",
+      "bytes": 516,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/before-desktop.png",
+      "bytes": 299085,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/auth-header-check.mjs",
+      "bytes": 1144,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/audit-topics-mobile.png",
+      "bytes": 86786,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/audit-topics-desktop.png",
+      "bytes": 294045,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/audit-settings-mobile.png",
+      "bytes": 76919,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/audit-notebook-mobile.png",
+      "bytes": 147191,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/audit-notebook-desktop.png",
+      "bytes": 283943,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/audit-login-mobile.png",
+      "bytes": 75520,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/audit-login-desktop.png",
+      "bytes": 376043,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/audit-dashboard-mobile.png",
+      "bytes": 76035,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/audit-dashboard-desktop.png",
+      "bytes": 290154,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/after-topics.png",
+      "bytes": 269367,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/after-mobile.png",
+      "bytes": 79469,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/after-desktop.png",
+      "bytes": 294279,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/after-chart-data.png",
+      "bytes": 298279,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/account-menu-mobile.png",
+      "bytes": 60778,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    },
+    {
+      "path": ".browser-check/account-menu-desktop.png",
+      "bytes": 142299,
+      "reason": "Generated historical browser capture, log or temporary mock harness; not runtime input."
+    }
+  ],
+  "deletedBytes": 8661383,
+  "preserved": [
+    "raw crawl/cache/archive and all review/import packages",
+    "MongoDB backups including pre-Idioms import",
+    "active public content, manifests, sources and assets",
+    "design HTML and license notices",
+    "test fixtures and mocks imported by active tests",
+    "legacy local code still referenced by test:legacy",
+    "node_modules and usable extension/server builds",
+    "TOPICS.md and PHASES.md referenced by catalog tests/progress tool"
+  ],
+  "runtimeMockFinding": "No hardcoded mock content identified in current src/server/extension runtime. Mocks in tests are referenced fixtures.",
+  "generatedBuild": "dist will be rebuilt clean; obsolete chunks removed by updated build script.",
+  "beforeFileBytesExcludingGitAndDependencies": 4377611400,
+  "afterFileBytesExcludingGitAndDependenciesBeforeReport": 4351517775,
+  "reclaimedFileBytes": 26093625,
+  "distChunksBefore": 649,
+  "distChunksAfter": 80,
+  "protectedPathsSizeAndPresenceCheck": "PASS",
+  "protectedPathChanges": [],
+  "checks": {
+    "frontendBuild": "PASS",
+    "frontendTypecheck": "PASS",
+    "serverTypecheck": "PASS",
+    "fullSystemTests": "NOT_RUN",
+    "obsoleteDocumentReferences": "none remaining in current docs/source/tooling"
+  },
+  "largestRemainingFolder": {
+    "path": "content/crawl/review-2026-10-24-expanded-local",
+    "reason": "Historical crawl/extraction candidate snapshots; retained as content lineage, not classified as runtime mock data."
+  }
+}

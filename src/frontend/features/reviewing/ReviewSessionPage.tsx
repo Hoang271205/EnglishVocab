@@ -95,6 +95,9 @@ export default function ReviewSessionPage({
           />
 
           {model.notice && <StatusMessage>{model.notice}</StatusMessage>}
+          {model.busy && (
+            <StatusMessage>Đang xử lý thao tác của bạn…</StatusMessage>
+          )}
 
           {session.phase === 'complete' ? (
             <div className="session-summary review-summary">
@@ -190,6 +193,7 @@ export default function ReviewSessionPage({
               question={session.question}
               letters={model.letters}
               disabled={model.blocked}
+              working={model.busy}
               canSubmit={model.canSubmit}
               onChange={model.setLetters}
               onSubmit={() => void model.submit()}

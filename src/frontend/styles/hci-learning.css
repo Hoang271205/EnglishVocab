@@ -1,0 +1,399 @@
+/* Task-first learning, progressive disclosure and touch-friendly controls. */
+:root {
+  --motion-quick: 140ms;
+  --motion-enter: 220ms;
+  --motion-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.app-shell .ui-button--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: #405347;
+  box-shadow: none;
+}
+.app-shell .ui-button--ghost:hover:not(:disabled) {
+  background: #edf4ef;
+}
+.app-shell .ui-button--danger {
+  background: #fff;
+  border-color: #e4b8ad;
+  color: #a52c23;
+  box-shadow: none;
+}
+.app-shell .ui-button--danger:hover:not(:disabled) {
+  background: #fff0ec;
+  border-color: #b64537;
+}
+.app-shell .ui-button:disabled:not([aria-busy='true']) {
+  background: #edf0ed;
+  border-color: #d5ddd7;
+  color: #667069;
+  opacity: 1;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.app-shell
+  :is(
+    .ui-button,
+    .nav-item,
+    .collection-chip,
+    .topic-row,
+    .topic-status-filters button
+  ) {
+  transition:
+    background-color var(--motion-quick) ease,
+    border-color var(--motion-quick) ease,
+    color var(--motion-quick) ease,
+    transform var(--motion-quick) var(--motion-ease);
+}
+.app-shell .ui-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.app-shell .ui-button[aria-busy='true'] {
+  cursor: progress;
+  opacity: 0.8;
+}
+.app-shell .ui-button[aria-busy='true'] .ui-spinner {
+  flex-shrink: 0;
+}
+.topic-dropdown,
+.review-options[open] .review-options-body,
+.session-page > .study-card,
+.session-page > .session-summary {
+  animation: hci-surface-in var(--motion-enter) var(--motion-ease) both;
+}
+.review-feedback-card[data-result='correct'] .feedback-status-icon {
+  animation: hci-success-in 280ms var(--motion-ease) both;
+}
+.review-feedback-card[data-result='incorrect'] .feedback-status-icon {
+  animation: hci-surface-in 180ms ease-out both;
+}
+.review-feedback-card[data-result='correct'] .feedback-banner {
+  border-color: #b7d4b2;
+}
+.review-feedback-card[data-result='incorrect'] .feedback-banner {
+  border-color: #e4b8ad;
+}
+.review-feedback-card .feedback-encouragement {
+  font-size: max(14px, 0.95vw);
+}
+.app-shell .ui-message {
+  border-left: 3px solid #4d775a;
+}
+.app-shell .ui-message--error {
+  border-left-color: #a7382c;
+}
+@keyframes hci-surface-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes hci-success-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.today-work {
+  margin: 24px 0 32px;
+  padding: 28px;
+  border: 1px solid #b7cdbd;
+  border-radius: 16px;
+  background: #fff;
+}
+.today-work-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.today-work .eyebrow {
+  margin: 0;
+}
+.learning-status {
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: #edf4ef;
+  color: #285a3c;
+  font-size: 14px;
+  font-weight: 600;
+}
+.today-work .online-review-start {
+  margin: 20px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.today-work h2 {
+  font-size: 24px;
+  line-height: 1.35;
+}
+.today-work p {
+  line-height: 1.6;
+}
+.today-work .online-review-start > .review-selection {
+  width: fit-content;
+  margin: 20px 0;
+  color: #285a3c;
+  font-weight: 600;
+}
+.review-options {
+  margin: 20px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.review-options > summary {
+  min-height: 48px;
+  padding: 14px 4px;
+  color: var(--green);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.review-options-body {
+  display: grid;
+  gap: 12px;
+  padding: 0 4px 20px;
+}
+.review-options-body > p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.review-options-body .collection-picker {
+  margin: 0;
+}
+.review-batch-picker {
+  max-width: 220px;
+}
+.review-launch {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.review-launch > .ui-button {
+  flex-shrink: 0;
+  min-height: 48px;
+  padding-inline: 24px;
+}
+.review-launch > p {
+  margin: 0;
+  max-width: 390px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.progress-section-heading {
+  margin-top: 32px;
+}
+.progress-section-heading h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+.progress-section-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.progress-section-heading + .dashboard-stats {
+  margin-top: 18px;
+}
+.online-topic-controls {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+}
+.topic-status-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+.topic-status-filters button {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid #c4d0c8;
+  border-radius: 8px;
+  background: #fff;
+  color: #405347;
+  font: inherit;
+  font-size: 14px;
+}
+.topic-status-filters button[aria-pressed='true'] {
+  border-color: #286344;
+  background: #edf4ef;
+  color: #204f34;
+  font-weight: 650;
+}
+.topic-status-filters button:hover:not(:disabled) {
+  background: #edf4ef;
+}
+.topic-search-empty {
+  padding: 32px 20px;
+  text-align: center;
+}
+.topic-results {
+  color: var(--muted);
+  font-size: 14px;
+  margin: -8px 0 20px;
+}
+.topic-results:empty {
+  display: none;
+}
+.workspace-skip:not(:focus) {
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+}
+.topic-search-empty h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+.topic-search-empty p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+.topic-row {
+  scroll-margin-top: 24px;
+}
+.topic-action {
+  min-width: 76px;
+  text-align: right;
+}
+.topic-status-filters button:focus-visible,
+.review-options > summary:focus-visible,
+.review-batch-picker select:focus-visible,
+.topic-row:focus-visible {
+  outline: 3px solid #286344;
+  outline-offset: 4px;
+}
+.site-header .nav-item,
+.review-options .collection-chip,
+.topic-part-filters button {
+  min-height: 44px;
+}
+.site-header .nav-item:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+@media (max-width: 600px) {
+  .today-work {
+    padding: 20px 16px;
+    margin-top: 20px;
+  }
+  .today-work h2 {
+    font-size: 21px;
+  }
+  .review-launch {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .review-launch > .ui-button {
+    width: 100%;
+  }
+  .review-launch > p {
+    font-size: 14px;
+  }
+  .online-topic-controls {
+    padding: 16px;
+  }
+  .topic-status-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .topic-status-filters button {
+    padding-inline: 8px;
+  }
+  .site-header .nav-item {
+    font-size: 14px;
+  }
+  .topic-row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .topic-row .topic-action {
+    width: 100%;
+    padding-left: 54px;
+    text-align: left;
+  }
+}
+
+@media (max-width: 760px) {
+  .app-shell .guide-dock {
+    position: relative;
+    inset: auto;
+    width: fit-content;
+    max-width: 100%;
+    margin: 24px 0 0 auto;
+  }
+  .app-shell .guide-toggle > span {
+    display: inline;
+  }
+  .app-shell .guide-popover {
+    width: 100%;
+    box-shadow: none;
+  }
+  .experience-dock {
+    position: relative;
+    inset: auto;
+    width: fit-content;
+    max-width: calc(100% - 32px);
+    margin: 16px auto 24px;
+  }
+  .experience-trigger {
+    width: auto;
+    height: auto;
+  }
+  .experience-trigger > span {
+    display: inline;
+  }
+  .experience-panel {
+    position: static;
+    margin-bottom: 12px;
+    max-height: none;
+    box-shadow: none;
+  }
+}
+
+/* Both the in-app preference and the operating system suppress decorative motion. */
+[data-motion='reduced'] .app-shell *,
+[data-motion='reduced'] .app-shell *::before,
+[data-motion='reduced'] .app-shell *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+[data-motion='reduced'] .app-shell .ui-button:active:not(:disabled) {
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .app-shell *,
+  .app-shell *::before,
+  .app-shell *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .app-shell .ui-button:active:not(:disabled) {
+    transform: none;
+  }
+}
