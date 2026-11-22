@@ -77,7 +77,7 @@ export default function ReviewFeedbackCard({
           disabled={disabled}
           onClick={() => speech.speak(entry.headword)}
         >
-          Nghe từ · Mỹ
+          Nghe từ
         </Button>
 
         <Button

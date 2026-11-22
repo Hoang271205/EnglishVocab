@@ -31,7 +31,7 @@ export default function LearnFrontCard({
           disabled={busy}
           onClick={() => void playAudio()}
         >
-          Nghe từ · Mỹ
+          Nghe từ
         </button>
 
         <button

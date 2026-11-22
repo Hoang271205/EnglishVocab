@@ -4,10 +4,9 @@
 
 Ứng dụng học từ cá nhân chạy local. **BE đã đạt kiểm tra kỹ thuật và đang dừng để bạn nghiệm thu; chưa có FE sản phẩm để sử dụng.** Theo lựa chọn của bạn, hoàn thiện bộ 2.000 từ là task nội dung riêng; hiện có 677 mục trong thư viện.
 
-- [Tiến độ phase và điểm tiếp tục](PHASES.md)
-- [Task chi tiết](TASKS.md) · [Backlog JSON](tasks.json) · [Kế hoạch](BUILD_PLAN.md)
-- [Thiết kế hệ thống](DESIGN.md) · [Thiết kế FE](FRONTEND.md) · [200 topic](TOPICS.md)
-- [HTML tham khảo](english-vocab-frontend.html) · [Popup tham khảo](english-vocab-lookup-popup.html)
+- [Hướng dẫn hiện tại](../../README.md) · [Phát triển](../../docs/DEVELOPMENT.md)
+- [Danh mục topic gốc](../../TOPICS.md)
+- [HTML tham khảo](../../docs/mockups/english-vocab-frontend.html) · [Popup tham khảo](../../docs/mockups/english-vocab-lookup-popup.html)
 
 ## Chạy phần BE hiện có
 

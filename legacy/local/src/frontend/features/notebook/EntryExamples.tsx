@@ -15,7 +15,7 @@ export default function EntryExamples({
           type="button"
           onClick={() => void playAudio()}
         >
-          Nghe từ · Mỹ
+          Nghe từ
         </button>
 
         <button

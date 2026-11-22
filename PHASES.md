@@ -127,7 +127,7 @@ Chỉ giữ checklist gọn và kiểm thử trong mã; không có Markdown evid
 3. Bộ đủ 2.000 từ đã tách sang P-DATA theo lựa chọn người dùng. Giữ raw/snapshot, rà soát proposals trước publish; hiện 677 mục, không tự nhập ứng viên chưa rà soát.
 4. P7 và P8 chưa triển khai xong. P6 hoàn tất phần triển khai; không coi đó là nghiệm thu toàn bộ giao diện hoặc ứng dụng.
 
-Lệnh: `npm run check`, `npm run test:browser`, `npm run test:extension`, `npm run validate:content -- public/content/pilot/pilot-200.json`, `npm run check:gate`. Checklist FE trong file này đã cập nhật trực tiếp theo code ngày 21/10/2026; trạng thái FE trong tasks.json/TASKS.md chưa đồng bộ. Cần đồng bộ các trạng thái đó trước khi chạy `npm run progress:update` để tránh ghi đè tiến độ hiện tại.
+Lệnh: `npm run check`, `npm run test:browser`, `npm run test:extension`, `npm run validate:content -- public/content/pilot/pilot-200.json`, `npm run check:gate`. Checklist FE trong file này đã cập nhật trực tiếp theo code ngày 21/10/2026; trạng thái FE trong tasks.json chưa đồng bộ. Cần đồng bộ các trạng thái đó trước khi chạy `npm run progress:update` để tránh ghi đè tiến độ hiện tại.
 
 
 ## FE online — triển khai nối MongoDB (22/10/2026)

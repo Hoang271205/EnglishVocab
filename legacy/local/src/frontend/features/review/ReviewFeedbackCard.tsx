@@ -54,7 +54,7 @@ export default function ReviewFeedbackCard({
           disabled={busy}
           onClick={() => void playAudio()}
         >
-          Nghe từ · Mỹ
+          Nghe từ 
         </button>
 
         <button

@@ -169,8 +169,8 @@ legacy/local/     Phiên bản IndexedDB cũ, giữ để tham khảo
 - [Cài đặt, SMTP, triển khai và dữ liệu](docs/DEVELOPMENT.md)
 - [Trang giới thiệu, âm thanh và chuyển động](docs/frontend-experience.md)
 - [Cache, phân trang và tối ưu tải](docs/performance-improvements.md)
-- [Thiết kế frontend](FRONTEND.md) · [Thiết kế hệ thống](DESIGN.md)
-- [Tiến độ dự án](PHASES.md) · [Kế hoạch ban đầu](BUILD_PLAN.md)
+- [Quy trình nhập nội dung Part 2](docs/part2-import.md)
+- [Xử lý lỗi giao diện và tài khoản](docs/ux-resilience.md)
 
 <details>
 <summary><strong>Các lệnh kiểm tra có sẵn</strong></summary>
