@@ -82,12 +82,18 @@ export default function DashboardPage({
       {dashboard.summary && (
         <>
           {pending ? null : dashboard.summary.dueCount > 0 ? (
-            <section className="today-work" aria-label="Việc học hôm nay">
-              <div className="today-work-heading">
+            <section
+              className="today-work today-work--review"
+              aria-label="Việc học hôm nay"
+            >
+              <div className="review-priority">
                 <p className="eyebrow">ƯU TIÊN HÔM NAY</p>
-                <span className="learning-status">
-                  {dashboard.summary.dueCount} từ đến hạn
-                </span>
+                <h2 className="review-priority-title">
+                  <strong>
+                    {dashboard.summary.dueCount.toLocaleString('vi-VN')}
+                  </strong>
+                  <span>từ đang chờ bạn ôn</span>
+                </h2>
               </div>
               {children}
             </section>
@@ -121,7 +127,7 @@ export default function DashboardPage({
           )}
           <div className="progress-section-heading">
             <h2>Hành trình của bạn</h2>
-            <p>Tiến độ tích lũy qua các lần học và ôn.</p>
+            <p>Nhìn lại những từ bạn đã học và mức ghi nhớ hiện tại.</p>
           </div>
           <DashboardStats summary={dashboard.summary} />
           <LevelDistribution counts={dashboard.summary.levels} />

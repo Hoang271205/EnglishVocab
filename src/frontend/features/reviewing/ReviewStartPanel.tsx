@@ -40,9 +40,7 @@ export default function ReviewStartPanel({
 
   return (
     <section className="online-review-start">
-      <h2>Bắt đầu ôn tập</h2>
-
-      <p>Gặp lại những từ đến hạn, bắt đầu bằng một lượt ngắn.</p>
+      <h3 className="review-start-title">Bắt đầu ôn tập</h3>
 
       <p className="review-selection" role="status">
         {collections.find((item) => item.value === collection)?.label} · Tối đa{' '}

@@ -1,6 +1,7 @@
 import Icon from '../../components/ui/Icon';
 import Button from '../../components/ui/Button';
 import StatusMessage from '../../components/ui/StatusMessage';
+import InfoPopover from '../../components/ui/InfoPopover';
 import { useAmericanSpeech } from '../../hooks/useAmericanSpeech';
 import type { NotebookRow } from './notebook.types';
 interface Props {
@@ -45,11 +46,13 @@ export default function EntryDetails({
         IPA Mỹ: {entry.pronunciation.ipa || 'Chưa có'} · CEFR:{' '}
         {entry.cefr.level || 'Chưa có'}{' '}
         {entry.cefr.status === 'estimated' ? '(ước lượng)' : ''}
+        <InfoPopover term="CEFR" />
       </p>
       {progress ? (
         <div className="cloud-inset">
           <p>
             Level ghi nhớ: <strong>{progress.level}</strong>
+            <InfoPopover term="Level" />
           </p>
           <p>
             Lần ôn tiếp theo:{' '}

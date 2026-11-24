@@ -1,0 +1,168 @@
+/* Fade only the existing content node; never remount the workspace for animation. */
+#workspace-content[data-workspace-view='review'] {
+  animation: workspace-review-in 140ms ease-out;
+}
+#workspace-content[data-workspace-view='learn'] {
+  animation: workspace-learn-in 140ms ease-out;
+}
+#workspace-content[data-workspace-view='notebook'] {
+  animation: workspace-notebook-in 140ms ease-out;
+}
+@keyframes workspace-review-in {
+  from {
+    opacity: 0.82;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes workspace-learn-in {
+  from {
+    opacity: 0.82;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes workspace-notebook-in {
+  from {
+    opacity: 0.82;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.account-menu-panel {
+  animation: contextual-panel-in 140ms ease-out;
+  transform-origin: top right;
+}
+.info-popover {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  margin-left: 6px;
+  font-size: 14px;
+  font-weight: 400;
+}
+.info-popover-trigger {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #b8cabe;
+  border-radius: 8px;
+  color: #285b3b;
+  background: #f0f5f1;
+  font: inherit;
+  font-weight: 700;
+}
+.info-popover-trigger:hover,
+.info-popover-trigger[aria-expanded='true'] {
+  background: #e2eee5;
+  border-color: #648b70;
+}
+.info-popover-panel {
+  display: grid;
+  gap: 10px;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 80;
+  width: min(280px, calc(100vw - 32px));
+  padding: 16px;
+  border: 1px solid #a9c1b0;
+  border-radius: 10px;
+  background: #fff;
+  color: #2b4634;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: left;
+  animation: contextual-panel-in 140ms ease-out;
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+}
+.info-popover-close {
+  justify-self: start;
+  min-height: 44px;
+  border: 0;
+  padding: 8px 0;
+  background: transparent;
+  color: #285b3b;
+  font: inherit;
+  font-weight: 650;
+  text-decoration: underline;
+}
+.info-popover button:focus-visible {
+  outline: 3px solid #286344;
+  outline-offset: 3px;
+}
+.memory-distribution figcaption h2 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+@keyframes contextual-panel-in {
+  from {
+    opacity: 0.7;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Static by default: one bounded gesture at the relevant event, no ambient loops. */
+.mascot .mascot-figure img,
+.mascot .mascot-leaves i {
+  animation: none;
+}
+.mascot .mascot-leaves {
+  display: none;
+}
+.mascot[data-gesture='greet'] .mascot-figure img {
+  animation: mascot-greet-once 650ms ease-in-out;
+}
+.mascot[data-gesture='celebrate'] .mascot-figure img {
+  animation: mascot-celebrate-once 650ms ease-out;
+}
+@keyframes mascot-greet-once {
+  0%,
+  100% {
+    transform: none;
+  }
+  30% {
+    transform: rotate(-3deg);
+  }
+  65% {
+    transform: rotate(2deg);
+  }
+}
+@keyframes mascot-celebrate-once {
+  0%,
+  100% {
+    transform: none;
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  70% {
+    transform: translateY(-2px);
+  }
+}
+[data-motion='reduced'] #workspace-content[data-workspace-view],
+[data-motion='reduced'] .account-menu-panel,
+[data-motion='reduced'] .info-popover-panel,
+[data-motion='reduced'] .mascot[data-gesture] .mascot-figure img {
+  animation: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  #workspace-content[data-workspace-view],
+  .account-menu-panel,
+  .info-popover-panel,
+  .mascot[data-gesture] .mascot-figure img {
+    animation: none !important;
+  }
+}

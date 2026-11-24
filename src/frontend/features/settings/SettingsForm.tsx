@@ -145,7 +145,11 @@ export default function SettingsForm({ document, onSaved }: Props) {
             mục này trước khi lưu.
           </StatusMessage>
         )}
-        {saved && <StatusMessage>Đã lưu cài đặt cho tài khoản.</StatusMessage>}
+        {saved && (
+          <StatusMessage tone="success">
+            Đã lưu cài đặt cho tài khoản.
+          </StatusMessage>
+        )}
         <Button type="submit" loading={action.busy}>
           Lưu cài đặt
         </Button>

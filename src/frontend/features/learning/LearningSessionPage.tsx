@@ -78,13 +78,16 @@ export default function LearningSessionPage({
           />
 
           {model.notice && <StatusMessage>{model.notice}</StatusMessage>}
-          {model.busy && (
-            <StatusMessage>Đang xử lý thao tác của bạn…</StatusMessage>
-          )}
 
           {session.phase === 'complete' ? (
             <div className="session-summary">
               <Mascot
+                gesture={
+                  session.total > (session.skippedCount ?? 0)
+                    ? 'celebrate'
+                    : undefined
+                }
+                gestureId={`learn-complete:${ownerId}:${session.id}`}
                 mood={
                   session.total > (session.skippedCount ?? 0)
                     ? 'celebrate'

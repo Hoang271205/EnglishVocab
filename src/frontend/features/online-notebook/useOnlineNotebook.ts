@@ -53,6 +53,11 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [editor, setEditor] = useState<NotebookRow | 'new' | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  const [noticeTone, setNoticeTone] = useState<'info' | 'success'>('info');
+  function inform(message: string | null, tone: 'info' | 'success' = 'info') {
+    setNotice(message);
+    setNoticeTone(tone);
+  }
   const [cleanup, setCleanup] = useState<ExtensionCleanup[]>(() => {
     try {
       return JSON.parse(
@@ -82,6 +87,7 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
     onChanged();
   }
   async function save(entry: Entry) {
+    inform(null);
     const current = editor;
     const result = await action.run((signal) =>
       current && current !== 'new'
@@ -89,10 +95,11 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
         : notebookApi.create(entry, signal),
     );
     if (!result) return;
-    setNotice(
+    inform(
       current && current !== 'new'
         ? 'Đã cập nhật từ; level và lịch ôn được giữ nguyên.'
         : 'Đã thêm từ.',
+      'success',
     );
     setEditor(null);
     setFilters((value) => ({ ...value, scope: 'personal' }));
@@ -105,7 +112,7 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
       return true;
     });
     if (result) {
-      setNotice(
+      inform(
         enabled
           ? 'Đã bật ôn tập; lịch cũ được giữ nguyên.'
           : 'Đã chuyển từ sang nhóm Không ôn tập.',
@@ -128,7 +135,7 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
     if (!result) return;
     setSelectedId(null);
     if (resource.data?.rows.length === 1 && page > 1) setPage(page - 1);
-    setNotice('Đã xoá dữ liệu trên server. Đang dọn cache extension…');
+    inform('Đã xoá dữ liệu trên server. Đang dọn cache extension…');
     changed();
     setCleanup((items) => [
       ...items.filter((item) => item.entryId !== result.entryId),
@@ -142,9 +149,9 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
       setCleanup((items) =>
         items.filter((item) => item.entryId !== result.entryId),
       );
-      setNotice('Đã xoá từ, tiến độ, nguồn và cache extension.');
+      inform('Đã xoá từ, tiến độ, nguồn và cache extension.');
     } else
-      setNotice(
+      inform(
         'Đã xoá dữ liệu trên server; cache extension chưa dọn được. Tải lại extension rồi bấm Dọn cache còn lại. Bạn vẫn có thể xoá các từ khác.',
       );
   }
@@ -156,7 +163,7 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
     });
     if (result) {
       setCleanup([]);
-      setNotice('Đã dọn cache extension còn lại.');
+      inform('Đã dọn cache extension còn lại.');
     }
   }
   return {
@@ -174,6 +181,7 @@ export function useOnlineNotebook(ownerId: string, onChanged: () => void) {
     editor,
     setEditor,
     notice,
+    noticeTone,
     cleanup,
     save,
     toggle,

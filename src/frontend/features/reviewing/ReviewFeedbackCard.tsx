@@ -2,6 +2,7 @@ import Mascot from '../../components/mascot/Mascot';
 import Button from '../../components/ui/Button';
 import Icon from '../../components/ui/Icon';
 import StatusMessage from '../../components/ui/StatusMessage';
+import InfoPopover from '../../components/ui/InfoPopover';
 import { useAmericanSpeech } from '../../hooks/useAmericanSpeech';
 import type { OnlineReviewSession } from './review.types';
 
@@ -64,6 +65,7 @@ export default function ReviewFeedbackCard({
         <p className="cefr-label">
           CEFR: {entry.cefr.level ?? 'Chưa có'}
           {entry.cefr.status === 'estimated' ? ' · tham khảo' : ''}
+          <InfoPopover term="CEFR" />
         </p>
       </div>
 

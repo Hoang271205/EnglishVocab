@@ -95,14 +95,15 @@ export default function ReviewSessionPage({
           />
 
           {model.notice && <StatusMessage>{model.notice}</StatusMessage>}
-          {model.busy && (
-            <StatusMessage>Đang xử lý thao tác của bạn…</StatusMessage>
-          )}
 
           {session.phase === 'complete' ? (
             <div className="session-summary review-summary">
               <span className="completion-pill">Đã hoàn tất</span>
-              <Mascot mood={answered > 0 ? 'celebrate' : 'encourage'} />
+              <Mascot
+                mood={answered > 0 ? 'celebrate' : 'encourage'}
+                gesture={answered > 0 ? 'celebrate' : undefined}
+                gestureId={`review-complete:${ownerId}:${session.id}`}
+              />
               <h1>
                 {session.endedEarly
                   ? 'Đã kết thúc phiên ôn'
