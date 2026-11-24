@@ -169,6 +169,7 @@ export default function Workspace({
 
   return (
     <AppShell
+      view={activeTab}
       account={account}
       navigation={
         <MainNavigation

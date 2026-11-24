@@ -82,7 +82,9 @@ export default function OnlineNotebookPage({
           Làm mới
         </Button>
       </div>
-      {model.notice && <StatusMessage>{model.notice}</StatusMessage>}
+      {model.notice && (
+        <StatusMessage tone={model.noticeTone}>{model.notice}</StatusMessage>
+      )}
       {model.error && <StatusMessage tone="error">{model.error}</StatusMessage>}
       {model.resource.error && (
         <StatusMessage tone="error">{model.resource.error}</StatusMessage>

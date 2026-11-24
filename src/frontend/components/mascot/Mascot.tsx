@@ -1,4 +1,7 @@
 import Icon from '../ui/Icon';
+import { useEffect, useState } from 'react';
+import { claimGesture } from './gestureHistory';
+import { readExperience } from '../../audio/experience';
 
 export type MascotMood =
   'welcome' | 'thinking' | 'celebrate' | 'rest' | 'encourage';
@@ -10,6 +13,8 @@ interface Props {
   messageLabel?: string;
   className?: string;
   compact?: boolean;
+  gesture?: 'greet' | 'celebrate' | undefined;
+  gestureId?: string;
 }
 
 export default function Mascot({
@@ -19,9 +24,23 @@ export default function Mascot({
   messageLabel,
   className = '',
   compact = false,
+  gesture,
+  gestureId,
 }: Props) {
+  const [activeGesture, setActiveGesture] = useState<string>();
+  const [imageReady, setImageReady] = useState(false);
+  useEffect(() => {
+    if (!imageReady || !gesture || !gestureId || !claimGesture(gestureId))
+      return;
+    if (
+      !readExperience().reduceMotion &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    )
+      setActiveGesture(gestureId);
+  }, [gesture, gestureId, imageReady]);
   return (
     <div
+      data-gesture={activeGesture === gestureId ? gesture : undefined}
       className={`mascot mascot--${mood}${compact ? ' mascot--compact' : ''} ${className}`}
     >
       {message &&
@@ -53,6 +72,7 @@ export default function Mascot({
           height="240"
           decoding="async"
           draggable={false}
+          onLoad={() => setImageReady(true)}
         />
         <span className="mascot-ground" />
         {mood === 'celebrate' && (

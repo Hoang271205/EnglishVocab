@@ -80,11 +80,14 @@ export default function SettingsPage({
         <div className="settings-content">
           <div hidden={section !== 'profile'}>
             {profileSaved && (
-              <StatusMessage>Đã lưu hồ sơ cá nhân.</StatusMessage>
+              <StatusMessage tone="success">
+                Đã lưu hồ sơ cá nhân.
+              </StatusMessage>
             )}
             <ProfileForm
               key={user.profileRevision ?? 0}
               user={user}
+              onSaving={() => setProfileSaved(false)}
               onSaved={(next) => {
                 setProfileSaved(true);
                 onUserChanged(next);
@@ -102,9 +105,11 @@ export default function SettingsPage({
 
 function ProfileForm({
   user,
+  onSaving,
   onSaved,
 }: {
   user: AuthUser;
+  onSaving: () => void;
   onSaved: (user: AuthUser) => void;
 }) {
   const [name, setName] = useState(user.name);
@@ -119,6 +124,7 @@ function ProfileForm({
       <form
         onSubmit={(event) => {
           event.preventDefault();
+          onSaving();
           void action.run(async (signal) => {
             const result = await apiRequest<{ user: AuthUser }>(
               '/api/auth/profile',
@@ -253,7 +259,7 @@ function PasswordForm({ onSaved }: { onSaved: (user: AuthUser) => void }) {
             </StatusMessage>
           )}
           {saved && (
-            <StatusMessage>
+            <StatusMessage tone="success">
               Đã đổi mật khẩu. Các phiên đăng nhập khác và kết nối extension đã
               được thu hồi.
             </StatusMessage>

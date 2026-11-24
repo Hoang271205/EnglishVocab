@@ -7,12 +7,14 @@ interface AppShellProps {
   children: ReactNode;
   account: ReactNode;
   navigation?: ReactNode;
+  view?: string;
 }
 
 export default function AppShell({
   children,
   account,
   navigation,
+  view,
 }: AppShellProps) {
   const main = useRef<HTMLElement>(null);
   const previousNavigation = useRef(navigation);
@@ -55,6 +57,7 @@ export default function AppShell({
         id="workspace-content"
         ref={main}
         tabIndex={-1}
+        data-workspace-view={view}
       >
         <Suspense fallback={<LoadingSkeleton label="Đang tải trang" />}>
           {children}

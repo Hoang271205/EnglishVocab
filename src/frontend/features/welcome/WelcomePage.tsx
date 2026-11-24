@@ -163,7 +163,7 @@ export default function WelcomePage() {
               </span>
             </div>
             <button
-              className={`welcome-mascot-button${greeting ? ' is-greeting' : ''}`}
+              className="welcome-mascot-button"
               type="button"
               aria-label="Chào linh thú đồng hành"
               onClick={async () => {
@@ -176,7 +176,11 @@ export default function WelcomePage() {
                   );
               }}
             >
-              <Mascot mood={greeting ? 'celebrate' : 'welcome'} />
+              <Mascot
+                mood={greeting ? 'celebrate' : 'welcome'}
+                gesture="greet"
+                gestureId="welcome-greeting"
+              />
             </button>
             <div className="welcome-floating-word">
               <span>TỪ ĐẦU TIÊN CỦA BẠN</span>

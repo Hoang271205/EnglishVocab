@@ -227,12 +227,6 @@
   width: 12px;
   height: 18px;
 }
-[data-study-feedback='correct'] .session-page .study-card {
-  animation: experience-correct 500ms ease-out;
-}
-[data-study-feedback='retry'] .session-page .study-card {
-  animation: experience-retry 350ms ease-out;
-}
 .ui-button {
   transition:
     transform 160ms ease,

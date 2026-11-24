@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react';
+import Icon from './Icon';
 
 interface StatusMessageProps {
   children: ReactNode;
-  tone?: 'error' | 'info';
+  tone?: 'error' | 'info' | 'success';
   id?: string;
 }
 
@@ -16,8 +17,16 @@ export default function StatusMessage({
       id={id}
       className={`ui-message ui-message--${tone}`}
       role={tone === 'error' ? 'alert' : 'status'}
+      aria-atomic="true"
     >
-      {children}
+      {tone === 'success' ? (
+        <>
+          <Icon name="check" className="save-success-icon" />
+          <span>{children}</span>
+        </>
+      ) : (
+        children
+      )}
     </p>
   );
 }

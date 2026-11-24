@@ -47,7 +47,7 @@ export default function FeedbackEffects() {
             ? 'Đã hoàn thành, bạn làm tốt lắm!'
             : 'Đúng rồi, bạn làm tốt lắm!'}
       </span>
-      {burst.animate && burst.kind !== 'retry' && (
+      {burst.animate && burst.kind === 'complete' && (
         <div
           key={burst.id}
           className={`learning-confetti${burst.kind === 'complete' ? ' learning-confetti--complete' : ''}`}
